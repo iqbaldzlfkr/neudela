@@ -1,0 +1,191 @@
+import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+interface KnobBase {
+  name: string;
+  label?: string;
+}
+
+interface BooleanKnob extends KnobBase {
+  type: 'boolean';
+  default: boolean;
+}
+
+interface SelectKnob extends KnobBase {
+  type: 'select';
+  options: string[];
+  default: string;
+}
+
+interface TextKnob extends KnobBase {
+  type: 'text';
+  default: string;
+}
+
+type Knob = BooleanKnob | SelectKnob | TextKnob;
+
+type KnobsState = Record<string, string | boolean>;
+
+interface CodeTemplates {
+  vue?: string;
+  html?: string;
+  react?: string;
+}
+
+interface PlaygroundProps {
+  name: string;
+  knobs: Knob[];
+  codeTemplates: (state: KnobsState) => CodeTemplates;
+  children: (state: KnobsState) => React.ReactNode;
+}
+
+export default function Playground({ name: _name, knobs, codeTemplates, children }: PlaygroundProps) {
+  const { t } = useLanguage();
+
+  // Initialize state from knobs default values
+  const [knobsState, setKnobsState] = useState<KnobsState>(() => {
+    const initialState: KnobsState = {};
+    knobs.forEach(knob => {
+      initialState[knob.name] = knob.default;
+    });
+    return initialState;
+  });
+
+  const [activeTab, setActiveTab] = useState<'vue' | 'html' | 'react'>('vue');
+  const [showToast, setShowToast] = useState(false);
+
+  const handleKnobChange = (name: string, value: string | boolean) => {
+    setKnobsState(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const code = codeTemplates(knobsState)[activeTab] || '';
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setShowToast(true);
+  };
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => setShowToast(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
+
+  return (
+    <div className="playground-container">
+      {/* Live Preview Panel */}
+      <div className="playground-preview">
+        {children(knobsState)}
+      </div>
+
+      {/* Code and Knobs Container */}
+      <div className="playground-body">
+        {/* Left Side: Code Viewer */}
+        <div className="playground-code-panel">
+          <div className="playground-code-header">
+            <div className="playground-tabs">
+              <button
+                className={`playground-tab ${activeTab === 'vue' ? 'active' : ''}`}
+                onClick={() => setActiveTab('vue')}
+              >
+                Vue 3
+              </button>
+              <button
+                className={`playground-tab ${activeTab === 'html' ? 'active' : ''}`}
+                onClick={() => setActiveTab('html')}
+              >
+                HTML / CSS
+              </button>
+              <button
+                className={`playground-tab ${activeTab === 'react' ? 'active' : ''}`}
+                onClick={() => setActiveTab('react')}
+              >
+                React
+              </button>
+            </div>
+            
+            <button className="playground-copy-btn" onClick={handleCopy}>
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+              </svg>
+              {t.playground.copy}
+            </button>
+          </div>
+          <pre className="playground-code-content">
+            <code>{code}</code>
+          </pre>
+        </div>
+
+        {/* Right Side: Knobs Controls */}
+        <div className="playground-knobs">
+          <div className="knobs-title">{t.playground.properties}</div>
+          {knobs.map(knob => {
+            if (knob.type === 'boolean') {
+              return (
+                <div className="knob-control" key={knob.name}>
+                  <label className="knob-checkbox-label">
+                    <input
+                      type="checkbox"
+                      className="knob-checkbox"
+                      checked={!!knobsState[knob.name]}
+                      onChange={e => handleKnobChange(knob.name, e.target.checked)}
+                    />
+                    {knob.label || knob.name}
+                  </label>
+                </div>
+              );
+            }
+
+            if (knob.type === 'select') {
+              return (
+                <div className="knob-control" key={knob.name}>
+                  <span className="knob-label">{knob.label || knob.name}</span>
+                  <select
+                    className="knob-select"
+                    value={knobsState[knob.name] as string}
+                    onChange={e => handleKnobChange(knob.name, e.target.value)}
+                  >
+                    {knob.options.map(opt => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            }
+
+            if (knob.type === 'text') {
+              return (
+                <div className="knob-control" key={knob.name}>
+                  <span className="knob-label">{knob.label || knob.name}</span>
+                  <input
+                    type="text"
+                    className="knob-input"
+                    value={knobsState[knob.name] as string}
+                    onChange={e => handleKnobChange(knob.name, e.target.value)}
+                  />
+                </div>
+              );
+            }
+
+            return null;
+          })}
+        </div>
+      </div>
+
+      {/* Copy Toast */}
+      <div className={`copy-toast ${showToast ? 'show' : ''}`}>
+        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        {t.playground.copied}
+      </div>
+    </div>
+  );
+}
