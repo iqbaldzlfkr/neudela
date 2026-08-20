@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 interface KnobBase {
   name: string;
   label?: string;
+  condition?: (state: KnobsState) => boolean;
 }
 
 interface BooleanKnob extends KnobBase {
@@ -125,17 +126,23 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
         <div className="playground-knobs">
           <div className="knobs-title">{t.playground.properties}</div>
           {knobs.map(knob => {
+            if (knob.condition && !knob.condition(knobsState)) {
+              return null;
+            }
             if (knob.type === 'boolean') {
               return (
-                <div className="knob-control" key={knob.name}>
-                  <label className="knob-checkbox-label">
-                    <input
-                      type="checkbox"
-                      className="knob-checkbox"
-                      checked={!!knobsState[knob.name]}
-                      onChange={e => handleKnobChange(knob.name, e.target.checked)}
-                    />
-                    {knob.label || knob.name}
+                <div className="knob-control knob-control--switch" key={knob.name}>
+                  <label className="knob-switch-label">
+                    <span className="knob-label" style={{ margin: 0 }}>{knob.label || knob.name}</span>
+                    <div className="knob-switch">
+                      <input
+                        type="checkbox"
+                        className="knob-switch-input"
+                        checked={!!knobsState[knob.name]}
+                        onChange={e => handleKnobChange(knob.name, e.target.checked)}
+                      />
+                      <span className="knob-switch-slider" />
+                    </div>
                   </label>
                 </div>
               );
@@ -145,17 +152,22 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
               return (
                 <div className="knob-control" key={knob.name}>
                   <span className="knob-label">{knob.label || knob.name}</span>
-                  <select
-                    className="knob-select"
-                    value={knobsState[knob.name] as string}
-                    onChange={e => handleKnobChange(knob.name, e.target.value)}
-                  >
-                    {knob.options.map(opt => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="knob-select-wrapper">
+                    <select
+                      className="knob-select"
+                      value={knobsState[knob.name] as string}
+                      onChange={e => handleKnobChange(knob.name, e.target.value)}
+                    >
+                      {knob.options.map(opt => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    <svg className="knob-select-arrow" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                  </div>
                 </div>
               );
             }

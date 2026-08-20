@@ -79,31 +79,33 @@
   --brand-900: #6d291a;
   --brand-950: #3e130a;
 
-  /* Slate Scale (Cool Grays) */
-  --slate-50: #f8fafc;
-  --slate-100: #f1f5f9;
-  --slate-200: #e2e8f0;
-  --slate-300: #cbd5e1;
-  --slate-400: #94a3b8;
-  --slate-500: #64748b;
-  --slate-600: #475569;
-  --slate-700: #334155;
-  --slate-800: #1e293b;
-  --slate-900: #0f172a;
-  --slate-950: #020617;
+  /* Slate Scale (Cool Grays / Neudela Gray) */
+  --slate-25: #fcfcfd;
+  --slate-50: #f9fafb;
+  --slate-100: #f2f4f7;
+  --slate-200: #e4e7ec;
+  --slate-300: #d0d5dd;
+  --slate-400: #98a2b3;
+  --slate-500: #667085;
+  --slate-600: #475467;
+  --slate-700: #344054;
+  --slate-800: #182230;
+  --slate-900: #101828;
+  --slate-950: #0c111d;
 
-  /* Gray Scale (Neutral Grays) */
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  --gray-950: #030712;
+  /* Gray Scale (Pure Neutral Grays / Neudela Neutral) */
+  --gray-25: #fafafa;
+  --gray-50: #f5f5f6;
+  --gray-100: #f0f1f1;
+  --gray-200: #ececed;
+  --gray-300: #cecfd2;
+  --gray-400: #94969c;
+  --gray-500: #85888e;
+  --gray-600: #61646c;
+  --gray-700: #333741;
+  --gray-800: #1f242f;
+  --gray-900: #161b26;
+  --gray-950: #0c111d;
 
   /* Emerald Scale (Success) */
   --emerald-50: #ecfdf5;
@@ -170,6 +172,45 @@
   --blue-900: #1e3a8a;
   --blue-950: #172554;
 
+  /* Purple Scale */
+  --purple-50: #f9f5ff;
+  --purple-100: #f4ebff;
+  --purple-200: #e9d7fe;
+  --purple-300: #d6bbfb;
+  --purple-400: #b692f6;
+  --purple-500: #9e77ed;
+  --purple-600: #7f56d9;
+  --purple-700: #6941c6;
+  --purple-800: #53389e;
+  --purple-900: #42307d;
+  --purple-950: #2c1c5f;
+
+  /* Pink Scale */
+  --pink-50: #fdf2fa;
+  --pink-100: #fce7f6;
+  --pink-200: #fbcfe8;
+  --pink-300: #f472b6;
+  --pink-400: #ec4899;
+  --pink-500: #db2777;
+  --pink-600: #be185d;
+  --pink-700: #9d174d;
+  --pink-800: #831843;
+  --pink-900: #500724;
+  --pink-950: #380419;
+
+  /* Orange Scale */
+  --orange-50: #fffaf5;
+  --orange-100: #ffeedb;
+  --orange-200: #fed7aa;
+  --orange-300: #fb923c;
+  --orange-400: #f97316;
+  --orange-500: #ea580c;
+  --orange-600: #c2410c;
+  --orange-700: #9a3412;
+  --orange-800: #7c2d12;
+  --orange-900: #431407;
+  --orange-950: #270b04;
+
   /* Semantic UI Tokens - Light Mode */
   --color-primary: var(--brand-500);
   --color-primary-hover: var(--brand-600);
@@ -198,14 +239,16 @@
   --color-info-border: var(--sky-200);
 
   /* Surface & Text Background Colors */
+  --color-bg: #ffffff;
   --color-bg-canvas: var(--slate-50);
+  --color-bg-subtle: var(--slate-50);
   --color-bg-surface: #ffffff;
-  --color-bg-surface-hover: var(--slate-100);
+  --color-bg-surface-hover: var(--slate-50);
   --color-bg-sidebar: #ffffff;
-  --color-border: var(--slate-200);
-  --color-border-hover: var(--slate-300);
+  --color-border: var(--slate-300);
+  --color-border-hover: var(--slate-400);
 
-  --color-text-primary: var(--slate-900);
+  --color-text-primary: var(--slate-700);
   --color-text-secondary: var(--slate-500);
   --color-text-tertiary: var(--slate-400);
   --color-text-on-primary: #ffffff;
@@ -249,7 +292,9 @@
   --color-info-border: var(--sky-800);
 
   /* Surface & Text Background Colors */
+  --color-bg: var(--slate-950);
   --color-bg-canvas: var(--slate-950);
+  --color-bg-subtle: var(--slate-800);
   --color-bg-surface: var(--slate-900);
   --color-bg-surface-hover: var(--slate-800);
   --color-bg-sidebar: var(--slate-900);

@@ -714,7 +714,15 @@ body {
   color: var(--color-text-secondary);
 }
 
+.knob-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .knob-select, .knob-input {
+  width: 100%;
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -723,10 +731,104 @@ body {
   background-color: var(--color-bg-canvas);
   color: var(--color-text-primary);
   outline: none;
+  transition: all 0.2s ease;
+}
+
+.knob-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 34px;
+  cursor: pointer;
+}
+
+.knob-select:hover, .knob-input:hover {
+  border-color: var(--color-border-hover);
 }
 
 .knob-select:focus, .knob-input:focus {
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.knob-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+.knob-select:focus ~ .knob-select-arrow {
+  color: var(--color-primary);
+}
+
+/* Playground Toggle Switch */
+.knob-control--switch {
+  padding: var(--space-1) 0;
+}
+
+.knob-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+}
+
+.knob-switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.knob-switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.knob-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.knob-switch-slider::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.knob-switch-input:checked + .knob-switch-slider {
+  background-color: var(--color-primary);
+}
+
+.knob-switch-input:focus-visible + .knob-switch-slider {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.knob-switch-input:checked + .knob-switch-slider::before {
+  transform: translateX(16px);
 }
 
 .knob-checkbox-label {
@@ -767,10 +869,17 @@ body {
 }
 
 /* Sizes */
+.neuron-btn--xs {
+  padding: 0 var(--space-3);
+  font-size: var(--fs-text-xs);
+  height: 32px;
+  gap: var(--space-1);
+}
+
 .neuron-btn--sm {
   padding: var(--space-1) var(--space-3);
   font-size: var(--fs-text-xs);
-  height: 32px;
+  height: 36px;
 }
 
 .neuron-btn--md {
@@ -780,6 +889,12 @@ body {
 }
 
 .neuron-btn--lg {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-text-md);
+  height: 44px;
+}
+
+.neuron-btn--xl {
   padding: var(--space-3) var(--space-6);
   font-size: var(--fs-text-md);
   height: 48px;
@@ -797,6 +912,7 @@ body {
 
 .neuron-btn--primary:active:not(:disabled) {
   background-color: var(--color-primary-active);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 35%, transparent);
 }
 
 .neuron-btn--secondary {
@@ -806,7 +922,12 @@ body {
 }
 
 .neuron-btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-surface-hover);
+}
+
+.neuron-btn--secondary:active:not(:disabled) {
   background-color: var(--color-border);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--slate-400) 35%, transparent);
 }
 
 .neuron-btn--outline {
@@ -819,6 +940,10 @@ body {
   background-color: var(--color-primary-light);
 }
 
+.neuron-btn--outline:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
 .neuron-btn--text {
   background-color: transparent;
   color: var(--color-text-primary);
@@ -828,20 +953,356 @@ body {
   background-color: var(--color-bg-surface-hover);
 }
 
-/* Spinner spinner-animate */
-.neuron-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid currentColor;
-  border-bottom-color: transparent;
-  border-radius: var(--radius-full);
-  display: inline-block;
-  animation: rotation 1s linear infinite;
+.neuron-btn--text:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
-@keyframes rotation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Spinner spinner-animate */
+.neuron-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Button Icon Support */
+.neuron-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.neuron-btn-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* Icon-only button: square aspect ratio */
+.neuron-btn--icon-only {
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.neuron-btn--icon-only.neuron-btn--xs { width: 32px; }
+.neuron-btn--icon-only.neuron-btn--sm { width: 36px; }
+.neuron-btn--icon-only.neuron-btn--md { width: 40px; }
+.neuron-btn--icon-only.neuron-btn--lg { width: 44px; }
+.neuron-btn--icon-only.neuron-btn--xl { width: 48px; }
+
+/* Dot indicator */
+.neuron-btn-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Button Active / Selected States */
+.neuron-btn--primary.neuron-btn--active,
+.neuron-btn--primary.is-active {
+  background-color: var(--brand-700);
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.neuron-btn--secondary.neuron-btn--active,
+.neuron-btn--secondary.is-active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.neuron-btn--outline.neuron-btn--active,
+.neuron-btn--outline.is-active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.neuron-btn--text.neuron-btn--active,
+.neuron-btn--text.is-active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ═════════════════════════════════════════════
+   1.1 BUTTON GROUP (NEURON BUTTON GROUP)
+   Purely neutral styling without primary color
+═════════════════════════════════════════════ */
+.neuron-btn-group {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+/* Neutral item styling inside group */
+.neuron-btn-group .neuron-btn {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.neuron-btn-group .neuron-btn:hover:not(:disabled) {
+  background-color: var(--color-bg-surface-hover);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+}
+
+/* Neutral active states in Button Group (NO primary color) */
+.neuron-btn-group .neuron-btn.is-active,
+.neuron-btn-group .neuron-btn.neuron-btn--active,
+.neuron-btn-group .neuron-btn[aria-pressed="true"],
+.neuron-btn-group .neuron-btn[aria-checked="true"] {
+  background-color: var(--color-bg-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+  font-weight: var(--font-weight-semibold);
+}
+
+.dark-theme .neuron-btn-group .neuron-btn {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.dark-theme .neuron-btn-group .neuron-btn:hover:not(:disabled) {
+  background-color: var(--color-bg-surface-hover);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+}
+
+.dark-theme .neuron-btn-group .neuron-btn.is-active,
+.dark-theme .neuron-btn-group .neuron-btn.neuron-btn--active,
+.dark-theme .neuron-btn-group .neuron-btn[aria-pressed="true"],
+.dark-theme .neuron-btn-group .neuron-btn[aria-checked="true"] {
+  background-color: var(--color-bg-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+}
+
+/* Neutral focus & active ring for Button Group (NO primary orange) */
+.neuron-btn-group .neuron-btn:active:not(:disabled),
+.neuron-btn-group .neuron-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.35) !important;
+  outline: none;
+}
+
+.dark-theme .neuron-btn-group .neuron-btn:active:not(:disabled),
+.dark-theme .neuron-btn-group .neuron-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.4) !important;
+  outline: none;
+}
+
+/* Attached mode - Horizontal */
+.neuron-btn-group--attached.neuron-btn-group--horizontal {
+  flex-direction: row;
+}
+
+.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:first-child {
+  margin-left: 0;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+}
+
+.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:last-child {
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+/* Radius variations based on group sizes */
+.neuron-btn-group--xs.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:first-child,
+.neuron-btn-group--sm.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:first-child {
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.neuron-btn-group--xs.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:last-child,
+.neuron-btn-group--sm.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:last-child {
+  border-top-right-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.neuron-btn-group--lg.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:first-child,
+.neuron-btn-group--xl.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:first-child {
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.neuron-btn-group--lg.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:last-child,
+.neuron-btn-group--xl.neuron-btn-group--attached.neuron-btn-group--horizontal .neuron-btn-group-item:last-child {
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Attached mode - Vertical */
+.neuron-btn-group--attached.neuron-btn-group--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.neuron-btn-group--attached.neuron-btn-group--vertical .neuron-btn-group-item {
+  border-radius: 0;
+  margin-top: -1px;
+  margin-left: 0;
+  width: 100%;
+}
+
+.neuron-btn-group--attached.neuron-btn-group--vertical .neuron-btn-group-item:first-child {
+  margin-top: 0;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.neuron-btn-group--attached.neuron-btn-group--vertical .neuron-btn-group-item:last-child {
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+/* Hover, Active, and Focus z-index stacking */
+.neuron-btn-group-item:hover,
+.neuron-btn-group-item:focus-visible,
+.neuron-btn-group-item.is-active,
+.neuron-btn-group-item.neuron-btn--active {
+  z-index: 2;
+  position: relative;
+}
+
+/* Spaced mode */
+.neuron-btn-group--spaced {
+  gap: var(--space-2);
+}
+
+.neuron-btn-group--spaced.neuron-btn-group--vertical {
+  flex-direction: column;
+}
+
+/* Full width mode */
+.neuron-btn-group--full-width {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.neuron-btn-group--full-width .neuron-btn-group-item,
+.neuron-btn-group--full-width .neuron-btn {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Pill / Segmented container mode */
+.neuron-btn-group--pill {
+  background-color: var(--color-bg-surface-hover);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  gap: 2px;
+}
+
+.neuron-btn-group--pill .neuron-btn-group-item {
+  border-radius: var(--radius-full) !important;
+  border-color: transparent !important;
+  margin: 0 !important;
+}
+
+.neuron-btn-group--pill .neuron-btn-group-item.is-active {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Radio Indicator Circle Support */
+.neuron-btn-radio-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--space-2);
+  flex-shrink: 0;
+}
+
+.neuron-btn-radio-indicator__circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-hover);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-surface);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.neuron-btn-radio-indicator__circle.is-selected {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+}
+
+.neuron-btn-radio-indicator__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-text-primary);
+  display: block;
+  animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Split button specific helper */
+.neuron-btn-split-trigger {
+  padding-left: var(--space-2) !important;
+  padding-right: var(--space-2) !important;
+}
+
+/* Button Group Anatomy styles */
+.anatomy-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 480px;
+}
+
+.anatomy-group-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--color-bg-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  position: relative;
 }
 
 /* 2. INPUT */
@@ -856,12 +1317,137 @@ body {
   font-size: var(--fs-text-xs);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.neuron-label__required {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-bold);
+}
+
+.neuron-label__help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  cursor: help;
+  margin-left: 2px;
+  transition: color 0.15s ease;
+}
+
+.neuron-label__help-icon:hover {
+  color: var(--color-text-primary);
 }
 
 .neuron-input-wrapper {
   position: relative;
   display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.neuron-input-inner {
+  position: relative;
+  display: flex;
   align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+/* Addon (Leading Text / Trailing Text) */
+.neuron-input-wrapper--has-addon {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-surface);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.neuron-input-wrapper--has-addon:hover:not(.neuron-input-wrapper--disabled):not(.neuron-input-wrapper--readonly):not(:focus-within) {
+  border-color: var(--color-border-hover);
+}
+
+.neuron-input-wrapper--has-addon:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--success {
+  border-color: var(--color-success);
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--success:focus-within {
+  border-color: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--error {
+  border-color: var(--color-danger);
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--error:focus-within {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--disabled {
+  background-color: var(--color-bg-surface-hover);
+  cursor: not-allowed;
+}
+
+.neuron-input-wrapper--has-addon.neuron-input-wrapper--readonly {
+  background-color: var(--color-bg-subtle);
+  cursor: default;
+}
+
+.neuron-input-wrapper--has-addon .neuron-input {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.neuron-input-addon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-tertiary);
+  background-color: var(--color-bg-subtle);
+  user-select: none;
+  white-space: nowrap;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.neuron-input-addon--leading {
+  border-right: 1px solid var(--color-border);
+}
+
+.neuron-input-addon--trailing {
+  border-left: 1px solid var(--color-border);
+}
+
+.neuron-input-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--color-text-tertiary);
+  z-index: 1;
+  transition: color 0.15s ease;
+}
+
+.neuron-input-icon--leading {
+  left: var(--space-3);
+}
+
+.neuron-input-icon--trailing {
+  right: var(--space-3);
 }
 
 .neuron-input {
@@ -877,19 +1463,45 @@ body {
   transition: all 0.2s ease;
 }
 
+.neuron-input--has-leading {
+  padding-left: calc(var(--space-3) + 20px);
+}
+
+.neuron-input--has-trailing {
+  padding-right: calc(var(--space-3) + 20px);
+}
+
 .neuron-input::placeholder {
   color: var(--color-text-tertiary);
 }
 
+.neuron-input:hover:not(:disabled):not(:read-only):not(:focus) {
+  border-color: var(--color-border-hover);
+}
+
 .neuron-input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.neuron-input:focus ~ .neuron-input-icon {
+  color: var(--color-primary);
 }
 
 .neuron-input:disabled {
   background-color: var(--color-bg-surface-hover);
   color: var(--color-text-tertiary);
   cursor: not-allowed;
+}
+
+.neuron-input:read-only {
+  background-color: var(--color-bg-subtle);
+  cursor: default;
+}
+
+.neuron-input:read-only:focus {
+  border-color: var(--color-border);
+  box-shadow: none;
 }
 
 /* Success Input state */
@@ -902,7 +1514,11 @@ body {
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
-/* Error Input state */
+.neuron-input--success:focus ~ .neuron-input-icon {
+  color: var(--color-success);
+}
+
+/* Error / Destructive Input state */
 .neuron-input--error {
   border-color: var(--color-danger);
 }
@@ -910,6 +1526,10 @@ body {
 .neuron-input--error:focus {
   border-color: var(--color-danger);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.neuron-input--error:focus ~ .neuron-input-icon {
+  color: var(--color-danger);
 }
 
 .neuron-helper-text {
@@ -921,70 +1541,1487 @@ body {
   color: var(--color-danger);
 }
 
+.neuron-form-group--error .neuron-label {
+  color: var(--color-danger);
+}
+
 .neuron-form-group--success .neuron-helper-text {
   color: var(--color-success);
 }
 
-/* 3. BADGES */
+/* 3. BADGES & BADGE GROUPS (NEURON BADGE) */
 .neuron-badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  padding: 2px var(--space-2);
-  font-size: var(--fs-text-xs);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-  border-radius: var(--radius-xs);
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
+  line-height: 1;
+  box-sizing: border-box;
 }
 
+/* Badge Sizes */
+.neuron-badge--sm {
+  height: 22px;
+  padding: 0 var(--space-2);
+  font-size: var(--fs-text-xs);
+  gap: 4px;
+}
+
+.neuron-badge--md {
+  height: 24px;
+  padding: 0 10px;
+  font-size: var(--fs-text-xs);
+  gap: 6px;
+}
+
+.neuron-badge--lg {
+  height: 28px;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-text-sm);
+  gap: 6px;
+}
+
+/* Badge Shape */
 .neuron-badge--pill {
   border-radius: var(--radius-full);
 }
 
+/* Icon-only badge */
+.neuron-badge--icon-only.neuron-badge--sm {
+  width: 22px;
+  padding: 0;
+}
+
+.neuron-badge--icon-only.neuron-badge--md {
+  width: 24px;
+  padding: 0;
+}
+
+.neuron-badge--icon-only.neuron-badge--lg {
+  width: 28px;
+  padding: 0;
+}
+
+/* Badge Internal Elements */
+.neuron-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+}
+
+.neuron-badge__avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: -4px;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+.neuron-badge--sm .neuron-badge__avatar {
+  width: 14px;
+  height: 14px;
+  margin-left: -3px;
+  margin-right: 1px;
+}
+
+.neuron-badge--lg .neuron-badge__avatar {
+  width: 18px;
+  height: 18px;
+  margin-left: -5px;
+  margin-right: 2px;
+}
+
+.neuron-badge__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.15s ease;
+  margin-left: 2px;
+}
+
+.neuron-badge__close:hover {
+  opacity: 1;
+}
+
+.neuron-badge__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+  transition: transform 0.15s ease;
+}
+
+/* ── Badge Colors (Subtle Fill Default) ── */
+/* Gray / Neutral */
+.neuron-badge--gray,
 .neuron-badge--default {
+  background-color: var(--slate-50);
+  border-color: var(--slate-200);
+  color: var(--slate-700);
+}
+.neuron-badge--gray .neuron-badge__dot,
+.neuron-badge--default .neuron-badge__dot {
+  background-color: var(--slate-500);
+}
+.dark-theme .neuron-badge--gray,
+.dark-theme .neuron-badge--default {
+  background-color: var(--slate-800);
+  border-color: var(--slate-700);
+  color: var(--slate-200);
+}
+
+/* Brand / Primary */
+.neuron-badge--brand,
+.neuron-badge--primary {
+  background-color: var(--brand-50);
+  border-color: var(--brand-200);
+  color: var(--brand-700);
+}
+.neuron-badge--brand .neuron-badge__dot,
+.neuron-badge--primary .neuron-badge__dot {
+  background-color: var(--brand-500);
+}
+.dark-theme .neuron-badge--brand,
+.dark-theme .neuron-badge--primary {
+  background-color: rgba(223, 126, 48, 0.15);
+  border-color: var(--brand-800);
+  color: var(--brand-300);
+}
+
+/* Error / Danger */
+.neuron-badge--error,
+.neuron-badge--danger {
+  background-color: var(--red-50);
+  border-color: var(--red-200);
+  color: var(--red-700);
+}
+.neuron-badge--error .neuron-badge__dot,
+.neuron-badge--danger .neuron-badge__dot {
+  background-color: var(--red-500);
+}
+.dark-theme .neuron-badge--error,
+.dark-theme .neuron-badge--danger {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: var(--red-800);
+  color: var(--red-300);
+}
+
+/* Warning */
+.neuron-badge--warning {
+  background-color: var(--amber-50);
+  border-color: var(--amber-200);
+  color: var(--amber-700);
+}
+.neuron-badge--warning .neuron-badge__dot {
+  background-color: var(--amber-500);
+}
+.dark-theme .neuron-badge--warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  border-color: var(--amber-800);
+  color: var(--amber-300);
+}
+
+/* Success */
+.neuron-badge--success {
+  background-color: var(--emerald-50);
+  border-color: var(--emerald-200);
+  color: var(--emerald-700);
+}
+.neuron-badge--success .neuron-badge__dot {
+  background-color: var(--emerald-500);
+}
+.dark-theme .neuron-badge--success {
+  background-color: rgba(16, 185, 129, 0.15);
+  border-color: var(--emerald-800);
+  color: var(--emerald-300);
+}
+
+/* Blue */
+.neuron-badge--blue {
+  background-color: var(--blue-50);
+  border-color: var(--blue-200);
+  color: var(--blue-700);
+}
+.neuron-badge--blue .neuron-badge__dot {
+  background-color: var(--blue-500);
+}
+.dark-theme .neuron-badge--blue {
+  background-color: rgba(59, 130, 246, 0.15);
+  border-color: var(--blue-800);
+  color: var(--blue-300);
+}
+
+/* Indigo / Sky */
+.neuron-badge--indigo,
+.neuron-badge--sky {
+  background-color: var(--sky-50);
+  border-color: var(--sky-200);
+  color: var(--sky-700);
+}
+.neuron-badge--indigo .neuron-badge__dot,
+.neuron-badge--sky .neuron-badge__dot {
+  background-color: var(--sky-500);
+}
+.dark-theme .neuron-badge--indigo,
+.dark-theme .neuron-badge--sky {
+  background-color: rgba(14, 165, 233, 0.15);
+  border-color: var(--sky-800);
+  color: var(--sky-300);
+}
+
+/* Purple */
+.neuron-badge--purple {
+  background-color: var(--purple-50);
+  border-color: var(--purple-200);
+  color: var(--purple-700);
+}
+.neuron-badge--purple .neuron-badge__dot {
+  background-color: var(--purple-500);
+}
+.dark-theme .neuron-badge--purple {
+  background-color: rgba(158, 119, 237, 0.15);
+  border-color: var(--purple-800);
+  color: var(--purple-300);
+}
+
+/* Pink */
+.neuron-badge--pink {
+  background-color: var(--pink-50);
+  border-color: var(--pink-200);
+  color: var(--pink-700);
+}
+.neuron-badge--pink .neuron-badge__dot {
+  background-color: var(--pink-500);
+}
+.dark-theme .neuron-badge--pink {
+  background-color: rgba(236, 72, 153, 0.15);
+  border-color: var(--pink-800);
+  color: var(--pink-300);
+}
+
+/* Orange */
+.neuron-badge--orange {
+  background-color: var(--orange-50);
+  border-color: var(--orange-200);
+  color: var(--orange-700);
+}
+.neuron-badge--orange .neuron-badge__dot {
+  background-color: var(--orange-500);
+}
+.dark-theme .neuron-badge--orange {
+  background-color: rgba(249, 115, 22, 0.15);
+  border-color: var(--orange-800);
+  color: var(--orange-300);
+}
+
+/* ── Fill Styles: Solid & Outline ── */
+.neuron-badge--solid.neuron-badge--brand,
+.neuron-badge--solid.neuron-badge--primary {
+  background-color: var(--brand-600);
+  color: #ffffff;
+  border-color: transparent;
+}
+.neuron-badge--solid.neuron-badge--gray,
+.neuron-badge--solid.neuron-badge--default {
+  background-color: var(--slate-700);
+  color: #ffffff;
+  border-color: transparent;
+}
+.neuron-badge--solid.neuron-badge--success {
+  background-color: var(--emerald-600);
+  color: #ffffff;
+  border-color: transparent;
+}
+.neuron-badge--solid.neuron-badge--warning {
+  background-color: var(--amber-600);
+  color: #ffffff;
+  border-color: transparent;
+}
+.neuron-badge--solid.neuron-badge--error,
+.neuron-badge--solid.neuron-badge--danger {
+  background-color: var(--red-600);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.neuron-badge--outline {
+  background-color: transparent;
+}
+
+/* ═════════════════════════════════════════════
+   3.1 BADGE GROUP (COMPOSITE ANNOUNCEMENT PILL)
+═════════════════════════════════════════════ */
+.neuron-badge-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 4px 12px 4px 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+}
+
+.neuron-badge-group--trailing {
+  padding: 4px 4px 4px 12px;
+}
+
+.neuron-badge-group:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.neuron-badge-group:hover .neuron-badge-group__arrow {
+  transform: translateX(3px);
+}
+
+.neuron-badge-group__text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  transition: color 0.2s ease;
+}
+
+.neuron-badge-group__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+  margin-left: 2px;
+}
+
+/* Inner badge pill inside Badge Group has crisp white background */
+.neuron-badge-group .neuron-badge {
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Badge Group Color Themes (Default Palette Fill + Elevated Hover) ── */
+
+/* 1. Brand / Primary */
+.neuron-badge-group--brand,
+.neuron-badge-group--primary {
+  background-color: var(--brand-50);
+  border-color: var(--brand-200);
+  color: var(--brand-800);
+}
+.neuron-badge-group--brand .neuron-badge-group__text,
+.neuron-badge-group--primary .neuron-badge-group__text {
+  color: var(--brand-800);
+}
+.neuron-badge-group--brand .neuron-badge-group__arrow,
+.neuron-badge-group--primary .neuron-badge-group__arrow {
+  color: var(--brand-600);
+}
+.neuron-badge-group--brand:hover,
+.neuron-badge-group--primary:hover {
+  background-color: var(--brand-100);
+  border-color: var(--brand-300);
+}
+.neuron-badge-group--brand:hover .neuron-badge-group__text,
+.neuron-badge-group--primary:hover .neuron-badge-group__text {
+  color: var(--brand-900);
+}
+.neuron-badge-group--brand:hover .neuron-badge-group__arrow,
+.neuron-badge-group--primary:hover .neuron-badge-group__arrow {
+  color: var(--brand-800);
+}
+
+/* 2. Gray / Neutral */
+.neuron-badge-group--gray,
+.neuron-badge-group--default {
+  background-color: var(--slate-50);
+  border-color: var(--slate-200);
+  color: var(--slate-700);
+}
+.neuron-badge-group--gray .neuron-badge-group__text,
+.neuron-badge-group--default .neuron-badge-group__text {
+  color: var(--slate-700);
+}
+.neuron-badge-group--gray .neuron-badge-group__arrow,
+.neuron-badge-group--default .neuron-badge-group__arrow {
+  color: var(--slate-500);
+}
+.neuron-badge-group--gray:hover,
+.neuron-badge-group--default:hover {
+  background-color: var(--slate-100);
+  border-color: var(--slate-300);
+}
+.neuron-badge-group--gray:hover .neuron-badge-group__text,
+.neuron-badge-group--default:hover .neuron-badge-group__text {
+  color: var(--slate-900);
+}
+.neuron-badge-group--gray:hover .neuron-badge-group__arrow,
+.neuron-badge-group--default:hover .neuron-badge-group__arrow {
+  color: var(--slate-700);
+}
+
+/* 3. Error / Danger */
+.neuron-badge-group--error,
+.neuron-badge-group--danger {
+  background-color: var(--red-50);
+  border-color: var(--red-200);
+  color: var(--red-700);
+}
+.neuron-badge-group--error .neuron-badge-group__text,
+.neuron-badge-group--danger .neuron-badge-group__text {
+  color: var(--red-700);
+}
+.neuron-badge-group--error .neuron-badge-group__arrow,
+.neuron-badge-group--danger .neuron-badge-group__arrow {
+  color: var(--red-500);
+}
+.neuron-badge-group--error:hover,
+.neuron-badge-group--danger:hover {
+  background-color: var(--red-100);
+  border-color: var(--red-300);
+}
+.neuron-badge-group--error:hover .neuron-badge-group__text,
+.neuron-badge-group--danger:hover .neuron-badge-group__text {
+  color: var(--red-800);
+}
+.neuron-badge-group--error:hover .neuron-badge-group__arrow,
+.neuron-badge-group--danger:hover .neuron-badge-group__arrow {
+  color: var(--red-700);
+}
+
+/* 4. Warning */
+.neuron-badge-group--warning {
+  background-color: var(--amber-50);
+  border-color: var(--amber-200);
+  color: var(--amber-800);
+}
+.neuron-badge-group--warning .neuron-badge-group__text {
+  color: var(--amber-800);
+}
+.neuron-badge-group--warning .neuron-badge-group__arrow {
+  color: var(--amber-600);
+}
+.neuron-badge-group--warning:hover {
+  background-color: var(--amber-100);
+  border-color: var(--amber-300);
+}
+.neuron-badge-group--warning:hover .neuron-badge-group__text {
+  color: var(--amber-900);
+}
+.neuron-badge-group--warning:hover .neuron-badge-group__arrow {
+  color: var(--amber-800);
+}
+
+/* 5. Success */
+.neuron-badge-group--success {
+  background-color: var(--emerald-50);
+  border-color: var(--emerald-200);
+  color: var(--emerald-700);
+}
+.neuron-badge-group--success .neuron-badge-group__text {
+  color: var(--emerald-700);
+}
+.neuron-badge-group--success .neuron-badge-group__arrow {
+  color: var(--emerald-500);
+}
+.neuron-badge-group--success:hover {
+  background-color: var(--emerald-100);
+  border-color: var(--emerald-300);
+}
+.neuron-badge-group--success:hover .neuron-badge-group__text {
+  color: var(--emerald-800);
+}
+.neuron-badge-group--success:hover .neuron-badge-group__arrow {
+  color: var(--emerald-700);
+}
+
+/* 6. Blue */
+.neuron-badge-group--blue {
+  background-color: var(--blue-50);
+  border-color: var(--blue-200);
+  color: var(--blue-700);
+}
+.neuron-badge-group--blue .neuron-badge-group__text {
+  color: var(--blue-700);
+}
+.neuron-badge-group--blue .neuron-badge-group__arrow {
+  color: var(--blue-500);
+}
+.neuron-badge-group--blue:hover {
+  background-color: var(--blue-100);
+  border-color: var(--blue-300);
+}
+.neuron-badge-group--blue:hover .neuron-badge-group__text {
+  color: var(--blue-800);
+}
+.neuron-badge-group--blue:hover .neuron-badge-group__arrow {
+  color: var(--blue-700);
+}
+
+/* 7. Indigo / Sky */
+.neuron-badge-group--indigo,
+.neuron-badge-group--sky {
+  background-color: var(--sky-50);
+  border-color: var(--sky-200);
+  color: var(--sky-700);
+}
+.neuron-badge-group--indigo .neuron-badge-group__text,
+.neuron-badge-group--sky .neuron-badge-group__text {
+  color: var(--sky-700);
+}
+.neuron-badge-group--indigo .neuron-badge-group__arrow,
+.neuron-badge-group--sky .neuron-badge-group__arrow {
+  color: var(--sky-500);
+}
+.neuron-badge-group--indigo:hover,
+.neuron-badge-group--sky:hover {
+  background-color: var(--sky-100);
+  border-color: var(--sky-300);
+}
+.neuron-badge-group--indigo:hover .neuron-badge-group__text,
+.neuron-badge-group--sky:hover .neuron-badge-group__text {
+  color: var(--sky-800);
+}
+.neuron-badge-group--indigo:hover .neuron-badge-group__arrow,
+.neuron-badge-group--sky:hover .neuron-badge-group__arrow {
+  color: var(--sky-700);
+}
+
+/* 8. Purple */
+.neuron-badge-group--purple {
+  background-color: var(--purple-50);
+  border-color: var(--purple-200);
+  color: var(--purple-700);
+}
+.neuron-badge-group--purple .neuron-badge-group__text {
+  color: var(--purple-700);
+}
+.neuron-badge-group--purple .neuron-badge-group__arrow {
+  color: var(--purple-500);
+}
+.neuron-badge-group--purple:hover {
+  background-color: var(--purple-100);
+  border-color: var(--purple-300);
+}
+.neuron-badge-group--purple:hover .neuron-badge-group__text {
+  color: var(--purple-800);
+}
+.neuron-badge-group--purple:hover .neuron-badge-group__arrow {
+  color: var(--purple-700);
+}
+
+/* 9. Pink */
+.neuron-badge-group--pink {
+  background-color: var(--pink-50);
+  border-color: var(--pink-200);
+  color: var(--pink-700);
+}
+.neuron-badge-group--pink .neuron-badge-group__text {
+  color: var(--pink-700);
+}
+.neuron-badge-group--pink .neuron-badge-group__arrow {
+  color: var(--pink-500);
+}
+.neuron-badge-group--pink:hover {
+  background-color: var(--pink-100);
+  border-color: var(--pink-300);
+}
+.neuron-badge-group--pink:hover .neuron-badge-group__text {
+  color: var(--pink-800);
+}
+.neuron-badge-group--pink:hover .neuron-badge-group__arrow {
+  color: var(--pink-700);
+}
+
+/* 10. Orange */
+.neuron-badge-group--orange {
+  background-color: var(--orange-50);
+  border-color: var(--orange-200);
+  color: var(--orange-700);
+}
+.neuron-badge-group--orange .neuron-badge-group__text {
+  color: var(--orange-700);
+}
+.neuron-badge-group--orange .neuron-badge-group__arrow {
+  color: var(--orange-500);
+}
+.neuron-badge-group--orange:hover {
+  background-color: var(--orange-100);
+  border-color: var(--orange-300);
+}
+.neuron-badge-group--orange:hover .neuron-badge-group__text {
+  color: var(--orange-800);
+}
+.neuron-badge-group--orange:hover .neuron-badge-group__arrow {
+  color: var(--orange-700);
+}
+
+/* ── Dark Theme Overrides for Badge Group ── */
+.dark-theme .neuron-badge-group .neuron-badge {
+  background-color: var(--slate-800);
+}
+
+.dark-theme .neuron-badge-group--brand {
+  background-color: rgba(223, 126, 48, 0.10);
+  border-color: var(--brand-800);
+  color: var(--brand-300);
+}
+.dark-theme .neuron-badge-group--brand:hover {
+  background-color: rgba(223, 126, 48, 0.20);
+  border-color: var(--brand-700);
+}
+
+.dark-theme .neuron-badge-group--gray {
+  background-color: var(--slate-900);
+  border-color: var(--slate-800);
+  color: var(--slate-200);
+}
+.dark-theme .neuron-badge-group--gray:hover {
+  background-color: var(--slate-800);
+  border-color: var(--slate-700);
+}
+
+.dark-theme .neuron-badge-group--error {
+  background-color: rgba(239, 68, 68, 0.10);
+  border-color: var(--red-800);
+  color: var(--red-300);
+}
+.dark-theme .neuron-badge-group--error:hover {
+  background-color: rgba(239, 68, 68, 0.20);
+  border-color: var(--red-700);
+}
+
+.dark-theme .neuron-badge-group--warning {
+  background-color: rgba(245, 158, 11, 0.10);
+  border-color: var(--amber-800);
+  color: var(--amber-300);
+}
+.dark-theme .neuron-badge-group--warning:hover {
+  background-color: rgba(245, 158, 11, 0.20);
+  border-color: var(--amber-700);
+}
+
+.dark-theme .neuron-badge-group--success {
+  background-color: rgba(16, 185, 129, 0.10);
+  border-color: var(--emerald-800);
+  color: var(--emerald-300);
+}
+.dark-theme .neuron-badge-group--success:hover {
+  background-color: rgba(16, 185, 129, 0.20);
+  border-color: var(--emerald-700);
+}
+
+.dark-theme .neuron-badge-group--blue {
+  background-color: rgba(59, 130, 246, 0.10);
+  border-color: var(--blue-800);
+  color: var(--blue-300);
+}
+.dark-theme .neuron-badge-group--blue:hover {
+  background-color: rgba(59, 130, 246, 0.20);
+  border-color: var(--blue-700);
+}
+
+.dark-theme .neuron-badge-group--indigo,
+.dark-theme .neuron-badge-group--sky {
+  background-color: rgba(14, 165, 233, 0.10);
+  border-color: var(--sky-800);
+  color: var(--sky-300);
+}
+.dark-theme .neuron-badge-group--indigo:hover,
+.dark-theme .neuron-badge-group--sky:hover {
+  background-color: rgba(14, 165, 233, 0.20);
+  border-color: var(--sky-700);
+}
+
+.dark-theme .neuron-badge-group--purple {
+  background-color: rgba(158, 119, 237, 0.10);
+  border-color: var(--purple-800);
+  color: var(--purple-300);
+}
+.dark-theme .neuron-badge-group--purple:hover {
+  background-color: rgba(158, 119, 237, 0.20);
+  border-color: var(--purple-700);
+}
+
+.dark-theme .neuron-badge-group--pink {
+  background-color: rgba(236, 72, 153, 0.10);
+  border-color: var(--pink-800);
+  color: var(--pink-300);
+}
+.dark-theme .neuron-badge-group--pink:hover {
+  background-color: rgba(236, 72, 153, 0.20);
+  border-color: var(--pink-700);
+}
+
+.dark-theme .neuron-badge-group--orange {
+  background-color: rgba(249, 115, 22, 0.10);
+  border-color: var(--orange-800);
+  color: var(--orange-300);
+}
+.dark-theme .neuron-badge-group--orange:hover {
+  background-color: rgba(249, 115, 22, 0.20);
+  border-color: var(--orange-700);
+}
+
+/* ═════════════════════════════════════════════
+   BADGE DESIGN SPECIFICATION SHOWCASE (OVERVIEW)
+═════════════════════════════════════════════ */
+.badge-spec-card {
+  margin-top: var(--space-6);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.badge-spec-header {
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.badge-spec-title {
+  font-size: var(--fs-text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.badge-spec-subtitle {
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.badge-spec-filter-group {
+  display: inline-flex;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 2px;
+  gap: 2px;
+}
+
+.badge-spec-filter-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.badge-spec-filter-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.badge-spec-filter-btn.is-active {
   background-color: var(--color-bg-surface-hover);
   color: var(--color-text-primary);
-  border-color: var(--color-border);
+  font-weight: var(--font-weight-semibold);
 }
 
-.neuron-badge--primary {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-  border-color: var(--color-primary-border);
+.badge-spec-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
-.neuron-badge--success {
-  background-color: var(--color-success-light);
-  color: var(--color-success);
-  border-color: var(--color-success-border);
+/* Badge Matrix Table (Guaranteed 100% column alignment) */
+.badge-matrix-table {
+  width: 100%;
+  min-width: 1680px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-text-sm);
 }
 
-.neuron-badge--warning {
-  background-color: var(--color-warning-light);
-  color: var(--color-warning);
-  border-color: var(--color-warning-border);
+.badge-matrix-table thead tr {
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.neuron-badge--danger {
-  background-color: var(--color-danger-light);
-  color: var(--color-danger);
-  border-color: var(--color-danger-border);
+.badge-matrix-table th {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-.neuron-badge-close {
+.badge-matrix-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s ease;
+}
+
+.badge-matrix-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.badge-matrix-table tbody tr:hover {
+  background-color: var(--color-bg-surface-hover);
+}
+
+.badge-matrix-table td {
+  padding: 10px 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.badge-theme-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.badge-cell-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.badge-theme-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Badge Group Matrix Table */
+.badge-group-matrix-table {
+  width: 100%;
+  min-width: 1480px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.badge-group-matrix-table thead tr {
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.badge-group-matrix-table th {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-group-matrix-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s ease;
+}
+
+.badge-group-matrix-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.badge-group-matrix-table tbody tr:hover {
+  background-color: var(--color-bg-surface-hover);
+}
+
+.badge-group-matrix-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* ═════════════════════════════════════════════
+   3.2 TOGGLES / SWITCHES
+═════════════════════════════════════════════ */
+.neuron-toggle-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-3);
   cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+}
+
+.neuron-toggle-wrapper--left {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.neuron-toggle-wrapper--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.neuron-toggle-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.neuron-toggle-label {
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  transition: color 0.15s ease;
+}
+
+.neuron-toggle-description {
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Base Toggle Switch Track */
+.neuron-toggle {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  border-radius: var(--radius-full);
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--slate-200);
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.neuron-toggle:hover:not(:disabled) {
+  background-color: var(--slate-300);
+}
+
+.neuron-toggle:focus-visible {
+  box-shadow: 0 0 0 4px var(--brand-100);
+}
+
+/* On-Click / Active Shadow (matching Button active feedback) */
+.neuron-toggle:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--slate-400) 35%, transparent);
+}
+
+.neuron-toggle.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Thumb (Knob) */
+.neuron-toggle__thumb {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 12px;
-  height: 12px;
-  border-radius: var(--radius-full);
-  transition: background-color 0.1s ease;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.15s ease, background-color 0.2s ease;
+  transform: translateX(0px);
 }
 
-.neuron-badge-close:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.neuron-toggle__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate-400);
+  transition: color 0.15s ease;
+}
+
+/* ── Toggle Sizes ── */
+/* Small (sm) */
+.neuron-toggle--sm {
+  width: 36px;
+  height: 20px;
+}
+.neuron-toggle--sm .neuron-toggle__thumb {
+  width: 16px;
+  height: 16px;
+}
+.neuron-toggle--sm.is-checked .neuron-toggle__thumb {
+  transform: translateX(16px);
+}
+.neuron-toggle--sm:active:not(:disabled) .neuron-toggle__thumb {
+  width: 18px;
+}
+.neuron-toggle--sm.is-checked:active:not(:disabled) .neuron-toggle__thumb {
+  transform: translateX(14px);
+}
+
+/* Medium (md) */
+.neuron-toggle--md {
+  width: 44px;
+  height: 24px;
+}
+.neuron-toggle--md .neuron-toggle__thumb {
+  width: 20px;
+  height: 20px;
+}
+.neuron-toggle--md.is-checked .neuron-toggle__thumb {
+  transform: translateX(20px);
+}
+.neuron-toggle--md:active:not(:disabled) .neuron-toggle__thumb {
+  width: 23px;
+}
+.neuron-toggle--md.is-checked:active:not(:disabled) .neuron-toggle__thumb {
+  transform: translateX(17px);
+}
+
+/* Large (lg) */
+.neuron-toggle--lg {
+  width: 52px;
+  height: 28px;
+}
+.neuron-toggle--lg .neuron-toggle__thumb {
+  width: 24px;
+  height: 24px;
+}
+.neuron-toggle--lg.is-checked .neuron-toggle__thumb {
+  transform: translateX(24px);
+}
+.neuron-toggle--lg:active:not(:disabled) .neuron-toggle__thumb {
+  width: 27px;
+}
+.neuron-toggle--lg.is-checked:active:not(:disabled) .neuron-toggle__thumb {
+  transform: translateX(21px);
+}
+
+/* ── Toggle Color Variants & Dedicated Active Shadow (Checked State) ── */
+/* Brand / Primary */
+.neuron-toggle--brand.is-checked {
+  background-color: var(--brand-500);
+}
+.neuron-toggle--brand.is-checked:hover:not(:disabled) {
+  background-color: var(--brand-600);
+}
+.neuron-toggle--brand:focus-visible,
+.neuron-toggle--brand.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-500) 35%, transparent);
+}
+.neuron-toggle--brand.is-checked .neuron-toggle__icon {
+  color: var(--brand-500);
+}
+
+/* Gray / Neutral */
+.neuron-toggle--gray.is-checked {
+  background-color: var(--slate-700);
+}
+.neuron-toggle--gray.is-checked:hover:not(:disabled) {
+  background-color: var(--slate-800);
+}
+.neuron-toggle--gray:focus-visible,
+.neuron-toggle--gray.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--slate-500) 35%, transparent);
+}
+.neuron-toggle--gray.is-checked .neuron-toggle__icon {
+  color: var(--slate-700);
+}
+
+/* Error / Danger */
+.neuron-toggle--error.is-checked {
+  background-color: var(--red-500);
+}
+.neuron-toggle--error.is-checked:hover:not(:disabled) {
+  background-color: var(--red-600);
+}
+.neuron-toggle--error:focus-visible,
+.neuron-toggle--error.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--red-500) 35%, transparent);
+}
+.neuron-toggle--error.is-checked .neuron-toggle__icon {
+  color: var(--red-500);
+}
+
+/* Warning */
+.neuron-toggle--warning.is-checked {
+  background-color: var(--amber-500);
+}
+.neuron-toggle--warning.is-checked:hover:not(:disabled) {
+  background-color: var(--amber-600);
+}
+.neuron-toggle--warning:focus-visible,
+.neuron-toggle--warning.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amber-500) 35%, transparent);
+}
+.neuron-toggle--warning.is-checked .neuron-toggle__icon {
+  color: var(--amber-600);
+}
+
+/* Success */
+.neuron-toggle--success.is-checked {
+  background-color: var(--emerald-500);
+}
+.neuron-toggle--success.is-checked:hover:not(:disabled) {
+  background-color: var(--emerald-600);
+}
+.neuron-toggle--success:focus-visible,
+.neuron-toggle--success.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--emerald-500) 35%, transparent);
+}
+.neuron-toggle--success.is-checked .neuron-toggle__icon {
+  color: var(--emerald-500);
+}
+
+/* Blue */
+.neuron-toggle--blue.is-checked {
+  background-color: var(--blue-500);
+}
+.neuron-toggle--blue.is-checked:hover:not(:disabled) {
+  background-color: var(--blue-600);
+}
+.neuron-toggle--blue:focus-visible,
+.neuron-toggle--blue.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue-500) 35%, transparent);
+}
+.neuron-toggle--blue.is-checked .neuron-toggle__icon {
+  color: var(--blue-500);
+}
+
+/* Indigo / Sky */
+.neuron-toggle--indigo.is-checked,
+.neuron-toggle--sky.is-checked {
+  background-color: var(--sky-500);
+}
+.neuron-toggle--indigo.is-checked:hover:not(:disabled),
+.neuron-toggle--sky.is-checked:hover:not(:disabled) {
+  background-color: var(--sky-600);
+}
+.neuron-toggle--indigo:focus-visible,
+.neuron-toggle--sky:focus-visible,
+.neuron-toggle--indigo.is-checked:active:not(:disabled),
+.neuron-toggle--sky.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky-500) 35%, transparent);
+}
+.neuron-toggle--indigo.is-checked .neuron-toggle__icon,
+.neuron-toggle--sky.is-checked .neuron-toggle__icon {
+  color: var(--sky-500);
+}
+
+/* Purple */
+.neuron-toggle--purple.is-checked {
+  background-color: var(--purple-500);
+}
+.neuron-toggle--purple.is-checked:hover:not(:disabled) {
+  background-color: var(--purple-600);
+}
+.neuron-toggle--purple:focus-visible,
+.neuron-toggle--purple.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple-500) 35%, transparent);
+}
+.neuron-toggle--purple.is-checked .neuron-toggle__icon {
+  color: var(--purple-500);
+}
+
+/* Pink */
+.neuron-toggle--pink.is-checked {
+  background-color: var(--pink-500);
+}
+.neuron-toggle--pink.is-checked:hover:not(:disabled) {
+  background-color: var(--pink-600);
+}
+.neuron-toggle--pink:focus-visible,
+.neuron-toggle--pink.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pink-500) 35%, transparent);
+}
+.neuron-toggle--pink.is-checked .neuron-toggle__icon {
+  color: var(--pink-500);
+}
+
+/* Orange */
+.neuron-toggle--orange.is-checked {
+  background-color: var(--orange-500);
+}
+.neuron-toggle--orange.is-checked:hover:not(:disabled) {
+  background-color: var(--orange-600);
+}
+.neuron-toggle--orange:focus-visible,
+.neuron-toggle--orange.is-checked:active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange-500) 35%, transparent);
+}
+.neuron-toggle--orange.is-checked .neuron-toggle__icon {
+  color: var(--orange-500);
+}
+
+/* ── Settings Card Layout ── */
+.neuron-toggle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-surface);
+  transition: all 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+  gap: var(--space-4);
+}
+
+.neuron-toggle-card:hover:not(.neuron-toggle-wrapper--disabled) {
+  border-color: var(--slate-400);
+  background-color: var(--slate-50);
+}
+
+/* ── Dark Theme Overrides for Toggle ── */
+.dark-theme .neuron-toggle:not(.is-checked) {
+  background-color: var(--slate-700);
+}
+.dark-theme .neuron-toggle:not(.is-checked):hover:not(:disabled) {
+  background-color: var(--slate-600);
+}
+.dark-theme .neuron-toggle:not(.is-checked):active:not(:disabled) {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--slate-500) 40%, transparent);
+}
+.dark-theme .neuron-toggle__thumb {
+  background-color: #ffffff;
+}
+
+/* Checked Color Variants in Dark Mode */
+.dark-theme .neuron-toggle--brand.is-checked {
+  background-color: var(--brand-500);
+}
+.dark-theme .neuron-toggle--brand.is-checked:hover:not(:disabled) {
+  background-color: var(--brand-400);
+}
+.dark-theme .neuron-toggle--brand.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--brand.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--brand.is-checked .neuron-toggle__icon {
+  color: var(--brand-500);
+}
+
+.dark-theme .neuron-toggle--gray.is-checked {
+  background-color: var(--slate-500);
+}
+.dark-theme .neuron-toggle--gray.is-checked:hover:not(:disabled) {
+  background-color: var(--slate-400);
+}
+.dark-theme .neuron-toggle--gray.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--gray.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--slate-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--gray.is-checked .neuron-toggle__icon {
+  color: var(--slate-600);
+}
+
+.dark-theme .neuron-toggle--error.is-checked {
+  background-color: var(--red-500);
+}
+.dark-theme .neuron-toggle--error.is-checked:hover:not(:disabled) {
+  background-color: var(--red-400);
+}
+.dark-theme .neuron-toggle--error.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--error.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--red-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--error.is-checked .neuron-toggle__icon {
+  color: var(--red-500);
+}
+
+.dark-theme .neuron-toggle--warning.is-checked {
+  background-color: var(--amber-500);
+}
+.dark-theme .neuron-toggle--warning.is-checked:hover:not(:disabled) {
+  background-color: var(--amber-400);
+}
+.dark-theme .neuron-toggle--warning.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--warning.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amber-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--warning.is-checked .neuron-toggle__icon {
+  color: var(--amber-600);
+}
+
+.dark-theme .neuron-toggle--success.is-checked {
+  background-color: var(--emerald-500);
+}
+.dark-theme .neuron-toggle--success.is-checked:hover:not(:disabled) {
+  background-color: var(--emerald-400);
+}
+.dark-theme .neuron-toggle--success.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--success.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--emerald-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--success.is-checked .neuron-toggle__icon {
+  color: var(--emerald-500);
+}
+
+.dark-theme .neuron-toggle--blue.is-checked {
+  background-color: var(--blue-500);
+}
+.dark-theme .neuron-toggle--blue.is-checked:hover:not(:disabled) {
+  background-color: var(--blue-400);
+}
+.dark-theme .neuron-toggle--blue.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--blue.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--blue.is-checked .neuron-toggle__icon {
+  color: var(--blue-500);
+}
+
+.dark-theme .neuron-toggle--indigo.is-checked,
+.dark-theme .neuron-toggle--sky.is-checked {
+  background-color: var(--sky-500);
+}
+.dark-theme .neuron-toggle--indigo.is-checked:hover:not(:disabled),
+.dark-theme .neuron-toggle--sky.is-checked:hover:not(:disabled) {
+  background-color: var(--sky-400);
+}
+.dark-theme .neuron-toggle--indigo.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--sky.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--indigo.is-checked:focus-visible,
+.dark-theme .neuron-toggle--sky.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--indigo.is-checked .neuron-toggle__icon,
+.dark-theme .neuron-toggle--sky.is-checked .neuron-toggle__icon {
+  color: var(--sky-500);
+}
+
+.dark-theme .neuron-toggle--purple.is-checked {
+  background-color: var(--purple-500);
+}
+.dark-theme .neuron-toggle--purple.is-checked:hover:not(:disabled) {
+  background-color: var(--purple-400);
+}
+.dark-theme .neuron-toggle--purple.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--purple.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--purple.is-checked .neuron-toggle__icon {
+  color: var(--purple-500);
+}
+
+.dark-theme .neuron-toggle--pink.is-checked {
+  background-color: var(--pink-500);
+}
+.dark-theme .neuron-toggle--pink.is-checked:hover:not(:disabled) {
+  background-color: var(--pink-400);
+}
+.dark-theme .neuron-toggle--pink.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--pink.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pink-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--pink.is-checked .neuron-toggle__icon {
+  color: var(--pink-500);
+}
+
+.dark-theme .neuron-toggle--orange.is-checked {
+  background-color: var(--orange-500);
+}
+.dark-theme .neuron-toggle--orange.is-checked:hover:not(:disabled) {
+  background-color: var(--orange-400);
+}
+.dark-theme .neuron-toggle--orange.is-checked:active:not(:disabled),
+.dark-theme .neuron-toggle--orange.is-checked:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange-400) 40%, transparent);
+}
+.dark-theme .neuron-toggle--orange.is-checked .neuron-toggle__icon {
+  color: var(--orange-500);
+}
+
+.dark-theme .neuron-toggle-card {
+  background-color: var(--slate-900);
+  border-color: var(--slate-800);
+}
+.dark-theme .neuron-toggle-card:hover:not(.neuron-toggle-wrapper--disabled) {
+  background-color: var(--slate-800);
+  border-color: var(--slate-700);
+}
+
+/* ── Toggle Spec / Matrix Table Styles ── */
+.toggle-matrix-table {
+  width: 100%;
+  min-width: 1280px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-text-sm);
+}
+
+.toggle-matrix-table thead tr {
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.toggle-matrix-table th {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.toggle-matrix-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s ease;
+}
+
+.toggle-matrix-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.toggle-matrix-table tbody tr:hover {
+  background-color: var(--color-bg-surface-hover);
+}
+
+.toggle-matrix-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.toggle-theme-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.toggle-cell-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
 }
 
 /* 4. ALERTS */
@@ -1059,36 +3096,269 @@ body {
 
 /* 5. CARDS */
 .neuron-card {
+  position: relative;
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.2s ease, 
+              background-color 0.2s ease;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
 }
 
+/* Card Variants */
+.neuron-card--default,
+.neuron-card--outlined {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+}
+
+.neuron-card--elevated {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.neuron-card--flat {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+/* Glassmorphism Luxury Card */
+.neuron-card--glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Gradient Surface Card */
+.neuron-card--gradient {
+  background: linear-gradient(135deg, var(--color-bg-surface) 0%, var(--brand-50) 100%);
+  border: 1px solid var(--brand-200);
+}
+
+/* Gradient Border Card (Neon/Accent Glow) */
+.neuron-card--gradient-border {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--color-bg-surface), var(--color-bg-surface)) padding-box,
+              linear-gradient(135deg, var(--brand-500), var(--purple-500), var(--blue-500)) border-box;
+  box-shadow: 0 4px 20px -2px rgba(223, 126, 48, 0.12);
+}
+
+/* Brand Solid Accent Card */
+.neuron-card--brand {
+  background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-800) 100%);
+  color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 25px -5px rgba(223, 126, 48, 0.35);
+}
+.neuron-card--brand .neuron-card-header,
+.neuron-card--brand .neuron-card-footer {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: transparent;
+}
+.neuron-card--brand .neuron-card-description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Ghost / Dashed Container */
+.neuron-card--ghost {
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  box-shadow: none;
+}
+
+/* ── Hover Effects (Tailored per Variant) ── */
+.neuron-card--interactive {
+  cursor: pointer;
+}
+.neuron-card--interactive:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--brand-100), var(--shadow-sm);
+}
+
+/* 1. Contextual Auto Hover per Variant */
+.neuron-card--default.neuron-card--hover-auto:hover,
+.neuron-card--outlined.neuron-card--hover-auto:hover,
 .neuron-card--hoverable:hover {
-  transform: translateY(-4px);
+  border-color: var(--slate-400);
+  box-shadow: var(--shadow-sm);
+}
+
+.neuron-card--elevated.neuron-card--hover-auto:hover {
   box-shadow: var(--shadow-lg);
   border-color: var(--color-border-hover);
+  transform: translateY(-2px);
 }
 
+.neuron-card--flat.neuron-card--hover-auto:hover {
+  background-color: var(--slate-100);
+}
+
+.neuron-card--glass.neuron-card--hover-auto:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.neuron-card--gradient.neuron-card--hover-auto:hover {
+  border-color: var(--brand-300);
+  box-shadow: 0 4px 18px rgba(223, 126, 48, 0.16);
+}
+
+.neuron-card--gradient-border.neuron-card--hover-auto:hover {
+  box-shadow: 0 0 28px rgba(223, 126, 48, 0.25);
+}
+
+.neuron-card--brand.neuron-card--hover-auto:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 8px 24px -2px rgba(223, 126, 48, 0.4);
+}
+
+.neuron-card--ghost.neuron-card--hover-auto:hover {
+  border-style: solid;
+  border-color: var(--brand-500);
+  background-color: var(--brand-50);
+}
+
+/* 2. Explicit Micro Hover Utilities */
+.neuron-card--hover-border:hover {
+  border-color: var(--brand-500);
+}
+
+.neuron-card--hover-tint:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.neuron-card--hover-glow:hover {
+  box-shadow: 0 0 25px rgba(223, 126, 48, 0.22);
+  border-color: var(--brand-400);
+}
+
+.neuron-card--hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.neuron-card--hover-scale:hover {
+  transform: scale(1.015);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Padding Sizes ── */
+.neuron-card--pad-none .neuron-card-body {
+  padding: 0;
+}
+.neuron-card--pad-sm .neuron-card-body {
+  padding: 12px 14px;
+}
+.neuron-card--pad-md .neuron-card-body {
+  padding: 18px 20px;
+}
+.neuron-card--pad-lg .neuron-card-body {
+  padding: 24px 28px;
+}
+.neuron-card--pad-xl .neuron-card-body {
+  padding: 32px 36px;
+}
+
+/* ── Radius Sizes ── */
+.neuron-card--radius-none { border-radius: 0; }
+.neuron-card--radius-sm { border-radius: var(--radius-sm); }
+.neuron-card--radius-md { border-radius: var(--radius-md); }
+.neuron-card--radius-lg { border-radius: var(--radius-lg); }
+.neuron-card--radius-xl { border-radius: var(--radius-xl); }
+.neuron-card--radius-2xl { border-radius: var(--radius-2xl); }
+.neuron-card--radius-full { border-radius: var(--radius-full); }
+
+/* ── Subcomponent Slots ── */
 .neuron-card-header {
-  padding: var(--space-5) var(--space-6);
+  padding: 14px 20px;
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.neuron-card-media {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+.neuron-card-media img,
+.neuron-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .neuron-card-body {
-  padding: var(--space-6);
+  padding: 18px 20px;
   flex: 1;
 }
 
 .neuron-card-footer {
-  padding: var(--space-4) var(--space-6);
-  background-color: var(--color-bg-surface-hover);
+  padding: 12px 20px;
+  background-color: var(--color-bg-subtle);
   border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ── Dark Theme Overrides for Cards ── */
+.dark-theme .neuron-card--glass {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.55) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .neuron-card--gradient {
+  background: linear-gradient(135deg, var(--slate-900) 0%, rgba(223, 126, 48, 0.15) 100%);
+  border-color: rgba(223, 126, 48, 0.3);
+}
+
+.dark-theme .neuron-card--gradient-border {
+  background: linear-gradient(var(--slate-900), var(--slate-900)) padding-box,
+              linear-gradient(135deg, var(--brand-500), var(--purple-500), var(--blue-500)) border-box;
+}
+
+.dark-theme .neuron-card--elevated {
+  background-color: var(--slate-900);
+  border-color: var(--slate-800);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+}
+
+.dark-theme .neuron-card--flat.neuron-card--hover-auto:hover {
+  background-color: var(--slate-800);
+}
+
+.dark-theme .neuron-card--glass.neuron-card--hover-auto:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.dark-theme .neuron-card--ghost.neuron-card--hover-auto:hover {
+  background-color: rgba(223, 126, 48, 0.12);
+}
+
+.dark-theme .neuron-card--hover-glow:hover {
+  box-shadow: 0 0 30px rgba(223, 126, 48, 0.3);
 }
 
 /* Toast Success Notification for Copy */
@@ -1365,7 +3635,7 @@ body {
 }
 
 .component-showcase-grid--wide {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .component-showcase-grid--align-end {
@@ -1376,17 +3646,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--space-3);
   padding: var(--space-6) var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--color-bg-subtle);
   border: 1px solid var(--color-border);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .showcase-item:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border-color: var(--slate-400);
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.15);
 }
 
 .showcase-item--wide {
@@ -1470,3 +3745,1615 @@ body {
 .api-table tbody tr:hover {
   background: color-mix(in srgb, var(--color-primary) 4%, var(--color-bg));
 }
+
+/* ── Component Tab Bar ── */
+.page-category-label {
+  display: inline-block;
+  font-size: var(--fs-text-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-1);
+}
+
+.comp-tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--color-border);
+  margin-top: var(--space-6);
+  margin-bottom: 0;
+}
+
+.comp-tab {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease;
+  font-family: inherit;
+}
+
+.comp-tab:hover {
+  color: var(--color-text-primary);
+}
+
+.comp-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tab-content {
+  animation: fadeIn 0.25s ease-out;
+  padding-top: var(--space-8);
+}
+
+/* ── Guideline: Overview Grid ── */
+.guideline-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.guideline-overview-item {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.guideline-overview-preview {
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.guideline-overview-caption {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  border-top: 1px solid var(--color-border);
+  margin: 0;
+}
+
+/* ── Anatomy ── */
+.anatomy-diagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .anatomy-diagram {
+    grid-template-columns: 1fr;
+  }
+}
+
+.anatomy-preview {
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anatomy-btn-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.anatomy-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Line pointing to Container (left edge) */
+.anatomy-marker--1::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--space-4);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+}
+
+/* Line pointing to Label (crossing button right padding) */
+.anatomy-marker--2::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--space-4) + var(--space-4) + 1px);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Line pointing to Leading Icon (crossing button left padding) */
+.anatomy-marker--3::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--space-4) + var(--space-4) + 1px);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Line pointing to Trailing Icon (crossing button right padding) */
+.anatomy-marker--4::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--space-4) + var(--space-4) + 1px);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Generic Anatomy Connector Lines (Black / Primary Text) */
+.anatomy-marker--line-right::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--space-3);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+}
+
+.anatomy-marker--line-left::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--space-3);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+}
+
+.anatomy-marker--line-right-deep::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--space-3) + 24px);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.anatomy-marker--line-left-deep::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--space-3) + 24px);
+  height: 1px;
+  background: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Anatomy Input Layout */
+.anatomy-input-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.anatomy-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.anatomy-input-target {
+  flex: 1;
+}
+
+/* ── Anatomy Figure (Legion-style) ── */
+.anatomy-figure {
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.anatomy-figure__diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.anatomy-tf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+}
+
+/* Top markers (Label & Input Area / Placeholder) sit above the field */
+.anatomy-tf__top-markers {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--space-3);
+  margin-bottom: 0;
+}
+
+.anatomy-tf__top-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.anatomy-tf__top-marker--left {
+  align-self: flex-start;
+}
+
+.anatomy-tf__top-marker--right {
+  align-self: flex-end;
+}
+
+/* Vertical line from marker down to component */
+.anatomy-tf__line-v {
+  width: 1px;
+  height: 20px;
+  background: var(--color-text-primary);
+}
+
+/* Horizontal line from marker into component */
+.anatomy-tf__line-h {
+  width: 20px;
+  height: 1px;
+  background: var(--color-text-primary);
+}
+
+/* Side marker (Container / Selection Control) sits to the left */
+.anatomy-tf__side-marker {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.anatomy-tf__field-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.anatomy-tf__field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Bottom marker (Icons) sits below the field */
+.anatomy-tf__bottom-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-left: 42px; /* aligns directly with the input box */
+  margin-top: -2px;
+}
+
+.anatomy-tf__branch-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.anatomy-tf__branch-line {
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: var(--color-text-primary);
+}
+
+.anatomy-tf__branch-tick {
+  width: 1px;
+  height: 10px;
+  background: var(--color-text-primary);
+}
+
+.anatomy-tf__branch-tick--left {
+  margin-left: 12px;
+}
+
+.anatomy-tf__branch-tick--right {
+  margin-right: 12px;
+}
+
+.anatomy-tf__branch-stem {
+  width: 1px;
+  height: 10px;
+  background: var(--color-text-primary);
+}
+.anatomy-labels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.anatomy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.anatomy-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.anatomy-label-name {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.anatomy-label-desc {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Usage Table ── */
+.usage-table {
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-surface);
+}
+
+.usage-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (max-width: 800px) {
+  .usage-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
+
+.usage-row:last-child {
+  border-bottom: none;
+}
+
+.usage-row--header {
+  background: var(--color-bg-subtle);
+  font-size: var(--fs-text-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  padding: var(--space-3) var(--space-5);
+}
+
+.usage-preview {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.usage-desc {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  min-width: 0;
+}
+
+/* ── Do / Don't Rule Cards ── */
+.rule-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 700px) {
+  .rule-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Do's & Don'ts Grid ── */
+.dodont-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.rule-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.rule-card--do {
+  border-top: 3px solid var(--color-success);
+}
+
+.rule-card--dont {
+  border-top: 3px solid var(--color-danger);
+}
+
+.rule-card__badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-text-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 7px var(--space-4);
+}
+
+.rule-card--do .rule-card__badge {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 8%, var(--color-bg-surface));
+}
+
+.rule-card--dont .rule-card__badge {
+  color: var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 8%, var(--color-bg-surface));
+}
+
+.rule-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Preview zone — checkerboard-light bg */
+.rule-card__preview {
+  background: var(--color-bg-subtle);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 96px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Text block below preview */
+.rule-card__text {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rule-card__title {
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1.45;
+}
+
+.rule-card__desc {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+/* Legacy compat */
+.rule-card__content {
+  padding: var(--space-5);
+}
+
+.rule-preview {
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-3);
+  min-height: 72px;
+}
+
+.rule-card__content p {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Size Guide ── */
+.size-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.size-guide-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-subtle);
+  transition: border-color 0.2s ease;
+}
+
+@media (max-width: 800px) {
+  .size-guide-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
+
+.size-guide-row:hover {
+  border-color: var(--slate-400);
+}
+
+.size-guide-preview {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.size-guide-name {
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.size-guide-usage {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Accessibility List ── */
+.a11y-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.a11y-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+}
+
+.a11y-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-success) 12%, transparent);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.a11y-title {
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.a11y-desc {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.a11y-desc code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--color-bg-surface);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+}
+
+.a11y-desc kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 0 var(--color-border);
+}
+
+/* ── Icon Usage Grid (Guideline tab) ── */
+.icon-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.icon-usage-item {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.icon-usage-preview {
+  padding: var(--space-8) var(--space-4);
+  background: var(--color-bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.icon-usage-label {
+  padding: var(--space-2) var(--space-4) var(--space-1);
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border);
+}
+
+.icon-usage-desc {
+  padding: 0 var(--space-4) var(--space-4);
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.icon-usage-desc code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--color-bg-surface);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   ── Checkbox Component (NeuronCheckbox) ──
+   ========================================================================== */
+
+.neuron-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+.neuron-checkbox__box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--slate-300);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ── Hover State (Unchecked) ── */
+.neuron-checkbox:hover:not(:disabled):not(.is-disabled):not(.is-checked):not(.is-indeterminate) .neuron-checkbox__box {
+  border-color: var(--slate-400);
+  background-color: var(--color-bg-subtle);
+}
+
+/* ── On-Click Focus Ring ── */
+.neuron-checkbox.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+/* ── Sizes ── */
+.neuron-checkbox--sm .neuron-checkbox__box {
+  width: 16px;
+  height: 16px;
+}
+.neuron-checkbox--md .neuron-checkbox__box {
+  width: 20px;
+  height: 20px;
+}
+.neuron-checkbox--lg .neuron-checkbox__box {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Shapes ── */
+.neuron-checkbox--rounded-sm .neuron-checkbox__box {
+  border-radius: 4px;
+}
+.neuron-checkbox--rounded-md .neuron-checkbox__box {
+  border-radius: 6px;
+}
+.neuron-checkbox--rounded-full .neuron-checkbox__box {
+  border-radius: var(--radius-full);
+}
+
+/* ── Checked & Indeterminate Base ── */
+.neuron-checkbox.is-checked .neuron-checkbox__box,
+.neuron-checkbox.is-indeterminate .neuron-checkbox__box {
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.neuron-checkbox__icon {
+  stroke-width: 3.5;
+  animation: checkbox-pop 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes checkbox-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Color Theme Variants (Checked & Indeterminate) ── */
+/* Brand (Terracotta) */
+.neuron-checkbox--brand.is-checked .neuron-checkbox__box,
+.neuron-checkbox--brand.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+.neuron-checkbox--brand:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--brand:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+.neuron-checkbox--brand.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-500) 20%, transparent);
+}
+
+/* Gray */
+.neuron-checkbox--gray.is-checked .neuron-checkbox__box,
+.neuron-checkbox--gray.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--slate-700);
+  border-color: var(--slate-700);
+}
+.neuron-checkbox--gray:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--gray:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--slate-800);
+  border-color: var(--slate-800);
+}
+.neuron-checkbox--gray.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--slate-700) 20%, transparent);
+}
+
+/* Error */
+.neuron-checkbox--error.is-checked .neuron-checkbox__box,
+.neuron-checkbox--error.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--red-600);
+  border-color: var(--red-600);
+}
+.neuron-checkbox--error:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--error:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--red-700);
+  border-color: var(--red-700);
+}
+.neuron-checkbox--error.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red-600) 20%, transparent);
+}
+
+/* Warning */
+.neuron-checkbox--warning.is-checked .neuron-checkbox__box,
+.neuron-checkbox--warning.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--amber-600);
+  border-color: var(--amber-600);
+}
+.neuron-checkbox--warning:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--warning:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--amber-700);
+  border-color: var(--amber-700);
+}
+.neuron-checkbox--warning.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber-600) 20%, transparent);
+}
+
+/* Success */
+.neuron-checkbox--success.is-checked .neuron-checkbox__box,
+.neuron-checkbox--success.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--emerald-600);
+  border-color: var(--emerald-600);
+}
+.neuron-checkbox--success:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--success:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--emerald-700);
+  border-color: var(--emerald-700);
+}
+.neuron-checkbox--success.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald-600) 20%, transparent);
+}
+
+/* Blue */
+.neuron-checkbox--blue.is-checked .neuron-checkbox__box,
+.neuron-checkbox--blue.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--blue-600);
+  border-color: var(--blue-600);
+}
+.neuron-checkbox--blue:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--blue:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--blue-700);
+  border-color: var(--blue-700);
+}
+.neuron-checkbox--blue.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue-600) 20%, transparent);
+}
+
+/* Indigo */
+.neuron-checkbox--indigo.is-checked .neuron-checkbox__box,
+.neuron-checkbox--indigo.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--sky-600);
+  border-color: var(--sky-600);
+}
+.neuron-checkbox--indigo:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--indigo:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--sky-700);
+  border-color: var(--sky-700);
+}
+.neuron-checkbox--indigo.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sky-600) 20%, transparent);
+}
+
+/* Purple */
+.neuron-checkbox--purple.is-checked .neuron-checkbox__box,
+.neuron-checkbox--purple.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--purple-600);
+  border-color: var(--purple-600);
+}
+.neuron-checkbox--purple:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--purple:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--purple-700);
+  border-color: var(--purple-700);
+}
+.neuron-checkbox--purple.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--purple-600) 20%, transparent);
+}
+
+/* Pink */
+.neuron-checkbox--pink.is-checked .neuron-checkbox__box,
+.neuron-checkbox--pink.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--pink-600);
+  border-color: var(--pink-600);
+}
+.neuron-checkbox--pink:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--pink:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--pink-700);
+  border-color: var(--pink-700);
+}
+.neuron-checkbox--pink.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pink-600) 20%, transparent);
+}
+
+/* Orange */
+.neuron-checkbox--orange.is-checked .neuron-checkbox__box,
+.neuron-checkbox--orange.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--orange-600);
+  border-color: var(--orange-600);
+}
+.neuron-checkbox--orange:hover:not(:disabled):not(.is-disabled).is-checked .neuron-checkbox__box,
+.neuron-checkbox--orange:hover:not(:disabled):not(.is-disabled).is-indeterminate .neuron-checkbox__box {
+  background-color: var(--orange-700);
+  border-color: var(--orange-700);
+}
+.neuron-checkbox--orange.is-focused .neuron-checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange-600) 20%, transparent);
+}
+
+/* ── Disabled States ── */
+.neuron-checkbox:disabled,
+.neuron-checkbox.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.neuron-checkbox.is-disabled .neuron-checkbox__box,
+.neuron-checkbox:disabled .neuron-checkbox__box {
+  background-color: var(--slate-100);
+  border-color: var(--slate-200);
+  box-shadow: none;
+}
+
+.neuron-checkbox.is-disabled.is-checked .neuron-checkbox__box,
+.neuron-checkbox:disabled.is-checked .neuron-checkbox__box,
+.neuron-checkbox.is-disabled.is-indeterminate .neuron-checkbox__box,
+.neuron-checkbox:disabled.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--slate-300);
+  border-color: var(--slate-300);
+  color: var(--slate-500);
+}
+
+/* ── Wrapper & Labels ── */
+.neuron-checkbox-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+}
+
+.neuron-checkbox-wrapper--left {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.neuron-checkbox-wrapper--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.neuron-checkbox-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.neuron-checkbox-label {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.35;
+}
+
+.neuron-checkbox-description {
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+/* Sizes for wrapper labels */
+.neuron-checkbox-wrapper--sm .neuron-checkbox-label {
+  font-size: 13px;
+}
+.neuron-checkbox-wrapper--sm .neuron-checkbox-description {
+  font-size: 11px;
+}
+
+.neuron-checkbox-wrapper--md .neuron-checkbox-label {
+  font-size: 14px;
+}
+.neuron-checkbox-wrapper--md .neuron-checkbox-description {
+  font-size: 12px;
+}
+
+.neuron-checkbox-wrapper--lg .neuron-checkbox-label {
+  font-size: 16px;
+}
+.neuron-checkbox-wrapper--lg .neuron-checkbox-description {
+  font-size: 14px;
+}
+
+/* ── Selectable Card Container ── */
+.neuron-checkbox-card {
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--color-bg-surface);
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-checkbox-card:hover:not(.neuron-checkbox-wrapper--disabled) {
+  border-color: var(--slate-400);
+  background-color: var(--color-bg-subtle);
+}
+
+.neuron-checkbox-card--active {
+  border-color: var(--brand-500);
+  background-color: var(--brand-50);
+}
+
+/* ── Dark Theme Overrides for Checkbox ── */
+.dark-theme .neuron-checkbox__box {
+  background-color: var(--slate-900);
+  border-color: var(--slate-600);
+}
+
+.dark-theme .neuron-checkbox:hover:not(:disabled):not(.is-disabled) .neuron-checkbox__box {
+  border-color: var(--slate-500);
+  background-color: var(--slate-800);
+}
+
+.dark-theme .neuron-checkbox.is-disabled .neuron-checkbox__box,
+.dark-theme .neuron-checkbox:disabled .neuron-checkbox__box {
+  background-color: var(--slate-800);
+  border-color: var(--slate-700);
+}
+
+.dark-theme .neuron-checkbox.is-disabled.is-checked .neuron-checkbox__box,
+.dark-theme .neuron-checkbox:disabled.is-checked .neuron-checkbox__box,
+.dark-theme .neuron-checkbox.is-disabled.is-indeterminate .neuron-checkbox__box,
+.dark-theme .neuron-checkbox:disabled.is-indeterminate .neuron-checkbox__box {
+  background-color: var(--slate-700);
+  border-color: var(--slate-700);
+  color: var(--slate-400);
+}
+
+.dark-theme .neuron-checkbox-card {
+  border-color: var(--slate-700);
+  background-color: var(--slate-900);
+}
+
+.dark-theme .neuron-checkbox-card:hover:not(.neuron-checkbox-wrapper--disabled) {
+  border-color: var(--slate-600);
+  background-color: var(--slate-800);
+}
+
+.dark-theme .neuron-checkbox-card--active {
+  border-color: var(--brand-500);
+  background-color: rgba(223, 126, 48, 0.12);
+}
+
+/* ═════════════════════════════════════════════
+   ── Checkbox Figma Spec Artboard (Guideline) ──
+   ═════════════════════════════════════════════ */
+.checkbox-figma-artboard {
+  margin-top: var(--space-6);
+  border: 1.5px dashed rgba(223, 126, 48, 0.35);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  background-color: var(--color-bg-surface);
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.dark-theme .checkbox-figma-artboard {
+  border-color: rgba(223, 126, 48, 0.25);
+  background-color: var(--slate-900);
+}
+
+.checkbox-figma-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.dark-theme .checkbox-figma-badge {
+  border-color: var(--slate-700);
+  background-color: var(--slate-800);
+}
+
+.checkbox-figma-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+@media (max-width: 960px) {
+  .checkbox-figma-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.checkbox-figma-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.checkbox-figma-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0;
+}
+
+.checkbox-figma-row-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.checkbox-figma-box-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Checkbox Theme Matrix Table ── */
+.checkbox-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.checkbox-matrix-table th {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.checkbox-matrix-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.checkbox-matrix-table tbody tr:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.checkbox-theme-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.checkbox-cell-flex {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NeuronRadio Component Styles
+   ───────────────────────────────────────────────────────────── */
+.neuron-radio-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.neuron-radio-wrapper--disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.neuron-radio-wrapper--left {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+/* Base button reset */
+.neuron-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  outline: none;
+}
+
+.neuron-radio.is-disabled {
+  cursor: not-allowed;
+}
+
+/* Inner Circle */
+.neuron-radio__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--slate-300);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ── Hover State (Unchecked) ── */
+.neuron-radio:hover:not(:disabled):not(.is-disabled):not(.is-checked) .neuron-radio__circle {
+  border-color: var(--slate-400);
+  background-color: var(--color-bg-subtle);
+}
+
+/* ── On-Click Focus Ring ── */
+.neuron-radio.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+/* ── Sizes ── */
+.neuron-radio--sm .neuron-radio__circle {
+  width: 16px;
+  height: 16px;
+}
+
+.neuron-radio--md .neuron-radio__circle {
+  width: 20px;
+  height: 20px;
+}
+
+.neuron-radio--lg .neuron-radio__circle {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Checked Base ── */
+.neuron-radio.is-checked .neuron-radio__circle {
+  border-color: transparent;
+  color: #ffffff;
+}
+
+/* Inner Dot */
+.neuron-radio__dot {
+  display: block;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  animation: radioDotPop 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes radioDotPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Color Theme Variants (Checked State & Hover & Focus) ── */
+/* Brand */
+.neuron-radio--brand.is-checked .neuron-radio__circle {
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+.neuron-radio--brand:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+.neuron-radio--brand.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-500) 20%, transparent);
+}
+
+/* Gray */
+.neuron-radio--gray.is-checked .neuron-radio__circle {
+  background-color: var(--slate-700);
+  border-color: var(--slate-700);
+}
+.neuron-radio--gray:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--slate-800);
+  border-color: var(--slate-800);
+}
+.neuron-radio--gray.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--slate-700) 20%, transparent);
+}
+
+/* Error */
+.neuron-radio--error.is-checked .neuron-radio__circle {
+  background-color: var(--red-600);
+  border-color: var(--red-600);
+}
+.neuron-radio--error:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--red-700);
+  border-color: var(--red-700);
+}
+.neuron-radio--error.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red-600) 20%, transparent);
+}
+
+/* Warning */
+.neuron-radio--warning.is-checked .neuron-radio__circle {
+  background-color: var(--amber-600);
+  border-color: var(--amber-600);
+}
+.neuron-radio--warning:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--amber-700);
+  border-color: var(--amber-700);
+}
+.neuron-radio--warning.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber-600) 20%, transparent);
+}
+
+/* Success */
+.neuron-radio--success.is-checked .neuron-radio__circle {
+  background-color: var(--emerald-600);
+  border-color: var(--emerald-600);
+}
+.neuron-radio--success:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--emerald-700);
+  border-color: var(--emerald-700);
+}
+.neuron-radio--success.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald-600) 20%, transparent);
+}
+
+/* Blue */
+.neuron-radio--blue.is-checked .neuron-radio__circle {
+  background-color: var(--blue-600);
+  border-color: var(--blue-600);
+}
+.neuron-radio--blue:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--blue-700);
+  border-color: var(--blue-700);
+}
+.neuron-radio--blue.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue-600) 20%, transparent);
+}
+
+/* Indigo */
+.neuron-radio--indigo.is-checked .neuron-radio__circle {
+  background-color: var(--sky-600);
+  border-color: var(--sky-600);
+}
+.neuron-radio--indigo:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--sky-700);
+  border-color: var(--sky-700);
+}
+.neuron-radio--indigo.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sky-600) 20%, transparent);
+}
+
+/* Purple */
+.neuron-radio--purple.is-checked .neuron-radio__circle {
+  background-color: var(--purple-600);
+  border-color: var(--purple-600);
+}
+.neuron-radio--purple:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--purple-700);
+  border-color: var(--purple-700);
+}
+.neuron-radio--purple.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--purple-600) 20%, transparent);
+}
+
+/* Pink */
+.neuron-radio--pink.is-checked .neuron-radio__circle {
+  background-color: var(--pink-600);
+  border-color: var(--pink-600);
+}
+.neuron-radio--pink:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--pink-700);
+  border-color: var(--pink-700);
+}
+.neuron-radio--pink.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pink-600) 20%, transparent);
+}
+
+/* Orange */
+.neuron-radio--orange.is-checked .neuron-radio__circle {
+  background-color: var(--orange-500);
+  border-color: var(--orange-500);
+}
+.neuron-radio--orange:hover:not(:disabled):not(.is-disabled).is-checked .neuron-radio__circle {
+  background-color: var(--orange-600);
+  border-color: var(--orange-600);
+}
+.neuron-radio--orange.is-focused .neuron-radio__circle {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange-500) 20%, transparent);
+}
+
+/* Label & Description Layout */
+.neuron-radio-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.neuron-radio-label {
+  font-size: var(--fs-text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.35;
+}
+
+.neuron-radio-wrapper--sm .neuron-radio-label {
+  font-size: var(--fs-text-xs);
+}
+
+.neuron-radio-wrapper--lg .neuron-radio-label {
+  font-size: var(--fs-text-base);
+}
+
+.neuron-radio-description {
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Card Mode */
+.neuron-radio-card {
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-surface);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-radio-card:hover:not(.neuron-radio-wrapper--disabled) {
+  border-color: var(--color-border-hover);
+  background-color: var(--color-bg-subtle);
+  transform: translateY(-1px);
+}
+
+.neuron-radio-card--active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light, rgba(230, 48, 48, 0.04));
+}
+
+/* Radio Group */
+.neuron-radio-group {
+  display: flex;
+}
+
+.neuron-radio-group--vertical {
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.neuron-radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* Matrix Table for Radio Docs */
+.radio-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-text-sm);
+}
+
+.radio-matrix-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.radio-matrix-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.radio-matrix-table tbody tr:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.radio-theme-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.radio-cell-flex {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+

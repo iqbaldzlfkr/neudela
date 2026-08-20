@@ -24,9 +24,13 @@ import Typography from './views/Typography';
 import Spacing from './views/Spacing';
 import FoundationOverview from './views/FoundationOverview';
 import ButtonView from './views/ButtonView';
+import ButtonGroupView from './views/ButtonGroupView';
 import InputView from './views/InputView';
 import CardView from './views/CardView';
 import BadgeView from './views/BadgeView';
+import ToggleView from './views/ToggleView';
+import CheckboxView from './views/CheckboxView';
+import RadioView from './views/RadioView';
 import AlertView from './views/AlertView';
 import { useLanguage } from './context/LanguageContext';
 
@@ -194,9 +198,13 @@ export default function App() {
       icon: 'components',
       items: [
         { id: 'comp-button', label: t.nav.compButton },
+        { id: 'comp-button-group', label: t.nav.compButtonGroup },
         { id: 'comp-input', label: t.nav.compInput },
         { id: 'comp-card', label: t.nav.compCard },
         { id: 'comp-badge', label: t.nav.compBadge },
+        { id: 'comp-toggle', label: t.nav.compToggle },
+        { id: 'comp-checkbox', label: t.nav.compCheckbox },
+        { id: 'comp-radio', label: t.nav.compRadio },
         { id: 'comp-alert', label: t.nav.compAlert },
       ],
     },
@@ -364,12 +372,20 @@ export default function App() {
         return <Spacing setActiveTab={setActiveTab} />;
       case 'comp-button':
         return <ButtonView setActiveTab={setActiveTab} />;
+      case 'comp-button-group':
+        return <ButtonGroupView setActiveTab={setActiveTab} />;
       case 'comp-input':
         return <InputView setActiveTab={setActiveTab} />;
       case 'comp-card':
         return <CardView setActiveTab={setActiveTab} />;
       case 'comp-badge':
         return <BadgeView setActiveTab={setActiveTab} />;
+      case 'comp-toggle':
+        return <ToggleView setActiveTab={setActiveTab} />;
+      case 'comp-checkbox':
+        return <CheckboxView setActiveTab={setActiveTab} />;
+      case 'comp-radio':
+        return <RadioView setActiveTab={setActiveTab} />;
       case 'comp-alert':
         return <AlertView setActiveTab={setActiveTab} />;
       default:
