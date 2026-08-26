@@ -928,20 +928,10 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Starter Tier */}
                   <div 
                     onClick={() => setPricingPlan('starter')}
-                    style={{
-                      border: pricingPlan === 'starter' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '14px 16px',
-                      background: pricingPlan === 'starter' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--blue ${pricingPlan === 'starter' ? 'is-selected' : ''}`}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                      <NeuronRadio value="starter" variant="brand" size="md" />
+                      <NeuronRadio value="starter" variant="blue" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Rocket size={16} color="var(--blue-500)" />
@@ -967,19 +957,8 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Pro Tier (Popular) */}
                   <div 
                     onClick={() => setPricingPlan('pro')}
-                    style={{
-                      border: pricingPlan === 'pro' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '14px 16px',
-                      background: pricingPlan === 'pro' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      position: 'relative',
-                      transition: 'all 0.15s ease',
-                      boxShadow: pricingPlan === 'pro' ? '0 0 0 1px var(--brand-500)' : 'none'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--brand ${pricingPlan === 'pro' ? 'is-selected' : ''}`}
+                    style={{ position: 'relative' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                       <NeuronRadio value="pro" variant="brand" size="md" />
@@ -1009,20 +988,10 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Enterprise Tier */}
                   <div 
                     onClick={() => setPricingPlan('enterprise')}
-                    style={{
-                      border: pricingPlan === 'enterprise' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '14px 16px',
-                      background: pricingPlan === 'enterprise' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--purple ${pricingPlan === 'enterprise' ? 'is-selected' : ''}`}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                      <NeuronRadio value="enterprise" variant="brand" size="md" />
+                      <NeuronRadio value="enterprise" variant="purple" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Building2 size={16} color="var(--purple-500)" />
@@ -1086,20 +1055,11 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Ground Shipping */}
                   <div
                     onClick={() => setShippingOption('ground')}
-                    style={{
-                      border: shippingOption === 'ground' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: shippingOption === 'ground' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--gray ${shippingOption === 'ground' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                      <NeuronRadio value="ground" variant="brand" size="md" />
+                      <NeuronRadio value="ground" variant="gray" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Truck size={16} color="var(--slate-500)" />
@@ -1118,25 +1078,16 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Express Priority */}
                   <div
                     onClick={() => setShippingOption('express')}
-                    style={{
-                      border: shippingOption === 'express' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: shippingOption === 'express' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--brand ${shippingOption === 'express' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                       <NeuronRadio value="express" variant="brand" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <PackageCheck size={16} color="var(--emerald-500)" />
+                          <PackageCheck size={16} color="var(--brand-500)" />
                           <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Express 2-Day Air</strong>
-                          <NeuronBadge variant="success" size="sm">Recommended</NeuronBadge>
+                          <NeuronBadge variant="brand" size="sm">Recommended</NeuronBadge>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
                           Guaranteed in 2 business days (FedEx Express)
@@ -1151,20 +1102,11 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Overnight Rush */}
                   <div
                     onClick={() => setShippingOption('overnight')}
-                    style={{
-                      border: shippingOption === 'overnight' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: shippingOption === 'overnight' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--orange ${shippingOption === 'overnight' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                      <NeuronRadio value="overnight" variant="brand" size="md" />
+                      <NeuronRadio value="overnight" variant="orange" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Clock size={16} color="var(--orange-500)" />
@@ -1231,17 +1173,8 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* US East */}
                   <div
                     onClick={() => setCloudRegion('us-east')}
-                    style={{
-                      border: cloudRegion === 'us-east' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: cloudRegion === 'us-east' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--blue ${cloudRegion === 'us-east' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                       <NeuronRadio value="us-east" variant="blue" size="md" />
@@ -1264,20 +1197,11 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* EU Central */}
                   <div
                     onClick={() => setCloudRegion('eu-central')}
-                    style={{
-                      border: cloudRegion === 'eu-central' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: cloudRegion === 'eu-central' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--success ${cloudRegion === 'eu-central' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                      <NeuronRadio value="eu-central" variant="blue" size="md" />
+                      <NeuronRadio value="eu-central" variant="success" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Globe size={16} color="var(--emerald-500)" />
@@ -1298,20 +1222,11 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Asia Pacific */}
                   <div
                     onClick={() => setCloudRegion('ap-southeast')}
-                    style={{
-                      border: cloudRegion === 'ap-southeast' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: cloudRegion === 'ap-southeast' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--purple ${cloudRegion === 'ap-southeast' ? 'is-selected' : ''}`}
+                    style={{ alignItems: 'center' }}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                      <NeuronRadio value="ap-southeast" variant="blue" size="md" />
+                      <NeuronRadio value="ap-southeast" variant="purple" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Cpu size={16} color="var(--purple-500)" />
@@ -1368,20 +1283,10 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Viewer */}
                   <div
                     onClick={() => setUserRole('viewer')}
-                    style={{
-                      border: userRole === 'viewer' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: userRole === 'viewer' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--gray ${userRole === 'viewer' ? 'is-selected' : ''}`}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                      <NeuronRadio value="viewer" variant="indigo" size="md" />
+                      <NeuronRadio value="viewer" variant="gray" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Eye size={16} color="var(--slate-500)" />
@@ -1398,23 +1303,13 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Editor */}
                   <div
                     onClick={() => setUserRole('editor')}
-                    style={{
-                      border: userRole === 'editor' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: userRole === 'editor' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--indigo ${userRole === 'editor' ? 'is-selected' : ''}`}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                       <NeuronRadio value="editor" variant="indigo" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <UserCheck size={16} color="var(--indigo-500)" />
+                          <UserCheck size={16} color="var(--sky-500)" />
                           <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Editor (Read & Write)</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
@@ -1428,20 +1323,10 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                   {/* Administrator */}
                   <div
                     onClick={() => setUserRole('admin')}
-                    style={{
-                      border: userRole === 'admin' ? '1.5px solid var(--brand-500)' : '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '12px 14px',
-                      background: userRole === 'admin' ? 'var(--color-bg-subtle)' : 'var(--color-bg-surface)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className={`selectable-pattern-card selectable-pattern-card--brand ${userRole === 'admin' ? 'is-selected' : ''}`}
                   >
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                      <NeuronRadio value="admin" variant="indigo" size="md" />
+                      <NeuronRadio value="admin" variant="brand" size="md" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <ShieldCheck size={16} color="var(--brand-500)" />

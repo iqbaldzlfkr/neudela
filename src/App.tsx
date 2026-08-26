@@ -32,6 +32,8 @@ import ToggleView from './views/ToggleView';
 import CheckboxView from './views/CheckboxView';
 import RadioView from './views/RadioView';
 import AlertView from './views/AlertView';
+import AvatarView from './views/AvatarView';
+import TooltipView from './views/TooltipView';
 import { useLanguage } from './context/LanguageContext';
 
 // Navigation icon helper
@@ -206,6 +208,8 @@ export default function App() {
         { id: 'comp-checkbox', label: t.nav.compCheckbox },
         { id: 'comp-radio', label: t.nav.compRadio },
         { id: 'comp-alert', label: t.nav.compAlert },
+        { id: 'comp-avatar', label: t.nav.compAvatar },
+        { id: 'comp-tooltip', label: t.nav.compTooltip },
       ],
     },
     {
@@ -388,6 +392,10 @@ export default function App() {
         return <RadioView setActiveTab={setActiveTab} />;
       case 'comp-alert':
         return <AlertView setActiveTab={setActiveTab} />;
+      case 'comp-avatar':
+        return <AvatarView setActiveTab={setActiveTab} />;
+      case 'comp-tooltip':
+        return <TooltipView setActiveTab={setActiveTab} />;
       default:
         return (
           <PlaceholderView 

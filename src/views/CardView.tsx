@@ -27,7 +27,23 @@ import {
   Activity,
   Layers,
   FileText,
-  ShoppingBag
+  ShoppingBag,
+  Bell,
+  MessageSquare,
+  Sparkles,
+  Zap,
+  Globe,
+  Lock,
+  Mail,
+  ChevronRight,
+  Quote,
+  UserPlus,
+  X,
+  AlertTriangle,
+  BarChart2,
+  Cpu,
+  GitBranch,
+  Play
 } from 'lucide-react';
 
 interface CardViewProps {
@@ -183,7 +199,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                           position: 'relative',
                           borderRadius: 'var(--radius-lg)',
                           padding: '1px',
-                          background: 'linear-gradient(135deg, rgba(223, 126, 48, 0.4) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(236, 72, 153, 0.4) 100%)',
+                          background: 'linear-gradient(135deg, rgba(223, 126, 48, 0.55) 0%, rgba(241, 206, 150, 0.3) 50%, rgba(162, 60, 27, 0.5) 100%)',
                         }}
                       >
                         {cardElement}
@@ -195,6 +211,185 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 })}
               </div>
             </div>
+
+            {/* ── Padding Scale ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Padding Scale</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Controls internal spacing — use <code>sm</code> for dense UIs, <code>lg</code> / <code>xl</code> for hero or feature cards.</p>
+              <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                {(['sm', 'md', 'lg', 'xl'] as const).map((p) => (
+                  <div key={p} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, minWidth: 120 }}>
+                    <NeuronCard variant="default" padding={p} style={{ width: '100%' }}>
+                      <div style={{ background: 'var(--color-bg-subtle)', borderRadius: 4, height: 10, width: '100%', marginBottom: 4 }} />
+                      <div style={{ background: 'var(--color-bg-subtle)', borderRadius: 4, height: 10, width: '70%' }} />
+                    </NeuronCard>
+                    <NeuronBadge size="sm" variant="gray">padding="{p}"</NeuronBadge>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Border Radius Scale ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Border Radius Scale</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Controls corner rounding — pair <code>sm</code> with dense data cards, <code>2xl</code> with hero or modal cards.</p>
+              <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                {(['sm', 'md', 'lg', 'xl', '2xl'] as const).map((r) => (
+                  <div key={r} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, minWidth: 100 }}>
+                    <NeuronCard variant="elevated" padding="md" radius={r} style={{ width: '100%' }}>
+                      <div style={{ background: 'var(--color-bg-subtle)', borderRadius: 4, height: 10, width: '100%', marginBottom: 4 }} />
+                      <div style={{ background: 'var(--color-bg-subtle)', borderRadius: 4, height: 10, width: '60%' }} />
+                    </NeuronCard>
+                    <NeuronBadge size="sm" variant="gray">radius="{r}"</NeuronBadge>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Hover Effects ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Hover Effects</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Hover over each card to preview the interaction feedback.</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 'var(--space-4)' }}>
+                {(['glow', 'border', 'tint', 'lift', 'scale'] as const).map((effect) => (
+                  <div key={effect} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                    <NeuronCard variant="elevated" padding="md" hoverable hoverEffect={effect} style={{ width: '100%', textAlign: 'center' }}>
+                      <div style={{ fontSize: '20px', marginBottom: 6 }}>
+                        {effect === 'glow' ? '✦' : effect === 'border' ? '⬡' : effect === 'tint' ? '◈' : effect === 'lift' ? '⬆' : '⤢'}
+                      </div>
+                      <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>Hover me</div>
+                    </NeuronCard>
+                    <NeuronBadge size="sm" variant="gray">{effect}</NeuronBadge>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Card States ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Card States</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Visual states for selected, disabled, and loading skeleton scenarios.</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'var(--space-4)' }}>
+
+                {/* Selected / Active */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="default" padding="md" style={{ border: '2px solid var(--brand-500)', background: 'var(--brand-50)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--brand-700)' }}>Pro Plan</span>
+                      <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'var(--brand-500)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Check size={10} strokeWidth={3} style={{ color: '#fff' }} />
+                      </div>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--brand-600)', lineHeight: 1.4 }}>Currently selected plan</p>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>selected</NeuronBadge>
+                </div>
+
+                {/* Disabled */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="default" padding="md" style={{ opacity: 0.45, pointerEvents: 'none', cursor: 'not-allowed' }}>
+                    <div style={{ marginBottom: 6 }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Enterprise Plan</span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Not available on your tier</p>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>disabled</NeuronBadge>
+                </div>
+
+                {/* Loading Skeleton */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="default" padding="md">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                      <div className="skeleton" style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--color-bg-subtle)' }} />
+                      <div style={{ flex: 1 }}>
+                        <div className="skeleton" style={{ height: 10, borderRadius: 4, background: 'var(--color-bg-subtle)', marginBottom: 6 }} />
+                        <div className="skeleton" style={{ height: 8, width: '60%', borderRadius: 4, background: 'var(--color-bg-subtle)' }} />
+                      </div>
+                    </div>
+                    <div className="skeleton" style={{ height: 8, borderRadius: 4, background: 'var(--color-bg-subtle)', marginBottom: 6 }} />
+                    <div className="skeleton" style={{ height: 8, width: '80%', borderRadius: 4, background: 'var(--color-bg-subtle)' }} />
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>skeleton</NeuronBadge>
+                </div>
+
+              </div>
+            </div>
+
+            {/* ── Media Cards ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Media Cards</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Cards with top or side image regions using the <code>neuron-card-media</code> slot.</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-4)' }}>
+
+                {/* Top image */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="elevated" padding="none" hoverable>
+                    <div className="neuron-card-media" style={{ height: 120, position: 'relative' }}>
+                      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Top media" />
+                      <div style={{ position: 'absolute', top: 10, left: 10 }}>
+                        <NeuronBadge size="sm" variant="brand">Featured</NeuronBadge>
+                      </div>
+                    </div>
+                    <div style={{ padding: '14px 16px' }}>
+                      <p style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: 600 }}>Top Media Card</p>
+                      <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Image positioned at the top of the card.</p>
+                    </div>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>mediaPosition="top"</NeuronBadge>
+                </div>
+
+                {/* Side image / horizontal */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="elevated" padding="none" hoverable>
+                    <div style={{ display: 'flex', overflow: 'hidden', borderRadius: 'inherit' }}>
+                      <div style={{ width: 90, flexShrink: 0, background: 'var(--brand-100)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Layers size={28} style={{ color: 'var(--brand-500)' }} />
+                      </div>
+                      <div style={{ padding: '14px 16px', flex: 1 }}>
+                        <p style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: 600 }}>Side Media Card</p>
+                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Horizontal layout with icon or image on the left.</p>
+                      </div>
+                    </div>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>horizontal layout</NeuronBadge>
+                </div>
+
+              </div>
+            </div>
+
+            {/* ── Clickable / Link Cards ── */}
+            <div style={{ marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
+              <h3 style={{ fontSize: 'var(--fs-text-md)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', marginBottom: '4px' }}>Clickable & Link Cards</h3>
+              <p style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', margin: '0 0 var(--space-4) 0' }}>Use <code>isClickable</code> or <code>href</code> to make the entire card a navigation target.</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
+
+                {/* onClick card */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="default" padding="md" isClickable hoverable hoverEffect="lift" onClick={() => {}}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Clickable Card</span>
+                      <ArrowRight size={14} style={{ color: 'var(--color-text-secondary)' }} />
+                    </div>
+                    <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Entire card acts as a button. Keyboard accessible.</p>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>isClickable</NeuronBadge>
+                </div>
+
+                {/* href / link card */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <NeuronCard variant="default" padding="md" href="#" hoverable hoverEffect="border">
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Link Card</span>
+                      <ArrowRight size={14} style={{ color: 'var(--brand-500)' }} />
+                    </div>
+                    <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Renders as an <code>&lt;a&gt;</code> tag. Opens URL on click.</p>
+                  </NeuronCard>
+                  <NeuronBadge size="sm" variant="gray" style={{ alignSelf: 'center' }}>href="#"</NeuronBadge>
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
           {/* ── Anatomy Diagram ── */}
@@ -715,7 +910,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                         position: 'relative',
                         borderRadius: 'var(--radius-lg)',
                         padding: '1px',
-                        background: 'linear-gradient(135deg, rgba(223, 126, 48, 0.4) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(236, 72, 153, 0.4) 100%)',
+                        background: 'linear-gradient(135deg, rgba(223, 126, 48, 0.55) 0%, rgba(241, 206, 150, 0.3) 50%, rgba(162, 60, 27, 0.5) 100%)',
                       }}
                     >
                       {cardElement}
@@ -811,7 +1006,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 </div>
 
                 <div style={{ 
-                  background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', 
+                  background: 'radial-gradient(circle at 15% 25%, rgba(223, 126, 48, 0.3) 0%, transparent 55%), radial-gradient(circle at 85% 75%, rgba(195, 87, 28, 0.25) 0%, transparent 50%), linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', 
                   padding: 'var(--space-6)', 
                   borderRadius: 'var(--radius-2xl)',
                   position: 'relative',
@@ -1032,7 +1227,229 @@ export default function CardView({ setActiveTab }: CardViewProps) {
             </div>
           </div>
 
-          {/* ── 3. INTERACTIVE PLAYGROUND ── */}
+          {/* ── SHOWCASE: NOTIFICATION FEED + AI FEATURE ── */}
+          <div className="section-card">
+            <h2 className="section-title">Notification & AI Feature Cards</h2>
+            <p className="section-description">Real-world patterns from top-tier products like Linear, Vercel, and Notion.</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-6)' }}>
+
+              {/* Notification Feed Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Notification Feed</div>
+                <NeuronCard variant="elevated" padding="none" hoverable>
+                  <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <Bell size={14} style={{ color: 'var(--color-text-secondary)' }} />
+                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Notifications</span>
+                    </div>
+                    <NeuronBadge size="sm" variant="brand">3 new</NeuronBadge>
+                  </div>
+                  {[
+                    { icon: <Check size={13} />, color: 'var(--emerald-600)', bg: 'var(--emerald-50)', msg: 'Pull request #142 merged', sub: 'neudela/design-tokens', time: '2m ago', unread: true },
+                    { icon: <MessageSquare size={13} />, color: 'var(--blue-600)', bg: 'var(--blue-50)', msg: 'Iqbal commented on your spec', sub: 'ButtonView.tsx · Line 89', time: '18m ago', unread: true },
+                    { icon: <AlertTriangle size={13} />, color: 'var(--amber-600)', bg: 'var(--amber-50)', msg: 'Bundle size warning exceeded', sub: 'main.css · 127.7 kB', time: '1h ago', unread: true },
+                    { icon: <ShieldCheck size={13} />, color: 'var(--slate-500)', bg: 'var(--slate-100)', msg: 'Security scan passed', sub: '0 vulnerabilities found', time: '3h ago', unread: false },
+                  ].map((n, i, arr) => (
+                    <div key={i} style={{ padding: '12px 18px', display: 'flex', alignItems: 'flex-start', gap: 12, background: n.unread ? 'rgba(223,126,48,0.03)' : 'transparent', borderBottom: i < arr.length - 1 ? '1px solid var(--color-border)' : 'none', cursor: 'pointer' }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: n.bg, color: n.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{n.icon}</div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: '12px', fontWeight: n.unread ? 600 : 400, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                          {n.msg}
+                          {n.unread && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand-500)', display: 'inline-block', flexShrink: 0 }} />}
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{n.sub}</div>
+                      </div>
+                      <span style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', flexShrink: 0, paddingTop: 2 }}>{n.time}</span>
+                    </div>
+                  ))}
+                </NeuronCard>
+              </div>
+
+              {/* AI Feature Spotlight Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>AI Feature Spotlight</div>
+                <NeuronCard variant="brand" padding="lg" hoverEffect="glow">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Sparkles size={18} style={{ color: '#fff' }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>Neudela AI</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)' }}>Powered by Gemini 2.5 Pro</div>
+                    </div>
+                    <NeuronBadge size="sm" variant="success" style={{ marginLeft: 'auto' }}>Beta</NeuronBadge>
+                  </div>
+
+                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+                    Generate production-ready component code, design tokens, and accessibility audits instantly from natural language.
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 18 }}>
+                    {[
+                      { icon: <Zap size={12} />, label: '10x faster component generation' },
+                      { icon: <ShieldCheck size={12} />, label: 'WCAG 2.1 AA auto-compliance' },
+                      { icon: <GitBranch size={12} />, label: 'Design-to-code sync pipeline' },
+                    ].map((f, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '12px', color: 'rgba(255,255,255,0.85)' }}>
+                        <span style={{ opacity: 0.8 }}>{f.icon}</span>
+                        {f.label}
+                      </div>
+                    ))}
+                  </div>
+
+                  <NeuronButton variant="outline" size="sm" style={{ width: '100%', justifyContent: 'center', borderColor: 'rgba(255,255,255,0.4)', color: '#fff' }}>
+                    <Play size={13} style={{ marginRight: 6 }} /> Try it now
+                  </NeuronButton>
+                </NeuronCard>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ── SHOWCASE: TESTIMONIAL + TEAM INVITE ── */}
+          <div className="section-card">
+            <h2 className="section-title">Testimonial & Team Invite Cards</h2>
+            <p className="section-description">Social proof and collaborative onboarding patterns seen in Stripe, Figma, and Loom.</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-6)' }}>
+
+              {/* Testimonial / Review Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Customer Testimonial</div>
+                <NeuronCard variant="gradient-border" padding="lg" hoverEffect="glow">
+                  <div style={{ display: 'flex', gap: 2, marginBottom: 14 }}>
+                    {[1,2,3,4,5].map(s => (
+                      <Star key={s} size={14} fill="var(--amber-400)" style={{ color: 'var(--amber-400)' }} />
+                    ))}
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginLeft: 6 }}>5.0</span>
+                  </div>
+
+                  <div style={{ position: 'relative', paddingLeft: 20, marginBottom: 18 }}>
+                    <Quote size={28} style={{ position: 'absolute', top: -4, left: -4, color: 'var(--brand-200)', opacity: 0.6 }} />
+                    <p style={{ fontSize: '14px', fontStyle: 'italic', lineHeight: 1.65, color: 'var(--color-text-primary)', margin: 0 }}>
+                      "Neudela cut our design-to-production cycle in half. The token system alone saved us weeks of QA time across 3 platforms."
+                    </p>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingTop: 14, borderTop: '1px solid var(--color-border)' }}>
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop&crop=faces" alt="Reviewer" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Priya Mehta</div>
+                      <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>VP of Design · Axiom Cloud</div>
+                    </div>
+                    <NeuronBadge size="sm" variant="gray" style={{ marginLeft: 'auto' }}>Verified</NeuronBadge>
+                  </div>
+                </NeuronCard>
+              </div>
+
+              {/* Team Invite Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team Invite</div>
+                <NeuronCard variant="elevated" padding="lg">
+                  <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                    <div style={{ width: 48, height: 48, borderRadius: 14, background: 'var(--brand-50)', color: 'var(--brand-600)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px auto' }}>
+                      <UserPlus size={22} />
+                    </div>
+                    <h3 style={{ margin: '0 0 6px 0', fontSize: '15px', fontWeight: 700 }}>Join the Neudela workspace</h3>
+                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      <strong style={{ color: 'var(--color-text-primary)' }}>Iqbal Dzulfikar</strong> invited you to collaborate on the Neudela Design System
+                    </p>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: 'var(--color-bg-subtle)', borderRadius: 10, border: '1px solid var(--color-border)', marginBottom: 16 }}>
+                    <Mail size={14} style={{ color: 'var(--color-text-secondary)', flexShrink: 0 }} />
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-primary)', flex: 1 }}>you@company.com</span>
+                    <Lock size={12} style={{ color: 'var(--color-text-tertiary)' }} />
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
+                    <NeuronButton variant="primary" size="sm" style={{ flex: 1, justifyContent: 'center' }}>Accept Invite</NeuronButton>
+                    <NeuronButton variant="outline" size="sm" style={{ flex: 1, justifyContent: 'center' }}>Decline</NeuronButton>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+                    {['#df7e30','#10b981','#3b82f6','#a855f7'].map((c, i) => (
+                      <div key={i} title="Team member" style={{ width: 24, height: 24, borderRadius: '50%', background: c, border: '2px solid var(--color-bg-surface)', marginLeft: i > 0 ? -8 : 0 }} />
+                    ))}
+                    <span style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginLeft: 6 }}>+12 team members</span>
+                  </div>
+                </NeuronCard>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ── SHOWCASE: CHANGELOG + DEPLOY STATUS ── */}
+          <div className="section-card">
+            <h2 className="section-title">Changelog & Deploy Status Cards</h2>
+            <p className="section-description">Developer-focused patterns from Vercel, Linear, and GitHub dashboards.</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-6)' }}>
+
+              {/* Changelog Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Product Changelog</div>
+                <NeuronCard variant="default" padding="none">
+                  <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <GitBranch size={14} style={{ color: 'var(--color-text-secondary)' }} />
+                    <span style={{ fontSize: '13px', fontWeight: 600 }}>What's New · v2.4.0</span>
+                    <NeuronBadge size="sm" variant="success" style={{ marginLeft: 'auto' }}>Latest</NeuronBadge>
+                  </div>
+                  {[
+                    { type: 'new', label: 'New', color: 'var(--emerald-600)', bg: 'var(--emerald-50)', msg: 'NeuronTooltip — 12 placement variants + focus trigger mode' },
+                    { type: 'improved', label: 'Improved', color: 'var(--blue-600)', bg: 'var(--blue-50)', msg: 'Glassmorphism card ambient glow now uses brand color tokens' },
+                    { type: 'fix', label: 'Fix', color: 'var(--amber-700)', bg: 'var(--amber-50)', msg: 'Arrow anchor offset corrected for -start / -end placements' },
+                    { type: 'new', label: 'New', color: 'var(--emerald-600)', bg: 'var(--emerald-50)', msg: 'Playground code generator — Vue, React, HTML tabs' },
+                  ].map((item, i, arr) => (
+                    <div key={i} style={{ padding: '12px 18px', display: 'flex', alignItems: 'flex-start', gap: 10, borderBottom: i < arr.length - 1 ? '1px solid var(--color-border)' : 'none' }}>
+                      <span style={{ fontSize: '10px', fontWeight: 700, color: item.color, background: item.bg, padding: '2px 7px', borderRadius: 4, flexShrink: 0, marginTop: 1 }}>{item.label}</span>
+                      <span style={{ fontSize: '12px', color: 'var(--color-text-primary)', lineHeight: 1.5 }}>{item.msg}</span>
+                    </div>
+                  ))}
+                  <div style={{ padding: '10px 18px', display: 'flex', justifyContent: 'flex-end' }}>
+                    <button style={{ fontSize: '12px', color: 'var(--brand-600)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                      Full changelog <ChevronRight size={12} />
+                    </button>
+                  </div>
+                </NeuronCard>
+              </div>
+
+              {/* Deploy Status Card */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Deploy Status</div>
+                <NeuronCard variant="elevated" padding="md" hoverEffect="border">
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--emerald-500)', boxShadow: '0 0 0 3px rgba(16,185,129,0.2)' }} />
+                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Production · neudela.design</span>
+                    </div>
+                    <NeuronBadge size="sm" variant="success">Ready</NeuronBadge>
+                  </div>
+
+                  {[
+                    { label: 'Branch', val: 'main', icon: <GitBranch size={12} /> },
+                    { label: 'Commit', val: 'fix: glass gradient token', icon: <Check size={12} /> },
+                    { label: 'Build time', val: '23s', icon: <Zap size={12} /> },
+                    { label: 'Region', val: 'sin1 · Jakarta', icon: <Globe size={12} /> },
+                  ].map((row, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--color-border)' : 'none', fontSize: '12px' }}>
+                      <span style={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}>{row.icon}{row.label}</span>
+                      <span style={{ fontWeight: 500, color: 'var(--color-text-primary)', fontFamily: 'var(--font-mono, monospace)', fontSize: '11px' }}>{row.val}</span>
+                    </div>
+                  ))}
+
+                  <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
+                    <NeuronButton size="xs" variant="outline" style={{ flex: 1, justifyContent: 'center' }}>View logs</NeuronButton>
+                    <NeuronButton size="xs" variant="primary" style={{ flex: 1, justifyContent: 'center' }}>Visit site <ArrowRight size={12} /></NeuronButton>
+                  </div>
+                </NeuronCard>
+              </div>
+
+            </div>
+          </div>
+
+
           <div className="section-card">
             <h2 className="section-title">NeuronCard {t.compShared.playground}</h2>
             <Playground

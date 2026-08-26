@@ -138,7 +138,7 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
       className={`neuron-checkbox-wrapper neuron-checkbox-wrapper--${size} ${
         labelPosition === 'left' ? 'neuron-checkbox-wrapper--left' : 'neuron-checkbox-wrapper--right'
       } ${disabled ? 'neuron-checkbox-wrapper--disabled' : ''} ${
-        isCard ? 'neuron-checkbox-card' : ''
+        isCard ? `neuron-checkbox-card neuron-checkbox-card--${variant}` : ''
       } ${isCard && (isChecked || indeterminate) ? 'neuron-checkbox-card--active' : ''} ${className}`}
       style={style}
     >

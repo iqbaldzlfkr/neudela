@@ -182,7 +182,7 @@ export const NeuronRadio: React.FC<NeuronRadioProps> = ({
       className={`neuron-radio-wrapper neuron-radio-wrapper--${effectiveSize} ${
         labelPosition === 'left' ? 'neuron-radio-wrapper--left' : 'neuron-radio-wrapper--right'
       } ${effectiveDisabled ? 'neuron-radio-wrapper--disabled' : ''} ${
-        isCard ? 'neuron-radio-card' : ''
+        isCard ? `neuron-radio-card neuron-radio-card--${effectiveVariant}` : ''
       } ${isCard && isChecked ? 'neuron-radio-card--active' : ''} ${className}`}
       style={style}
     >

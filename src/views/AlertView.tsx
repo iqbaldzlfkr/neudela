@@ -163,7 +163,7 @@ export default function AlertView({ setActiveTab }: AlertViewProps) {
 
       <NextPrevious
         prev={{ id: 'comp-radio', label: t.nav.compRadio }}
-        next={{ id: 'overview', label: t.nav.overview }}
+        next={{ id: 'comp-avatar', label: t.nav.compAvatar }}
         setActiveTab={setActiveTab}
       />
     </div>
