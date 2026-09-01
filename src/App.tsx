@@ -34,6 +34,10 @@ import RadioView from './views/RadioView';
 import AlertView from './views/AlertView';
 import AvatarView from './views/AvatarView';
 import TooltipView from './views/TooltipView';
+import ProgressView from './views/ProgressView';
+import BreadcrumbView from './views/BreadcrumbView';
+import DatePickerView from './views/DatePickerView';
+import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
 // Navigation icon helper
@@ -187,10 +191,10 @@ export default function App() {
       items: [
         { id: 'foundation-overview', label: t.nav.foundationOverview },
         { id: 'colors', label: t.nav.colors },
-        { id: 'typography', label: t.nav.typography },
-        { id: 'spacing', label: t.nav.spacing },
         { id: 'grid', label: t.nav.grid },
         { id: 'icons', label: t.nav.icons },
+        { id: 'spacing', label: t.nav.spacing },
+        { id: 'typography', label: t.nav.typography },
       ],
     },
     {
@@ -199,16 +203,20 @@ export default function App() {
       type: 'dropdown',
       icon: 'components',
       items: [
-        { id: 'comp-button', label: t.nav.compButton },
-        { id: 'comp-button-group', label: t.nav.compButtonGroup },
-        { id: 'comp-input', label: t.nav.compInput },
-        { id: 'comp-card', label: t.nav.compCard },
-        { id: 'comp-badge', label: t.nav.compBadge },
-        { id: 'comp-toggle', label: t.nav.compToggle },
-        { id: 'comp-checkbox', label: t.nav.compCheckbox },
-        { id: 'comp-radio', label: t.nav.compRadio },
+        { id: 'components-overview', label: t.nav.componentsOverview },
         { id: 'comp-alert', label: t.nav.compAlert },
         { id: 'comp-avatar', label: t.nav.compAvatar },
+        { id: 'comp-badge', label: t.nav.compBadge },
+        { id: 'comp-breadcrumb', label: t.nav.compBreadcrumb },
+        { id: 'comp-button', label: t.nav.compButton },
+        { id: 'comp-button-group', label: t.nav.compButtonGroup },
+        { id: 'comp-card', label: t.nav.compCard },
+        { id: 'comp-checkbox', label: t.nav.compCheckbox },
+        { id: 'comp-datepicker', label: t.nav.compDatePicker },
+        { id: 'comp-input', label: t.nav.compInput },
+        { id: 'comp-progress', label: t.nav.compProgress },
+        { id: 'comp-radio', label: t.nav.compRadio },
+        { id: 'comp-toggle', label: t.nav.compToggle },
         { id: 'comp-tooltip', label: t.nav.compTooltip },
       ],
     },
@@ -368,6 +376,10 @@ export default function App() {
         return <Overview setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
       case 'foundation-overview':
         return <FoundationOverview setActiveTab={setActiveTab} />;
+      case 'components':
+      case 'components-overview':
+      case 'components-section':
+        return <ComponentsOverview setActiveTab={setActiveTab} />;
       case 'colors':
         return <Colors setActiveTab={setActiveTab} />;
       case 'typography':
@@ -384,10 +396,14 @@ export default function App() {
         return <CardView setActiveTab={setActiveTab} />;
       case 'comp-badge':
         return <BadgeView setActiveTab={setActiveTab} />;
+      case 'comp-breadcrumb':
+        return <BreadcrumbView setActiveTab={setActiveTab} />;
       case 'comp-toggle':
         return <ToggleView setActiveTab={setActiveTab} />;
       case 'comp-checkbox':
         return <CheckboxView setActiveTab={setActiveTab} />;
+      case 'comp-datepicker':
+        return <DatePickerView setActiveTab={setActiveTab} />;
       case 'comp-radio':
         return <RadioView setActiveTab={setActiveTab} />;
       case 'comp-alert':
@@ -396,6 +412,8 @@ export default function App() {
         return <AvatarView setActiveTab={setActiveTab} />;
       case 'comp-tooltip':
         return <TooltipView setActiveTab={setActiveTab} />;
+      case 'comp-progress':
+        return <ProgressView setActiveTab={setActiveTab} />;
       default:
         return (
           <PlaceholderView 

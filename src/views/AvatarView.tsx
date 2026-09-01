@@ -2010,7 +2010,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
       {/* ── Page Navigation Footer ── */}
       <NextPrevious
         prev={{ id: 'comp-alert', label: t.nav.compAlert }}
-        next={{ id: 'pat-forms', label: t.nav.patForms }}
+        next={{ id: 'comp-badge', label: t.nav.compBadge }}
         setActiveTab={setActiveTab}
       />
     </div>

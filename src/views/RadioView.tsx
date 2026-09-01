@@ -1608,8 +1608,8 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
 
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
-        prev={{ id: 'comp-checkbox', label: t.nav.compCheckbox }}
-        next={{ id: 'comp-alert', label: t.nav.compAlert }}
+        prev={{ id: 'comp-progress', label: t.nav.compProgress }}
+        next={{ id: 'comp-toggle', label: t.nav.compToggle }}
         setActiveTab={setActiveTab}
       />
 

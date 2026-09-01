@@ -1689,8 +1689,8 @@ export default function CardView({ setActiveTab }: CardViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-input', label: t.nav.compInput }}
-        next={{ id: 'comp-badge', label: t.nav.compBadge }}
+        prev={{ id: 'comp-button-group', label: t.nav.compButtonGroup }}
+        next={{ id: 'comp-checkbox', label: t.nav.compCheckbox }}
         setActiveTab={setActiveTab}
       />
     </div>

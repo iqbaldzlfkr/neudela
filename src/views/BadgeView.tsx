@@ -1350,8 +1350,8 @@ export default function BadgeView({ setActiveTab }: BadgeViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-card', label: t.nav.compCard }}
-        next={{ id: 'comp-toggle', label: t.nav.compToggle }}
+        prev={{ id: 'comp-avatar', label: t.nav.compAvatar }}
+        next={{ id: 'comp-breadcrumb', label: t.nav.compBreadcrumb }}
         setActiveTab={setActiveTab}
       />
     </div>

@@ -37,6 +37,7 @@ export interface NeuronTooltipProps {
   isOpen?: boolean;
   disabled?: boolean;
   maxWidth?: number;
+  interactive?: boolean;
   className?: string;
   id?: string;
 }
@@ -186,6 +187,7 @@ const NeuronTooltip: React.FC<NeuronTooltipProps> = ({
   isOpen: controlledOpen,
   disabled = false,
   maxWidth,
+  interactive = false,
   className = '',
   id,
 }) => {
@@ -390,7 +392,7 @@ const NeuronTooltip: React.FC<NeuronTooltipProps> = ({
     fontFamily:   'var(--font-family)',
     fontWeight:   400,
     wordBreak:    'break-word',
-    pointerEvents: trigger === 'click' ? 'auto' : 'none',
+    pointerEvents: (interactive || trigger === 'click' || trigger === 'manual' || isControlled) ? 'auto' : 'none',
     // smooth animation
     opacity:      positioned && active ? 1 : 0,
     transform:    positioned && active ? 'scale(1) translateY(0px)' : 'scale(0.94) translateY(3px)',

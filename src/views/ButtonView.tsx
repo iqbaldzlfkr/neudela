@@ -677,7 +677,7 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
       )}
 
       <NextPrevious
-        prev={{ id: 'spacing', label: t.nav.spacing }}
+        prev={{ id: 'comp-breadcrumb', label: t.nav.compBreadcrumb }}
         next={{ id: 'comp-button-group', label: t.nav.compButtonGroup }}
         setActiveTab={setActiveTab}
       />

@@ -242,7 +242,7 @@ export default function Colors({ setActiveTab }: ColorsProps) {
 
       <NextPrevious
         prev={{ id: 'foundation-overview', label: t.nav.foundationOverview }}
-        next={{ id: 'typography', label: t.nav.typography }}
+        next={{ id: 'spacing', label: t.nav.spacing }}
         setActiveTab={setActiveTab}
       />
 

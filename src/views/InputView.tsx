@@ -977,8 +977,8 @@ export default function InputView({ setActiveTab }: InputViewProps) {
       )}
 
       <NextPrevious
-        prev={{ id: 'comp-button-group', label: t.nav.compButtonGroup }}
-        next={{ id: 'comp-card', label: t.nav.compCard }}
+        prev={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
+        next={{ id: 'comp-progress', label: t.nav.compProgress }}
         setActiveTab={setActiveTab}
       />
     </div>

@@ -69,7 +69,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
           </p>
         </div>
 
-        <div className="feature-card" onClick={() => setActiveTab('components')}>
+        <div className="feature-card" onClick={() => setActiveTab('components-overview')}>
           <div className="feature-icon-wrapper">🧩</div>
           <h3 className="feature-title">{t.overview.cardComponentsTitle}</h3>
           <p className="feature-desc">

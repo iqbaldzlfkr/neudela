@@ -38,9 +38,10 @@ interface PlaygroundProps {
   knobs: Knob[];
   codeTemplates: (state: KnobsState) => CodeTemplates;
   children: (state: KnobsState) => React.ReactNode;
+  previewStyle?: React.CSSProperties;
 }
 
-export default function Playground({ name: _name, knobs, codeTemplates, children }: PlaygroundProps) {
+export default function Playground({ name: _name, knobs, codeTemplates, children, previewStyle }: PlaygroundProps) {
   const { t } = useLanguage();
 
   // Initialize state from knobs default values
@@ -79,7 +80,7 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
   return (
     <div className="playground-container">
       {/* Live Preview Panel */}
-      <div className="playground-preview">
+      <div className="playground-preview" style={previewStyle}>
         {children(knobsState)}
       </div>
 

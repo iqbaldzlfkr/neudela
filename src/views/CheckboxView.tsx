@@ -1253,8 +1253,8 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
 
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
-        prev={{ id: 'comp-toggle', label: t.nav.compToggle }}
-        next={{ id: 'comp-radio', label: t.nav.compRadio }}
+        prev={{ id: 'comp-card', label: t.nav.compCard }}
+        next={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
         setActiveTab={setActiveTab}
       />
 

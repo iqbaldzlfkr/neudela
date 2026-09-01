@@ -79,96 +79,6 @@ export default function FoundationOverview({ setActiveTab }: FoundationOverviewP
       )
     },
     {
-      id: 'typography',
-      title: t.foundationOverview.typographyTitle,
-      desc: t.foundationOverview.typographyDesc,
-      badge: 'Inter Typeface',
-      action: 'typography',
-      renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(100, 116, 139, 0.15) 100%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Typography Visual */}
-          <span style={{ fontSize: '48px', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', lineHeight: 1 }}>Aa</span>
-          <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>Inter Font Family</span>
-        </div>
-      )
-    },
-    {
-      id: 'spacing',
-      title: t.foundationOverview.spacerTitle,
-      desc: t.foundationOverview.spacerDesc,
-      badge: '4px Grid Scale',
-      action: 'spacing',
-      renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(2, 132, 199, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-2)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Spacer Visual */}
-          {[16, 24, 32, 40].map((width, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{
-                width: `${width}px`,
-                height: '12px',
-                backgroundColor: 'var(--color-primary)',
-                opacity: 0.3 + (i * 0.2),
-                borderRadius: '2px',
-              }} />
-              <span style={{ fontSize: '8px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>
-                {width}px
-              </span>
-            </div>
-          ))}
-        </div>
-      )
-    },
-    {
-      id: 'radius',
-      title: t.foundationOverview.radiusTitle,
-      desc: t.foundationOverview.radiusDesc,
-      badge: 'Corner Shapes',
-      action: null,
-      renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-3)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Radius Visual */}
-          {['4px', '8px', '16px', '9999px'].map((radius, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                border: '2px solid var(--color-primary)',
-                borderRadius: radius,
-                backgroundColor: 'rgba(223, 126, 48, 0.05)',
-              }} />
-              <span style={{ fontSize: '9px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '6px' }}>
-                {radius === '9999px' ? 'Full' : radius}
-              </span>
-            </div>
-          ))}
-        </div>
-      )
-    },
-    {
       id: 'elevation',
       title: t.foundationOverview.elevationTitle,
       desc: t.foundationOverview.elevationDesc,
@@ -209,7 +119,97 @@ export default function FoundationOverview({ setActiveTab }: FoundationOverviewP
           ))}
         </div>
       )
-    }
+    },
+    {
+      id: 'radius',
+      title: t.foundationOverview.radiusTitle,
+      desc: t.foundationOverview.radiusDesc,
+      badge: 'Corner Shapes',
+      action: null,
+      renderVisual: () => (
+        <div style={{
+          height: '140px',
+          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0.15) 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'var(--space-3)',
+          borderBottom: '1px solid var(--color-border)',
+        }}>
+          {/* Radius Visual */}
+          {['4px', '8px', '16px', '9999px'].map((radius, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{
+                width: '36px',
+                height: '36px',
+                border: '2px solid var(--color-primary)',
+                borderRadius: radius,
+                backgroundColor: 'rgba(223, 126, 48, 0.05)',
+              }} />
+              <span style={{ fontSize: '9px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '6px' }}>
+                {radius === '9999px' ? 'Full' : radius}
+              </span>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    {
+      id: 'spacing',
+      title: t.foundationOverview.spacerTitle,
+      desc: t.foundationOverview.spacerDesc,
+      badge: '4px Grid Scale',
+      action: 'spacing',
+      renderVisual: () => (
+        <div style={{
+          height: '140px',
+          background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(2, 132, 199, 0.15) 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'var(--space-2)',
+          borderBottom: '1px solid var(--color-border)',
+        }}>
+          {/* Spacer Visual */}
+          {[16, 24, 32, 40].map((width, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{
+                width: `${width}px`,
+                height: '12px',
+                backgroundColor: 'var(--color-primary)',
+                opacity: 0.3 + (i * 0.2),
+                borderRadius: '2px',
+              }} />
+              <span style={{ fontSize: '8px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>
+                {width}px
+              </span>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    {
+      id: 'typography',
+      title: t.foundationOverview.typographyTitle,
+      desc: t.foundationOverview.typographyDesc,
+      badge: 'Inter Typeface',
+      action: 'typography',
+      renderVisual: () => (
+        <div style={{
+          height: '140px',
+          background: 'linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(100, 116, 139, 0.15) 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: '1px solid var(--color-border)',
+        }}>
+          {/* Typography Visual */}
+          <span style={{ fontSize: '48px', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', lineHeight: 1 }}>Aa</span>
+          <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>Inter Font Family</span>
+        </div>
+      )
+    },
   ];
 
   return (

@@ -253,7 +253,7 @@ body {
 }
 
 .submenu-links.visible {
-  max-height: 500px;
+  max-height: 2000px;
 }
 
 .submenu-link {
@@ -3025,74 +3025,255 @@ body {
 }
 
 /* 4. ALERTS */
+/* ─────────────────────────────────────────────────────────────────────────────
+   NEURON ALERT — Complete design system
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Base ── */
 .neuron-alert {
   display: flex;
   gap: var(--space-3);
-  padding: var(--space-4);
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   width: 100%;
   align-items: flex-start;
-  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
 }
 
-.neuron-alert-icon {
+/* ── Sizes ── */
+.neuron-alert--sm {
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-2);
+}
+.neuron-alert--md {
+  padding: var(--space-3) var(--space-4);
+}
+.neuron-alert--lg {
+  padding: var(--space-4) var(--space-5);
+  gap: var(--space-4);
+}
+
+/* ── Icon Wrapper ── */
+.neuron-alert__icon-wrap {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 1px;
 }
+.neuron-alert--sm .neuron-alert__icon-wrap svg { width: 16px; height: 16px; }
+.neuron-alert--md .neuron-alert__icon-wrap svg { width: 18px; height: 18px; }
+.neuron-alert--lg .neuron-alert__icon-wrap svg { width: 20px; height: 20px; }
 
-.neuron-alert-content {
+/* ── Body ── */
+.neuron-alert__body {
   flex: 1;
+  min-width: 0;
 }
 
-.neuron-alert-title {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--fs-text-sm);
-  margin-bottom: var(--space-1);
+/* ── Title ── */
+.neuron-alert__title {
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+}
+.neuron-alert--sm .neuron-alert__title { font-size: var(--fs-text-xs); }
+.neuron-alert--md .neuron-alert__title { font-size: var(--fs-text-sm); }
+.neuron-alert--lg .neuron-alert__title { font-size: var(--fs-text-md); }
+
+/* ── Description ── */
+.neuron-alert__desc {
+  line-height: 1.55;
+  margin-top: var(--space-1);
+}
+.neuron-alert--sm .neuron-alert__desc { font-size: 11px; opacity: 0.85; }
+.neuron-alert--md .neuron-alert__desc { font-size: var(--fs-text-sm); opacity: 0.9; }
+.neuron-alert--lg .neuron-alert__desc { font-size: var(--fs-text-sm); opacity: 0.9; }
+
+/* ── Actions ── */
+.neuron-alert__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+  align-items: center;
 }
 
-.neuron-alert-desc {
-  font-size: var(--fs-text-sm);
-  opacity: 0.9;
+.neuron-alert__action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-text-xs);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid currentColor;
+  background: currentColor;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
 }
+.neuron-alert__action:hover { opacity: 0.85; transform: translateY(-1px); }
 
-.neuron-alert-close {
+.neuron-alert__action--ghost {
+  background: transparent;
+  opacity: 0.75;
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.neuron-alert__action--ghost:hover { opacity: 1; transform: none; }
+
+/* ── Close Button ── */
+.neuron-alert__close {
   background: none;
   border: none;
   cursor: pointer;
   color: inherit;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, background 0.15s ease;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin-left: var(--space-1);
+}
+.neuron-alert__close:hover { opacity: 1; background: rgba(0,0,0,0.08); }
+.neuron-alert__close:focus-visible { outline: 2px solid currentColor; outline-offset: 1px; }
+
+/* ── Dismiss Animation ── */
+@keyframes alertDismiss {
+  to { opacity: 0; transform: translateY(-4px) scale(0.98); max-height: 0; }
+}
+.neuron-alert--dismissing {
+  animation: alertDismiss 0.25s ease forwards;
+  overflow: hidden;
 }
 
-.neuron-alert-close:hover {
-  opacity: 1;
-}
-
-.neuron-alert--info {
+/* ══════════════════════════════════════════════════════════════════
+   FILL: SUBTLE (default) — tinted soft background
+══════════════════════════════════════════════════════════════════ */
+.neuron-alert--subtle.neuron-alert--info {
   background-color: var(--color-info-light);
   color: var(--color-info);
   border-color: var(--color-info-border);
 }
-
-.neuron-alert--success {
+.neuron-alert--subtle.neuron-alert--success {
   background-color: var(--color-success-light);
   color: var(--color-success);
   border-color: var(--color-success-border);
 }
-
-.neuron-alert--warning {
+.neuron-alert--subtle.neuron-alert--warning {
   background-color: var(--color-warning-light);
   color: var(--color-warning);
   border-color: var(--color-warning-border);
 }
-
-.neuron-alert--danger {
+.neuron-alert--subtle.neuron-alert--danger {
   background-color: var(--color-danger-light);
   color: var(--color-danger);
   border-color: var(--color-danger-border);
 }
+
+/* Action buttons on subtle fill — use a contrast version */
+.neuron-alert--subtle .neuron-alert__action {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  border-color: color-mix(in srgb, currentColor 25%, transparent);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FILL: SOLID — inverted high-contrast
+══════════════════════════════════════════════════════════════════ */
+.neuron-alert--solid.neuron-alert--info {
+  background-color: var(--sky-600);
+  color: #fff;
+  border-color: var(--sky-700);
+}
+.neuron-alert--solid.neuron-alert--success {
+  background-color: var(--emerald-600);
+  color: #fff;
+  border-color: var(--emerald-700);
+}
+.neuron-alert--solid.neuron-alert--warning {
+  background-color: var(--amber-500);
+  color: #1a1200;
+  border-color: var(--amber-600);
+}
+.neuron-alert--solid.neuron-alert--danger {
+  background-color: var(--red-600);
+  color: #fff;
+  border-color: var(--red-700);
+}
+
+.neuron-alert--solid .neuron-alert__action {
+  color: inherit;
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+}
+.neuron-alert--solid .neuron-alert__close:hover { background: rgba(255,255,255,0.15); }
+
+/* ══════════════════════════════════════════════════════════════════
+   FILL: OUTLINED — border only, transparent background
+══════════════════════════════════════════════════════════════════ */
+.neuron-alert--outlined.neuron-alert--info {
+  background-color: transparent;
+  color: var(--color-info);
+  border-color: var(--color-info-border);
+}
+.neuron-alert--outlined.neuron-alert--success {
+  background-color: transparent;
+  color: var(--color-success);
+  border-color: var(--color-success-border);
+}
+.neuron-alert--outlined.neuron-alert--warning {
+  background-color: transparent;
+  color: var(--color-warning);
+  border-color: var(--color-warning-border);
+}
+.neuron-alert--outlined.neuron-alert--danger {
+  background-color: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+}
+
+.neuron-alert--outlined .neuron-alert__action {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+}
+
+/* ── Legacy class backward-compat (old neuron-alert-* selectors) ── */
+.neuron-alert-icon   { flex-shrink: 0; width: 20px; height: 20px; }
+.neuron-alert-content { flex: 1; }
+.neuron-alert-title  { font-weight: var(--font-weight-bold); font-size: var(--fs-text-sm); margin-bottom: var(--space-1); }
+.neuron-alert-desc   { font-size: var(--fs-text-sm); opacity: 0.9; }
+.neuron-alert-close  { background: none; border: none; cursor: pointer; color: inherit; opacity: 0.6; transition: opacity 0.2s ease; }
+.neuron-alert-close:hover { opacity: 1; }
+
+/* Legacy variant colors (for any old usage without fill class) */
+.neuron-alert--info:not([class*='neuron-alert--subtle']):not([class*='neuron-alert--solid']):not([class*='neuron-alert--outlined']) {
+  background-color: var(--color-info-light);
+  color: var(--color-info);
+  border-color: var(--color-info-border);
+}
+.neuron-alert--success:not([class*='neuron-alert--subtle']):not([class*='neuron-alert--solid']):not([class*='neuron-alert--outlined']) {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+  border-color: var(--color-success-border);
+}
+.neuron-alert--warning:not([class*='neuron-alert--subtle']):not([class*='neuron-alert--solid']):not([class*='neuron-alert--outlined']) {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+  border-color: var(--color-warning-border);
+}
+.neuron-alert--danger:not([class*='neuron-alert--subtle']):not([class*='neuron-alert--solid']):not([class*='neuron-alert--outlined']) {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+}
+
+
 
 /* 5. CARDS */
 .neuron-card {
@@ -5904,6 +6085,943 @@ body {
 .dark-theme .neuron-avatar--error:not(:has(img)) {
   background-color: rgba(239, 68, 68, 0.18);
   color: var(--red-300);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   NEURON PROGRESS — Bar & Circle
+   ═══════════════════════════════════════════════════════════ */
+
+/* Keyframes */
+@keyframes neuron-progress-indeterminate {
+  0%   { transform: translateX(-100%); }
+  60%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
+
+@keyframes neuron-progress-spin {
+  to { transform: rotate(-90deg) rotate(360deg); }
+}
+
+@keyframes neuron-progress-stripes {
+  from { background-position: 24px 0; }
+  to   { background-position: 0 0; }
+}
+
+@keyframes neuron-skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Skeleton shimmer utility */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-subtle) 25%,
+    var(--color-border) 50%,
+    var(--color-bg-subtle) 75%
+  );
+  background-size: 400px 100%;
+  animation: neuron-skeleton-shimmer 1.4s ease infinite;
+}
+
+.dark-theme .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 400px 100%;
+  animation: neuron-skeleton-shimmer 1.4s ease infinite;
+}
+
+/* ── Component Overview Cards Interactive & Hover Animation ── */
+.component-overview-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.component-overview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px -6px rgba(223, 126, 48, 0.12),
+              0 6px 14px -4px rgba(0, 0, 0, 0.05);
+  border-color: rgba(223, 126, 48, 0.45);
+}
+
+.component-overview-card:active {
+  transform: translateY(-2px) scale(0.99);
+  transition-duration: 0.1s;
+}
+
+.component-overview-preview {
+  height: 120px;
+  background: linear-gradient(135deg, rgba(223, 126, 48, 0.04) 0%, rgba(223, 126, 48, 0.12) 100%);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  pointer-events: none;
+  user-select: none;
+  transition: background 0.3s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+
+.component-overview-card:hover .component-overview-preview {
+  background: linear-gradient(135deg, rgba(223, 126, 48, 0.08) 0%, rgba(223, 126, 48, 0.18) 100%);
+  border-bottom-color: rgba(223, 126, 48, 0.25);
+}
+
+.component-overview-preview > * {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.component-overview-card:hover .component-overview-preview > * {
+  transform: scale(1.06);
+}
+
+.component-overview-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.component-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.component-overview-title {
+  font-size: var(--fs-text-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.component-overview-card:hover .component-overview-title {
+  color: var(--brand-600);
+}
+
+.component-overview-badge {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-canvas);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-tertiary);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.component-overview-card:hover .component-overview-badge {
+  border-color: rgba(223, 126, 48, 0.3);
+  color: var(--brand-600);
+  background-color: rgba(223, 126, 48, 0.06);
+}
+
+.component-overview-desc {
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4) 0;
+  flex: 1;
+}
+
+.component-overview-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-600);
+  margin-top: auto;
+  transition: color 0.2s ease;
+}
+
+.component-overview-arrow {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.component-overview-card:hover .component-overview-arrow {
+  transform: translateX(4px);
+}
+
+/* ── NeuronBreadcrumb Component ── */
+.neuron-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.neuron-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.neuron-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.neuron-breadcrumb__separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.neuron-breadcrumb__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.neuron-breadcrumb__link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.neuron-breadcrumb__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.neuron-breadcrumb__current {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.neuron-breadcrumb__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.neuron-breadcrumb__link:hover .neuron-breadcrumb__icon {
+  opacity: 1;
+}
+
+.neuron-breadcrumb__ellipsis-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.neuron-breadcrumb__ellipsis-btn:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ── Size Scales ── */
+.neuron-breadcrumb--sm {
+  font-size: var(--fs-text-xs);
+}
+.neuron-breadcrumb--sm .neuron-breadcrumb__separator {
+  padding: 0 4px;
+  font-size: 10px;
+}
+.neuron-breadcrumb--sm .neuron-breadcrumb__link,
+.neuron-breadcrumb--sm .neuron-breadcrumb__current {
+  padding: 2px 4px;
+}
+.neuron-breadcrumb--sm .neuron-breadcrumb__ellipsis-btn {
+  padding: 1px 6px;
+  font-size: 9px;
+}
+
+.neuron-breadcrumb--md {
+  font-size: var(--fs-text-sm);
+}
+.neuron-breadcrumb--md .neuron-breadcrumb__separator {
+  padding: 0 6px;
+  font-size: 12px;
+}
+.neuron-breadcrumb--md .neuron-breadcrumb__link,
+.neuron-breadcrumb--md .neuron-breadcrumb__current {
+  padding: 3px 6px;
+}
+.neuron-breadcrumb--md .neuron-breadcrumb__ellipsis-btn {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.neuron-breadcrumb--lg {
+  font-size: var(--fs-text-md);
+}
+.neuron-breadcrumb--lg .neuron-breadcrumb__separator {
+  padding: 0 8px;
+  font-size: 14px;
+}
+.neuron-breadcrumb--lg .neuron-breadcrumb__link,
+.neuron-breadcrumb--lg .neuron-breadcrumb__current {
+  padding: 4px 8px;
+}
+.neuron-breadcrumb--lg .neuron-breadcrumb__ellipsis-btn {
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+/* ── Variant: filled ── */
+.neuron-breadcrumb--filled {
+  background-color: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 4px 6px;
+}
+.neuron-breadcrumb--filled .neuron-breadcrumb__link:hover {
+  background-color: var(--color-bg-canvas);
+  text-decoration: none;
+}
+
+/* ── Variant: bordered ── */
+.neuron-breadcrumb--bordered {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 4px 8px;
+  background-color: var(--color-bg-surface);
+}
+.neuron-breadcrumb--bordered .neuron-breadcrumb__link:hover {
+  background-color: var(--color-bg-subtle);
+  text-decoration: none;
+}
+
+/* ── Variant: pills ── */
+.neuron-breadcrumb--pills .neuron-breadcrumb__link {
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-subtle);
+  border: 1px solid transparent;
+}
+.neuron-breadcrumb--pills .neuron-breadcrumb__link:hover {
+  background-color: var(--color-bg-canvas);
+  border-color: var(--color-border);
+  text-decoration: none;
+}
+.neuron-breadcrumb--pills .neuron-breadcrumb__current {
+  border-radius: var(--radius-full);
+  background-color: var(--brand-50);
+  color: var(--brand-700);
+  border: 1px solid var(--brand-200);
+}
+.dark-theme .neuron-breadcrumb--pills .neuron-breadcrumb__current {
+  background-color: rgba(223, 126, 48, 0.12);
+  color: var(--brand-400);
+  border-color: rgba(223, 126, 48, 0.25);
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   NEURON DATE PICKER COMPONENT
+═════════════════════════════════════════════════════════════════════════════ */
+
+.neuron-datepicker-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.neuron-datepicker-label {
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.neuron-datepicker-error-msg {
+  font-size: var(--fs-text-xs);
+  color: var(--color-danger);
+  margin-top: 2px;
+}
+
+.neuron-datepicker-helper-msg {
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+/* ── Picker Container ── */
+.neuron-datepicker {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  display: inline-block;
+  user-select: none;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-datepicker--bordered {
+  border: 1.5px solid var(--color-border-hover);
+  box-shadow: none;
+}
+
+.neuron-datepicker--flat {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.neuron-datepicker--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ── Body Layout ── */
+.neuron-datepicker-body {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ── Presets Sidebar ── */
+.neuron-datepicker-presets {
+  width: 136px;
+  border-right: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: var(--color-bg-surface);
+  flex-shrink: 0;
+}
+
+.neuron-datepicker-preset-btn {
+  width: 100%;
+  text-align: left;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.neuron-datepicker-preset-btn:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.neuron-datepicker-preset-btn--active {
+  background-color: #fef2f0;
+  color: #df3b28;
+  font-weight: var(--font-weight-semibold);
+}
+
+.dark-theme .neuron-datepicker-preset-btn--active {
+  background-color: rgba(223, 126, 48, 0.16);
+  color: var(--brand-400);
+}
+
+/* ── Main Picker Area ── */
+.neuron-datepicker-main {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.neuron-datepicker--sm .neuron-datepicker-main {
+  padding: var(--space-3);
+  gap: var(--space-3);
+}
+
+.neuron-datepicker--lg .neuron-datepicker-main {
+  padding: var(--space-6);
+  gap: var(--space-5);
+}
+
+/* ── Input Header Row (Single & Range) ── */
+.neuron-datepicker-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.neuron-datepicker-input-field {
+  flex: 1;
+  position: relative;
+}
+
+.neuron-datepicker-text-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-datepicker-text-input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(223, 126, 48, 0.15);
+}
+
+.neuron-datepicker-range-sep {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+.neuron-datepicker-today-btn {
+  height: 36px;
+  padding: 0 var(--space-3);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.neuron-datepicker-today-btn:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border-hover);
+}
+
+/* ── Calendars Multi-Month Layout ── */
+.neuron-datepicker-calendars {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-6);
+}
+
+.neuron-datepicker-secondary-cal {
+  border-left: 1px solid var(--color-border);
+  padding-left: var(--space-6);
+}
+
+.neuron-datepicker-calendar {
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.neuron-datepicker--sm .neuron-datepicker-calendar {
+  width: 224px;
+}
+
+.neuron-datepicker--lg .neuron-datepicker-calendar {
+  width: 294px;
+}
+
+/* ── Month Header ── */
+.neuron-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+}
+
+.neuron-datepicker-month-title {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.neuron-datepicker-nav-btn {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.neuron-datepicker-nav-btn:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.neuron-datepicker-nav-placeholder {
+  width: 28px;
+  height: 28px;
+}
+
+/* ── Weekday Header Row ── */
+.neuron-datepicker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.neuron-datepicker-weekday {
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  padding-bottom: 4px;
+}
+
+/* ── Days Grid ── */
+.neuron-datepicker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 2px;
+}
+
+.neuron-datepicker-day-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+}
+
+.neuron-datepicker--sm .neuron-datepicker-day-wrapper {
+  height: 32px;
+}
+
+.neuron-datepicker--lg .neuron-datepicker-day-wrapper {
+  height: 42px;
+}
+
+/* ── Range Strip Connector ── */
+.neuron-datepicker-day-wrapper--in-range {
+  background-color: #fef2f0;
+}
+
+.dark-theme .neuron-datepicker-day-wrapper--in-range {
+  background-color: rgba(223, 126, 48, 0.14);
+}
+
+.neuron-datepicker-day-wrapper--range-start {
+  background: linear-gradient(to right, transparent 50%, #fef2f0 50%);
+}
+
+.dark-theme .neuron-datepicker-day-wrapper--range-start {
+  background: linear-gradient(to right, transparent 50%, rgba(223, 126, 48, 0.14) 50%);
+}
+
+.neuron-datepicker-day-wrapper--range-end {
+  background: linear-gradient(to left, transparent 50%, #fef2f0 50%);
+}
+
+.dark-theme .neuron-datepicker-day-wrapper--range-end {
+  background: linear-gradient(to left, transparent 50%, rgba(223, 126, 48, 0.14) 50%);
+}
+
+/* When start and end are same day */
+.neuron-datepicker-day-wrapper--range-start.neuron-datepicker-day-wrapper--range-end {
+  background: transparent;
+}
+
+/* ── Individual Day Button ── */
+.neuron-datepicker-day {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: all 0.15s ease;
+}
+
+.neuron-datepicker--sm .neuron-datepicker-day {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+
+.neuron-datepicker--lg .neuron-datepicker-day {
+  width: 38px;
+  height: 38px;
+  font-size: 14px;
+}
+
+.neuron-datepicker-day:hover:not(:disabled) {
+  background-color: var(--color-bg-subtle);
+}
+
+.neuron-datepicker-day--muted {
+  color: var(--color-text-tertiary);
+  opacity: 0.45;
+}
+
+.neuron-datepicker-day--today {
+  font-weight: var(--font-weight-bold);
+  color: #df3b28;
+}
+
+.dark-theme .neuron-datepicker-day--today {
+  color: var(--brand-400);
+}
+
+.neuron-datepicker-day--in-range {
+  color: #df3b28;
+  font-weight: var(--font-weight-semibold);
+}
+
+.dark-theme .neuron-datepicker-day--in-range {
+  color: var(--brand-300);
+}
+
+.neuron-datepicker-day--selected,
+.neuron-datepicker-day--range-start,
+.neuron-datepicker-day--range-end {
+  background-color: #df3b28 !important;
+  color: #ffffff !important;
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 2px 6px rgba(223, 59, 40, 0.35);
+}
+
+.dark-theme .neuron-datepicker-day--selected,
+.dark-theme .neuron-datepicker-day--range-start,
+.dark-theme .neuron-datepicker-day--range-end {
+  background-color: var(--brand-600) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.neuron-datepicker-day--hover-endpoint {
+  background-color: rgba(223, 59, 40, 0.15);
+  color: #df3b28;
+}
+
+/* ── Footer Action Area ── */
+.neuron-datepicker-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.neuron-datepicker-footer-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.neuron-datepicker-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.neuron-datepicker-footer-btns--full {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.neuron-datepicker-btn {
+  height: 36px;
+  padding: 0 var(--space-4);
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.neuron-datepicker-btn--cancel {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.neuron-datepicker-btn--cancel:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+}
+
+.neuron-datepicker-btn--apply {
+  background-color: #df3b28;
+  border: 1px solid #df3b28;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(223, 59, 40, 0.2);
+}
+
+.neuron-datepicker-btn--apply:hover {
+  background-color: #c9301f;
+  border-color: #c9301f;
+}
+
+.dark-theme .neuron-datepicker-btn--apply {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+.dark-theme .neuron-datepicker-btn--apply:hover {
+  background-color: var(--brand-500);
+}
+
+/* ── Popover Trigger Button ── */
+.neuron-datepicker-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.neuron-datepicker-trigger-btn {
+  height: 40px;
+  min-width: 220px;
+  padding: 0 var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--fs-text-sm);
+  font-family: var(--font-family);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-datepicker-trigger-btn--sm {
+  height: 32px;
+  font-size: var(--fs-text-xs);
+  min-width: 180px;
+}
+
+.neuron-datepicker-trigger-btn--lg {
+  height: 48px;
+  font-size: var(--fs-text-md);
+  min-width: 260px;
+}
+
+.neuron-datepicker-trigger-btn:hover:not(:disabled) {
+  border-color: var(--color-border-hover);
+}
+
+.neuron-datepicker-trigger-btn--open {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(223, 126, 48, 0.15);
+}
+
+.neuron-datepicker-trigger-btn--error {
+  border-color: var(--color-danger);
+}
+
+.neuron-datepicker-trigger-btn--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--color-bg-subtle);
+}
+
+.neuron-datepicker-trigger-icon {
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+}
+
+.neuron-datepicker-trigger-text {
+  flex: 1;
+  font-weight: var(--font-weight-medium);
+}
+
+.neuron-datepicker-trigger-placeholder {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-regular);
+}
+
+.neuron-datepicker-trigger-clear {
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: var(--radius-full);
+}
+
+.neuron-datepicker-trigger-clear:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+/* ── Popover Dropdown Card ── */
+.neuron-datepicker-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 200;
+  animation: datepickerFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes datepickerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 

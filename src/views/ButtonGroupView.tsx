@@ -1083,7 +1083,7 @@ export default function ButtonGroupView({ setActiveTab }: ButtonGroupViewProps) 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
         prev={{ id: 'comp-button', label: t.nav.compButton }}
-        next={{ id: 'comp-input', label: t.nav.compInput }}
+        next={{ id: 'comp-card', label: t.nav.compCard }}
         setActiveTab={setActiveTab}
       />
     </div>

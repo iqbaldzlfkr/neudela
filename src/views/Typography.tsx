@@ -167,8 +167,8 @@ export default function Typography({ setActiveTab }: TypographyProps) {
       </div>
 
       <NextPrevious
-        prev={{ id: 'colors', label: t.nav.colors }}
-        next={{ id: 'spacing', label: t.nav.spacing }}
+        prev={{ id: 'spacing', label: t.nav.spacing }}
+        next={{ id: 'components-overview', label: t.nav.componentsOverview }}
         setActiveTab={setActiveTab}
       />
     </div>

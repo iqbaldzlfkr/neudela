@@ -105,6 +105,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
 
   // Onboarding step state
   const [onboardStep, setOnboardStep] = useState(0);
+  const [isTourActive, setIsTourActive] = useState(false);
 
   // Member table data
   const tableMembers = [
@@ -1298,8 +1299,8 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
 
           {/* ── Footer Navigation ── */}
           <NextPrevious
-            prev={{ id: 'comp-avatar', label: 'Avatar' }}
-            next={{ id: 'pat-forms', label: 'Forms' }}
+            prev={{ id: 'comp-toggle', label: t.nav.compToggle }}
+            next={{ id: 'pat-forms', label: t.nav.patForms }}
             setActiveTab={setActiveTab}
           />
         </div>
@@ -1779,11 +1780,39 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 <div style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--color-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800 }}>N</div>
                 <strong style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>Neudela Workspace</strong>
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <NeuronBadge variant="brand" size="sm">
-                    <Sparkles size={10} style={{ marginRight: 3 }} />
-                    Tour: Step {onboardStep + 1} / {onboardingSteps.length}
+                  <NeuronBadge variant={isTourActive ? 'brand' : 'neutral'} size="sm">
+                    {isTourActive ? (
+                      <>
+                        <Sparkles size={10} style={{ marginRight: 3 }} />
+                        Tour: Step {onboardStep + 1} / {onboardingSteps.length}
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles size={10} style={{ marginRight: 3 }} />
+                        Tour Ready
+                      </>
+                    )}
                   </NeuronBadge>
-                  <NeuronButton variant="outline" size="sm" onClick={() => setOnboardStep(0)}>Restart Tour</NeuronButton>
+                  {isTourActive ? (
+                    <NeuronButton
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setIsTourActive(false)}
+                    >
+                      Dismiss Tour
+                    </NeuronButton>
+                  ) : (
+                    <NeuronButton
+                      variant="primary"
+                      size="sm"
+                      onClick={() => {
+                        setOnboardStep(0);
+                        setIsTourActive(true);
+                      }}
+                    >
+                      Start Tour
+                    </NeuronButton>
+                  )}
                 </div>
               </div>
 
@@ -1792,51 +1821,108 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 {/* Sidebar */}
                 <div style={{ width: 200, borderRight: '1px solid var(--color-border)', padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 4, background: 'var(--color-bg-subtle)' }}>
                   {[
-                    { icon: <Layers size={15} />, label: 'Components', step: 1 },
-                    { icon: <Image size={15} />, label: 'Figma Files', step: 2 },
-                    { icon: <Users size={15} />, label: 'Team', step: -1 },
-                    { icon: <Settings size={15} />, label: 'Settings', step: -1 },
-                  ].map((item) => (
-                    <NeuronTooltip
-                      key={item.label}
-                      content={
-                        item.step >= 0 && item.step === onboardStep ? (
-                          <div>
-                            <strong style={{ display: 'block', fontSize: 13, marginBottom: 6 }}>{onboardingSteps[item.step].title}</strong>
-                            <p style={{ margin: 0, fontSize: 12, lineHeight: 1.5, opacity: 0.9 }}>{onboardingSteps[item.step].body}</p>
-                            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end' }}>
-                              <button
-                                onClick={() => setOnboardStep(s => Math.min(s + 1, onboardingSteps.length - 1))}
-                                style={{ background: 'rgba(255,255,255,0.15)', border: 'none', color: '#fff', padding: '4px 12px', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}
-                              >
-                                Next →
-                              </button>
+                    { icon: <Layers size={15} />, label: 'Components', step: 0 },
+                    { icon: <Image size={15} />, label: 'Figma Files', step: 1 },
+                    { icon: <Users size={15} />, label: 'Team Members', step: 2 },
+                    { icon: <Settings size={15} />, label: 'Settings', step: 3 },
+                  ].map((item) => {
+                    const isCurrentStep = isTourActive && item.step === onboardStep;
+                    return (
+                      <NeuronTooltip
+                        key={item.label}
+                        interactive={true}
+                        content={
+                          isCurrentStep ? (
+                            <div style={{ padding: '2px 0' }}>
+                              <strong style={{ display: 'block', fontSize: 13, marginBottom: 4, color: '#fff' }}>
+                                {onboardingSteps[item.step].title}
+                              </strong>
+                              <p style={{ margin: '0 0 10px 0', fontSize: 11, lineHeight: 1.45, opacity: 0.92, color: 'rgba(255,255,255,0.95)' }}>
+                                {onboardingSteps[item.step].body}
+                              </p>
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: 8 }}>
+                                <span style={{ fontSize: 10, opacity: 0.8, color: '#fff' }}>
+                                  {item.step + 1} of {onboardingSteps.length}
+                                </span>
+                                <div style={{ display: 'flex', gap: 6 }}>
+                                  {item.step > 0 && (
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setOnboardStep(s => Math.max(0, s - 1));
+                                        setIsTourActive(true);
+                                      }}
+                                      style={{
+                                        background: 'rgba(255,255,255,0.2)',
+                                        border: 'none',
+                                        color: '#fff',
+                                        padding: '3px 8px',
+                                        borderRadius: 4,
+                                        fontSize: 11,
+                                        cursor: 'pointer',
+                                        fontWeight: 600,
+                                      }}
+                                    >
+                                      ← Back
+                                    </button>
+                                  )}
+                                  <button
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      if (item.step === onboardingSteps.length - 1) {
+                                        setIsTourActive(false); // Just dismiss the tooltip
+                                      } else {
+                                        setOnboardStep(s => s + 1);
+                                        setIsTourActive(true);
+                                      }
+                                    }}
+                                    style={{
+                                      background: '#fff',
+                                      border: 'none',
+                                      color: 'var(--brand-700, #a23c1b)',
+                                      padding: '3px 10px',
+                                      borderRadius: 4,
+                                      fontSize: 11,
+                                      cursor: 'pointer',
+                                      fontWeight: 700,
+                                    }}
+                                  >
+                                    {item.step === onboardingSteps.length - 1 ? 'Finish 🎉' : 'Next →'}
+                                  </button>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        ) : item.label
-                      }
-                      variant={item.step >= 0 && item.step === onboardStep ? 'brand' : 'dark'}
-                      placement="right"
-                      size={item.step >= 0 && item.step === onboardStep ? 'lg' : 'sm'}
-                      trigger={item.step >= 0 && item.step === onboardStep ? 'manual' : 'hover'}
-                      isOpen={item.step >= 0 && item.step === onboardStep}
-                      arrow
-                    >
-                      <button
-                        style={{
-                          display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '8px 10px', borderRadius: 8,
-                          background: item.step === onboardStep ? 'rgba(223,126,48,0.1)' : 'none',
-                          border: item.step === onboardStep ? '1px solid rgba(223,126,48,0.2)' : '1px solid transparent',
-                          color: item.step === onboardStep ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-                          cursor: 'pointer', fontSize: 13, fontWeight: item.step === onboardStep ? 600 : 400, textAlign: 'left'
-                        }}
+                          ) : item.label
+                        }
+                        variant={isCurrentStep ? 'brand' : 'dark'}
+                        placement="right"
+                        trigger={isCurrentStep ? 'manual' : 'hover'}
+                        isOpen={isCurrentStep}
+                        arrow
                       >
-                        {item.icon}
-                        {item.label}
-                        {item.step === onboardStep && <ArrowUpRight size={12} style={{ marginLeft: 'auto' }} />}
-                      </button>
-                    </NeuronTooltip>
-                  ))}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setOnboardStep(item.step);
+                            setIsTourActive(true);
+                          }}
+                          style={{
+                            display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '8px 10px', borderRadius: 8,
+                            background: isCurrentStep ? 'rgba(223,126,48,0.12)' : 'none',
+                            border: isCurrentStep ? '1px solid rgba(223,126,48,0.3)' : '1px solid transparent',
+                            color: isCurrentStep ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+                            cursor: 'pointer', fontSize: 13, fontWeight: isCurrentStep ? 700 : 400, textAlign: 'left'
+                          }}
+                        >
+                          {item.icon}
+                          {item.label}
+                          {isCurrentStep && <ArrowUpRight size={12} style={{ marginLeft: 'auto' }} />}
+                        </button>
+                      </NeuronTooltip>
+                    );
+                  })}
                 </div>
 
                 {/* Main content area */}
@@ -1845,29 +1931,83 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                       <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
                       <strong style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>
-                        {onboardStep < onboardingSteps.length ? `👋 ${onboardingSteps[onboardStep].title}` : '✅ Tour Complete!'}
+                        {`Step ${onboardStep + 1}: ${onboardingSteps[onboardStep]?.title ?? ''}`}
                       </strong>
                     </div>
                     <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0 }}>
-                      {onboardStep < onboardingSteps.length
-                        ? onboardingSteps[onboardStep].body
-                        : 'You\'ve completed the onboarding tour! The Neudela Design System is ready for you to explore.'}
+                      {onboardingSteps[onboardStep]?.body ?? ''}
                     </p>
 
-                    <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
-                      {onboardingSteps.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setOnboardStep(idx)}
-                          style={{ width: idx === onboardStep ? 20 : 8, height: 8, borderRadius: 4, background: idx === onboardStep ? 'var(--color-primary)' : 'var(--color-border)', border: 'none', cursor: 'pointer', transition: 'all 0.2s ease' }}
-                        />
-                      ))}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, paddingTop: 12, borderTop: '1px solid var(--color-border)' }}>
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        {onboardingSteps.map((_, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => {
+                              setOnboardStep(idx);
+                              setIsTourActive(true);
+                            }}
+                            style={{
+                              width: idx === onboardStep ? 24 : 8,
+                              height: 8,
+                              borderRadius: 4,
+                              background: idx === onboardStep ? 'var(--color-primary)' : 'var(--color-border)',
+                              border: 'none',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        {onboardStep > 0 && (
+                          <NeuronButton
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setOnboardStep(s => Math.max(0, s - 1));
+                              setIsTourActive(true);
+                            }}
+                          >
+                            ← Previous
+                          </NeuronButton>
+                        )}
+                        {!isTourActive ? (
+                          <NeuronButton
+                            variant="primary"
+                            size="sm"
+                            onClick={() => {
+                              setOnboardStep(0);
+                              setIsTourActive(true);
+                            }}
+                          >
+                            Start Onboarding Tour →
+                          </NeuronButton>
+                        ) : (
+                          <NeuronButton
+                            variant="primary"
+                            size="sm"
+                            onClick={() => {
+                              if (onboardStep === onboardingSteps.length - 1) {
+                                setIsTourActive(false); // Just dismiss tooltip
+                              } else {
+                                setOnboardStep(s => s + 1);
+                                setIsTourActive(true);
+                              }
+                            }}
+                          >
+                            {onboardStep === onboardingSteps.length - 1 ? 'Finish 🎉' : 'Next Step →'}
+                          </NeuronButton>
+                        )}
+                      </div>
                     </div>
                   </div>
 
                   {/* Final step CTA */}
                   {onboardStep === onboardingSteps.length - 1 && (
-                    <div style={{ display: 'flex', gap: 12 }}>
+                    <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
                       <NeuronTooltip content="Open the Figma file" variant="brand" placement="top" size="sm">
                         <NeuronButton variant="primary" size="sm" leadingIcon={<ExternalLink size={14} />}>
                           Open in Figma
@@ -1887,8 +2027,8 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
 
           {/* ── Footer Navigation ── */}
           <NextPrevious
-            prev={{ id: 'comp-avatar', label: 'Avatar' }}
-            next={{ id: 'pat-forms', label: 'Forms' }}
+            prev={{ id: 'comp-toggle', label: t.nav.compToggle }}
+            next={{ id: 'pat-forms', label: t.nav.patForms }}
             setActiveTab={setActiveTab}
           />
         </div>
