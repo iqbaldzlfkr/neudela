@@ -10,7 +10,7 @@ import NeuronAvatar from '../components/NeuronAvatar';
 import NeuronProgress from '../components/NeuronProgress';
 import NeuronAlert from '../components/NeuronAlert';
 import NeuronBreadcrumb from '../components/NeuronBreadcrumb';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar, ChevronDown } from 'lucide-react';
 
 interface ComponentsOverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -132,8 +132,20 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
       badge: 'Forms',
       renderPreview: () => (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', fontSize: '11px', fontWeight: 500, color: 'var(--color-text-primary)' }}>
-          <Calendar size={13} color="#df3b28" />
+          <Calendar size={13} color="var(--brand-600)" />
           <span>Jan 6, 2025 – Jan 13, 2025</span>
+        </div>
+      ),
+    },
+    {
+      id: 'comp-dropdown',
+      title: 'Dropdown',
+      desc: 'Contextual selection menus with avatars, searchable filtering, and multi-select tags.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '6px 12px', width: '85%', maxWidth: 220, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', fontSize: '11px', fontWeight: 500, color: 'var(--color-text-primary)' }}>
+          <span>Select member...</span>
+          <ChevronDown size={13} color="var(--color-text-tertiary)" />
         </div>
       ),
     },
@@ -150,6 +162,25 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
             value="iqbal@neudela.design"
             style={{ width: '100%', padding: '6px 10px', fontSize: '11px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', background: 'var(--color-bg-surface)', color: 'var(--color-text-primary)' }}
           />
+        </div>
+      ),
+    },
+    {
+      id: 'comp-modal',
+      title: 'Modal',
+      desc: 'Overlay dialog panels requiring user attention for confirmations, forms, or critical messages.',
+      badge: 'Overlay',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 220, padding: '8px 12px', background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+            <span style={{ fontSize: '10px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Dialog Title</span>
+            <span style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>✕</span>
+          </div>
+          <div style={{ fontSize: '9px', color: 'var(--color-text-secondary)', marginBottom: 6 }}>Action confirmation</div>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 4 }}>
+            <span style={{ padding: '2px 6px', fontSize: '9px', borderRadius: 4, background: 'var(--slate-100)', color: 'var(--slate-700)' }}>Cancel</span>
+            <span style={{ padding: '2px 6px', fontSize: '9px', borderRadius: 4, background: 'var(--brand-500)', color: '#fff' }}>OK</span>
+          </div>
         </div>
       ),
     },
@@ -176,6 +207,28 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           <NeuronRadio checked={true} label="Selected" onChange={() => {}} />
           <NeuronRadio checked={false} label="Default" onChange={() => {}} />
+        </div>
+      ),
+    },
+    {
+      id: 'comp-table',
+      title: 'Table',
+      desc: 'Structured multi-column data grids with sorting, search filtering, status badges, and pagination.',
+      badge: 'Data Display',
+      renderPreview: () => (
+        <div style={{ width: '92%', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', overflow: 'hidden', fontSize: '10px' }}>
+          <div style={{ display: 'flex', background: 'var(--slate-50)', padding: '4px 8px', fontWeight: 600, borderBottom: '1px solid var(--color-border)', justifyContent: 'space-between' }}>
+            <span>Project Name</span>
+            <span>Status</span>
+          </div>
+          <div style={{ display: 'flex', padding: '4px 8px', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-bg-surface)' }}>
+            <span>Design System</span>
+            <NeuronBadge size="xs" variant="success" pill>Approved</NeuronBadge>
+          </div>
+          <div style={{ display: 'flex', padding: '4px 8px', justifyContent: 'space-between', alignItems: 'center', background: '#f9fafb', borderTop: '1px solid var(--color-border)' }}>
+            <span>Cloud Audit</span>
+            <NeuronBadge size="xs" variant="warning" pill>In Review</NeuronBadge>
+          </div>
         </div>
       ),
     },

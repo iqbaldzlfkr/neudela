@@ -921,7 +921,7 @@ export default function ToggleView({ setActiveTab }: ToggleViewProps) {
 
       {/* ── Page Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-radio', label: t.nav.compRadio }}
+        prev={{ id: 'comp-table', label: t.nav.compTable }}
         next={{ id: 'comp-tooltip', label: t.nav.compTooltip }}
         setActiveTab={setActiveTab}
       />

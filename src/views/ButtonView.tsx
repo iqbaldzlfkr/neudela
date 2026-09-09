@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Plus, Download, Filter, ArrowRight, Settings } from 'lucide-react';
 import NeuronButton from '../components/NeuronButton';
+import NeuronBadge from '../components/NeuronBadge';
 import Playground from '../components/Playground';
 import NextPrevious from '../components/NextPrevious';
 import { useLanguage } from '../context/LanguageContext';
@@ -51,7 +53,8 @@ function AnatomyLabel({ number, label, desc }: { number: number; label: string; 
 // Main view
 // ─────────────────────────────────────────────
 export default function ButtonView({ setActiveTab }: ButtonViewProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isId = language === 'id';
   const [activeTab, setTab] = useState<'guideline' | 'playbook'>('guideline');
   const gl = t.button.guideline;
 
@@ -165,16 +168,97 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
                 <span>{gl.tableColWhenToUse}</span>
               </div>
               {[
-                { variant: 'primary' as const, label: t.button.primary, color: 'var(--color-primary)', desc: gl.whenPrimaryDesc },
-                { variant: 'secondary' as const, label: t.button.secondary, color: 'var(--color-text-secondary)', desc: gl.whenSecondaryDesc },
-                { variant: 'outline' as const, label: t.button.outline, color: 'var(--color-primary)', desc: gl.whenOutlineDesc },
-                { variant: 'text' as const, label: t.button.text, color: 'var(--color-text-secondary)', desc: gl.whenTextDesc },
-              ].map(({ variant, label, desc }) => (
-                <div key={variant} className="usage-row">
+                {
+                  preview: (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+                      <NeuronButton variant="primary" leadingIcon={<Plus size={16} />}>
+                        {isId ? 'Buat Proyek' : 'Create Project'}
+                      </NeuronButton>
+                      <NeuronBadge variant="brand" size="sm">
+                        variant="primary"
+                      </NeuronBadge>
+                    </div>
+                  ),
+                  title: isId ? 'Penekanan Tinggi (CTA Utama)' : 'High Emphasis (Primary CTA)',
+                  desc: isId 
+                    ? 'Tindakan paling utama pada halaman atau alur formulir (misal: "Simpan", "Kirim", "Buat Proyek"). Batasi hanya satu tombol primary per layar untuk mempertahankan hierarki visual yang jelas.'
+                    : 'The single most critical action on a page or form flow (e.g., "Save Changes", "Submit Form", "Create Project"). Limit to one primary button per screen to maintain a clear visual focal point.'
+                },
+                {
+                  preview: (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+                      <NeuronButton variant="secondary" leadingIcon={<Download size={16} />}>
+                        {isId ? 'Unduh CSV' : 'Export CSV'}
+                      </NeuronButton>
+                      <NeuronBadge variant="gray" size="sm">
+                        variant="secondary"
+                      </NeuronBadge>
+                    </div>
+                  ),
+                  title: isId ? 'Penekanan Sedang (Aksi Pendukung)' : 'Medium Emphasis (Supporting Actions)',
+                  desc: isId 
+                    ? 'Tindakan pendukung yang melengkapi tombol utama (misal: "Batal", "Kembali", "Unduh Laporan", "Tinjau Draf"). Menawarkan jalur alternatif tanpa menyaingi penekanan tombol primary.'
+                    : 'Supporting actions that complement the primary action (e.g., "Cancel", "Back", "Export CSV", "Review Draft"). Provides clear alternative paths without competing with the primary CTA.'
+                },
+                {
+                  preview: (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+                      <NeuronButton variant="outline" leadingIcon={<Filter size={16} />}>
+                        {isId ? 'Filter Status' : 'Filter Status'}
+                      </NeuronButton>
+                      <NeuronBadge variant="brand" size="sm" fill="outline">
+                        variant="outline"
+                      </NeuronBadge>
+                    </div>
+                  ),
+                  title: isId ? 'Penekanan Menengah-Rendah (Toolbar & Utilitas)' : 'Medium-Low Emphasis (Toolbars & Filters)',
+                  desc: isId 
+                    ? 'Tindakan berkepentingan menengah dengan bobot visual ringan berbingkai halus (misal: "Filter Data", "Kelola Pengaturan", "Tambah Baris"). Sangat cocok untuk bilah alat tabel data.'
+                    : 'Medium-priority actions where a lighter visual weight is appropriate (e.g., "Filter Data", "Manage Columns", "Add Filter"). Ideal for data table toolbars and card header utilities.'
+                },
+                {
+                  preview: (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+                      <NeuronButton variant="text" trailingIcon={<ArrowRight size={16} />}>
+                        {isId ? 'Pelajari Selengkapnya' : 'Learn more'}
+                      </NeuronButton>
+                      <NeuronBadge variant="gray" size="sm" fill="subtle">
+                        variant="text"
+                      </NeuronBadge>
+                    </div>
+                  ),
+                  title: isId ? 'Penekanan Rendah (Navigasi Inline & Pelengkap)' : 'Low Emphasis (Inline & Supplemental)',
+                  desc: isId 
+                    ? 'Tindakan pelengkap yang menyatu secara alami di dalam teks atau kartu (misal: "Pelajari Selengkapnya", "Lewati Langkah", "Lihat Riwayat"). Menghilangkan border untuk meminimalkan distraksi visual.'
+                    : 'Inline or supplemental actions that blend seamlessly into text or card bodies (e.g., "Learn more", "Skip Step", "View History"). Eliminates borders to minimize visual clutter.'
+                },
+                {
+                  preview: (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+                      <NeuronButton variant="secondary" iconOnly aria-label="Settings" leadingIcon={<Settings size={16} />} />
+                      <NeuronBadge variant="gray" size="sm">
+                        iconOnly
+                      </NeuronBadge>
+                    </div>
+                  ),
+                  title: isId ? 'Utilitas Ruang Terbatas (Icon Only)' : 'Compact Space Utility (Icon Only)',
+                  desc: isId 
+                    ? 'Digunakan pada area tata letak yang padat atau sempit seperti header tabel data, baris entri tindakan, atau toolbar mini di mana arti ikon sudah sangat jelas dan universal.'
+                    : 'Compact triggers in tight spaces such as data table headers, row-level action menus, or mini toolbars where icon metaphors are universally understood.'
+                },
+              ].map(({ preview, title, desc }, idx) => (
+                <div key={idx} className="usage-row">
                   <div className="usage-preview">
-                    <NeuronButton variant={variant}>{label}</NeuronButton>
+                    {preview}
                   </div>
-                  <p className="usage-desc">{desc}</p>
+                  <div className="usage-desc">
+                    <strong style={{ display: 'block', color: 'var(--color-text-primary)', marginBottom: '4px', fontSize: '13px' }}>
+                      {title}
+                    </strong>
+                    <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
+                      {desc}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

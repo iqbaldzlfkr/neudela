@@ -37,6 +37,9 @@ import TooltipView from './views/TooltipView';
 import ProgressView from './views/ProgressView';
 import BreadcrumbView from './views/BreadcrumbView';
 import DatePickerView from './views/DatePickerView';
+import ModalView from './views/ModalView';
+import DropdownView from './views/DropdownView';
+import TableView from './views/TableView';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
@@ -213,9 +216,12 @@ export default function App() {
         { id: 'comp-card', label: t.nav.compCard },
         { id: 'comp-checkbox', label: t.nav.compCheckbox },
         { id: 'comp-datepicker', label: t.nav.compDatePicker },
+        { id: 'comp-dropdown', label: t.nav.compDropdown || t.nav.compSelect },
         { id: 'comp-input', label: t.nav.compInput },
+        { id: 'comp-modal', label: t.nav.compModal },
         { id: 'comp-progress', label: t.nav.compProgress },
         { id: 'comp-radio', label: t.nav.compRadio },
+        { id: 'comp-table', label: t.nav.compTable },
         { id: 'comp-toggle', label: t.nav.compToggle },
         { id: 'comp-tooltip', label: t.nav.compTooltip },
       ],
@@ -412,8 +418,15 @@ export default function App() {
         return <AvatarView setActiveTab={setActiveTab} />;
       case 'comp-tooltip':
         return <TooltipView setActiveTab={setActiveTab} />;
+      case 'comp-modal':
+        return <ModalView setActiveTab={setActiveTab} />;
+      case 'comp-dropdown':
+      case 'comp-select':
+        return <DropdownView setActiveTab={setActiveTab} />;
       case 'comp-progress':
         return <ProgressView setActiveTab={setActiveTab} />;
+      case 'comp-table':
+        return <TableView setActiveTab={setActiveTab} />;
       default:
         return (
           <PlaceholderView 

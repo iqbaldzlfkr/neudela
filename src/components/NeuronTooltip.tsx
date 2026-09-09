@@ -382,11 +382,11 @@ const NeuronTooltip: React.FC<NeuronTooltipProps> = ({
     color:        v.color,
     border:       v.border || 'none',
     boxShadow:    positioned ? v.shadow : 'none',
-    // uniform size specs (All tooltips use standard 12px font & 260px maxWidth)
-    maxWidth:     maxWidth || 260,
-    fontSize:     '12px',
-    padding:      hasRichContent && title && description ? '8px 12px' : '6px 10px',
-    borderRadius: '6px',
+    // size specs
+    maxWidth:     maxWidth || SIZE_STYLES[size].maxWidth,
+    fontSize:     SIZE_STYLES[size].fontSize,
+    padding:      hasRichContent && title && description ? '8px 12px' : SIZE_STYLES[size].padding,
+    borderRadius: SIZE_STYLES[size].borderRadius,
     // typography & layout
     lineHeight:   1.4,
     fontFamily:   'var(--font-family)',

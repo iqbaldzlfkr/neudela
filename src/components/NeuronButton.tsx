@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface NeuronButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'destructive' | 'danger';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   disabled?: boolean;
@@ -54,7 +54,7 @@ export default function NeuronButton({
         <span className="neuron-btn-icon neuron-btn-icon--leading">{leadingIcon}</span>
       )}
       {dot && !loading && <span className="neuron-btn-dot" />}
-      {!iconOnly && children}
+      {iconOnly ? (!leadingIcon && children ? <span className="neuron-btn-icon">{children}</span> : null) : children}
       {!loading && trailingIcon && (
         <span className="neuron-btn-icon neuron-btn-icon--trailing">{trailingIcon}</span>
       )}

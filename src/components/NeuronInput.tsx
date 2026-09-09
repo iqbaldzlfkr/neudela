@@ -1,8 +1,8 @@
 import React from 'react';
 
-type InputState = 'default' | 'success' | 'error';
+export type InputState = 'default' | 'success' | 'error';
 
-interface NeuronInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface NeuronInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;
   placeholder?: string;
   disabled?: boolean;

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useId } from 'react';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Calendar as CalendarIcon, X } from 'lucide-react';
+import NeuronButton from './NeuronButton';
+import { useLanguage } from '../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -38,6 +40,8 @@ export interface NeuronDatePickerProps {
   size?: DatePickerSize;
   /** Visual variant */
   variant?: DatePickerVariant;
+  /** Explicit locale override */
+  locale?: 'en' | 'id';
   /** Value for single mode */
   value?: Date | null;
   /** Value for range or double mode */
@@ -78,6 +82,8 @@ export interface NeuronDatePickerProps {
   label?: string;
   /** Helper text */
   helperText?: string;
+  /** Dropdown popover placement / alignment ('bottom-start', 'bottom-end', or 'auto') */
+  placement?: 'bottom-start' | 'bottom-end' | 'auto';
   /** Min selectable date */
   minDate?: Date;
   /** Max selectable date */
@@ -92,19 +98,26 @@ export interface NeuronDatePickerProps {
 // Helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-const MONTH_NAMES = [
+const MONTH_NAMES_EN = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-const WEEKDAY_NAMES = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sat', 'Su'];
+const MONTH_NAMES_ID = [
+  'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+  'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+];
 
-export function formatDate(d: Date | null | undefined): string {
+const WEEKDAY_NAMES_EN = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sat', 'Su'];
+const WEEKDAY_NAMES_ID = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+
+export function formatDate(d: Date | null | undefined, locale: 'en' | 'id' = 'en'): string {
   if (!d || isNaN(d.getTime())) return '';
-  const month = MONTH_NAMES[d.getMonth()].slice(0, 3);
+  const monthNames = locale === 'id' ? MONTH_NAMES_ID : MONTH_NAMES_EN;
+  const month = monthNames[d.getMonth()].slice(0, 3);
   const day = d.getDate();
   const year = d.getFullYear();
-  return `${month} ${day}, ${year}`;
+  return locale === 'id' ? `${day} ${month} ${year}` : `${month} ${day}, ${year}`;
 }
 
 export function isSameDay(a: Date | null, b: Date | null): boolean {
@@ -165,7 +178,6 @@ export function generateCalendarGrid(year: number, month: number): CalendarCell[
     });
   }
 
-  // Current month days
   for (let i = 1; i <= totalDaysCurrentMonth; i++) {
     const date = new Date(year, month, i);
     cells.push({
@@ -176,7 +188,6 @@ export function generateCalendarGrid(year: number, month: number): CalendarCell[
     });
   }
 
-  // Next month leading days to complete 42 cells
   const remaining = 42 - cells.length;
   for (let i = 1; i <= remaining; i++) {
     const date = new Date(year, month + 1, i);
@@ -191,100 +202,104 @@ export function generateCalendarGrid(year: number, month: number): CalendarCell[
   return cells;
 }
 
-export const DEFAULT_PRESETS: DatePreset[] = [
-  {
-    id: 'today',
-    label: 'Today',
-    getRange: () => {
-      const now = new Date();
-      return { startDate: now, endDate: now };
+export function getDefaultPresets(isId: boolean): DatePreset[] {
+  return [
+    {
+      id: 'today',
+      label: isId ? 'Hari ini' : 'Today',
+      getRange: () => {
+        const now = new Date();
+        return { startDate: now, endDate: now };
+      },
     },
-  },
-  {
-    id: 'yesterday',
-    label: 'Yesterday',
-    getRange: () => {
-      const y = new Date();
-      y.setDate(y.getDate() - 1);
-      return { startDate: y, endDate: y };
+    {
+      id: 'yesterday',
+      label: isId ? 'Kemarin' : 'Yesterday',
+      getRange: () => {
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        return { startDate: y, endDate: y };
+      },
     },
-  },
-  {
-    id: 'this_week',
-    label: 'This week',
-    getRange: () => {
-      const now = new Date();
-      const day = now.getDay() || 7;
-      const start = new Date(now);
-      start.setDate(now.getDate() - day + 1);
-      const end = new Date(start);
-      end.setDate(start.getDate() + 6);
-      return { startDate: start, endDate: end };
+    {
+      id: 'this_week',
+      label: isId ? 'Minggu ini' : 'This week',
+      getRange: () => {
+        const now = new Date();
+        const day = now.getDay() || 7;
+        const start = new Date(now);
+        start.setDate(now.getDate() - day + 1);
+        const end = new Date(start);
+        end.setDate(start.getDate() + 6);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'last_week',
-    label: 'Last week',
-    getRange: () => {
-      const now = new Date();
-      const day = now.getDay() || 7;
-      const start = new Date(now);
-      start.setDate(now.getDate() - day - 6);
-      const end = new Date(start);
-      end.setDate(start.getDate() + 6);
-      return { startDate: start, endDate: end };
+    {
+      id: 'last_week',
+      label: isId ? 'Minggu lalu' : 'Last week',
+      getRange: () => {
+        const now = new Date();
+        const day = now.getDay() || 7;
+        const start = new Date(now);
+        start.setDate(now.getDate() - day - 6);
+        const end = new Date(start);
+        end.setDate(start.getDate() + 6);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'this_month',
-    label: 'This month',
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), now.getMonth(), 1);
-      const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-      return { startDate: start, endDate: end };
+    {
+      id: 'this_month',
+      label: isId ? 'Bulan ini' : 'This month',
+      getRange: () => {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), now.getMonth(), 1);
+        const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'last_month',
-    label: 'Last month',
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-      const end = new Date(now.getFullYear(), now.getMonth(), 0);
-      return { startDate: start, endDate: end };
+    {
+      id: 'last_month',
+      label: isId ? 'Bulan lalu' : 'Last month',
+      getRange: () => {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        const end = new Date(now.getFullYear(), now.getMonth(), 0);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'this_year',
-    label: 'This year',
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), 0, 1);
-      const end = new Date(now.getFullYear(), 11, 31);
-      return { startDate: start, endDate: end };
+    {
+      id: 'this_year',
+      label: isId ? 'Tahun ini' : 'This year',
+      getRange: () => {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 1);
+        const end = new Date(now.getFullYear(), 11, 31);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'last_year',
-    label: 'Last year',
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear() - 1, 0, 1);
-      const end = new Date(now.getFullYear() - 1, 11, 31);
-      return { startDate: start, endDate: end };
+    {
+      id: 'last_year',
+      label: isId ? 'Tahun lalu' : 'Last year',
+      getRange: () => {
+        const now = new Date();
+        const start = new Date(now.getFullYear() - 1, 0, 1);
+        const end = new Date(now.getFullYear() - 1, 11, 31);
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-  {
-    id: 'all_time',
-    label: 'All time',
-    getRange: () => {
-      const start = new Date(2020, 0, 1);
-      const end = new Date();
-      return { startDate: start, endDate: end };
+    {
+      id: 'all_time',
+      label: isId ? 'Semua waktu' : 'All time',
+      getRange: () => {
+        const start = new Date(2020, 0, 1);
+        const end = new Date();
+        return { startDate: start, endDate: end };
+      },
     },
-  },
-];
+  ];
+}
+
+export const DEFAULT_PRESETS: DatePreset[] = getDefaultPresets(false);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component Implementation
@@ -294,6 +309,7 @@ export default function NeuronDatePicker({
   mode = 'single',
   size = 'md',
   variant = 'default',
+  locale,
   value,
   rangeValue,
   defaultValue = null,
@@ -303,12 +319,13 @@ export default function NeuronDatePicker({
   onApply,
   onCancel,
   showPresets = true,
-  presets = DEFAULT_PRESETS,
+  presets,
   activePreset: initialActivePreset = null,
   showTodayButton = true,
   showActions = true,
   trigger = 'inline',
-  placeholder = 'Select date...',
+  placeholder,
+  placement = 'auto',
   disabled = false,
   error = false,
   errorMessage,
@@ -321,6 +338,22 @@ export default function NeuronDatePicker({
 }: NeuronDatePickerProps) {
   const uniqueId = useId();
 
+  let contextLanguage: 'en' | 'id' = 'en';
+  try {
+    const langContext = useLanguage();
+    if (langContext && langContext.language) {
+      contextLanguage = langContext.language;
+    }
+  } catch {
+    // fallback if used outside LanguageProvider
+  }
+
+  const effectiveLocale = locale || contextLanguage;
+  const isId = effectiveLocale === 'id';
+  const monthNames = isId ? MONTH_NAMES_ID : MONTH_NAMES_EN;
+  const weekdayNames = isId ? WEEKDAY_NAMES_ID : WEEKDAY_NAMES_EN;
+  const effectivePresets = presets ?? getDefaultPresets(isId);
+
   // Internal selection state
   const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? defaultValue);
   const [selectedRange, setSelectedRange] = useState<DateRange>(rangeValue ?? defaultRangeValue);
@@ -329,13 +362,19 @@ export default function NeuronDatePicker({
 
   // Popover state
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownAlign, setDropdownAlign] = useState<'start' | 'end'>('start');
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Current view month/year
-  const initialDate = selectedDate || selectedRange.startDate || new Date(2025, 0, 1);
+  const initialDate = selectedDate || selectedRange.startDate || new Date();
   const [viewYear, setViewYear] = useState<number>(initialDate.getFullYear());
   const [viewMonth, setViewMonth] = useState<number>(initialDate.getMonth());
+
+  // Month-Year quick popup overlay state
+  const [activeMonthYearPicker, setActiveMonthYearPicker] = useState<'primary' | 'secondary' | null>(null);
+  const [pickerYear, setPickerYear] = useState<number>(initialDate.getFullYear());
+  const [pickerMode, setPickerMode] = useState<'month' | 'year'>('month');
 
   // Synchronize controlled props
   useEffect(() => {
@@ -358,7 +397,37 @@ export default function NeuronDatePicker({
     }
   }, [rangeValue]);
 
-  // Click outside to close popover
+  // Click outside to close popover & calculate alignment
+  useEffect(() => {
+    if (trigger !== 'popover' || !isOpen) return;
+
+    if (placement === 'bottom-end') {
+      setDropdownAlign('end');
+    } else if (placement === 'bottom-start') {
+      setDropdownAlign('start');
+    } else {
+      // Auto placement: measure viewport bounds
+      const checkPlacement = () => {
+        if (triggerRef.current) {
+          const rect = triggerRef.current.getBoundingClientRect();
+          const estimatedWidth = mode === 'double' ? 680 : mode === 'range' ? 320 : 300;
+          const popoverWidth = popoverRef.current ? popoverRef.current.offsetWidth || estimatedWidth : estimatedWidth;
+          const rightSpace = window.innerWidth - rect.left;
+
+          if (rightSpace < popoverWidth + 24) {
+            setDropdownAlign('end');
+          } else {
+            setDropdownAlign('start');
+          }
+        }
+      };
+
+      checkPlacement();
+      window.addEventListener('resize', checkPlacement);
+      return () => window.removeEventListener('resize', checkPlacement);
+    }
+  }, [isOpen, trigger, placement, mode]);
+
   useEffect(() => {
     if (trigger !== 'popover' || !isOpen) return;
 
@@ -456,23 +525,24 @@ export default function NeuronDatePicker({
     onRangeChange?.(range);
   };
 
-  // Action Buttons
+  // Cancel & Apply handlers
+  const handleCancel = () => {
+    if (mode === 'single') {
+      setSelectedDate(value ?? defaultValue);
+    } else {
+      setSelectedRange(rangeValue ?? defaultRangeValue);
+    }
+    onCancel?.();
+    if (trigger === 'popover') setIsOpen(false);
+  };
+
   const handleApply = () => {
     if (mode === 'single') {
       onApply?.(selectedDate);
     } else {
       onApply?.(selectedRange);
     }
-    if (trigger === 'popover') {
-      setIsOpen(false);
-    }
-  };
-
-  const handleCancel = () => {
-    onCancel?.();
-    if (trigger === 'popover') {
-      setIsOpen(false);
-    }
+    if (trigger === 'popover') setIsOpen(false);
   };
 
   // Generate grids
@@ -511,23 +581,60 @@ export default function NeuronDatePicker({
     }
   };
 
+  // Month & Year Quick Selector Handlers
+  const handleToggleMonthYearPicker = (calendarKey: 'primary' | 'secondary') => {
+    if (activeMonthYearPicker === calendarKey) {
+      setActiveMonthYearPicker(null);
+    } else {
+      setActiveMonthYearPicker(calendarKey);
+      setPickerYear(calendarKey === 'primary' ? viewYear : nextMonthYear);
+      setPickerMode('month');
+    }
+  };
+
+  const handleSelectMonth = (selectedMonth: number, targetYear: number, calendarKey: 'primary' | 'secondary') => {
+    if (calendarKey === 'primary') {
+      setViewYear(targetYear);
+      setViewMonth(selectedMonth);
+    } else {
+      if (selectedMonth === 0) {
+        setViewYear(targetYear - 1);
+        setViewMonth(11);
+      } else {
+        setViewYear(targetYear);
+        setViewMonth(selectedMonth - 1);
+      }
+    }
+    setActiveMonthYearPicker(null);
+  };
+
+  const handleSelectYear = (selectedYear: number) => {
+    setPickerYear(selectedYear);
+    setPickerMode('month');
+  };
+
+  const yearRangeStart = Math.floor(pickerYear / 12) * 12;
+
   // Render a Single Calendar Month
   const renderCalendar = (
     year: number,
     month: number,
     grid: CalendarCell[],
-    showNav: { prev: boolean; next: boolean }
+    showNav: { prev: boolean; next: boolean },
+    calendarKey: 'primary' | 'secondary' = 'primary'
   ) => {
+    const isPickerOpen = activeMonthYearPicker === calendarKey;
+
     return (
       <div className="neuron-datepicker-calendar">
         {/* Month Header Navigation */}
         <div className="neuron-datepicker-header">
-          {showNav.prev ? (
+          {!isPickerOpen && showNav.prev ? (
             <button
               type="button"
               className="neuron-datepicker-nav-btn"
               onClick={handlePrevMonth}
-              aria-label="Previous month"
+              aria-label={isId ? "Bulan sebelumnya" : "Previous month"}
             >
               <ChevronLeft size={16} />
             </button>
@@ -535,16 +642,23 @@ export default function NeuronDatePicker({
             <div className="neuron-datepicker-nav-placeholder" />
           )}
 
-          <div className="neuron-datepicker-month-title">
-            {MONTH_NAMES[month]} {year}
-          </div>
+          <button
+            type="button"
+            className={`neuron-datepicker-month-btn ${isPickerOpen ? 'neuron-datepicker-month-btn--active' : ''}`}
+            onClick={() => handleToggleMonthYearPicker(calendarKey)}
+            aria-expanded={isPickerOpen}
+            aria-label={isId ? "Pilih bulan dan tahun" : "Select month and year"}
+          >
+            <span>{monthNames[month]} {year}</span>
+            <ChevronDown size={14} className={`neuron-datepicker-month-chevron ${isPickerOpen ? 'neuron-datepicker-month-chevron--open' : ''}`} />
+          </button>
 
-          {showNav.next ? (
+          {!isPickerOpen && showNav.next ? (
             <button
               type="button"
               className="neuron-datepicker-nav-btn"
               onClick={handleNextMonth}
-              aria-label="Next month"
+              aria-label={isId ? "Bulan berikutnya" : "Next month"}
             >
               <ChevronRight size={16} />
             </button>
@@ -553,17 +667,136 @@ export default function NeuronDatePicker({
           )}
         </div>
 
-        {/* Weekday Row */}
-        <div className="neuron-datepicker-weekdays" role="row">
-          {WEEKDAY_NAMES.map(day => (
-            <div key={day} className="neuron-datepicker-weekday" role="columnheader">
-              {day}
-            </div>
-          ))}
-        </div>
+        {isPickerOpen ? (
+          /* Month & Year Quick Selector Overlay */
+          <div className="neuron-datepicker-my-view" role="dialog" aria-label={isId ? "Pemilih bulan dan tahun" : "Month and year selector"}>
+            {/* Year / Range Nav Header */}
+            <div className="neuron-datepicker-my-header">
+              <button
+                type="button"
+                className="neuron-datepicker-nav-btn"
+                onClick={() => {
+                  if (pickerMode === 'month') {
+                    setPickerYear(y => y - 1);
+                  } else {
+                    setPickerYear(y => y - 12);
+                  }
+                }}
+                aria-label={isId ? "Tahun sebelumnya" : "Previous year"}
+              >
+                <ChevronLeft size={16} />
+              </button>
 
-        {/* Days Grid */}
-        <div className="neuron-datepicker-days" role="grid">
+              <button
+                type="button"
+                className="neuron-datepicker-my-year-title"
+                onClick={() => setPickerMode(m => m === 'month' ? 'year' : 'month')}
+                title={isId ? "Klik untuk memilih rentang tahun" : "Click to select year range"}
+              >
+                <span>{pickerMode === 'month' ? pickerYear : `${yearRangeStart} - ${yearRangeStart + 11}`}</span>
+                <ChevronDown size={12} className={`neuron-datepicker-month-chevron ${pickerMode === 'year' ? 'neuron-datepicker-month-chevron--open' : ''}`} />
+              </button>
+
+              <button
+                type="button"
+                className="neuron-datepicker-nav-btn"
+                onClick={() => {
+                  if (pickerMode === 'month') {
+                    setPickerYear(y => y + 1);
+                  } else {
+                    setPickerYear(y => y + 12);
+                  }
+                }}
+                aria-label={isId ? "Tahun berikutnya" : "Next year"}
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+            {/* Months Grid */}
+            {pickerMode === 'month' ? (
+              <div className="neuron-datepicker-my-grid">
+                {monthNames.map((mName, mIdx) => {
+                  const isCurrentMonthView = mIdx === month && pickerYear === year;
+                  const now = new Date();
+                  const isThisMonth = mIdx === now.getMonth() && pickerYear === now.getFullYear();
+
+                  return (
+                    <button
+                      key={mIdx}
+                      type="button"
+                      className={[
+                        'neuron-datepicker-my-cell',
+                        isCurrentMonthView ? 'neuron-datepicker-my-cell--selected' : '',
+                        isThisMonth && !isCurrentMonthView ? 'neuron-datepicker-my-cell--current' : '',
+                      ].filter(Boolean).join(' ')}
+                      onClick={() => handleSelectMonth(mIdx, pickerYear, calendarKey)}
+                    >
+                      {mName.slice(0, 3)}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              /* Years Grid */
+              <div className="neuron-datepicker-my-grid">
+                {Array.from({ length: 12 }, (_, i) => yearRangeStart + i).map((yr) => {
+                  const isCurrentViewYear = yr === pickerYear;
+                  const isThisYear = yr === new Date().getFullYear();
+
+                  return (
+                    <button
+                      key={yr}
+                      type="button"
+                      className={[
+                        'neuron-datepicker-my-cell',
+                        isCurrentViewYear ? 'neuron-datepicker-my-cell--selected' : '',
+                        isThisYear && !isCurrentViewYear ? 'neuron-datepicker-my-cell--current' : '',
+                      ].filter(Boolean).join(' ')}
+                      onClick={() => handleSelectYear(yr)}
+                    >
+                      {yr}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Quick Footer */}
+            <div className="neuron-datepicker-my-quick-footer">
+              <button
+                type="button"
+                className="neuron-datepicker-my-back-btn"
+                onClick={() => {
+                  const now = new Date();
+                  handleSelectMonth(now.getMonth(), now.getFullYear(), calendarKey);
+                }}
+              >
+                {isId ? 'Bulan Ini' : 'This Month'}
+              </button>
+              <button
+                type="button"
+                className="neuron-datepicker-my-back-btn"
+                onClick={() => setActiveMonthYearPicker(null)}
+              >
+                {isId ? 'Kembali' : 'Back'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* Normal Calendar Days Grid */
+          <>
+            {/* Weekday Row */}
+            <div className="neuron-datepicker-weekdays" role="row">
+              {weekdayNames.map(day => (
+                <div key={day} className="neuron-datepicker-weekday" role="columnheader">
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            {/* Days Grid */}
+            <div className="neuron-datepicker-days" role="grid">
           {grid.map((cell, idx) => {
             const { isSelected, isRangeStart, isRangeEnd, isInRange } = getCellState(cell.date);
             const isMuted = !cell.isCurrentMonth;
@@ -614,10 +847,12 @@ export default function NeuronDatePicker({
                 >
                   <span className="neuron-datepicker-day-text">{cell.dayNumber}</span>
                 </button>
-              </div>
-            );
-          })}
-        </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     );
   };
@@ -640,7 +875,7 @@ export default function NeuronDatePicker({
           {/* Presets Sidebar (for Double or Range mode when showPresets=true) */}
           {(mode === 'double' || (mode === 'range' && showPresets)) && (
             <div className="neuron-datepicker-presets" role="listbox" aria-label="Date presets">
-              {presets.map(preset => {
+              {effectivePresets.map(preset => {
                 const isActive = activePreset === preset.id;
                 return (
                   <button
@@ -667,20 +902,21 @@ export default function NeuronDatePicker({
                   <input
                     type="text"
                     readOnly
-                    value={formatDate(selectedDate)}
-                    placeholder="Select date"
+                    value={formatDate(selectedDate, effectiveLocale)}
+                    placeholder={isId ? "Pilih tanggal" : "Select date"}
                     className="neuron-datepicker-text-input"
                     aria-label="Selected date"
                   />
                 </div>
                 {showTodayButton && (
-                  <button
+                  <NeuronButton
                     type="button"
-                    className="neuron-datepicker-today-btn"
+                    variant="outline"
+                    size={size === 'lg' ? 'md' : 'sm'}
                     onClick={handleTodayClick}
                   >
-                    Today
-                  </button>
+                    {isId ? 'Hari Ini' : 'Today'}
+                  </NeuronButton>
                 )}
               </div>
             )}
@@ -691,8 +927,8 @@ export default function NeuronDatePicker({
                   <input
                     type="text"
                     readOnly
-                    value={formatDate(selectedRange.startDate)}
-                    placeholder="Start date"
+                    value={formatDate(selectedRange.startDate, effectiveLocale)}
+                    placeholder={isId ? "Tanggal mulai" : "Start date"}
                     className="neuron-datepicker-text-input"
                     aria-label="Start date"
                   />
@@ -702,8 +938,8 @@ export default function NeuronDatePicker({
                   <input
                     type="text"
                     readOnly
-                    value={formatDate(selectedRange.endDate)}
-                    placeholder="End date"
+                    value={formatDate(selectedRange.endDate, effectiveLocale)}
+                    placeholder={isId ? "Tanggal selesai" : "End date"}
                     className="neuron-datepicker-text-input"
                     aria-label="End date"
                   />
@@ -720,7 +956,8 @@ export default function NeuronDatePicker({
                 primaryGrid,
                 mode === 'double'
                   ? { prev: true, next: false }
-                  : { prev: true, next: true }
+                  : { prev: true, next: true },
+                'primary'
               )}
 
               {/* Secondary Calendar (for double mode) */}
@@ -730,7 +967,8 @@ export default function NeuronDatePicker({
                     nextMonthYear,
                     nextMonth,
                     secondaryGrid,
-                    { prev: false, next: true }
+                    { prev: false, next: true },
+                    'secondary'
                   )}
                 </div>
               )}
@@ -746,8 +984,8 @@ export default function NeuronDatePicker({
                         <input
                           type="text"
                           readOnly
-                          value={formatDate(selectedRange.startDate)}
-                          placeholder="Start date"
+                          value={formatDate(selectedRange.startDate, effectiveLocale)}
+                          placeholder={isId ? "Tanggal mulai" : "Start date"}
                           className="neuron-datepicker-text-input"
                           aria-label="Start date"
                         />
@@ -757,46 +995,50 @@ export default function NeuronDatePicker({
                         <input
                           type="text"
                           readOnly
-                          value={formatDate(selectedRange.endDate)}
-                          placeholder="End date"
+                          value={formatDate(selectedRange.endDate, effectiveLocale)}
+                          placeholder={isId ? "Tanggal selesai" : "End date"}
                           className="neuron-datepicker-text-input"
                           aria-label="End date"
                         />
                       </div>
                     </div>
                     <div className="neuron-datepicker-footer-btns">
-                      <button
+                      <NeuronButton
                         type="button"
-                        className="neuron-datepicker-btn neuron-datepicker-btn--cancel"
+                        variant="outline"
+                        size={size === 'lg' ? 'md' : 'sm'}
                         onClick={handleCancel}
                       >
-                        Cancel
-                      </button>
-                      <button
+                        {isId ? 'Batal' : 'Cancel'}
+                      </NeuronButton>
+                      <NeuronButton
                         type="button"
-                        className="neuron-datepicker-btn neuron-datepicker-btn--apply"
+                        variant="primary"
+                        size={size === 'lg' ? 'md' : 'sm'}
                         onClick={handleApply}
                       >
-                        Apply
-                      </button>
+                        {isId ? 'Terapkan' : 'Apply'}
+                      </NeuronButton>
                     </div>
                   </>
                 ) : (
                   <div className="neuron-datepicker-footer-btns neuron-datepicker-footer-btns--full">
-                    <button
+                    <NeuronButton
                       type="button"
-                      className="neuron-datepicker-btn neuron-datepicker-btn--cancel"
+                      variant="outline"
+                      size={size === 'lg' ? 'md' : 'sm'}
                       onClick={handleCancel}
                     >
-                      Cancel
-                    </button>
-                    <button
+                      {isId ? 'Batal' : 'Cancel'}
+                    </NeuronButton>
+                    <NeuronButton
                       type="button"
-                      className="neuron-datepicker-btn neuron-datepicker-btn--apply"
+                      variant="primary"
+                      size={size === 'lg' ? 'md' : 'sm'}
                       onClick={handleApply}
                     >
-                      Apply
-                    </button>
+                      {isId ? 'Terapkan' : 'Apply'}
+                    </NeuronButton>
                   </div>
                 )}
               </div>
@@ -826,12 +1068,14 @@ export default function NeuronDatePicker({
   // If Popover trigger
   const displayTriggerText =
     mode === 'single'
-      ? selectedDate ? formatDate(selectedDate) : ''
+      ? selectedDate ? formatDate(selectedDate, effectiveLocale) : ''
       : selectedRange.startDate && selectedRange.endDate
-      ? `${formatDate(selectedRange.startDate)} - ${formatDate(selectedRange.endDate)}`
+      ? `${formatDate(selectedRange.startDate, effectiveLocale)} - ${formatDate(selectedRange.endDate, effectiveLocale)}`
       : selectedRange.startDate
-      ? `${formatDate(selectedRange.startDate)} - ...`
+      ? `${formatDate(selectedRange.startDate, effectiveLocale)} - ...`
       : '';
+
+  const defaultPlaceholder = isId ? 'Pilih tanggal...' : 'Select date...';
 
   return (
     <div className={`neuron-datepicker-popover-wrap ${className}`} style={style}>
@@ -862,7 +1106,7 @@ export default function NeuronDatePicker({
           <CalendarIcon size={16} />
         </span>
         <span className={`neuron-datepicker-trigger-text ${!displayTriggerText ? 'neuron-datepicker-trigger-placeholder' : ''}`}>
-          {displayTriggerText || placeholder}
+          {displayTriggerText || placeholder || defaultPlaceholder}
         </span>
         {displayTriggerText && (
           <span
@@ -878,7 +1122,7 @@ export default function NeuronDatePicker({
                 onRangeChange?.(empty);
               }
             }}
-            title="Clear date"
+            title={isId ? "Hapus tanggal" : "Clear date"}
           >
             <X size={14} />
           </span>
@@ -887,7 +1131,12 @@ export default function NeuronDatePicker({
 
       {/* Popover Dropdown Panel */}
       {isOpen && (
-        <div ref={popoverRef} className="neuron-datepicker-dropdown" role="dialog" aria-modal="true">
+        <div
+          ref={popoverRef}
+          className={`neuron-datepicker-dropdown neuron-datepicker-dropdown--${dropdownAlign}`}
+          role="dialog"
+          aria-modal="true"
+        >
           {renderPickerCard()}
         </div>
       )}

@@ -35,6 +35,8 @@ export interface NeuronCheckboxProps {
   'aria-label'?: string;
   className?: string;
   style?: React.CSSProperties;
+  tabIndex?: number;
+  isFocused?: boolean;
 }
 
 export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
@@ -57,6 +59,8 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
   'aria-label': ariaLabel,
   className = '',
   style,
+  tabIndex,
+  isFocused: controlledFocused,
 }) => {
   const generatedId = useId();
   const checkboxId = customId || generatedId;
@@ -65,7 +69,8 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
   const [internalChecked, setInternalChecked] = useState<boolean>(defaultChecked);
   const isChecked = isControlled ? controlledChecked : internalChecked;
 
-  const [isFocused, setIsFocused] = useState(false);
+  const [internalFocused, setInternalFocused] = useState(false);
+  const isFocused = controlledFocused !== undefined ? controlledFocused : internalFocused;
 
   const handleToggle = (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -76,8 +81,11 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
       setInternalChecked(nextChecked);
     }
     onChange?.(nextChecked);
-    // Hilangkan ring setelah state berubah
-    setIsFocused(false);
+    // Tampilkan shadow ring saat klik berlangsung, lalu pudar halus setelah 220ms
+    setInternalFocused(true);
+    setTimeout(() => {
+      setInternalFocused(false);
+    }, 220);
     (e.currentTarget as HTMLButtonElement).blur();
   };
 
@@ -102,10 +110,13 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
       id={checkboxId}
       name={name}
       value={value}
+      tabIndex={tabIndex}
+      style={style}
       aria-label={ariaLabel || (typeof label === 'string' ? label : undefined)}
       onClick={handleToggle}
       onKeyDown={handleKeyDown}
-      onMouseDown={(e) => { e.preventDefault(); if (!disabled) setIsFocused(true); }}
+      onMouseDown={(e) => { e.preventDefault(); if (!disabled) setInternalFocused(true); }}
+      onMouseLeave={() => { setInternalFocused(false); }}
       className={`neuron-checkbox neuron-checkbox--${size} neuron-checkbox--${shape} neuron-checkbox--${variant} ${
         indeterminate ? 'is-indeterminate' : isChecked ? 'is-checked' : 'is-unchecked'
       } ${disabled ? 'is-disabled' : ''} ${isFocused ? 'is-focused' : ''}`}

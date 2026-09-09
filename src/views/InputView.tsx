@@ -977,8 +977,8 @@ export default function InputView({ setActiveTab }: InputViewProps) {
       )}
 
       <NextPrevious
-        prev={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
-        next={{ id: 'comp-progress', label: t.nav.compProgress }}
+        prev={{ id: 'comp-dropdown', label: t.nav.compDropdown || 'Dropdown' }}
+        next={{ id: 'comp-modal', label: t.nav.compModal }}
         setActiveTab={setActiveTab}
       />
     </div>

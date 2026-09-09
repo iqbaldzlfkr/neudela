@@ -1321,7 +1321,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-input', label: t.nav.compInput }}
+        prev={{ id: 'comp-modal', label: t.nav.compModal }}
         next={{ id: 'comp-radio', label: t.nav.compRadio }}
         setActiveTab={setActiveTab}
       />

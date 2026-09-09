@@ -12,11 +12,13 @@ export type NeuronBadgeVariant =
   | 'purple' 
   | 'pink' 
   | 'orange'
+  | 'sky'
+  | 'info'
   | 'default' // alias for gray
   | 'primary' // alias for brand
   | 'danger'; // alias for error
 
-export type NeuronBadgeSize = 'sm' | 'md' | 'lg';
+export type NeuronBadgeSize = 'xs' | 'sm' | 'md' | 'lg';
 export type NeuronBadgeFill = 'subtle' | 'solid' | 'outline';
 
 export interface NeuronBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -64,9 +66,10 @@ export default function NeuronBadge({
 }: NeuronBadgeProps) {
   // Normalize alias variants
   const normalizedVariant = 
-    variant === 'default' ? 'gray' :
+    variant === 'default' || (variant as string) === 'neutral' ? 'gray' :
     variant === 'primary' ? 'brand' :
-    variant === 'danger' ? 'error' : variant;
+    variant === 'danger' ? 'error' :
+    variant === 'info' ? 'info' : variant;
 
   const badgeClasses = [
     'neuron-badge',
@@ -78,7 +81,7 @@ export default function NeuronBadge({
     className,
   ].filter(Boolean).join(' ');
 
-  const iconSize = size === 'sm' ? 11 : size === 'lg' ? 14 : 12;
+  const iconSize = size === 'xs' ? 10 : size === 'sm' ? 11 : size === 'lg' ? 14 : 12;
 
   return (
     <span className={badgeClasses} {...props}>
