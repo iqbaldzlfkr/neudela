@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { version } from '../package.json';
 import { 
   Home, 
   Info, 
@@ -568,7 +569,7 @@ export default function App() {
         {/* Sidebar Footer - Language & Dark mode controls with identical button sizes */}
         <div className="sidebar-footer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span className="version-label" style={{ fontSize: '11px' }}>
-            v1.0.0
+            v{version}
           </span>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
