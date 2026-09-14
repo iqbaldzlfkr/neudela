@@ -65,6 +65,18 @@ export type {
 export { default as NeuronInput } from './components/NeuronInput';
 export type { NeuronInputProps, InputState } from './components/NeuronInput';
 
+export { default as NeuronTextArea, NeuronTextarea } from './components/NeuronTextArea';
+export type { 
+  NeuronTextAreaProps, 
+  TextAreaSize, 
+  TextAreaVariant, 
+  TextAreaResize, 
+  TextAreaState, 
+  TextAreaCountType,
+  TextAreaToolType,
+  TextAreaToolbarPosition
+} from './components/NeuronTextArea';
+
 export { default as NeuronCheckbox } from './components/NeuronCheckbox';
 export type { 
   NeuronCheckboxProps, 
@@ -135,6 +147,15 @@ export type {
   DatePreset 
 } from './components/NeuronDatePicker';
 
+export { default as NeuronSlider } from './components/NeuronSlider';
+export type { 
+  NeuronSliderProps, 
+  NeuronSliderSize, 
+  NeuronSliderVariant, 
+  SliderTooltipPlacement, 
+  SliderTooltipVisible 
+} from './components/NeuronSlider';
+
 // ── Data Display ──
 export { default as NeuronTable } from './components/NeuronTable';
 export type { 
@@ -160,6 +181,15 @@ export type {
   NeuronTooltipSize, 
   NeuronTooltipTrigger 
 } from './components/NeuronTooltip';
+
+export { default as NeuronTree, NeuronTree as NeuronTreeView } from './components/NeuronTree';
+export type { 
+  NeuronTreeProps, 
+  TreeNode, 
+  TreeSize, 
+  TreeVariant, 
+  TreeSelectionMode 
+} from './components/NeuronTree';
 
 // ── Feedback & Overlays ──
 export { default as NeuronAlert } from './components/NeuronAlert';

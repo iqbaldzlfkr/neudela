@@ -550,13 +550,13 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
               {/* Scenario 1 */}
               <div style={{ padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', background: 'var(--color-bg-surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Account Header</span>
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Account Header</span>
                   <NeuronBadge size="sm" variant="brand">Single Identity</NeuronBadge>
                 </div>
                 <div style={{ background: 'var(--color-bg-subtle)', padding: '12px', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <NeuronAvatar src="/avatars/iqbal.jpg" size="md" status="online" badge={<NeuronAvatarVerifiedBadge size="sm" />} />
                   <div>
-                    <strong style={{ fontSize: '13px', display: 'block', color: 'var(--color-text-primary)' }}>Iqbal Dzulfikar</strong>
+                    <strong style={{ fontSize: '12px', display: 'block', color: 'var(--color-text-primary)' }}>Iqbal Dzulfikar</strong>
                     <span style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>iqbal.dzulfikar@neudela.design</span>
                   </div>
                 </div>
@@ -565,7 +565,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
               {/* Scenario 2 */}
               <div style={{ padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', background: 'var(--color-bg-surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Collaborator Stack</span>
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Collaborator Stack</span>
                   <NeuronBadge size="sm" variant="success">Group Stack</NeuronBadge>
                 </div>
                 <div style={{ background: 'var(--color-bg-subtle)', padding: '12px', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -583,13 +583,13 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
               {/* Scenario 3 */}
               <div style={{ padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', background: 'var(--color-bg-surface)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>AI Assistant Entity</span>
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>AI Assistant Entity</span>
                   <NeuronBadge size="sm" variant="purple">Bot Entity</NeuronBadge>
                 </div>
                 <div style={{ background: 'var(--color-bg-subtle)', padding: '12px', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <NeuronAvatar variant="purple" size="md" icon={<Bot size={20} />} status="online" />
                   <div>
-                    <strong style={{ fontSize: '13px', display: 'block', color: 'var(--color-text-primary)' }}>Neuron Copilot</strong>
+                    <strong style={{ fontSize: '12px', display: 'block', color: 'var(--color-text-primary)' }}>Neuron Copilot</strong>
                     <span style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>Automated System Bot</span>
                   </div>
                 </div>
@@ -605,19 +605,19 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-4)', marginTop: 'var(--space-4)' }}>
               <div style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', background: 'var(--color-bg-subtle)' }}>
-                <strong style={{ fontSize: '13px', display: 'block', marginBottom: '4px' }}>Descriptive Alt Text</strong>
+                <strong style={{ fontSize: '12px', display: 'block', marginBottom: '4px' }}>Descriptive Alt Text</strong>
                 <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{av.a11yPoint1}</p>
               </div>
               <div style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', background: 'var(--color-bg-subtle)' }}>
-                <strong style={{ fontSize: '13px', display: 'block', marginBottom: '4px' }}>Status Screen Readers</strong>
+                <strong style={{ fontSize: '12px', display: 'block', marginBottom: '4px' }}>Status Screen Readers</strong>
                 <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{av.a11yPoint2}</p>
               </div>
               <div style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', background: 'var(--color-bg-subtle)' }}>
-                <strong style={{ fontSize: '13px', display: 'block', marginBottom: '4px' }}>Contrast Ratios (4.5:1)</strong>
+                <strong style={{ fontSize: '12px', display: 'block', marginBottom: '4px' }}>Contrast Ratios (4.5:1)</strong>
                 <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{av.a11yPoint3}</p>
               </div>
               <div style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', background: 'var(--color-bg-subtle)' }}>
-                <strong style={{ fontSize: '13px', display: 'block', marginBottom: '4px' }}>Keyboard Focus Visible</strong>
+                <strong style={{ fontSize: '12px', display: 'block', marginBottom: '4px' }}>Keyboard Focus Visible</strong>
                 <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{av.a11yPoint4}</p>
               </div>
             </div>
@@ -859,13 +859,13 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                       borderRadius: '6px',
                       background: 'var(--brand-50, rgba(223, 126, 48, 0.1))',
                       color: 'var(--brand-600)',
-                      fontSize: '13px',
+                      fontSize: '12px',
                       fontWeight: 700
                     }}>
                       ❖
                     </span>
                     <div>
-                      <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)', display: 'block' }}>
+                      <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)', display: 'block' }}>
                         Neuron / Component / Avatar Matrix
                       </strong>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>
@@ -1081,7 +1081,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <NeuronAvatar src="/avatars/sophia.jpg" size="md" status="online" />
                         <div>
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)', display: 'block' }}>Sophia Sterling</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)', display: 'block' }}>Sophia Sterling</strong>
                           <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>sophia.s@neudela.design</span>
                         </div>
                       </div>
@@ -1089,7 +1089,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <NeuronAvatar src="/avatars/marcus.jpg" size="md" status="busy" />
                         <div>
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)', display: 'block' }}>Marcus Vance</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)', display: 'block' }}>Marcus Vance</strong>
                           <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>marcus.v@neudela.design</span>
                         </div>
                       </div>
@@ -1097,7 +1097,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <NeuronAvatar src="/avatars/iqbal.jpg" size="md" status="away" badge={<NeuronAvatarVerifiedBadge size="sm" />} />
                         <div>
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)', display: 'block' }}>Iqbal Dzulfikar</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)', display: 'block' }}>Iqbal Dzulfikar</strong>
                           <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>iqbal.dzulfikar@neudela.design</span>
                         </div>
                       </div>
@@ -1160,7 +1160,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                         Pattern 01
                       </span>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>•</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         {av.pattern1Title}
                       </span>
                     </div>
@@ -1185,7 +1185,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-                      <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>
+                      <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>
                         Canvas #CANVAS-9082
                       </strong>
                       <NeuronBadge size="sm" variant="success">Active</NeuronBadge>
@@ -1329,7 +1329,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                         Pattern 02
                       </span>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>•</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         {av.pattern2Title}
                       </span>
                     </div>
@@ -1509,7 +1509,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                         Pattern 03
                       </span>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>•</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         {av.pattern3Title}
                       </span>
                     </div>
@@ -1543,7 +1543,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Iqbal Dzulfikar</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Iqbal Dzulfikar</strong>
                           <NeuronBadge size="sm" variant="brand">Lead</NeuronBadge>
                         </div>
                         <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -1627,7 +1627,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                         Pattern 04
                       </span>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>•</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         {av.pattern4Title}
                       </span>
                     </div>

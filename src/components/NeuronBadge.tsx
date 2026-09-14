@@ -15,6 +15,7 @@ export type NeuronBadgeVariant =
   | 'sky'
   | 'info'
   | 'default' // alias for gray
+  | 'neutral' // alias for gray
   | 'primary' // alias for brand
   | 'danger'; // alias for error
 

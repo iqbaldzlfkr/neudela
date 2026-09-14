@@ -572,7 +572,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                     <Compass size={20} />
                   </div>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                       12 Directional Placements
                     </div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>
@@ -686,7 +686,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       <span style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(223,126,48,0.1)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <ArrowUp size={13} />
                       </span>
-                      <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Top Axis Placements</strong>
+                      <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Top Axis Placements</strong>
                     </div>
                     <NeuronBadge variant="gray" size="sm">3 Variations</NeuronBadge>
                   </div>
@@ -718,7 +718,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       <span style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(223,126,48,0.1)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <ArrowDown size={13} />
                       </span>
-                      <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Bottom Axis Placements</strong>
+                      <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Bottom Axis Placements</strong>
                     </div>
                     <NeuronBadge variant="gray" size="sm">3 Variations</NeuronBadge>
                   </div>
@@ -750,7 +750,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       <span style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(223,126,48,0.1)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <ArrowLeft size={13} />
                       </span>
-                      <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Left Axis Placements</strong>
+                      <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Left Axis Placements</strong>
                     </div>
                     <NeuronBadge variant="gray" size="sm">3 Variations</NeuronBadge>
                   </div>
@@ -782,7 +782,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       <span style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(223,126,48,0.1)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <ArrowRight size={13} />
                       </span>
-                      <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Right Axis Placements</strong>
+                      <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Right Axis Placements</strong>
                     </div>
                     <NeuronBadge variant="gray" size="sm">3 Variations</NeuronBadge>
                   </div>
@@ -819,7 +819,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               {/* Type 1: Title Only */}
               <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 'var(--space-6)', padding: 'var(--space-5)', background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeTitleOnly}</div>
+                  <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeTitleOnly}</div>
                   <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>{gl.typeTitleOnlyDesc}</div>
                   <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                     <NeuronBadge variant="gray" size="sm">font-size: 12px</NeuronBadge>
@@ -842,7 +842,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               {/* Type 2: Title + Supporting Text */}
               <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 'var(--space-6)', padding: 'var(--space-5)', background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeTitleAndSupporting}</div>
+                  <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeTitleAndSupporting}</div>
                   <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>{gl.typeTitleAndSupportingDesc}</div>
                   <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                     <NeuronBadge variant="brand" size="sm">Title: 12px / 600</NeuronBadge>
@@ -864,7 +864,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               {/* Type 3: Supporting Text Only */}
               <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 'var(--space-6)', padding: 'var(--space-5)', background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeSupportingOnly}</div>
+                  <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{gl.typeSupportingOnly}</div>
                   <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>{gl.typeSupportingOnlyDesc}</div>
                   <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                     <NeuronBadge variant="gray" size="sm">font-size: 12px</NeuronBadge>
@@ -894,7 +894,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               <div style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-xs)' }}>
                 <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerHover}</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerHover}</div>
                     <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{gl.triggerHoverDesc}</div>
                   </div>
                   <NeuronBadge variant="gray" size="sm">trigger="hover"</NeuronBadge>
@@ -923,7 +923,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               <div style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-xs)' }}>
                 <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerClick}</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerClick}</div>
                     <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{gl.triggerClickDesc}</div>
                   </div>
                   <NeuronBadge variant="brand" size="sm">trigger="click"</NeuronBadge>
@@ -952,7 +952,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               <div style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-xs)' }}>
                 <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerFocus}</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerFocus}</div>
                     <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{gl.triggerFocusDesc}</div>
                   </div>
                   <NeuronBadge variant="success" size="sm">trigger="focus"</NeuronBadge>
@@ -971,7 +971,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                         padding: '8px 14px',
                         border: '1px solid var(--color-border)',
                         borderRadius: 8,
-                        fontSize: 13,
+                        fontSize: 12,
                         fontFamily: 'var(--font-family)',
                         background: 'var(--color-bg-surface)',
                         color: 'var(--color-text-primary)',
@@ -1003,7 +1003,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               <div style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-xs)' }}>
                 <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerManual}</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{gl.triggerManual}</div>
                     <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{gl.triggerManualDesc}</div>
                   </div>
                   <NeuronBadge variant="warning" size="sm">trigger="manual"</NeuronBadge>
@@ -1222,7 +1222,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
             <p className="section-description">{gl.specsDesc}</p>
 
             <div style={{ marginTop: 'var(--space-6)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
                 <thead>
                   <tr style={{ background: 'var(--color-bg-subtle)', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-secondary)' }}>
                     <th style={{ padding: '10px 20px', textAlign: 'left', borderBottom: '1px solid var(--color-border)' }}>Property Token</th>
@@ -1261,7 +1261,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
             <p className="section-description">Full prop interface for the NeuronTooltip component.</p>
 
             <div style={{ marginTop: 'var(--space-5)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
                 <thead>
                   <tr style={{ background: 'var(--color-bg-subtle)', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-secondary)' }}>
                     {['Prop', 'Type', 'Default', 'Description'].map(h => (
@@ -1439,7 +1439,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                             padding: '9px 16px',
                             border: '1px solid var(--color-border)',
                             borderRadius: 8,
-                            fontSize: 13,
+                            fontSize: 12,
                             fontFamily: 'var(--font-family)',
                             background: 'var(--color-bg-surface)',
                             color: 'var(--color-text-primary)',
@@ -1555,7 +1555,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
             <div style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', boxShadow: 'var(--shadow-sm)', overflow: 'hidden' }}>
               <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', alignItems: 'center', gap: 10 }}>
                 <Settings size={16} style={{ color: 'var(--color-text-tertiary)' }} />
-                <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Account Settings</strong>
+                <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Account Settings</strong>
                 <NeuronBadge variant="brand" size="sm" style={{ marginLeft: 'auto' }}>Profile Completion: 72%</NeuronBadge>
               </div>
 
@@ -1563,7 +1563,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 {/* Username field */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Username</label>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Username</label>
                     <NeuronTooltip
                       content="Your unique username appears in your profile URL and mentions. Only letters, numbers, hyphens, and underscores are allowed."
                       trigger="focus"
@@ -1586,7 +1586,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 {/* Email field */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Email Address</label>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Email Address</label>
                     <NeuronTooltip
                       content="We'll send account notifications and team invitations to this address. Must be verified before changes take effect."
                       trigger="focus"
@@ -1609,7 +1609,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 {/* Password field */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>New Password</label>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>New Password</label>
                     <NeuronTooltip
                       content={
                         <div>
@@ -1646,7 +1646,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <ShieldCheck size={18} style={{ color: '#10b981' }} />
                       <div>
-                        <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Two-Factor Authentication</div>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Two-Factor Authentication</div>
                         <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>Adds a security layer to your account</div>
                       </div>
                     </div>
@@ -1680,7 +1680,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
               {/* Table Header */}
               <div style={{ padding: '12px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-subtle)', display: 'flex', alignItems: 'center', gap: 12 }}>
                 <Users size={15} style={{ color: 'var(--color-text-tertiary)' }} />
-                <strong style={{ fontSize: 13, color: 'var(--color-text-primary)' }}>Team Members</strong>
+                <strong style={{ fontSize: 12, color: 'var(--color-text-primary)' }}>Team Members</strong>
                 <NeuronBadge variant="gray" size="sm">{tableMembers.length} members</NeuronBadge>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
                   <NeuronTooltip content="Filter members" placement="top" size="sm">
@@ -1696,7 +1696,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                 </div>
               </div>
 
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
                 <thead>
                   <tr style={{ background: 'var(--color-bg-subtle)', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-secondary)' }}>
                     <th style={{ padding: '10px 20px', textAlign: 'left', borderBottom: '1px solid var(--color-border)' }}>Member</th>
@@ -1834,7 +1834,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                         content={
                           isCurrentStep ? (
                             <div style={{ padding: '2px 0' }}>
-                              <strong style={{ display: 'block', fontSize: 13, marginBottom: 4, color: '#fff' }}>
+                              <strong style={{ display: 'block', fontSize: 12, marginBottom: 4, color: '#fff' }}>
                                 {onboardingSteps[item.step].title}
                               </strong>
                               <p style={{ margin: '0 0 10px 0', fontSize: 11, lineHeight: 1.45, opacity: 0.92, color: 'rgba(255,255,255,0.95)' }}>
@@ -1913,7 +1913,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                             background: isCurrentStep ? 'rgba(223,126,48,0.12)' : 'none',
                             border: isCurrentStep ? '1px solid rgba(223,126,48,0.3)' : '1px solid transparent',
                             color: isCurrentStep ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-                            cursor: 'pointer', fontSize: 13, fontWeight: isCurrentStep ? 700 : 400, textAlign: 'left'
+                            cursor: 'pointer', fontSize: 12, fontWeight: isCurrentStep ? 700 : 400, textAlign: 'left'
                           }}
                         >
                           {item.icon}
@@ -1934,7 +1934,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                         {`Step ${onboardStep + 1}: ${onboardingSteps[onboardStep]?.title ?? ''}`}
                       </strong>
                     </div>
-                    <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0 }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0 }}>
                       {onboardingSteps[onboardStep]?.body ?? ''}
                     </p>
 

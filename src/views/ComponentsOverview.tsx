@@ -10,6 +10,9 @@ import NeuronAvatar from '../components/NeuronAvatar';
 import NeuronProgress from '../components/NeuronProgress';
 import NeuronAlert from '../components/NeuronAlert';
 import NeuronBreadcrumb from '../components/NeuronBreadcrumb';
+import NeuronTree from '../components/NeuronTree';
+import NeuronTextArea from '../components/NeuronTextArea';
+import NeuronSlider from '../components/NeuronSlider';
 import { ArrowRight, Calendar, ChevronDown } from 'lucide-react';
 
 interface ComponentsOverviewProps {
@@ -233,6 +236,40 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
       ),
     },
     {
+      id: 'comp-textarea',
+      title: 'Text Area',
+      desc: 'Multi-line text input field supporting dynamic auto-grow, character limiting, and rich formatting.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 220 }}>
+          <NeuronTextArea
+            size="sm"
+            rows={2}
+            placeholder="Type notes or comments..."
+            resize="none"
+          />
+        </div>
+      ),
+    },
+    {
+      id: 'comp-slider',
+      title: 'Slider',
+      desc: 'Interactive continuous and discrete range controls with single or dual thumbs, tooltips, and tick marks.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 220 }}>
+          <NeuronSlider
+            size="sm"
+            range
+            defaultValue={[25, 75]}
+            showTooltip
+            tooltipPlacement="top"
+            tooltipVisible="always"
+          />
+        </div>
+      ),
+    },
+    {
       id: 'comp-toggle',
       title: 'Toggle Switch',
       desc: 'Binary switch controls with smooth sliding pill transition and accessible states.',
@@ -255,6 +292,30 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
             <span>Tooltip popover</span>
             <div style={{ position: 'absolute', bottom: -4, left: '50%', transform: 'translateX(-50%) rotate(45deg)', width: 6, height: 6, background: 'var(--slate-900)' }} />
           </div>
+        </div>
+      ),
+    },
+    {
+      id: 'comp-tree',
+      title: 'Tree View',
+      desc: 'Hierarchical node explorer with branching guide lines, cascading checkboxes, and search highlighting.',
+      badge: 'Data Display',
+      renderPreview: () => (
+        <div style={{ width: '100%', maxWidth: 200, pointerEvents: 'none' }}>
+          <NeuronTree
+            data={[
+              {
+                id: 'src',
+                label: 'src',
+                children: [
+                  { id: 'App.tsx', label: 'App.tsx' },
+                  { id: 'NeuronTree.tsx', label: 'NeuronTree.tsx' }
+                ]
+              }
+            ]}
+            size="sm"
+            defaultExpandedIds={['src']}
+          />
         </div>
       ),
     },

@@ -606,7 +606,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
                     isCard 
                     size="sm"
                     defaultChecked={true}
-                    label={<strong style={{ fontSize: '13px' }}>Automated Daily Backups</strong>}
+                    label={<strong style={{ fontSize: '12px' }}>Automated Daily Backups</strong>}
                     description="Cloud snapshot synced every 24h (+ $5/mo)"
                   />
                 </div>
@@ -658,7 +658,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
               <RuleCard type="dont">
                 <div className="rule-card__preview" style={{ flexDirection: 'row', gap: '10px', alignItems: 'center' }}>
                   <NeuronCheckbox size="sm" defaultChecked={false} />
-                  <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', cursor: 'default' }}>
+                  <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)', cursor: 'default' }}>
                     Unlinked plain text label (hard to click)
                   </span>
                 </div>
@@ -712,7 +712,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
                     <td><code>sm</code></td>
                     <td>16 × 16 px</td>
                     <td>10 px</td>
-                    <td>13px Label · 11px Desc</td>
+                    <td>12px Label · 11px Desc</td>
                     <td>{cb.sizeSmUsage}</td>
                   </tr>
                   <tr>
@@ -880,7 +880,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
                     <NeuronCheckbox 
                       size="sm" 
                       defaultChecked={true} 
-                      label={<span style={{ fontSize: '13px' }}>Remember for 30 days</span>}
+                      label={<span style={{ fontSize: '12px' }}>Remember for 30 days</span>}
                     />
                     <a href="#forgot" onClick={(e) => e.preventDefault()} style={{ fontSize: '12px', color: 'var(--brand-600)', textDecoration: 'none', fontWeight: 600 }}>
                       Forgot password?
@@ -1004,7 +1004,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
                     size="sm"
                     checked={selectedCards.includes('backup')}
                     onChange={() => toggleCardSelection('backup')}
-                    label={<strong style={{ fontSize: '13px' }}>Automated Cloud Backups</strong>}
+                    label={<strong style={{ fontSize: '12px' }}>Automated Cloud Backups</strong>}
                     description="Continuous snapshot storage with instant 1-click restore."
                   />
                   <NeuronCheckbox
@@ -1012,7 +1012,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
                     size="sm"
                     checked={selectedCards.includes('security')}
                     onChange={() => toggleCardSelection('security')}
-                    label={<strong style={{ fontSize: '13px' }}>Enterprise Shield & SSO</strong>}
+                    label={<strong style={{ fontSize: '12px' }}>Enterprise Shield & SSO</strong>}
                     description="SAML 2.0 single sign-on and dedicated audit logging."
                   />
                 </div>

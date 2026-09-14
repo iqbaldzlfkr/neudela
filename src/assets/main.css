@@ -2202,7 +2202,7 @@ body {
   justify-content: center;
   background: linear-gradient(135deg, var(--brand-600), #EA580C);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
 }
 
@@ -2493,7 +2493,7 @@ body {
   background: linear-gradient(135deg, var(--brand-600), #EA580C);
   color: #fff;
   font-weight: var(--font-weight-semibold);
-  font-size: 13px;
+  font-size: 12px;
   box-shadow: 0 0 0 1.5px var(--color-border);
 }
 
@@ -3671,7 +3671,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -4283,7 +4283,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -5242,9 +5242,16 @@ body {
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
+  outline: none;
   cursor: pointer;
   transition: color 0.18s ease, border-color 0.18s ease;
   font-family: inherit;
+}
+
+.comp-tab:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: -2px;
+  border-radius: var(--radius-xs);
 }
 
 .comp-tab:hover {
@@ -6566,7 +6573,7 @@ body {
 
 /* Sizes for wrapper labels */
 .neuron-checkbox-wrapper--sm .neuron-checkbox-label {
-  font-size: 13px;
+  font-size: 12px;
 }
 .neuron-checkbox-wrapper--sm .neuron-checkbox-description {
   font-size: 11px;
@@ -7983,7 +7990,7 @@ body {
 }
 .neuron-breadcrumb--lg .neuron-breadcrumb__ellipsis-btn {
   padding: 3px 10px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 /* ── Variant: filled ── */
@@ -8112,7 +8119,7 @@ body {
   width: 100%;
   text-align: left;
   padding: 6px 12px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
   background: transparent;
@@ -8220,7 +8227,7 @@ body {
 
 .neuron-datepicker--lg .neuron-datepicker-text-input {
   height: 38px;
-  font-size: 13px;
+  font-size: 12px;
   padding: 0 var(--space-3);
 }
 
@@ -8250,7 +8257,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   white-space: nowrap;
@@ -8394,7 +8401,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 4px 12px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   cursor: pointer;
@@ -8423,7 +8430,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   background: var(--color-bg-subtle);
@@ -8593,7 +8600,7 @@ body {
   border: none;
   background: transparent;
   color: var(--color-text-primary);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-medium);
   display: flex;
   align-items: center;
@@ -8724,7 +8731,7 @@ body {
 .neuron-datepicker-btn {
   height: 36px;
   padding: 0 var(--space-4);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -9111,7 +9118,7 @@ body {
 }
 
 .neuron-modal__description {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
@@ -9126,7 +9133,7 @@ body {
 .neuron-modal__body {
   width: 100%;
   margin-bottom: var(--space-4);
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-secondary);
   line-height: 1.5;
 }
@@ -9147,7 +9154,7 @@ body {
   justify-content: center;
   height: 38px;
   border-radius: var(--radius-md);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -10354,7 +10361,7 @@ body {
 .neuron-table--sm .neuron-table__th,
 .neuron-table--sm .neuron-table__td {
   padding: 8px 12px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .neuron-table--md .neuron-table__th,
@@ -10385,6 +10392,45 @@ body {
 .neuron-table--bordered .neuron-table__th,
 .neuron-table--bordered .neuron-table__td {
   border-right: 1px solid var(--color-border);
+}
+
+/* ── Clickable Rows & Cells ── */
+.neuron-table__tr--clickable {
+  cursor: pointer;
+  user-select: none;
+}
+.neuron-table__tr--clickable:hover .neuron-table__td {
+  background-color: var(--brand-50, #fff7ed);
+}
+
+.dark-theme .neuron-table__tr--clickable:hover .neuron-table__td,
+[data-theme="dark"] .neuron-table__tr--clickable:hover .neuron-table__td {
+  background-color: rgba(223, 126, 48, 0.12);
+}
+
+.neuron-table__link {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-align: left;
+  transition: color 0.15s ease;
+}
+.neuron-table__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: none;
+}
+.neuron-table__link:active {
+  color: var(--color-primary-active);
 }
 
 /* ── Checkbox Column ── */
@@ -10541,14 +10587,14 @@ body {
 }
 
 .neuron-table-pagination__label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-text-secondary);
   white-space: nowrap;
 }
 
 .neuron-table-pagination__total {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-secondary);
   white-space: nowrap;
 }
@@ -10572,7 +10618,7 @@ body {
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background-color: var(--color-bg-surface);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-text-primary);
   cursor: pointer;
@@ -10604,7 +10650,7 @@ body {
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   background: transparent;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -10644,7 +10690,7 @@ body {
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background-color: var(--color-bg-surface);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -11030,7 +11076,7 @@ body {
   background-color: rgba(223, 126, 48, 0.08);
   border-bottom: 1px solid rgba(223, 126, 48, 0.25);
   color: var(--brand-700);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   animation: fadeIn 0.2s ease-in-out;
 }
@@ -11078,7 +11124,7 @@ body {
 }
 
 .table-spec-token-val {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-text-primary);
   font-family: var(--font-family-mono, monospace);
@@ -11432,7 +11478,7 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
 }
 
 .table-anatomy-card-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-secondary);
   line-height: 1.45;
 }
@@ -11456,3 +11502,1915 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   padding: 2px 8px;
   border-radius: var(--radius-sm);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TREE VIEW (NeuronTree)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.neuron-tree {
+  --neuron-tree-indent: 20px;
+  --neuron-tree-chevron-size: 20px;
+  --neuron-tree-line-color: var(--color-border, #cbd5e1);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-family, inherit);
+  color: var(--color-text-primary);
+  user-select: none;
+  outline: none;
+}
+
+.neuron-tree:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+/* Tree Variants */
+.neuron-tree--default {
+  background: transparent;
+}
+
+.neuron-tree--bordered {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-2);
+  box-shadow: var(--shadow-xs);
+}
+
+.neuron-tree--subtle {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-2);
+}
+
+/* Sizes */
+.neuron-tree--sm {
+  --neuron-tree-indent: 18px;
+  --neuron-tree-chevron-size: 18px;
+  --neuron-tree-node-gap: 6px;
+}
+.neuron-tree--sm .neuron-tree__node {
+  min-height: 28px;
+  font-size: 12px;
+  gap: var(--neuron-tree-node-gap, 6px);
+  padding-right: 8px;
+}
+
+.neuron-tree--md {
+  --neuron-tree-indent: 20px;
+  --neuron-tree-chevron-size: 20px;
+  --neuron-tree-node-gap: 8px;
+}
+.neuron-tree--md .neuron-tree__node {
+  min-height: 32px;
+  font-size: 14px;
+  gap: var(--neuron-tree-node-gap, 8px);
+  padding-right: 10px;
+}
+
+.neuron-tree--lg {
+  --neuron-tree-indent: 24px;
+  --neuron-tree-chevron-size: 24px;
+  --neuron-tree-node-gap: 10px;
+}
+.neuron-tree--lg .neuron-tree__node {
+  min-height: 38px;
+  font-size: 15px;
+  gap: var(--neuron-tree-node-gap, 10px);
+  padding-right: 12px;
+}
+
+/* Node Wrapper & Children Group */
+.neuron-tree__node-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.neuron-tree__children {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Node Item Row */
+.neuron-tree__node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  margin: 1px 0;
+  padding: 2px 8px 2px 2px;
+}
+
+.neuron-tree__node:hover:not(.is-disabled) {
+  background-color: var(--color-bg-subtle, rgba(0, 0, 0, 0.04));
+}
+
+.neuron-tree__node.is-selected {
+  background-color: var(--brand-50, rgba(223, 126, 48, 0.1));
+  color: var(--brand-700);
+  font-weight: var(--font-weight-medium, 500);
+}
+
+.dark-theme .neuron-tree__node.is-selected {
+  background-color: rgba(223, 126, 48, 0.18);
+  color: var(--brand-300);
+}
+
+.neuron-tree__node.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.neuron-tree__node.is-focused:not(.is-selected) {
+  outline: 2px solid var(--brand-500);
+  outline-offset: -2px;
+}
+
+/* ==========================================================================
+   Tree Indent & Guide Lines System (showLines)
+   ========================================================================== */
+
+.neuron-tree__indent {
+  display: inline-flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.neuron-tree__indent-unit {
+  position: relative;
+  width: var(--neuron-tree-indent);
+  flex-shrink: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+
+/* Vertical guide line passing through ancestor column */
+.neuron-tree__indent-unit--line::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 50%;
+  width: 1px;
+  border-left: 1px solid var(--neuron-tree-line-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Connector Branch for non-last child ('T' shape) */
+.neuron-tree__indent-unit--connector:not(.is-last)::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 50%;
+  width: 1px;
+  border-left: 1px solid var(--neuron-tree-line-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.neuron-tree__indent-unit--connector:not(.is-last)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: calc(-1 * var(--neuron-tree-node-gap, 8px));
+  height: 1px;
+  border-top: 1px solid var(--neuron-tree-line-color);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Connector Branch for last child ('L' shape with smooth 6px curve) */
+.neuron-tree__indent-unit--connector.is-last::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  right: calc(-1 * var(--neuron-tree-node-gap, 8px));
+  height: calc(50% + 2px);
+  border-left: 1px solid var(--neuron-tree-line-color);
+  border-bottom: 1px solid var(--neuron-tree-line-color);
+  border-bottom-left-radius: 6px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* Chevron Wrap & Parent Guide Line */
+.neuron-tree__chevron-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--neuron-tree-chevron-size);
+  height: var(--neuron-tree-chevron-size);
+  flex-shrink: 0;
+}
+
+.neuron-tree__parent-line {
+  position: absolute;
+  top: 50%;
+  bottom: -2px;
+  left: 50%;
+  width: 1px;
+  border-left: 1px solid var(--neuron-tree-line-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Chevron Expand/Collapse Toggle */
+.neuron-tree__chevron {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--neuron-tree-chevron-size);
+  height: var(--neuron-tree-chevron-size);
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: var(--radius-sm, 4px);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s ease, background-color 0.15s ease;
+}
+
+.neuron-tree__chevron:hover {
+  color: var(--color-text-primary);
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.dark-theme .neuron-tree__chevron:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.neuron-tree__chevron.is-expanded {
+  transform: rotate(90deg);
+  color: var(--color-text-primary);
+}
+
+.neuron-tree__chevron-spacer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--neuron-tree-chevron-size);
+  height: var(--neuron-tree-chevron-size);
+  flex-shrink: 0;
+}
+
+/* Horizontal extension for leaf nodes connecting to icon */
+.neuron-tree__leaf-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(100% + var(--neuron-tree-node-gap, 8px));
+  height: 1px;
+  border-top: 1px solid var(--neuron-tree-line-color);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Dark Theme Line Adaptations */
+.dark-theme .neuron-tree {
+  --neuron-tree-line-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Checkbox */
+.neuron-tree__checkbox-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.neuron-tree__checkbox-wrap .neuron-checkbox {
+  vertical-align: middle;
+}
+
+.neuron-tree__checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-xs, 4px);
+  border: 1.5px solid var(--color-border-strong, #cbd5e1);
+  background-color: var(--color-bg-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.neuron-tree__checkbox:hover {
+  border-color: var(--brand-500);
+}
+
+.neuron-tree__checkbox.is-checked,
+.neuron-tree__checkbox.is-indeterminate {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+/* Node Icon */
+.neuron-tree__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.neuron-tree__default-folder-icon {
+  color: #f59e0b; /* warm vibrant folder amber */
+}
+
+.neuron-tree__default-file-icon {
+  color: var(--slate-400, #94a3b8);
+}
+
+.neuron-tree__node.is-selected .neuron-tree__icon {
+  color: var(--brand-600);
+}
+.dark-theme .neuron-tree__node.is-selected .neuron-tree__icon {
+  color: var(--brand-400);
+}
+
+/* Label & Search Highlight */
+.neuron-tree__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.neuron-tree__highlight {
+  background-color: rgba(223, 126, 48, 0.22);
+  color: var(--brand-700);
+  font-weight: var(--font-weight-semibold, 600);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.dark-theme .neuron-tree__highlight {
+  background-color: rgba(223, 126, 48, 0.35);
+  color: var(--brand-300);
+}
+
+/* Badge & Extra info */
+.neuron-tree__badge {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.neuron-tree__extra {
+  margin-left: 8px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+/* Actions (Visible on hover) */
+.neuron-tree__actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.neuron-tree__node:hover .neuron-tree__actions {
+  display: inline-flex;
+}
+
+.neuron-tree__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm, 4px);
+  border: none;
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.neuron-tree__action-btn:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.neuron-tree__empty {
+  padding: var(--space-6, 24px);
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   Tree View Visual Anatomy Interactive Showcase
+   ========================================================================== */
+.tree-anatomy-card {
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tree-anatomy-stage {
+  position: relative;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 54px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-xs);
+  min-height: 180px;
+}
+
+.tree-anatomy-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  max-width: 520px;
+  transition: all 0.2s ease;
+}
+
+.tree-anatomy-zone {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.tree-anatomy-zone:hover,
+.tree-anatomy-zone.is-active {
+  background: rgba(223, 126, 48, 0.12);
+  outline: 2px solid var(--brand-500);
+  outline-offset: 1px;
+}
+
+.tree-anatomy-pin {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.tree-anatomy-pin:hover,
+.tree-anatomy-pin.is-active {
+  transform: translateX(-50%) scale(1.15);
+}
+
+.tree-anatomy-pin--top {
+  bottom: calc(100% + 2px);
+}
+
+.tree-anatomy-pin--bottom {
+  top: calc(100% + 2px);
+}
+
+.tree-anatomy-pin__stem {
+  width: 1.5px;
+  height: 16px;
+  background: var(--brand-500);
+}
+
+.tree-anatomy-pin--bottom .tree-anatomy-pin__stem {
+  order: -1;
+}
+
+.tree-anatomy-pin__dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(223, 126, 48, 0.35);
+  transition: all 0.18s ease;
+}
+
+.tree-anatomy-pin.is-active .tree-anatomy-pin__dot {
+  background: var(--brand-600);
+  box-shadow: 0 0 0 4px rgba(223, 126, 48, 0.28), 0 3px 8px rgba(223, 126, 48, 0.45);
+}
+
+.tree-anatomy-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.tree-anatomy-item-card:hover {
+  background: var(--color-bg-subtle);
+  border-color: var(--slate-300);
+  transform: translateX(2px);
+}
+
+.tree-anatomy-item-card.is-active {
+  border-color: var(--brand-500);
+  background: var(--brand-50, rgba(223, 126, 48, 0.08));
+  box-shadow: 0 2px 8px rgba(223, 126, 48, 0.12);
+  transform: translateX(4px);
+}
+
+.dark-theme .tree-anatomy-item-card.is-active {
+  background: rgba(223, 126, 48, 0.14);
+}
+
+/* ── Textarea Formatting Toolbar Variant ── */
+.neuron-textarea-wrapper--with-toolbar {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.neuron-textarea-wrapper--with-toolbar .neuron-textarea-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.neuron-textarea-wrapper--with-toolbar.neuron-textarea-wrapper--sm .neuron-textarea-content {
+  padding: 6px 10px;
+}
+
+.neuron-textarea-wrapper--with-toolbar.neuron-textarea-wrapper--md .neuron-textarea-content {
+  padding: 8px 12px;
+}
+
+.neuron-textarea-wrapper--with-toolbar.neuron-textarea-wrapper--lg .neuron-textarea-content {
+  padding: 10px 14px;
+}
+
+.neuron-textarea-wrapper--with-toolbar.neuron-textarea-wrapper--has-clear .neuron-textarea {
+  padding-right: 28px;
+}
+
+.neuron-textarea-wrapper--with-toolbar.neuron-textarea-wrapper--has-leading .neuron-textarea {
+  padding-left: 28px;
+}
+
+.neuron-textarea-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2, 8px);
+  padding: 4px 8px;
+  background-color: var(--color-bg-subtle, #f8fafc);
+  border-color: var(--color-border);
+  box-sizing: border-box;
+  width: 100%;
+  user-select: none;
+  min-height: 36px;
+  flex-wrap: wrap;
+}
+
+.neuron-textarea-toolbar--top {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.neuron-textarea-toolbar--bottom {
+  border-top: 1px solid var(--color-border);
+}
+
+.dark-theme .neuron-textarea-toolbar {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.neuron-textarea-toolbar__tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.neuron-textarea-toolbar__extra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.neuron-textarea-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm, 4px);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.neuron-textarea-wrapper--sm .neuron-textarea-tool-btn {
+  width: 22px;
+  height: 22px;
+}
+
+.neuron-textarea-wrapper--lg .neuron-textarea-tool-btn {
+  width: 30px;
+  height: 30px;
+}
+
+.neuron-textarea-tool-btn:hover:not(:disabled) {
+  background-color: var(--color-bg-surface-hover, rgba(0, 0, 0, 0.06));
+  color: var(--color-text-primary);
+}
+
+.dark-theme .neuron-textarea-tool-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.neuron-textarea-tool-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.neuron-textarea-tool-btn:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 1px;
+}
+
+.neuron-textarea-tool-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.neuron-textarea-tool-divider {
+  width: 1px;
+  height: 14px;
+  background-color: var(--color-border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.dark-theme .neuron-textarea-tool-divider {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   NeuronTextArea Component Design Tokens & Utilities
+   ========================================================================== */
+.neuron-textarea-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.neuron-textarea-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2, 8px);
+  margin-bottom: var(--space-1-5, 6px);
+}
+
+.neuron-textarea-header .neuron-label {
+  margin-bottom: 0;
+}
+
+.neuron-textarea-label-action {
+  font-size: 12px;
+  color: var(--brand-600);
+  display: inline-flex;
+  align-items: center;
+}
+
+.neuron-textarea-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs, 0 1px 2px rgba(0, 0, 0, 0.04));
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Sizing */
+.neuron-textarea-wrapper--sm {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.neuron-textarea-wrapper--md {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: var(--radius-md, 6px);
+}
+
+.neuron-textarea-wrapper--lg {
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: var(--radius-lg, 8px);
+}
+
+/* Hover & Focus */
+.neuron-textarea-wrapper:hover:not(.neuron-textarea-wrapper--disabled):not(.neuron-textarea-wrapper--readonly):not(:focus-within) {
+  border-color: var(--color-border-hover);
+}
+
+.neuron-textarea-wrapper:focus-within {
+  border-color: var(--brand-600) !important;
+  box-shadow: 0 0 0 3px rgba(223, 126, 48, 0.2) !important;
+}
+
+.dark-theme .neuron-textarea-wrapper:focus-within {
+  border-color: var(--brand-400) !important;
+  box-shadow: 0 0 0 3px rgba(223, 126, 48, 0.25) !important;
+}
+
+/* Variants */
+.neuron-textarea-wrapper--default {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.neuron-textarea-wrapper--filled {
+  background-color: var(--color-bg-subtle);
+  border-color: transparent;
+}
+
+.neuron-textarea-wrapper--filled:hover:not(.neuron-textarea-wrapper--disabled):not(.neuron-textarea-wrapper--readonly):not(:focus-within) {
+  border-color: var(--color-border);
+}
+
+.neuron-textarea-wrapper--filled:focus-within {
+  background-color: var(--color-bg-surface);
+  border-color: var(--brand-600) !important;
+}
+
+.neuron-textarea-wrapper--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.neuron-textarea-wrapper--ghost:hover:not(.neuron-textarea-wrapper--disabled):not(.neuron-textarea-wrapper--readonly):not(:focus-within) {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border);
+}
+
+.neuron-textarea-wrapper--ghost:focus-within {
+  background-color: var(--color-bg-surface);
+  border-color: var(--brand-600) !important;
+  box-shadow: 0 0 0 3px rgba(223, 126, 48, 0.2) !important;
+}
+
+/* States */
+.neuron-textarea-wrapper--error {
+  border-color: var(--color-error, #ef4444) !important;
+}
+
+.neuron-textarea-wrapper--error:focus-within {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.neuron-textarea-wrapper--warning {
+  border-color: var(--color-warning, #f59e0b) !important;
+}
+
+.neuron-textarea-wrapper--warning:focus-within {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2) !important;
+}
+
+.neuron-textarea-wrapper--success {
+  border-color: var(--color-success, #10b981) !important;
+}
+
+.neuron-textarea-wrapper--success:focus-within {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Disabled & ReadOnly */
+.neuron-textarea-wrapper--disabled {
+  background-color: var(--color-bg-surface-hover, #f1f5f9) !important;
+  cursor: not-allowed;
+  opacity: 0.65;
+  border-color: var(--color-border) !important;
+}
+
+.neuron-textarea-wrapper--disabled .neuron-textarea {
+  cursor: not-allowed;
+}
+
+.neuron-textarea-wrapper--readonly {
+  background-color: var(--color-bg-subtle) !important;
+  cursor: default;
+}
+
+/* Clear button */
+.neuron-textarea-wrapper--has-clear .neuron-textarea {
+  padding-right: 28px;
+}
+
+.neuron-textarea-clear-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: var(--slate-200, #e2e8f0);
+  color: var(--slate-600, #475569);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+  z-index: 2;
+}
+
+.neuron-textarea-clear-btn:hover {
+  background: var(--slate-300, #cbd5e1);
+  color: var(--slate-900, #0f172a);
+}
+
+.dark-theme .neuron-textarea-clear-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--slate-300, #cbd5e1);
+}
+
+.dark-theme .neuron-textarea-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Leading icon */
+.neuron-textarea-wrapper--has-leading .neuron-textarea {
+  padding-left: 28px;
+}
+
+.neuron-textarea-leading-icon {
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Core <textarea> styling */
+.neuron-textarea {
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+}
+
+.neuron-textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Resizing behaviors */
+.neuron-textarea--resize-none {
+  resize: none;
+}
+
+.neuron-textarea--resize-vertical {
+  resize: vertical;
+}
+
+.neuron-textarea--resize-horizontal {
+  resize: horizontal;
+}
+
+.neuron-textarea--resize-both {
+  resize: both;
+}
+
+.neuron-textarea--resize-auto {
+  resize: none;
+  transition: height 0.1s ease-out;
+}
+
+/* Custom subtle scrollbar */
+.neuron-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.neuron-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.neuron-textarea::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.neuron-textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Footer row */
+.neuron-textarea-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2, 8px);
+  margin-top: var(--space-1-5, 6px);
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.neuron-textarea-helper-slot {
+  flex: 1;
+  min-width: 0;
+}
+
+.neuron-textarea-meta-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.neuron-textarea-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.neuron-textarea-count {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.neuron-textarea-count--warning {
+  color: var(--color-warning, #f59e0b) !important;
+  font-weight: 600;
+}
+
+.neuron-textarea-count--error {
+  color: var(--color-error, #ef4444) !important;
+  font-weight: 700;
+}
+
+.neuron-helper-text--warning {
+  color: var(--color-warning, #f59e0b);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FOUNDATION OVERVIEW STYLES
+   ══════════════════════════════════════════════════════════════════ */
+
+.foundation-overview-container {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Header & Highlights */
+.foundation-header-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  margin-top: var(--space-4, 16px);
+  margin-bottom: var(--space-8, 32px);
+}
+
+.foundation-pill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.foundation-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary, #df7e30);
+}
+
+/* Grid for Foundation Cards */
+.foundation-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6, 24px);
+  margin-bottom: var(--space-12, 48px);
+}
+
+/* Visual container inside card */
+.foundation-card-visual {
+  height: 145px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: background 0.3s ease, border-color 0.25s ease;
+}
+
+.component-overview-card:hover .foundation-card-visual {
+  border-bottom-color: rgba(223, 126, 48, 0.3);
+}
+
+.foundation-visual-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm, 4px);
+  background-color: rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(4px);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--color-text-tertiary);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme='dark'] .foundation-visual-tag {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.foundation-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+/* Visual: Colors Swatches Fan */
+.foundation-visual-colors {
+  background: linear-gradient(135deg, rgba(223, 126, 48, 0.04) 0%, rgba(223, 126, 48, 0.14) 100%);
+}
+
+.foundation-swatches-fan {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  height: 70px;
+}
+
+.foundation-swatch-chip {
+  width: 38px;
+  height: 60px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.foundation-swatch-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.component-overview-card:hover .foundation-swatch-chip {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Visual: Grid 12-Column */
+.foundation-visual-grid {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.04) 0%, rgba(2, 132, 199, 0.12) 100%);
+}
+
+.foundation-grid-frame {
+  width: 82%;
+  max-width: 260px;
+  height: 80px;
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  border-radius: var(--radius-md, 8px);
+  background-color: var(--color-bg-surface);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.component-overview-card:hover .foundation-grid-frame {
+  border-color: rgba(2, 132, 199, 0.5);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+}
+
+.foundation-grid-cols {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  height: 32px;
+}
+
+.foundation-grid-col-bar {
+  background-color: rgba(2, 132, 199, 0.12);
+  border-radius: 2px;
+  transition: background-color 0.25s ease;
+}
+
+.component-overview-card:hover .foundation-grid-col-bar {
+  background-color: rgba(2, 132, 199, 0.22);
+}
+
+.foundation-grid-blocks {
+  display: flex;
+  gap: 6px;
+  height: 22px;
+}
+
+.foundation-grid-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  border-radius: 3px;
+  color: #0284c7;
+}
+
+.foundation-grid-span.span-4 {
+  flex: 4;
+  background-color: rgba(2, 132, 199, 0.15);
+  border: 1px dashed rgba(2, 132, 199, 0.4);
+}
+
+.foundation-grid-span.span-8 {
+  flex: 8;
+  background-color: rgba(2, 132, 199, 0.22);
+  border: 1px solid rgba(2, 132, 199, 0.4);
+}
+
+/* Visual: Icons Cluster */
+.foundation-visual-icons {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.04) 0%, rgba(139, 92, 246, 0.12) 100%);
+}
+
+.foundation-icons-cluster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.foundation-icon-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md, 8px);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.component-overview-card:hover .foundation-icon-pill {
+  color: #8b5cf6;
+  border-color: rgba(139, 92, 246, 0.35);
+  transform: translateY(-2px);
+}
+
+.component-overview-card:hover .foundation-icon-pill:nth-child(2) {
+  transition-delay: 0.03s;
+}
+.component-overview-card:hover .foundation-icon-pill:nth-child(3) {
+  transition-delay: 0.06s;
+}
+.component-overview-card:hover .foundation-icon-pill:nth-child(4) {
+  transition-delay: 0.09s;
+}
+.component-overview-card:hover .foundation-icon-pill:nth-child(5) {
+  transition-delay: 0.12s;
+}
+.component-overview-card:hover .foundation-icon-pill:nth-child(6) {
+  transition-delay: 0.15s;
+}
+
+/* Visual: Spacing Scale */
+.foundation-visual-spacing {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, rgba(16, 185, 129, 0.12) 100%);
+}
+
+.foundation-spacing-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 80%;
+  max-width: 240px;
+}
+
+.foundation-spacing-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.foundation-spacing-bar {
+  height: 8px;
+  background-color: var(--color-primary, #df7e30);
+  border-radius: 2px;
+  opacity: 0.75;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 8px;
+}
+
+.component-overview-card:hover .foundation-spacing-bar {
+  opacity: 1;
+  transform: scaleX(1.04);
+  transform-origin: left;
+}
+
+.foundation-spacing-label {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--color-text-tertiary);
+  min-width: 28px;
+}
+
+/* Visual: Typography Specimen */
+.foundation-visual-typography {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.04) 0%, rgba(245, 158, 11, 0.14) 100%);
+}
+
+.foundation-typo-specimen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 16px);
+}
+
+.foundation-typo-glyph {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  line-height: 1;
+  font-family: 'Inter', -apple-system, sans-serif;
+  letter-spacing: -2px;
+  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.component-overview-card:hover .foundation-typo-glyph {
+  color: var(--color-primary, #df7e30);
+  transform: scale(1.05);
+}
+
+.foundation-typo-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.foundation-typo-line {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.foundation-typo-scale {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--color-text-tertiary);
+}
+
+/* Foundation Architecture Banner / Grid */
+.foundation-arch-section {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-8, 32px);
+  margin-bottom: var(--space-12, 48px);
+  position: relative;
+  overflow: hidden;
+}
+
+.foundation-arch-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary, #df7e30) 0%, #0284c7 50%, #8b5cf6 100%);
+}
+
+.foundation-arch-header {
+  margin-bottom: var(--space-6, 24px);
+}
+
+.foundation-arch-title {
+  font-size: var(--fs-text-lg, 18px);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-1, 4px) 0;
+}
+
+.foundation-arch-subtitle {
+  font-size: var(--fs-text-sm, 13px);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.foundation-arch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5, 20px);
+}
+
+@media (max-width: 860px) {
+  .foundation-arch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.foundation-arch-card {
+  padding: var(--space-5, 20px);
+  border-radius: var(--radius-lg, 12px);
+  background-color: var(--color-bg-canvas);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.foundation-arch-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(223, 126, 48, 0.3);
+}
+
+.foundation-arch-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-1, 4px);
+}
+
+.foundation-arch-icon.token {
+  background-color: rgba(223, 126, 48, 0.1);
+  color: #df7e30;
+}
+
+.foundation-arch-icon.a11y {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.foundation-arch-icon.responsive {
+  background-color: rgba(2, 132, 199, 0.1);
+  color: #0284c7;
+}
+
+.foundation-arch-item-title {
+  font-size: var(--fs-text-sm, 14px);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.foundation-arch-item-desc {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   NeuronSlider Component Styles
+   ══════════════════════════════════════════════════════════ */
+
+.neuron-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2, 8px);
+}
+
+.neuron-slider-label {
+  font-size: var(--fs-text-sm, 14px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, #182230);
+  margin: 0;
+  user-select: none;
+}
+
+.neuron-slider-header-value {
+  font-size: var(--fs-text-xs, 12px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--brand-600, #c3571c);
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+}
+
+/* Main slider interaction container */
+.neuron-slider-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  user-select: none;
+  touch-action: none;
+  box-sizing: border-box;
+}
+
+.neuron-slider-root--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Outer wrapper providing generous clickable/touch hit area */
+.neuron-slider-track-area {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.neuron-slider-root--disabled .neuron-slider-track-area {
+  cursor: not-allowed;
+}
+
+/* Base rail (inactive track) */
+.neuron-slider-rail {
+  position: relative;
+  width: 100%;
+  background-color: var(--slate-200, #e4e7ec);
+  border-radius: var(--radius-full, 9999px);
+  transition: background-color 0.2s ease;
+  overflow: visible;
+}
+
+.dark-theme .neuron-slider-rail,
+[data-theme="dark"] .neuron-slider-rail {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Active filled segment */
+.neuron-slider-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--brand-600, #c3571c);
+  transition: background-color 0.15s ease;
+  pointer-events: none;
+}
+
+/* Semantic Variants for active fill & thumb border */
+.neuron-slider--variant-brand .neuron-slider-fill {
+  background-color: var(--brand-600, #c3571c);
+}
+.neuron-slider--variant-brand .neuron-slider-thumb {
+  border-color: var(--brand-600, #c3571c);
+}
+
+.neuron-slider--variant-neutral .neuron-slider-fill {
+  background-color: var(--slate-700, #344054);
+}
+.neuron-slider--variant-neutral .neuron-slider-thumb {
+  border-color: var(--slate-700, #344054);
+}
+
+.neuron-slider--variant-success .neuron-slider-fill {
+  background-color: var(--emerald-600, #059669);
+}
+.neuron-slider--variant-success .neuron-slider-thumb {
+  border-color: var(--emerald-600, #059669);
+}
+
+.neuron-slider--variant-warning .neuron-slider-fill {
+  background-color: var(--amber-500, #f59e0b);
+}
+.neuron-slider--variant-warning .neuron-slider-thumb {
+  border-color: var(--amber-500, #f59e0b);
+}
+
+.neuron-slider--variant-error .neuron-slider-fill {
+  background-color: var(--rose-600, #e11d48);
+}
+.neuron-slider--variant-error .neuron-slider-thumb {
+  border-color: var(--rose-600, #e11d48);
+}
+
+/* Sizing Options */
+/* Size sm */
+.neuron-slider--size-sm .neuron-slider-track-area {
+  height: 28px;
+}
+.neuron-slider--size-sm .neuron-slider-rail {
+  height: 4px;
+}
+.neuron-slider--size-sm .neuron-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+.neuron-slider--size-sm .neuron-slider-label {
+  font-size: 12px;
+}
+.neuron-slider--size-sm .neuron-slider-header-value {
+  font-size: 11px;
+}
+
+/* Size md (Default) */
+.neuron-slider--size-md .neuron-slider-track-area {
+  height: 36px;
+}
+.neuron-slider--size-md .neuron-slider-rail {
+  height: 6px;
+}
+.neuron-slider--size-md .neuron-slider-thumb {
+  width: 22px;
+  height: 22px;
+  border-width: 2.5px;
+}
+
+/* Size lg */
+.neuron-slider--size-lg .neuron-slider-track-area {
+  height: 44px;
+}
+.neuron-slider--size-lg .neuron-slider-rail {
+  height: 8px;
+}
+.neuron-slider--size-lg .neuron-slider-thumb {
+  width: 28px;
+  height: 28px;
+  border-width: 3px;
+}
+
+/* Thumb (Circular white handle with colored ring) */
+.neuron-slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-style: solid;
+  border-radius: var(--radius-full, 9999px);
+  cursor: grab;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease, border-color 0.15s ease;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.neuron-slider-thumb:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 0 0 4px rgba(195, 87, 28, 0.18), 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.neuron-slider-thumb--active,
+.neuron-slider-thumb:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 0 0 6px rgba(195, 87, 28, 0.25), 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.neuron-slider-thumb:focus-visible {
+  box-shadow: 0 0 0 4px rgba(195, 87, 28, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+}
+
+.dark-theme .neuron-slider-thumb,
+[data-theme="dark"] .neuron-slider-thumb {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.dark-theme .neuron-slider-thumb:hover,
+[data-theme="dark"] .neuron-slider-thumb:hover {
+  box-shadow: 0 0 0 5px rgba(223, 126, 48, 0.25), 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Tooltip Speech Bubble (Columns 3 & 4 in reference image) */
+.neuron-slider-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: var(--color-text-primary, #182230);
+  border: 1px solid var(--color-border, #e4e7ec);
+  border-radius: var(--radius-sm, 6px);
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.12), 0 1px 3px -1px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  user-select: none;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 10;
+}
+
+/* Speech bubble arrows */
+.neuron-slider-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Tooltip Top (Arrow pointing down to thumb) */
+.neuron-slider-tooltip--top {
+  bottom: calc(100% + 8px);
+}
+.neuron-slider-tooltip--top::after {
+  top: 100%;
+  border-width: 4px 4px 0 4px;
+  border-color: #ffffff transparent transparent transparent;
+}
+.neuron-slider-tooltip--top::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: var(--color-border, #e4e7ec) transparent transparent transparent;
+  z-index: -1;
+}
+
+/* Tooltip Bottom (Arrow pointing up to thumb) */
+.neuron-slider-tooltip--bottom {
+  top: calc(100% + 8px);
+}
+.neuron-slider-tooltip--bottom::after {
+  bottom: 100%;
+  border-width: 0 4px 4px 4px;
+  border-color: transparent transparent #ffffff transparent;
+}
+.neuron-slider-tooltip--bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent var(--color-border, #e4e7ec) transparent;
+  z-index: -1;
+}
+
+/* Tooltip Visibility States */
+.neuron-slider-tooltip--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.neuron-slider-thumb:hover .neuron-slider-tooltip--hover,
+.neuron-slider-thumb--active .neuron-slider-tooltip--hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dark-theme .neuron-slider-tooltip,
+[data-theme="dark"] .neuron-slider-tooltip {
+  background-color: var(--slate-800, #182230);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.dark-theme .neuron-slider-tooltip--top::after,
+[data-theme="dark"] .neuron-slider-tooltip--top::after {
+  border-color: var(--slate-800, #182230) transparent transparent transparent;
+}
+.dark-theme .neuron-slider-tooltip--top::before,
+[data-theme="dark"] .neuron-slider-tooltip--top::before {
+  border-color: rgba(255, 255, 255, 0.15) transparent transparent transparent;
+}
+
+.dark-theme .neuron-slider-tooltip--bottom::after,
+[data-theme="dark"] .neuron-slider-tooltip--bottom::after {
+  border-color: transparent transparent var(--slate-800, #182230) transparent;
+}
+.dark-theme .neuron-slider-tooltip--bottom::before,
+[data-theme="dark"] .neuron-slider-tooltip--bottom::before {
+  border-color: transparent transparent rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* Text Values Below Thumbs (Column 2 in reference image) */
+.neuron-slider-thumb-label-below {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #667085);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.dark-theme .neuron-slider-thumb-label-below,
+[data-theme="dark"] .neuron-slider-thumb-label-below {
+  color: var(--slate-300, #d0d5dd);
+}
+
+/* Step Marks & Discrete Ticks */
+.neuron-slider-marks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.neuron-slider-tick {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--slate-400, #94a3b8);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+  z-index: 1;
+}
+
+.neuron-slider-tick--active {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.dark-theme .neuron-slider-tick {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.dark-theme .neuron-slider-tick--active {
+  background-color: #ffffff;
+}
+
+/* Discrete Text Labels beneath marks */
+.neuron-slider-marks-labels {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  margin-top: 8px;
+}
+
+.neuron-slider-mark-label {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--color-text-tertiary, #98a2b3);
+  font-weight: 500;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color 0.15s ease, font-weight 0.15s ease;
+}
+
+.neuron-slider-mark-label:hover {
+  color: var(--brand-600, #c3571c);
+}
+
+.neuron-slider-mark-label--active {
+  color: var(--color-text-primary, #182230);
+  font-weight: 600;
+}
+
+.dark-theme .neuron-slider-mark-label--active {
+  color: #ffffff;
+}
+
+/* Helper text & error feedback */
+.neuron-slider-helper {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary, #667085);
+  margin-top: 4px;
+}
+
+.neuron-slider-error {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--rose-600, #e11d48);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+
+

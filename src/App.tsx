@@ -40,6 +40,9 @@ import DatePickerView from './views/DatePickerView';
 import ModalView from './views/ModalView';
 import DropdownView from './views/DropdownView';
 import TableView from './views/TableView';
+import TreeView from './views/TreeView';
+import TextAreaView from './views/TextAreaView';
+import SliderView from './views/SliderView';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
@@ -147,12 +150,39 @@ function PlaceholderView({ title, category }: PlaceholderViewProps) {
   );
 }
 
+function getTabFromHash(hashStr: string): string | null {
+  const raw = hashStr.replace(/^#\/?/, '').trim();
+  if (!raw) return null;
+  if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
+  if (raw.startsWith('comp-')) return raw;
+  if (raw === 'overview' || raw === 'colors' || raw === 'typography' || raw === 'spacing' || raw === 'foundation-overview') return raw;
+  return `comp-${raw}`;
+}
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState(() => getTabFromHash(window.location.hash) || 'overview');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
   const { language, setLanguage, t } = useLanguage();
+
+  // Sync hash changes from browser URL
+  useEffect(() => {
+    const handleHashChange = () => {
+      const tab = getTabFromHash(window.location.hash);
+      if (tab) setActiveTab(tab);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Update hash when activeTab changes
+  useEffect(() => {
+    const targetHash = activeTab.replace(/^comp-/, '');
+    if (window.location.hash.replace(/^#\/?/, '') !== targetHash) {
+      window.location.hash = targetHash;
+    }
+  }, [activeTab]);
 
   // Dynamically constructed menu structure based on active language translations
   const MENU_STRUCTURE: MenuItem[] = useMemo(() => [
@@ -221,9 +251,12 @@ export default function App() {
         { id: 'comp-modal', label: t.nav.compModal },
         { id: 'comp-progress', label: t.nav.compProgress },
         { id: 'comp-radio', label: t.nav.compRadio },
+        { id: 'comp-slider', label: t.nav.compSlider || 'Slider' },
         { id: 'comp-table', label: t.nav.compTable },
+        { id: 'comp-textarea', label: t.nav.compTextArea || 'Text Area' },
         { id: 'comp-toggle', label: t.nav.compToggle },
         { id: 'comp-tooltip', label: t.nav.compTooltip },
+        { id: 'comp-tree', label: t.nav.compTree || 'Tree View' },
       ],
     },
     {
@@ -412,6 +445,8 @@ export default function App() {
         return <DatePickerView setActiveTab={setActiveTab} />;
       case 'comp-radio':
         return <RadioView setActiveTab={setActiveTab} />;
+      case 'comp-slider':
+        return <SliderView setActiveTab={setActiveTab} />;
       case 'comp-alert':
         return <AlertView setActiveTab={setActiveTab} />;
       case 'comp-avatar':
@@ -427,6 +462,10 @@ export default function App() {
         return <ProgressView setActiveTab={setActiveTab} />;
       case 'comp-table':
         return <TableView setActiveTab={setActiveTab} />;
+      case 'comp-textarea':
+        return <TextAreaView setActiveTab={setActiveTab} />;
+      case 'comp-tree':
+        return <TreeView setActiveTab={setActiveTab} />;
       default:
         return (
           <PlaceholderView 

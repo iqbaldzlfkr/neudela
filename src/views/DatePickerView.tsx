@@ -381,7 +381,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                         Single Mode
                       </span>
                     </div>
-                    <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                       {dp.cardSingleDesc}
                     </p>
                   </div>
@@ -437,7 +437,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                         Range Mode
                       </span>
                     </div>
-                    <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                       {dp.cardRangeDesc}
                     </p>
                   </div>
@@ -496,7 +496,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                         Multi-Month & Presets
                       </span>
                     </div>
-                    <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                       {dp.cardDoubleDesc}
                     </p>
                   </div>
@@ -815,7 +815,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <Plane size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenItem1Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -829,7 +829,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <BarChart2 size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenItem2Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -843,7 +843,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <Zap size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenItem3Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -857,7 +857,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <CalendarCheck size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenItem4Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -894,7 +894,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <UserCheck size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenNotItem1Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -908,7 +908,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <SlidersHorizontal size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenNotItem2Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -922,7 +922,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <Smartphone size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenNotItem3Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -936,7 +936,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                       <Clock size={15} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                         {dp.whenNotItem4Title}
                       </div>
                       <div style={{ fontSize: 'var(--fs-text-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -973,7 +973,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>{dp.alt1Title}</strong>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>{dp.alt1Title}</strong>
                     <span style={{ fontSize: '10px', fontWeight: 600, padding: '2px 6px', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--brand-50)', color: 'var(--brand-700)' }}>
                       {dp.alt1Tag}
                     </span>
@@ -995,7 +995,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>{dp.alt2Title}</strong>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>{dp.alt2Title}</strong>
                     <span style={{ fontSize: '10px', fontWeight: 600, padding: '2px 6px', borderRadius: 'var(--radius-full)', backgroundColor: 'rgba(99, 102, 241, 0.1)', color: '#6366f1' }}>
                       {dp.alt2Tag}
                     </span>
@@ -1017,7 +1017,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>{dp.alt3Title}</strong>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>{dp.alt3Title}</strong>
                     <span style={{ fontSize: '10px', fontWeight: 600, padding: '2px 6px', borderRadius: 'var(--radius-full)', backgroundColor: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
                       {dp.alt3Tag}
                     </span>
@@ -1300,7 +1300,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--brand-500)', flexShrink: 0 }} />
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>
                       {dp.a11yCard1Title}
                     </strong>
                   </div>
@@ -1324,7 +1324,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#6366f1', flexShrink: 0 }} />
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>
                       {dp.a11yCard2Title}
                     </strong>
                   </div>
@@ -1348,7 +1348,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#10b981', flexShrink: 0 }} />
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>
                       {dp.a11yCard3Title}
                     </strong>
                   </div>
@@ -1372,7 +1372,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ec4899', flexShrink: 0 }} />
-                    <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>
+                    <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>
                       {dp.a11yCard4Title}
                     </strong>
                   </div>
@@ -1681,7 +1681,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'var(--space-2)', paddingTop: 'var(--space-2)', borderTop: '1px solid var(--color-border)' }}>
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>{isId ? 'Mulai dari' : 'Starting from'} </span>
-                      <strong style={{ fontSize: '13px', color: 'var(--brand-700)' }}>Rp 1.850.000</strong>
+                      <strong style={{ fontSize: '12px', color: 'var(--brand-700)' }}>Rp 1.850.000</strong>
                     </div>
                     <NeuronButton
                       type="button"
@@ -1805,17 +1805,17 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', marginTop: '4px' }}>
                     <div style={{ padding: '8px', backgroundColor: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
                       <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>{isId ? 'Pendapatan' : 'Revenue'}</div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>$128.4K</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>$128.4K</div>
                       <div style={{ fontSize: '9px', color: '#10b981' }}>+14.2% MoM</div>
                     </div>
                     <div style={{ padding: '8px', backgroundColor: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
                       <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>{isId ? 'Permintaan API' : 'Requests'}</div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>1.42M</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>1.42M</div>
                       <div style={{ fontSize: '9px', color: '#6366f1' }}>99.98% Up</div>
                     </div>
                     <div style={{ padding: '8px', backgroundColor: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
                       <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>{isId ? 'Error Rate' : 'Error Rate'}</div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>0.02%</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>0.02%</div>
                       <div style={{ fontSize: '9px', color: '#10b981' }}>Healthy</div>
                     </div>
                   </div>
@@ -1964,7 +1964,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Sprint 42: Design System Core</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Sprint 42: Design System Core</div>
                       <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>14 Days Duration · 25 Issues</div>
                     </div>
                     <NeuronAvatarGroup size="xs" max={3}>

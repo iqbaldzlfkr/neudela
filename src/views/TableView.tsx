@@ -231,6 +231,10 @@ export default function TableView({ setActiveTab }: TableViewProps) {
   // Playbook user selection state
   const [selectedUserKeys, setSelectedUserKeys] = useState<(string | number)[]>([]);
 
+  // Interactive Variant feedback states
+  const [clickedRowData, setClickedRowData] = useState<any | null>(null);
+  const [clickedCellData, setClickedCellData] = useState<{ name: string; id: string } | null>(null);
+
   // Anatomy interactive highlight zone state
   const [activeAnatomyZone, setActiveAnatomyZone] = useState<number | null>(null);
 
@@ -333,7 +337,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
         label: 'Category',
         sortable: specSort,
         render: (value) => (
-          <span style={{ color: 'var(--color-text-secondary)', fontSize: '13px' }}>
+          <span style={{ color: 'var(--color-text-secondary)', fontSize: '12px' }}>
             {value}
           </span>
         ),
@@ -415,7 +419,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
         label: 'Created',
         sortable: specSort,
         render: (value) => (
-          <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap', fontSize: '13px' }}>
+          <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap', fontSize: '12px' }}>
             {value}
           </span>
         ),
@@ -1322,6 +1326,101 @@ export default function TableView({ setActiveTab }: TableViewProps) {
                   variant="bordered"
                 />
               </div>
+
+              {/* Clickable Rows */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: 'var(--space-2)' }}>
+                  <h3 className="section-subtitle" style={{ margin: 0 }}>{gl.variantClickableRowTitle}</h3>
+                  {clickedRowData && (
+                    <div style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '6px', 
+                      fontSize: '12px', 
+                      padding: '4px 10px', 
+                      backgroundColor: 'rgba(223, 126, 48, 0.1)', 
+                      border: '1px solid var(--brand-300)',
+                      borderRadius: 'var(--radius-full)',
+                      color: 'var(--brand-700)'
+                    }}>
+                      <CheckCircle2 size={13} color="var(--brand-600)" />
+                      <span>{isId ? `Baris terpilih: ${clickedRowData.projectName} (ID: ${clickedRowData.id})` : `Selected row: ${clickedRowData.projectName} (ID: ${clickedRowData.id})`}</span>
+                      <button 
+                        type="button"
+                        onClick={() => setClickedRowData(null)}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', marginLeft: '4px', color: 'var(--brand-600)' }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <p className="section-description" style={{ marginBottom: 'var(--space-4)' }}>{gl.variantClickableRowDesc}</p>
+                <NeuronTable
+                  columns={[
+                    { key: 'no', label: 'No', width: 60 },
+                    { key: 'projectName', label: 'Project Name', sortable: true },
+                    { key: 'owner', label: 'Owner' },
+                    { key: 'status', label: 'Status', render: (v) => <NeuronBadge variant={v === 'Approved' ? 'success' : v === 'Active' ? 'brand' : 'warning'} pill>{v}</NeuronBadge> },
+                    { key: 'recordsCount', label: 'Records', align: 'right', render: (v) => Number(v).toLocaleString() },
+                    { key: 'created', label: 'Created' },
+                  ]}
+                  data={DUMMY_PROJECT_DATA.slice(0, 4)}
+                  rowKey="id"
+                  variant="default"
+                  onRowClick={(record) => setClickedRowData(record)}
+                />
+              </div>
+
+              {/* Clickable Name / Value */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: 'var(--space-2)' }}>
+                  <h3 className="section-subtitle" style={{ margin: 0 }}>{gl.variantClickableCellTitle}</h3>
+                  {clickedCellData && (
+                    <div style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '6px', 
+                      fontSize: '12px', 
+                      padding: '4px 10px', 
+                      backgroundColor: 'rgba(14, 165, 233, 0.1)', 
+                      border: '1px solid #7dd3fc',
+                      borderRadius: 'var(--radius-full)',
+                      color: '#0369a1'
+                    }}>
+                      <FileText size={13} color="#0284c7" />
+                      <span>{isId ? `Tautan diklik: "${clickedCellData.name}" (${clickedCellData.id})` : `Link clicked: "${clickedCellData.name}" (${clickedCellData.id})`}</span>
+                      <button 
+                        type="button"
+                        onClick={() => setClickedCellData(null)}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', marginLeft: '4px', color: '#0369a1' }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <p className="section-description" style={{ marginBottom: 'var(--space-4)' }}>{gl.variantClickableCellDesc}</p>
+                <NeuronTable
+                  columns={[
+                    { key: 'no', label: 'No', width: 60 },
+                    { 
+                      key: 'projectName', 
+                      label: 'Project Name (Clickable)', 
+                      sortable: true,
+                      clickable: true,
+                      onClick: (val, record) => setClickedCellData({ name: String(val), id: String(record.id) })
+                    },
+                    { key: 'owner', label: 'Owner' },
+                    { key: 'status', label: 'Status', render: (v) => <NeuronBadge variant={v === 'Approved' ? 'success' : v === 'Active' ? 'brand' : 'warning'} pill>{v}</NeuronBadge> },
+                    { key: 'recordsCount', label: 'Records', align: 'right', render: (v) => Number(v).toLocaleString() },
+                    { key: 'created', label: 'Created' },
+                  ]}
+                  data={DUMMY_PROJECT_DATA.slice(2, 6)}
+                  rowKey="id"
+                  variant="default"
+                />
+              </div>
             </div>
           </div>
 
@@ -1689,37 +1788,37 @@ export default function TableView({ setActiveTab }: TableViewProps) {
               <div>
                 <RuleCard type="do">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.do1Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do1Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do1Desc}</p>
                 </RuleCard>
               </div>
               <div>
                 <RuleCard type="dont">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.dont1Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont1Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont1Desc}</p>
                 </RuleCard>
               </div>
               <div>
                 <RuleCard type="do">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.do2Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do2Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do2Desc}</p>
                 </RuleCard>
               </div>
               <div>
                 <RuleCard type="dont">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.dont2Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont2Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont2Desc}</p>
                 </RuleCard>
               </div>
               <div>
                 <RuleCard type="do">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.do3Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do3Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.do3Desc}</p>
                 </RuleCard>
               </div>
               <div>
                 <RuleCard type="dont">
                   <h4 style={{ fontWeight: 600, marginBottom: 4 }}>{gl.dont3Title}</h4>
-                  <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont3Desc}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: 0 }}>{gl.dont3Desc}</p>
                 </RuleCard>
               </div>
             </div>
@@ -1733,15 +1832,15 @@ export default function TableView({ setActiveTab }: TableViewProps) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-4)', marginTop: 'var(--space-6)' }}>
               <div style={{ padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-subtle)' }}>
                 <h4 style={{ fontWeight: 600, fontSize: '14px', marginBottom: '6px' }}>{gl.a11yRoleTitle}</h4>
-                <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yRoleDesc}</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yRoleDesc}</p>
               </div>
               <div style={{ padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-subtle)' }}>
                 <h4 style={{ fontWeight: 600, fontSize: '14px', marginBottom: '6px' }}>{gl.a11yKeyboardTitle}</h4>
-                <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yKeyboardDesc}</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yKeyboardDesc}</p>
               </div>
               <div style={{ padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-subtle)' }}>
                 <h4 style={{ fontWeight: 600, fontSize: '14px', marginBottom: '6px' }}>{gl.a11yScreenReaderTitle}</h4>
-                <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yScreenReaderDesc}</p>
+                <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>{gl.a11yScreenReaderDesc}</p>
               </div>
             </div>
           </div>
@@ -1804,7 +1903,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
                   backgroundColor: 'rgba(223, 126, 48, 0.08)',
                   border: '1px solid rgba(223, 126, 48, 0.3)',
                   color: 'var(--brand-700)',
-                  fontSize: '13px',
+                  fontSize: '12px',
                   fontWeight: 600,
                 }}>
                   <span>{selectedUserKeys.length} user(s) selected for bulk management</span>
@@ -1895,7 +1994,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
                   {
                     key: 'lastActive',
                     label: 'Last Active',
-                    render: (v) => <span style={{ color: 'var(--color-text-tertiary)', fontSize: '13px' }}>{v}</span>,
+                    render: (v) => <span style={{ color: 'var(--color-text-tertiary)', fontSize: '12px' }}>{v}</span>,
                   },
                   {
                     key: 'actions',
@@ -2254,7 +2353,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-radio', label: t.nav.compRadio }}
+        prev={{ id: 'comp-slider', label: t.nav.compSlider || 'Slider' }}
         next={{ id: 'comp-toggle', label: t.nav.compToggle }}
         setActiveTab={setActiveTab}
       />

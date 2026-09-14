@@ -1,5 +1,16 @@
 import NextPrevious from '../components/NextPrevious';
 import { useLanguage } from '../context/LanguageContext';
+import {
+  Palette,
+  LayoutGrid,
+  Type,
+  Ruler,
+  Sparkles,
+  ArrowRight,
+  Sliders,
+  ShieldCheck,
+  Layers,
+} from 'lucide-react';
 
 interface FoundationOverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -10,280 +21,265 @@ export default function FoundationOverview({ setActiveTab }: FoundationOverviewP
 
   const cards = [
     {
-      id: 'accessibility',
-      title: t.foundationOverview.accessibilityTitle,
-      desc: t.foundationOverview.accessibilityDesc,
-      badge: 'A11y Standards',
-      action: null,
-      renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* A11y Visual */}
-          <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: 'var(--radius-full)',
-            border: '2.5px dashed var(--color-success)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-success)',
-            animation: 'spinSlow 20s linear infinite',
-          }}>
-            <svg width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" style={{ transform: 'rotate(calc(-1 * var(--rotation, 0deg)))' }}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.109A9.342 9.342 0 0012 21a9.342 9.342 0 00-3-1.763v-.109m0-19.128c-.813 0-1.619.13-2.375.372a4.125 4.125 0 00-4.121 5.922 4.125 4.125 0 007.533 2.493M9 19.128v-.003c0-1.113.285-2.16.786-3.07M9 19.128v.109A9.342 9.342 0 0112 21" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 0v6" />
-            </svg>
-          </div>
-        </div>
-      )
-    },
-    {
       id: 'colors',
-      title: t.foundationOverview.colorSystemTitle,
-      desc: t.foundationOverview.colorSystemDesc,
-      badge: 'Colors System',
+      title: t.foundationOverview.colorsTitle,
+      desc: t.foundationOverview.colorsDesc,
+      badge: t.foundationOverview.colorsBadge,
       action: 'colors',
       renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(223, 126, 48, 0.05) 0%, rgba(223, 126, 48, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-1.5)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Swatches Visual */}
-          {['#fdf7ed', '#f1ce96', '#df7e30', '#a23c1b', '#3e130a'].map((color, i) => (
-            <div
-              key={i}
-              style={{
-                width: '32px',
-                height: '56px',
-                backgroundColor: color,
-                borderRadius: 'var(--radius-md)',
-                boxShadow: 'var(--shadow-sm)',
-                transform: `rotate(${(i - 2) * 8}deg) translateY(${Math.abs(i - 2) * 4}px)`,
-                border: '1px solid var(--color-border)',
-              }}
-            />
-          ))}
+        <div className="foundation-card-visual foundation-visual-colors">
+          <div className="foundation-swatches-fan">
+            {[
+              { color: '#df7e30', rotate: -16, y: 10 },
+              { color: '#a23c1b', rotate: -8, y: 4 },
+              { color: '#f1ce96', rotate: 0, y: 0 },
+              { color: '#10b981', rotate: 8, y: 4 },
+              { color: '#0284c7', rotate: 16, y: 10 },
+            ].map((swatch, i) => (
+              <div
+                key={i}
+                className="foundation-swatch-chip"
+                style={{
+                  backgroundColor: swatch.color,
+                  transform: `rotate(${swatch.rotate}deg) translateY(${swatch.y}px)`,
+                }}
+              />
+            ))}
+          </div>
+          <div className="foundation-visual-tag">
+            <span className="foundation-tag-dot" style={{ backgroundColor: '#df7e30' }} />
+            <span>Tokens · Hex</span>
+          </div>
         </div>
-      )
+      ),
     },
     {
-      id: 'elevation',
-      title: t.foundationOverview.elevationTitle,
-      desc: t.foundationOverview.elevationDesc,
-      badge: 'Elevation Levels',
-      action: null,
+      id: 'grid',
+      title: t.foundationOverview.gridTitle,
+      desc: t.foundationOverview.gridDesc,
+      badge: t.foundationOverview.gridBadge,
+      action: 'grid',
       renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-3)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Elevation Visual */}
-          {['var(--shadow-sm)', 'var(--shadow-md)', 'var(--shadow-lg)'].map((shadow, i) => (
-            <div
-              key={i}
-              style={{
-                width: '40px',
-                height: '56px',
-                backgroundColor: 'var(--color-bg-surface)',
-                border: '1px solid var(--color-border)',
-                borderRadius: 'var(--radius-md)',
-                boxShadow: shadow,
-                transform: `translateY(${-i * 4}px)`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '9px',
-                color: 'var(--color-text-tertiary)',
-                fontWeight: 'var(--font-weight-semibold)',
-              }}
-            >
-              Lvl {i + 1}
+        <div className="foundation-card-visual foundation-visual-grid">
+          <div className="foundation-grid-frame">
+            <div className="foundation-grid-cols">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} className="foundation-grid-col-bar" />
+              ))}
             </div>
-          ))}
+            <div className="foundation-grid-blocks">
+              <div className="foundation-grid-span span-4">col-4</div>
+              <div className="foundation-grid-span span-8">col-8 (fluid)</div>
+            </div>
+          </div>
+          <div className="foundation-visual-tag">
+            <span className="foundation-tag-dot" style={{ backgroundColor: '#0284c7' }} />
+            <span>12 Col · Fluid</span>
+          </div>
         </div>
-      )
+      ),
     },
     {
-      id: 'radius',
-      title: t.foundationOverview.radiusTitle,
-      desc: t.foundationOverview.radiusDesc,
-      badge: 'Corner Shapes',
-      action: null,
+      id: 'icons',
+      title: t.foundationOverview.iconsTitle,
+      desc: t.foundationOverview.iconsDesc,
+      badge: t.foundationOverview.iconsBadge,
+      action: 'icons',
       renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-3)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Radius Visual */}
-          {['4px', '8px', '16px', '9999px'].map((radius, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                border: '2px solid var(--color-primary)',
-                borderRadius: radius,
-                backgroundColor: 'rgba(223, 126, 48, 0.05)',
-              }} />
-              <span style={{ fontSize: '9px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '6px' }}>
-                {radius === '9999px' ? 'Full' : radius}
-              </span>
-            </div>
-          ))}
+        <div className="foundation-card-visual foundation-visual-icons">
+          <div className="foundation-icons-cluster">
+            {[
+              Palette,
+              LayoutGrid,
+              Type,
+              Ruler,
+              Sparkles,
+              ShieldCheck,
+            ].map((IconComponent, i) => (
+              <div key={i} className="foundation-icon-pill">
+                <IconComponent size={17} strokeWidth={1.9} />
+              </div>
+            ))}
+          </div>
+          <div className="foundation-visual-tag">
+            <span className="foundation-tag-dot" style={{ backgroundColor: '#8b5cf6' }} />
+            <span>24px Grid</span>
+          </div>
         </div>
-      )
+      ),
     },
     {
       id: 'spacing',
-      title: t.foundationOverview.spacerTitle,
-      desc: t.foundationOverview.spacerDesc,
-      badge: '4px Grid Scale',
+      title: t.foundationOverview.spacingTitle,
+      desc: t.foundationOverview.spacingDesc,
+      badge: t.foundationOverview.spacingBadge,
       action: 'spacing',
       renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(2, 132, 199, 0.15) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--space-2)',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Spacer Visual */}
-          {[16, 24, 32, 40].map((width, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{
-                width: `${width}px`,
-                height: '12px',
-                backgroundColor: 'var(--color-primary)',
-                opacity: 0.3 + (i * 0.2),
-                borderRadius: '2px',
-              }} />
-              <span style={{ fontSize: '8px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>
-                {width}px
-              </span>
-            </div>
-          ))}
+        <div className="foundation-card-visual foundation-visual-spacing">
+          <div className="foundation-spacing-scale">
+            {[
+              { width: 32, label: 'space-2 (8px)' },
+              { width: 64, label: 'space-4 (16px)' },
+              { width: 96, label: 'space-6 (24px)' },
+              { width: 128, label: 'space-8 (32px)' },
+            ].map((step, i) => (
+              <div key={i} className="foundation-spacing-item">
+                <div
+                  className="foundation-spacing-bar"
+                  style={{ width: `${step.width}px` }}
+                />
+                <span className="foundation-spacing-label">{step.label}</span>
+              </div>
+            ))}
+          </div>
+          <div className="foundation-visual-tag">
+            <span className="foundation-tag-dot" style={{ backgroundColor: '#10b981' }} />
+            <span>4px Base Unit</span>
+          </div>
         </div>
-      )
+      ),
     },
     {
       id: 'typography',
       title: t.foundationOverview.typographyTitle,
       desc: t.foundationOverview.typographyDesc,
-      badge: 'Inter Typeface',
+      badge: t.foundationOverview.typographyBadge,
       action: 'typography',
       renderVisual: () => (
-        <div style={{
-          height: '140px',
-          background: 'linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(100, 116, 139, 0.15) 100%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid var(--color-border)',
-        }}>
-          {/* Typography Visual */}
-          <span style={{ fontSize: '48px', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', lineHeight: 1 }}>Aa</span>
-          <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>Inter Font Family</span>
+        <div className="foundation-card-visual foundation-visual-typography">
+          <div className="foundation-typo-specimen">
+            <span className="foundation-typo-glyph">Aa</span>
+            <div className="foundation-typo-details">
+              <span className="foundation-typo-line">Inter</span>
+              <span className="foundation-typo-scale">400 · 500 · 600 · 700</span>
+            </div>
+          </div>
+          <div className="foundation-visual-tag">
+            <span className="foundation-tag-dot" style={{ backgroundColor: '#df7e30' }} />
+            <span>Font: Inter</span>
+          </div>
         </div>
-      )
+      ),
     },
   ];
 
   return (
-    <div style={{ animation: 'fadeIn 0.5s ease-out' }}>
+    <div className="foundation-overview-container">
       {/* Page Header */}
       <div className="page-header">
-        <span style={{ 
-          fontSize: 'var(--fs-text-xs)', 
-          fontWeight: 'var(--font-weight-bold)', 
-          color: 'var(--color-primary)', 
-          textTransform: 'uppercase', 
-          letterSpacing: '1px',
-          display: 'block',
-          marginBottom: 'var(--space-2)'
-        }}>
+        <span
+          style={{
+            fontSize: 'var(--fs-text-xs)',
+            fontWeight: 'var(--font-weight-bold)',
+            color: 'var(--color-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            marginBottom: 'var(--space-2)',
+          }}
+        >
+          <Layers size={13} strokeWidth={2.4} />
           {t.foundationOverview.categoryLabel}
         </span>
         <h1 className="page-title">{t.foundationOverview.pageTitle}</h1>
-        <p className="page-subtitle">
-          {t.foundationOverview.pageSubtitle}
-        </p>
+        <p className="page-subtitle">{t.foundationOverview.pageSubtitle}</p>
+
+        {/* Highlight Pills */}
+        <div className="foundation-header-pills">
+          <div className="foundation-pill-item">
+            <span className="foundation-pill-dot" />
+            {t.foundationOverview.pillModules}
+          </div>
+          <div className="foundation-pill-item">
+            <span className="foundation-pill-dot" style={{ backgroundColor: '#0284c7' }} />
+            {t.foundationOverview.pillTokens}
+          </div>
+          <div className="foundation-pill-item">
+            <span className="foundation-pill-dot" style={{ backgroundColor: '#10b981' }} />
+            {t.foundationOverview.pillWcag}
+          </div>
+        </div>
       </div>
 
-      {/* Cards Grid */}
-      <div className="foundation-overview-grid" style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: 'var(--space-6)',
-        marginBottom: 'var(--space-12)',
-      }}>
-        {cards.map(card => {
-          const isClickable = !!card.action;
-          return (
-            <div
-              key={card.id}
-              onClick={isClickable ? () => setActiveTab(card.action!) : undefined}
-              className="section-card"
-              style={{
-                padding: 0,
-                overflow: 'hidden',
-                cursor: isClickable ? 'pointer' : 'default',
-                transition: 'all 0.25s ease',
-                display: 'flex',
-                flexDirection: 'column',
-                margin: 0
-              }}
-            >
-              {card.renderVisual()}
-              <div style={{ padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-                  <h3 style={{ fontSize: 'var(--fs-text-lg)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)' }}>
-                    {card.title}
-                  </h3>
-                  <span style={{
-                    fontSize: '10px',
-                    fontFamily: 'JetBrains Mono',
-                    padding: '2px 8px',
-                    borderRadius: 'var(--radius-full)',
-                    backgroundColor: 'var(--color-bg-canvas)',
-                    border: '1px solid var(--color-border)',
-                    color: 'var(--color-text-tertiary)',
-                  }}>
-                    {card.badge}
-                  </span>
+      {/* Foundation Items Cards Grid */}
+      <div className="foundation-cards-grid">
+        {cards.map((card) => (
+          <div
+            key={card.id}
+            onClick={() => setActiveTab(card.action)}
+            className="component-overview-card"
+          >
+            {/* Visual Preview */}
+            {card.renderVisual()}
+
+            {/* Card Body */}
+            <div className="component-overview-body">
+              <div className="component-overview-header">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h3 className="component-overview-title">{card.title}</h3>
+                  {card.id === 'typography' && (
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontWeight: 700,
+                        color: 'var(--color-primary)',
+                        backgroundColor: 'rgba(223, 126, 48, 0.1)',
+                        padding: '1px 7px',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid rgba(223, 126, 48, 0.25)',
+                      }}
+                    >
+                      Inter
+                    </span>
+                  )}
                 </div>
-                <p style={{ fontSize: 'var(--fs-text-sm)', color: 'var(--color-text-secondary)', lineHeight: '1.6', margin: 0, flex: 1 }}>
-                  {card.desc}
-                </p>
+                <span className="component-overview-badge">{card.badge}</span>
+              </div>
+              <p className="component-overview-desc">{card.desc}</p>
+              <div className="component-overview-link">
+                {t.foundationOverview.exploreModule}
+                <ArrowRight size={12} className="component-overview-arrow" />
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
+      {/* Foundation Architecture Section */}
+      <div className="foundation-arch-section">
+        <div className="foundation-arch-header">
+          <h2 className="foundation-arch-title">{t.foundationOverview.archTitle}</h2>
+          <p className="foundation-arch-subtitle">{t.foundationOverview.archSubtitle}</p>
+        </div>
+        <div className="foundation-arch-grid">
+          <div className="foundation-arch-card">
+            <div className="foundation-arch-icon token">
+              <Sliders size={18} strokeWidth={2} />
+            </div>
+            <h4 className="foundation-arch-item-title">{t.foundationOverview.archTokenTitle}</h4>
+            <p className="foundation-arch-item-desc">{t.foundationOverview.archTokenDesc}</p>
+          </div>
+          <div className="foundation-arch-card">
+            <div className="foundation-arch-icon a11y">
+              <ShieldCheck size={18} strokeWidth={2} />
+            </div>
+            <h4 className="foundation-arch-item-title">{t.foundationOverview.archA11yTitle}</h4>
+            <p className="foundation-arch-item-desc">{t.foundationOverview.archA11yDesc}</p>
+          </div>
+          <div className="foundation-arch-card">
+            <div className="foundation-arch-icon responsive">
+              <LayoutGrid size={18} strokeWidth={2} />
+            </div>
+            <h4 className="foundation-arch-item-title">{t.foundationOverview.archResponsiveTitle}</h4>
+            <p className="foundation-arch-item-desc">{t.foundationOverview.archResponsiveDesc}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Next & Previous Navigation */}
       <NextPrevious
         prev={{ id: 'overview', label: t.nav.overview }}
         next={{ id: 'colors', label: t.nav.colors }}

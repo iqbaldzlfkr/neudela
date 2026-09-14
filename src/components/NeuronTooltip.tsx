@@ -81,13 +81,13 @@ function computePosition(
     else y = top + height - th;
   }
 
-  // Viewport clamp
-  const vpw = window.innerWidth;
-  const vph = window.innerHeight;
-  if (x < 8) x = 8;
+  // Viewport clamp (ensure tooltip never goes offscreen into negative coordinates)
+  const vpw = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0, 800);
+  const vph = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0, 600);
   if (x + tw > vpw - 8) x = vpw - tw - 8;
-  if (y < 8) y = 8;
+  if (x < 8) x = 8;
   if (y + th > vph - 8) y = vph - th - 8;
+  if (y < 8) y = 8;
 
   return { x, y };
 }
@@ -167,7 +167,7 @@ const VARIANT_STYLES: Record<NeuronTooltipVariant, { bg: string; color: string; 
 const SIZE_STYLES: Record<NeuronTooltipSize, { maxWidth: number; fontSize: string; padding: string; borderRadius: string }> = {
   sm: { maxWidth: 160, fontSize: '11px', padding: '5px 10px',  borderRadius: '6px' },
   md: { maxWidth: 240, fontSize: '12px', padding: '7px 12px',  borderRadius: '8px' },
-  lg: { maxWidth: 360, fontSize: '13px', padding: '10px 14px', borderRadius: '10px' },
+  lg: { maxWidth: 360, fontSize: '12px', padding: '10px 14px', borderRadius: '10px' },
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────

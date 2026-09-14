@@ -86,7 +86,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
                 padding: '6px 10px 6px 14px',
                 boxShadow: 'var(--shadow-sm)',
                 fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '13px',
+                fontSize: '12px',
                 color: 'var(--color-text-primary)'
               }}
             >
@@ -206,29 +206,21 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
         </p>
 
         {/* Project Selector Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: 'var(--space-2)',
-          borderBottom: '1px solid var(--color-border)',
-          marginBottom: 'var(--space-6)',
-          paddingBottom: 'var(--space-2)',
-          overflowX: 'auto'
-        }}>
+        <div 
+          className="comp-tab-bar"
+          style={{
+            marginTop: 0,
+            marginBottom: 'var(--space-8)',
+            borderBottom: '2px solid var(--color-border)'
+          }}
+        >
           <button
             onClick={() => setProjectType('react')}
+            className={`comp-tab ${projectType === 'react' ? 'active' : ''}`}
             style={{
-              background: 'none',
-              border: 'none',
-              padding: 'var(--space-2) var(--space-4)',
-              fontSize: 'var(--fs-text-sm)',
-              fontWeight: 'var(--font-weight-semibold)',
-              color: projectType === 'react' ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-              borderBottom: projectType === 'react' ? '2px solid var(--color-primary)' : '2px solid transparent',
-              cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               gap: 'var(--space-2)',
-              transition: 'all 0.2s ease',
               whiteSpace: 'nowrap'
             }}
           >
@@ -242,10 +234,11 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
             <span style={{ 
               fontSize: '10px', 
               fontWeight: 700, 
-              backgroundColor: 'rgba(223, 126, 48, 0.15)', 
-              color: 'var(--brand-600)', 
+              backgroundColor: projectType === 'react' ? 'rgba(223, 126, 48, 0.15)' : 'var(--color-bg-subtle)', 
+              color: projectType === 'react' ? 'var(--brand-600)' : 'var(--color-text-tertiary)', 
               padding: '2px 6px', 
-              borderRadius: 'var(--radius-xs)' 
+              borderRadius: 'var(--radius-xs)',
+              marginLeft: '2px'
             }}>
               Primary
             </span>
@@ -253,19 +246,11 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
 
           <button
             onClick={() => setProjectType('vue')}
+            className={`comp-tab ${projectType === 'vue' ? 'active' : ''}`}
             style={{
-              background: 'none',
-              border: 'none',
-              padding: 'var(--space-2) var(--space-4)',
-              fontSize: 'var(--fs-text-sm)',
-              fontWeight: 'var(--font-weight-semibold)',
-              color: projectType === 'vue' ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-              borderBottom: projectType === 'vue' ? '2px solid var(--color-primary)' : '2px solid transparent',
-              cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               gap: 'var(--space-2)',
-              transition: 'all 0.2s ease',
               whiteSpace: 'nowrap'
             }}
           >
@@ -277,19 +262,11 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
 
           <button
             onClick={() => setProjectType('html')}
+            className={`comp-tab ${projectType === 'html' ? 'active' : ''}`}
             style={{
-              background: 'none',
-              border: 'none',
-              padding: 'var(--space-2) var(--space-4)',
-              fontSize: 'var(--fs-text-sm)',
-              fontWeight: 'var(--font-weight-semibold)',
-              color: projectType === 'html' ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-              borderBottom: projectType === 'html' ? '2px solid var(--color-primary)' : '2px solid transparent',
-              cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               gap: 'var(--space-2)',
-              transition: 'all 0.2s ease',
               whiteSpace: 'nowrap'
             }}
           >

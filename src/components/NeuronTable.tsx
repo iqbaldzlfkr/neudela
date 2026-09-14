@@ -25,6 +25,10 @@ export interface NeuronTableColumn<T = any> {
   align?: 'left' | 'center' | 'right';
   /** Make column sticky to left or right when table scrolls horizontally */
   sticky?: 'left' | 'right';
+  /** Make cell value clickable as an interactive link */
+  clickable?: boolean;
+  /** Callback fired when clickable cell is clicked */
+  onClick?: (value: any, record: T, index: number, event: React.MouseEvent) => void;
   /** Custom render function for the cell content */
   render?: (value: any, record: T, index: number) => React.ReactNode;
 }
@@ -58,6 +62,8 @@ export interface NeuronTableProps<T = any> {
   selectedRowKeys?: (string | number)[];
   /** Callback fired when row selection changes */
   onSelectChange?: (selectedKeys: (string | number)[], selectedRows: T[]) => void;
+  /** Callback fired when a table row is clicked */
+  onRowClick?: (record: T, index: number, event: React.MouseEvent<HTMLTableRowElement>) => void;
   /** Controlled active sort column key */
   sortColumn?: string;
   /** Controlled active sort direction */
@@ -121,6 +127,7 @@ export default function NeuronTable<T extends Record<string, any>>({
   selectable = false,
   selectedRowKeys: controlledSelectedKeys,
   onSelectChange,
+  onRowClick,
   sortColumn: controlledSortColumn,
   sortDirection: controlledSortDirection,
   onSort,
@@ -579,11 +586,15 @@ export default function NeuronTable<T extends Record<string, any>>({
                 return (
                   <tr
                     key={String(key)}
-                    className={`neuron-table__tr ${isSelected ? 'neuron-table__tr--selected' : ''}`}
+                    className={`neuron-table__tr ${isSelected ? 'neuron-table__tr--selected' : ''} ${onRowClick ? 'neuron-table__tr--clickable' : ''}`}
+                    onClick={onRowClick ? (e) => onRowClick(record, rIndex, e) : undefined}
                   >
                     {/* Row Checkbox */}
                     {selectable && (
-                      <td className="neuron-table__td neuron-table__td--checkbox">
+                      <td 
+                        className="neuron-table__td neuron-table__td--checkbox"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <div className="neuron-table__checkbox-wrap">
                           <NeuronCheckbox
                             checked={isSelected}
@@ -604,6 +615,24 @@ export default function NeuronTable<T extends Record<string, any>>({
                       const isStickyLeftShadow = isStickyLeft && canScrollLeft;
                       const alignClass = col.align ? `neuron-table--align-${col.align}` : 'neuron-table--align-left';
 
+                      let cellContent = col.render ? col.render(value, record, rIndex) : value !== undefined && value !== null ? String(value) : '—';
+                      if (col.clickable || col.onClick) {
+                        cellContent = (
+                          <button
+                            type="button"
+                            className="neuron-table__link"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (col.onClick) {
+                                col.onClick(value, record, rIndex, e);
+                              }
+                            }}
+                          >
+                            {cellContent}
+                          </button>
+                        );
+                      }
+
                       return (
                         <td
                           key={col.key}
@@ -613,7 +642,7 @@ export default function NeuronTable<T extends Record<string, any>>({
                             minWidth: col.minWidth,
                           }}
                         >
-                          {col.render ? col.render(value, record, rIndex) : value !== undefined && value !== null ? String(value) : '—'}
+                          {cellContent}
                         </td>
                       );
                     })}

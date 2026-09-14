@@ -275,7 +275,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <NeuronCard variant="default" padding="md" style={{ border: '2px solid var(--brand-500)', background: 'var(--brand-50)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--brand-700)' }}>Pro Plan</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--brand-700)' }}>Pro Plan</span>
                       <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'var(--brand-500)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Check size={10} strokeWidth={3} style={{ color: '#fff' }} />
                       </div>
@@ -289,7 +289,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <NeuronCard variant="default" padding="md" style={{ opacity: 0.45, pointerEvents: 'none', cursor: 'not-allowed' }}>
                     <div style={{ marginBottom: 6 }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Enterprise Plan</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600 }}>Enterprise Plan</span>
                     </div>
                     <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Not available on your tier</p>
                   </NeuronCard>
@@ -331,7 +331,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                       </div>
                     </div>
                     <div style={{ padding: '14px 16px' }}>
-                      <p style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: 600 }}>Top Media Card</p>
+                      <p style={{ margin: '0 0 4px 0', fontSize: '12px', fontWeight: 600 }}>Top Media Card</p>
                       <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Image positioned at the top of the card.</p>
                     </div>
                   </NeuronCard>
@@ -346,7 +346,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                         <Layers size={28} style={{ color: 'var(--brand-500)' }} />
                       </div>
                       <div style={{ padding: '14px 16px', flex: 1 }}>
-                        <p style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: 600 }}>Side Media Card</p>
+                        <p style={{ margin: '0 0 4px 0', fontSize: '12px', fontWeight: 600 }}>Side Media Card</p>
                         <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Horizontal layout with icon or image on the left.</p>
                       </div>
                     </div>
@@ -367,7 +367,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <NeuronCard variant="default" padding="md" isClickable hoverable hoverEffect="lift" onClick={() => {}}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Clickable Card</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600 }}>Clickable Card</span>
                       <ArrowRight size={14} style={{ color: 'var(--color-text-secondary)' }} />
                     </div>
                     <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Entire card acts as a button. Keyboard accessible.</p>
@@ -379,7 +379,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <NeuronCard variant="default" padding="md" href="#" hoverable hoverEffect="border">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Link Card</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600 }}>Link Card</span>
                       <ArrowRight size={14} style={{ color: 'var(--brand-500)' }} />
                     </div>
                     <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>Renders as an <code>&lt;a&gt;</code> tag. Opens URL on click.</p>
@@ -503,7 +503,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                       header={
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                           <div>
-                            <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>Card Title</div>
+                            <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>Card Title</div>
                             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '2px' }}>Subtitle & meta</div>
                           </div>
                           <NeuronBadge size="sm" variant="brand">Badge</NeuronBadge>
@@ -576,7 +576,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '4px' }}>
                       <Clock size={11} /> 3 min read · Engineering
                     </div>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
+                    <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
                       Synchronizing Multi-Theme Tokens
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '10px', fontSize: '11px' }}>
@@ -1040,11 +1040,11 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                     <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)' }}>
                       <div>
                         <div style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Card Holder</div>
-                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff', marginTop: '2px' }}>ALEXANDER WARD</div>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#ffffff', marginTop: '2px' }}>ALEXANDER WARD</div>
                       </div>
                       <div>
                         <div style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Expires</div>
-                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff', marginTop: '2px' }}>08/29</div>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#ffffff', marginTop: '2px' }}>08/29</div>
                       </div>
                       <div style={{ width: '36px', height: '24px', borderRadius: '4px', background: 'linear-gradient(135deg, #f59e0b, #ef4444)', opacity: 0.9 }} />
                     </div>
@@ -1241,7 +1241,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                   <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <Bell size={14} style={{ color: 'var(--color-text-secondary)' }} />
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Notifications</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Notifications</span>
                     </div>
                     <NeuronBadge size="sm" variant="brand">3 new</NeuronBadge>
                   </div>
@@ -1275,13 +1275,13 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                       <Sparkles size={18} style={{ color: '#fff' }} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>Neudela AI</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: '#fff' }}>Neudela AI</div>
                       <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)' }}>Powered by Gemini 2.5 Pro</div>
                     </div>
                     <NeuronBadge size="sm" variant="success" style={{ marginLeft: 'auto' }}>Beta</NeuronBadge>
                   </div>
 
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: '0 0 16px 0' }}>
                     Generate production-ready component code, design tokens, and accessibility audits instantly from natural language.
                   </p>
 
@@ -1335,7 +1335,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingTop: 14, borderTop: '1px solid var(--color-border)' }}>
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop&crop=faces" alt="Reviewer" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Priya Mehta</div>
+                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Priya Mehta</div>
                       <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>VP of Design · Axiom Cloud</div>
                     </div>
                     <NeuronBadge size="sm" variant="gray" style={{ marginLeft: 'auto' }}>Verified</NeuronBadge>
@@ -1393,7 +1393,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                 <NeuronCard variant="default" padding="none">
                   <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <GitBranch size={14} style={{ color: 'var(--color-text-secondary)' }} />
-                    <span style={{ fontSize: '13px', fontWeight: 600 }}>What's New · v2.4.0</span>
+                    <span style={{ fontSize: '12px', fontWeight: 600 }}>What's New · v2.4.0</span>
                     <NeuronBadge size="sm" variant="success" style={{ marginLeft: 'auto' }}>Latest</NeuronBadge>
                   </div>
                   {[
@@ -1422,7 +1422,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--emerald-500)', boxShadow: '0 0 0 3px rgba(16,185,129,0.2)' }} />
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Production · neudela.design</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Production · neudela.design</span>
                     </div>
                     <NeuronBadge size="sm" variant="success">Ready</NeuronBadge>
                   </div>

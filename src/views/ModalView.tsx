@@ -7,7 +7,6 @@ import NextPrevious from '../components/NextPrevious';
 import { useLanguage } from '../context/LanguageContext';
 import {
   AlertTriangle,
-  CheckCircle,
   CheckCircle2,
   Info,
   Trash2,
@@ -17,8 +16,6 @@ import {
   Settings,
   Bell,
   Upload,
-  Save,
-  Edit3,
   X,
   Check,
   FileText,

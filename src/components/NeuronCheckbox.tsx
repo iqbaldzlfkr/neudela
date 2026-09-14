@@ -37,6 +37,7 @@ export interface NeuronCheckboxProps {
   style?: React.CSSProperties;
   tabIndex?: number;
   isFocused?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
@@ -61,6 +62,7 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
   style,
   tabIndex,
   isFocused: controlledFocused,
+  onClick,
 }) => {
   const generatedId = useId();
   const checkboxId = customId || generatedId;
@@ -81,6 +83,9 @@ export const NeuronCheckbox: React.FC<NeuronCheckboxProps> = ({
       setInternalChecked(nextChecked);
     }
     onChange?.(nextChecked);
+    if ('button' in e) {
+      onClick?.(e as React.MouseEvent<HTMLButtonElement>);
+    }
     // Tampilkan shadow ring saat klik berlangsung, lalu pudar halus setelah 220ms
     setInternalFocused(true);
     setTimeout(() => {

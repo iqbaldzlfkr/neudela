@@ -499,7 +499,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
                 <button
                   type="button"
                   onClick={() => setLastAction(null)}
-                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 13, padding: 0 }}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 12, padding: 0 }}
                 >
                   ✕
                 </button>
@@ -948,7 +948,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
                           <span>Olivia Rhye</span>
                           <X size={12} style={{ opacity: 0.6 }} />
                         </span>
-                        <span style={{ fontSize: '13px', color: 'var(--color-text-tertiary)' }}>Select team...</span>
+                        <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Select team...</span>
                       </div>
 
                       {/* 3. Chevron Icon */}

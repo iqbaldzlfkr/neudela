@@ -935,7 +935,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Rocket size={16} color="var(--blue-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Starter Plan</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Starter Plan</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '3px 0 6px 0' }}>
                           Up to 5 seats · 10 GB cloud storage · Standard support
@@ -965,7 +965,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Sparkles size={16} color="var(--brand-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Professional Tier</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Professional Tier</strong>
                           <NeuronBadge variant="brand" size="sm">POPULAR</NeuronBadge>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '3px 0 6px 0' }}>
@@ -995,7 +995,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Building2 size={16} color="var(--purple-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Enterprise Custom</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Enterprise Custom</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '3px 0 6px 0' }}>
                           Dedicated VPC · SAML SSO · 99.99% SLA · Dedicated CSM
@@ -1063,14 +1063,14 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Truck size={16} color="var(--slate-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Standard Ground Delivery</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Standard Ground Delivery</strong>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
                           Estimated 4–6 business days (USPS Ground)
                         </span>
                       </div>
                     </div>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--emerald-600)' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--emerald-600)' }}>
                       Free
                     </span>
                   </div>
@@ -1086,7 +1086,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <PackageCheck size={16} color="var(--brand-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Express 2-Day Air</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Express 2-Day Air</strong>
                           <NeuronBadge variant="brand" size="sm">Recommended</NeuronBadge>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
@@ -1094,7 +1094,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                         </span>
                       </div>
                     </div>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                       +$12.50
                     </span>
                   </div>
@@ -1110,14 +1110,14 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <Clock size={16} color="var(--orange-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Overnight Priority Rush</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Overnight Priority Rush</strong>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
                           Next business day by 10:30 AM (DHL Express)
                         </span>
                       </div>
                     </div>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                       +$28.00
                     </span>
                   </div>
@@ -1181,7 +1181,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Server size={16} color="var(--blue-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>US East (N. Virginia · us-east-1)</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>US East (N. Virginia · us-east-1)</strong>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
                           3 Availability Zones · High Compute & Memory Availability
@@ -1205,7 +1205,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Globe size={16} color="var(--emerald-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>EU Central (Frankfurt · eu-central-1)</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>EU Central (Frankfurt · eu-central-1)</strong>
                           <NeuronBadge variant="success" size="sm">GDPR</NeuronBadge>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
@@ -1230,7 +1230,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Cpu size={16} color="var(--purple-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Asia Pacific (Singapore · ap-southeast-1)</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Asia Pacific (Singapore · ap-southeast-1)</strong>
                         </div>
                         <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
                           Ultra-low latency edge node for Southeast Asia
@@ -1290,7 +1290,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Eye size={16} color="var(--slate-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Viewer (Read Only)</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Viewer (Read Only)</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
                           Can browse workspace projects and view reports. Cannot edit components or settings.
@@ -1310,7 +1310,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <UserCheck size={16} color="var(--sky-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Editor (Read & Write)</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Editor (Read & Write)</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
                           Can create & edit designs, build tokens, and trigger deployment workflows.
@@ -1330,7 +1330,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <ShieldCheck size={16} color="var(--brand-500)" />
-                          <strong style={{ fontSize: '13px', color: 'var(--color-text-primary)' }}>Workspace Administrator</strong>
+                          <strong style={{ fontSize: '12px', color: 'var(--color-text-primary)' }}>Workspace Administrator</strong>
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
                           Full unrestricted governance: manage member roles, billing, and SAML SSO configuration.
@@ -1609,7 +1609,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
         prev={{ id: 'comp-progress', label: t.nav.compProgress }}
-        next={{ id: 'comp-table', label: t.nav.compTable }}
+        next={{ id: 'comp-slider', label: t.nav.compSlider || 'Slider' }}
         setActiveTab={setActiveTab}
       />
 

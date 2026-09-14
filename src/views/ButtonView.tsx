@@ -252,10 +252,10 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
                     {preview}
                   </div>
                   <div className="usage-desc">
-                    <strong style={{ display: 'block', color: 'var(--color-text-primary)', marginBottom: '4px', fontSize: '13px' }}>
+                    <strong style={{ display: 'block', color: 'var(--color-text-primary)', marginBottom: '4px', fontSize: '12px' }}>
                       {title}
                     </strong>
-                    <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
                       {desc}
                     </span>
                   </div>

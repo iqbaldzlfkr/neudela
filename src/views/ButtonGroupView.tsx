@@ -381,7 +381,7 @@ export default function ButtonGroupView({ setActiveTab }: ButtonGroupViewProps) 
                 },
                 {
                   preview: (
-                    <div style={{ display: 'flex', gap: '4px', borderBottom: '2px solid var(--slate-700)', paddingBottom: '4px', fontSize: '13px', fontWeight: 'bold', color: 'var(--color-text-primary)' }}>
+                    <div style={{ display: 'flex', gap: '4px', borderBottom: '2px solid var(--slate-700)', paddingBottom: '4px', fontSize: '12px', fontWeight: 'bold', color: 'var(--color-text-primary)' }}>
                       Overview Tabs
                     </div>
                   ),

@@ -387,7 +387,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
                 {VARIANTS.map((v) => (
                   <div key={v} style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', background: 'var(--color-bg-surface)', display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>{VARIANT_META[v].label}</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>{VARIANT_META[v].label}</span>
                       <NeuronBadge size="sm" variant={v === 'brand' ? 'brand' : 'gray'}>{v}</NeuronBadge>
                     </div>
                     <NeuronProgress type="bar" value={72} size="md" variant={v} showValue />
@@ -415,7 +415,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
                       <HardDrive size={18} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 700 }}>Cloud Storage Usage</div>
+                      <div style={{ fontSize: '12px', fontWeight: 700 }}>Cloud Storage Usage</div>
                       <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>128.4 GB of 256 GB used (50.1%)</div>
                     </div>
                   </div>
@@ -443,7 +443,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               <NeuronCard variant="elevated" padding="lg" hoverable>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700 }}>Core Web Vitals</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700 }}>Core Web Vitals</div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>Live production audit metrics</div>
                   </div>
                   <NeuronBadge size="sm" variant="success">98 / 100</NeuronBadge>
@@ -500,7 +500,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               <NeuronCard variant="elevated" padding="lg" hoverable>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700 }}>Package Delivery Tracking</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700 }}>Package Delivery Tracking</div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>Order #NEU-98421 · JNE Express</div>
                   </div>
                   <NeuronBadge size="sm" variant="brand">On the way</NeuronBadge>
@@ -580,7 +580,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
                       <Sparkles size={16} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         Neudela AI Generation
                       </div>
                       <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>
@@ -605,7 +605,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
 
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         Compiling Design Tokens
                       </div>
                       <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginTop: 2, lineHeight: 1.4 }}>
@@ -661,7 +661,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               <NeuronCard variant="elevated" padding="lg" hoverable>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700 }}>Security Verification</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700 }}>Security Verification</div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>OTP code expires shortly</div>
                   </div>
                   <Clock size={16} style={{ color: 'var(--color-text-secondary)' }} />
@@ -707,7 +707,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               <NeuronCard variant="elevated" padding="lg" hoverable>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700 }}>Sprint 24 Velocity</div>
+                    <div style={{ fontSize: '12px', fontWeight: 700 }}>Sprint 24 Velocity</div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)' }}>28 of 34 issues resolved (82%)</div>
                   </div>
                   <NeuronBadge size="sm" variant="success">On Track</NeuronBadge>
@@ -1116,7 +1116,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
                     {uploadProgress === 100 ? <CheckCircle2 size={20} /> : <Upload size={18} />}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>neudela-tokens-v2.4.fig</div>
+                    <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--color-text-primary)' }}>neudela-tokens-v2.4.fig</div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginTop: 1 }}>
                       {uploadProgress === 0
                         ? '34.8 MB · Figma specification'
@@ -1214,7 +1214,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
             <div style={{ maxWidth: 520, marginTop: 'var(--space-5)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden' }}>
               <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--emerald-500)', boxShadow: '0 0 0 3px rgba(16,185,129,0.2)' }} />
-                <span style={{ fontSize: '13px', fontWeight: 600 }}>sin1 — Jakarta · All systems operational</span>
+                <span style={{ fontSize: '12px', fontWeight: 600 }}>sin1 — Jakarta · All systems operational</span>
                 <NeuronBadge size="sm" variant="success" style={{ marginLeft: 'auto' }}>Healthy</NeuronBadge>
               </div>
               {[

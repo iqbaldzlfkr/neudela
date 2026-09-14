@@ -40,6 +40,201 @@ export default function Typography({ setActiveTab }: TypographyProps) {
         <p className="section-description">
           {t.typography.fontSpecsDesc}
         </p>
+
+        {/* Font Families Display */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'var(--space-4)',
+            marginBottom: 'var(--space-6)',
+            marginTop: 'var(--space-4)',
+          }}
+        >
+          {/* Primary Font: Inter */}
+          <div
+            style={{
+              padding: 'var(--space-5)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-lg)',
+              backgroundColor: 'var(--color-bg-canvas)',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                backgroundColor: 'var(--color-primary)',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: 'var(--space-2)',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 'var(--fs-text-xs)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  color: 'var(--color-primary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                }}
+              >
+                {language === 'en' ? 'Primary Font' : 'Jenis Font Utama'}
+              </span>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontFamily: 'JetBrains Mono',
+                  padding: '2px 8px',
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--color-bg-surface)',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                Sans-Serif
+              </span>
+            </div>
+            <h3
+              style={{
+                fontSize: 'var(--fs-display-sm)',
+                fontWeight: 800,
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-text-primary)',
+                fontFamily: "'Inter', sans-serif",
+              }}
+            >
+              Inter
+            </h3>
+            <p
+              style={{
+                fontSize: 'var(--fs-text-xs)',
+                color: 'var(--color-text-secondary)',
+                margin: '0 0 var(--space-3) 0',
+                lineHeight: 1.5,
+              }}
+            >
+              {language === 'en'
+                ? 'Standard typeface crafted specifically for user interfaces with exceptional legibility across display densities.'
+                : 'Huruf standar yang dirancang khusus untuk antarmuka pengguna dengan tingkat keterbacaan tinggi di berbagai resolusi layar.'}
+            </p>
+            <div
+              style={{
+                fontSize: '11px',
+                fontFamily: 'JetBrains Mono',
+                color: 'var(--color-text-tertiary)',
+                background: 'var(--color-bg-surface)',
+                padding: '6px 10px',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <code>--font-family: 'Inter', system-ui, sans-serif;</code>
+            </div>
+          </div>
+
+          {/* Monospace Font: JetBrains Mono */}
+          <div
+            style={{
+              padding: 'var(--space-5)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-lg)',
+              backgroundColor: 'var(--color-bg-canvas)',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                backgroundColor: '#0284c7',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: 'var(--space-2)',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 'var(--fs-text-xs)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  color: '#0284c7',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                }}
+              >
+                {language === 'en' ? 'Code & Monospace' : 'Jenis Font Monospace / Kode'}
+              </span>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontFamily: 'JetBrains Mono',
+                  padding: '2px 8px',
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--color-bg-surface)',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                Monospace
+              </span>
+            </div>
+            <h3
+              style={{
+                fontSize: 'var(--fs-display-sm)',
+                fontWeight: 800,
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-text-primary)',
+                fontFamily: "'JetBrains Mono', monospace",
+              }}
+            >
+              JetBrains Mono
+            </h3>
+            <p
+              style={{
+                fontSize: 'var(--fs-text-xs)',
+                color: 'var(--color-text-secondary)',
+                margin: '0 0 var(--space-3) 0',
+                lineHeight: 1.5,
+              }}
+            >
+              {language === 'en'
+                ? 'Monospaced font family for code snippets, design tokens, data tables, and developer documentation.'
+                : 'Keluarga huruf monospace untuk baris kode, token desain, tabel data, dan dokumentasi pengembang.'}
+            </p>
+            <div
+              style={{
+                fontSize: '11px',
+                fontFamily: 'JetBrains Mono',
+                color: 'var(--color-text-tertiary)',
+                background: 'var(--color-bg-surface)',
+                padding: '6px 10px',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <code>--font-mono: 'JetBrains Mono', monospace;</code>
+            </div>
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
           <div style={{ padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)' }}>
             <span style={{ fontSize: 'var(--fs-text-xs)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>Font Weight 400</span>
