@@ -1508,11 +1508,11 @@ export default function TextAreaView({ setActiveTab }: TextAreaViewProps) {
             </div>
           </div>
 
-          {/* ── 7. Best Practices ── */}
+          {/* ── 7. Do's & Don'ts ── */}
           <div className="section-card">
-            <h2 className="section-title">Best Practices</h2>
+            <h2 className="section-title">Do's & Don'ts</h2>
             <p className="section-description">
-              Essential design and implementation recommendations when utilizing multi-line textareas in enterprise interfaces.
+              Essential design recommendations and anti-patterns when utilizing multi-line textareas in enterprise interfaces.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-5)', marginTop: 'var(--space-4)' }}>

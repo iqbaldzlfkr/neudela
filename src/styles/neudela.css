@@ -8719,3 +8719,4086 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   font-weight: 500;
   margin-top: 4px;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   NeuronTabBar Component Styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.neuron-tab-bar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.neuron-tab-bar--vertical {
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--space-6, 24px);
+}
+
+.neuron-tab-bar__header-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  gap: var(--space-2, 8px);
+}
+
+.neuron-tab-bar--vertical .neuron-tab-bar__header-wrap {
+  flex-direction: column;
+  align-items: stretch;
+  width: 240px;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.neuron-tab-bar__nav {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  gap: var(--space-1, 4px);
+  flex: 1;
+  min-width: 0;
+}
+
+.neuron-tab-bar__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.neuron-tab-bar--vertical .neuron-tab-bar__nav {
+  flex-direction: column;
+  align-items: stretch;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.neuron-tab-bar--full-width .neuron-tab-bar__nav {
+  width: 100%;
+}
+
+.neuron-tab-bar--full-width .neuron-tab {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Base Tab Button */
+.neuron-tab {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-secondary, #667085);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2, 8px);
+  white-space: nowrap;
+  user-select: none;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  position: relative;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Hover: Brand color & subtle brand surface (inactive tabs only) */
+.neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #b25e40);
+  background-color: var(--color-primary-light, #fdf4ed);
+}
+
+.neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__icon {
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__badge {
+  background-color: rgba(178, 94, 64, 0.15);
+  color: var(--color-primary, #b25e40);
+}
+
+/* Active tab hover: keep active appearance unchanged */
+.neuron-tab--active:hover {
+  cursor: default;
+}
+
+/* On Focus & On Click (Clean standard tab bar style) */
+.neuron-tab:focus-visible {
+  outline: none;
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #b25e40);
+  background-color: var(--color-primary-light, #fdf4ed);
+}
+
+.dark-theme .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #e28462);
+  background-color: rgba(226, 132, 98, 0.12);
+}
+
+.dark-theme .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__icon {
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__badge {
+  background-color: rgba(226, 132, 98, 0.25);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab:focus-visible,
+.dark-theme .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #e28462);
+}
+
+.neuron-tab--disabled,
+.neuron-tab:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Sizes */
+.neuron-tab-bar--sm .neuron-tab {
+  height: 32px;
+  padding: 0 var(--space-3, 12px);
+  font-size: var(--fs-text-xs, 12px);
+  border-radius: var(--radius-sm, 6px);
+}
+
+.neuron-tab-bar--md .neuron-tab {
+  height: 40px;
+  padding: 0 var(--space-4, 16px);
+  font-size: var(--fs-text-sm, 14px);
+  border-radius: var(--radius-md, 8px);
+}
+
+.neuron-tab-bar--lg .neuron-tab {
+  height: 48px;
+  padding: 0 var(--space-5, 20px);
+  font-size: var(--fs-text-md, 16px);
+  border-radius: var(--radius-lg, 12px);
+}
+
+/* Icon slots */
+.neuron-tab__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.neuron-tab-bar--sm .neuron-tab__icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.neuron-tab-bar--md .neuron-tab__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.neuron-tab-bar--lg .neuron-tab__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Label text */
+.neuron-tab__label {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badge / Counter */
+.neuron-tab__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 2px 7px;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--color-bg-secondary, #f2f4f7);
+  color: var(--color-text-secondary, #475467);
+  transition: all 0.2s ease;
+}
+
+.dark-theme .neuron-tab__badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary, #98a2b3);
+}
+
+/* Closable action button */
+.neuron-tab__close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full, 9999px);
+  margin-left: 2px;
+  color: var(--color-text-tertiary, #98a2b3);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.neuron-tab__close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: var(--color-text-primary, #182230);
+  transform: scale(1.1);
+}
+
+.dark-theme .neuron-tab__close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Scroll Buttons */
+.neuron-tab-bar__scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--color-border, #d0d5dd);
+  background: var(--color-bg-surface, #ffffff);
+  color: var(--color-text-secondary, #667085);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.neuron-tab-bar__scroll-btn:hover:not(:disabled) {
+  background: var(--color-bg-secondary, #f8f9fa);
+  color: var(--color-text-primary, #182230);
+  border-color: var(--color-border-hover, #98a2b3);
+}
+
+.neuron-tab-bar__scroll-btn.is-disabled,
+.neuron-tab-bar__scroll-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.dark-theme .neuron-tab-bar__scroll-btn {
+  background: var(--color-bg-surface, #1e232d);
+  border-color: var(--color-border, #333a48);
+  color: var(--color-text-secondary, #98a2b3);
+}
+
+.dark-theme .neuron-tab-bar__scroll-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+/* Extra Actions Slot */
+.neuron-tab-bar__extra {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  flex-shrink: 0;
+}
+
+.neuron-tab-bar--vertical .neuron-tab-bar__extra {
+  margin-left: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ── Variant: Line (Underline) ── */
+.neuron-tab-bar--line .neuron-tab-bar__header-wrap {
+  border-bottom: 1px solid var(--color-border, #eaecf0);
+}
+
+.neuron-tab-bar--line .neuron-tab {
+  border-radius: var(--radius-sm, 6px) var(--radius-sm, 6px) 0 0;
+  color: var(--color-text-secondary, #667085);
+  background-color: transparent;
+  padding-bottom: 2px;
+}
+
+.neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #b25e40);
+  background-color: transparent;
+}
+
+.neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__label,
+.neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__icon {
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__badge {
+  background-color: var(--color-bg-subtle, #f2f4f7);
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--line .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #b25e40);
+  background-color: transparent;
+}
+
+.neuron-tab-bar--line .neuron-tab--active {
+  color: var(--color-primary, #b25e40);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.neuron-tab-bar--line .neuron-tab--active .neuron-tab__badge {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab-bar__header-wrap {
+  border-bottom-color: var(--color-border, #2d3341);
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #e28462);
+  background-color: transparent;
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__label,
+.dark-theme .neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__icon {
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) .neuron-tab__badge {
+  background-color: var(--color-bg-subtle, #1e2430);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #e28462);
+  background-color: transparent;
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab--active {
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab--active .neuron-tab__badge {
+  background-color: rgba(226, 132, 98, 0.15);
+  color: var(--color-primary, #e28462);
+}
+
+/* Line active indicator */
+.neuron-tab-bar--line .neuron-tab-bar__active-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2.5px;
+  background-color: var(--color-primary, #b25e40);
+  border-radius: 3px 3px 0 0;
+  transition: left 0.24s cubic-bezier(0.2, 0, 0, 1), width 0.24s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dark-theme .neuron-tab-bar--line .neuron-tab-bar__active-indicator {
+  background-color: var(--color-primary, #e28462);
+}
+
+/* Vertical line */
+.neuron-tab-bar--line.neuron-tab-bar--vertical .neuron-tab-bar__header-wrap {
+  border-bottom: none;
+  border-right: 1px solid var(--color-border, #eaecf0);
+}
+
+.dark-theme .neuron-tab-bar--line.neuron-tab-bar--vertical .neuron-tab-bar__header-wrap {
+  border-right-color: var(--color-border, #2d3341);
+}
+
+.neuron-tab-bar--line.neuron-tab-bar--vertical .neuron-tab {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.neuron-tab-bar--line.neuron-tab-bar--vertical .neuron-tab-bar__active-indicator {
+  bottom: auto;
+  right: 0;
+  left: auto !important;
+  width: 2.5px !important;
+  border-radius: 3px 0 0 3px;
+  transition: top 0.24s cubic-bezier(0.2, 0, 0, 1), height 0.24s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ── Variant: Pills ── */
+.neuron-tab-bar--pills .neuron-tab {
+  border-radius: var(--radius-full, 9999px);
+}
+
+.neuron-tab-bar--pills .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--pills .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  background-color: var(--color-primary, #b25e40);
+  color: #ffffff;
+}
+
+.neuron-tab-bar--pills .neuron-tab--active {
+  background-color: var(--color-primary, #b25e40);
+  color: #ffffff;
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.neuron-tab-bar--pills .neuron-tab--active .neuron-tab__badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.dark-theme .neuron-tab-bar--pills .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: rgba(226, 132, 98, 0.15);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--pills .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  background-color: var(--color-primary, #e28462);
+  color: #12151b;
+}
+
+.dark-theme .neuron-tab-bar--pills .neuron-tab--active {
+  background-color: var(--color-primary, #e28462);
+  color: #12151b;
+}
+
+.dark-theme .neuron-tab-bar--pills .neuron-tab--active .neuron-tab__badge {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #12151b;
+}
+
+/* ── Variant: Enclosed (Cards / Browser) ── */
+.neuron-tab-bar--enclosed .neuron-tab-bar__header-wrap {
+  border-bottom: 1px solid var(--color-border, #eaecf0);
+}
+
+.neuron-tab-bar--enclosed .neuron-tab {
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius-md, 8px) var(--radius-md, 8px) 0 0;
+  margin-bottom: -1px;
+}
+
+.neuron-tab-bar--enclosed .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+  border-color: var(--brand-200, #fed7aa);
+}
+
+.neuron-tab-bar--enclosed .neuron-tab:active:not(:disabled) {
+  background-color: var(--color-bg-surface, #ffffff);
+  border-color: var(--color-border, #eaecf0);
+  color: var(--color-primary, #b25e40);
+  outline: none;
+  box-shadow: none;
+}
+
+.neuron-tab-bar--enclosed .neuron-tab--active {
+  background-color: var(--color-bg-surface, #ffffff);
+  border-color: var(--color-border, #eaecf0);
+  color: var(--color-primary, #b25e40);
+  font-weight: var(--font-weight-semibold, 600);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.dark-theme .neuron-tab-bar--enclosed .neuron-tab-bar__header-wrap {
+  border-bottom-color: var(--color-border, #2d3341);
+}
+
+.dark-theme .neuron-tab-bar--enclosed .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: rgba(226, 132, 98, 0.12);
+  color: var(--color-primary, #e28462);
+  border-color: rgba(226, 132, 98, 0.25);
+}
+
+.dark-theme .neuron-tab-bar--enclosed .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+}
+
+.dark-theme .neuron-tab-bar--enclosed .neuron-tab--active {
+  background-color: var(--color-bg-surface, #1e232d);
+  border-color: var(--color-border, #2d3341);
+  color: var(--color-primary, #e28462);
+}
+
+/* ── Variant: Segment (Segmented Control) ── */
+.neuron-tab-bar--segment .neuron-tab-bar__nav {
+  background-color: var(--color-bg-secondary, #f2f4f7);
+  padding: 4px;
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--color-border-subtle, #e4e7ec);
+  gap: 2px;
+}
+
+.neuron-tab-bar--segment .neuron-tab {
+  z-index: 2;
+  border-radius: calc(var(--radius-lg, 12px) - 3px);
+  color: var(--color-text-secondary, #667085);
+}
+
+.neuron-tab-bar--segment .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #b25e40);
+  background-color: rgba(178, 94, 64, 0.08);
+}
+
+.neuron-tab-bar--segment .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--segment .neuron-tab--active {
+  color: var(--color-primary, #b25e40);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.neuron-tab-bar--segment .neuron-tab--active .neuron-tab__badge {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--segment .neuron-tab-bar__active-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  background-color: var(--color-bg-surface, #ffffff);
+  border-radius: calc(var(--radius-lg, 12px) - 3px);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+  transition: left 0.22s cubic-bezier(0.2, 0, 0, 1), width 0.22s cubic-bezier(0.2, 0, 0, 1),
+              top 0.22s cubic-bezier(0.2, 0, 0, 1), height 0.22s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab-bar__nav {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab {
+  color: var(--color-text-secondary, #98a2b3);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  color: var(--color-primary, #e28462);
+  background-color: rgba(226, 132, 98, 0.15);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab--active {
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab--active .neuron-tab__badge {
+  background-color: rgba(226, 132, 98, 0.2);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--segment .neuron-tab-bar__active-indicator {
+  background-color: var(--color-bg-surface, #242a35);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Variant: Soft (Tinted) ── */
+.neuron-tab-bar--soft .neuron-tab {
+  border-radius: var(--radius-md, 8px);
+}
+
+.neuron-tab-bar--soft .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-tab-bar--soft .neuron-tab:active:not(:disabled) {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+  outline: none;
+  box-shadow: none;
+}
+
+.neuron-tab-bar--soft .neuron-tab--active {
+  background-color: var(--color-primary-light, #fdf4ed);
+  color: var(--color-primary, #b25e40);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.neuron-tab-bar--soft .neuron-tab--active .neuron-tab__badge {
+  background-color: #ffffff;
+  color: var(--color-primary, #b25e40);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .neuron-tab-bar--soft .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
+  background-color: rgba(226, 132, 98, 0.12);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--soft .neuron-tab:active:not(:disabled) {
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--soft .neuron-tab--active {
+  background-color: rgba(226, 132, 98, 0.15);
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-tab-bar--soft .neuron-tab--active .neuron-tab__badge {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--color-primary, #e28462);
+}
+
+/* ── Tab Panel Content ── */
+.neuron-tab-bar__panels {
+  width: 100%;
+  flex: 1;
+}
+
+.neuron-tab-panel {
+  outline: none;
+  padding: var(--space-4, 16px) 0;
+  animation: neuronTabFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes neuronTabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Tab Bar Interactive Anatomy ── */
+.tab-anatomy-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+  width: 100%;
+}
+
+.tab-anatomy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tab-anatomy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Master Stage Card */
+.tab-anatomy-stage-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-anatomy-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--space-6);
+  background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tab-anatomy-stage-body {
+  position: relative;
+  background: var(--color-bg-surface);
+  padding: 72px 24px 64px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  overflow: visible;
+}
+
+@media (max-width: 640px) {
+  .tab-anatomy-stage-body {
+    overflow-x: auto;
+    align-items: flex-start;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.tab-anatomy-bar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+}
+
+.tab-anatomy-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  padding: 0 4px;
+  transition: box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.tab-anatomy-bar.is-active {
+  box-shadow: 0 0 0 2px var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+
+.tab-anatomy-tabs-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.tab-anatomy-zone {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  transition: background-color 0.15s ease, outline 0.15s ease;
+  user-select: none;
+}
+
+.tab-anatomy-zone:hover,
+.tab-anatomy-zone.is-active {
+  background: rgba(178, 94, 64, 0.12);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.dark-theme .tab-anatomy-zone:hover,
+.dark-theme .tab-anatomy-zone.is-active {
+  background: rgba(226, 132, 98, 0.18);
+}
+
+/* Pin Callouts - Absolutely Stationary (No scale/translate that causes mouse flutter) */
+.tab-anatomy-pin {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.tab-anatomy-pin--top {
+  bottom: calc(100% + 4px);
+}
+
+.tab-anatomy-pin--bottom {
+  top: calc(100% + 4px);
+}
+
+.tab-anatomy-pin__stem {
+  width: 1.5px;
+  height: 20px;
+  background: var(--color-primary);
+}
+
+.tab-anatomy-pin--bottom .tab-anatomy-pin__stem {
+  order: -1;
+}
+
+.tab-anatomy-pin__dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(178, 94, 64, 0.35);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tab-anatomy-pin:hover .tab-anatomy-pin__dot,
+.tab-anatomy-pin.is-active .tab-anatomy-pin__dot {
+  background: var(--color-primary-hover, #9c4f34);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.25), 0 3px 8px rgba(178, 94, 64, 0.4);
+}
+
+/* Fixed-Height Stage Footer (Zero Layout Shift) */
+.tab-anatomy-stage-footer {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  padding: 0 var(--space-6);
+  background: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Anatomy Cards Grid (Clean, Symmetrical 2-Column) */
+.tab-anatomy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tab-anatomy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tab-anatomy-item-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  min-height: 124px;
+  box-sizing: border-box;
+}
+
+.tab-anatomy-item-card:hover {
+  border-color: rgba(178, 94, 64, 0.4);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-bg-surface);
+}
+
+.tab-anatomy-item-card.is-active {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.05);
+  box-shadow: 0 0 0 1px var(--color-primary), 0 2px 8px rgba(178, 94, 64, 0.1);
+}
+
+.dark-theme .tab-anatomy-item-card.is-active {
+  background: rgba(226, 132, 98, 0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NEURON FILE UPLOAD
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.neuron-file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-file-upload__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-text-sm, 14px);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.neuron-file-upload__required {
+  color: var(--color-error, #ef4444);
+}
+
+.neuron-file-upload__helper {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
+.neuron-file-upload--avatar .neuron-file-upload__helper {
+  margin-top: 2px;
+  max-width: 240px;
+}
+
+.neuron-file-upload__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-error, #ef4444);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Error validation border & accent styling */
+.neuron-file-upload.has-error .neuron-file-dropzone,
+.neuron-file-upload.has-error .neuron-file-compact-bar,
+.neuron-file-upload.has-error .neuron-file-avatar {
+  border-color: var(--color-error, #ef4444) !important;
+  background-color: rgba(239, 68, 68, 0.02);
+}
+
+.neuron-file-upload.has-error .neuron-file-dropzone:hover,
+.neuron-file-upload.has-error .neuron-file-compact-bar:hover {
+  border-color: var(--color-error, #ef4444) !important;
+  box-shadow: 0 0 0 1px var(--color-error, #ef4444);
+}
+
+.neuron-file-upload.has-error .neuron-file-dropzone__icon-badge {
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  background-color: rgba(239, 68, 68, 0.06);
+  color: var(--color-error, #ef4444);
+}
+
+.neuron-file-upload__hint {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-tertiary, #94a3b8);
+}
+
+.neuron-file-upload__native-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Dropzone Area ── */
+.neuron-file-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3, 12px);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-xl, 16px);
+  background: var(--color-bg-surface);
+  padding: var(--space-8, 32px) var(--space-6, 24px);
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.neuron-file-dropzone:hover:not(.is-disabled) {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.03);
+}
+
+.neuron-file-dropzone.is-dragover {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.08);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.15);
+  transform: scale(1.002);
+}
+
+.neuron-file-dropzone:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(178, 94, 64, 0.2);
+}
+
+.neuron-file-dropzone.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border);
+}
+
+.neuron-file-dropzone__icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--color-bg-subtle);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.neuron-file-dropzone__icon-badge svg,
+.neuron-file-dropzone__icon {
+  stroke-width: 1.75;
+}
+
+.neuron-file-dropzone:hover:not(.is-disabled) .neuron-file-dropzone__icon-badge,
+.neuron-file-dropzone.is-dragover .neuron-file-dropzone__icon-badge,
+.neuron-file-dropzone__icon-badge:hover {
+  transform: translateY(-2px);
+  background: rgba(178, 94, 64, 0.08);
+  border-color: var(--color-primary);
+}
+
+.neuron-file-dropzone__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.neuron-file-dropzone__prompt {
+  font-size: var(--fs-text-sm, 14px);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.neuron-file-dropzone__browse-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.neuron-file-dropzone__hint {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Dropzone Sizing Scale */
+.neuron-file-upload--sm .neuron-file-dropzone {
+  padding: var(--space-4, 16px) var(--space-4, 16px);
+  gap: var(--space-2, 8px);
+}
+.neuron-file-upload--sm .neuron-file-dropzone__icon-badge {
+  width: 40px;
+  height: 40px;
+}
+.neuron-file-upload--sm .neuron-file-dropzone__prompt {
+  font-size: var(--fs-text-xs, 12px);
+}
+
+.neuron-file-upload--lg .neuron-file-dropzone {
+  padding: var(--space-12, 48px) var(--space-8, 32px);
+  gap: var(--space-4, 16px);
+}
+.neuron-file-upload--lg .neuron-file-dropzone__icon-badge {
+  width: 64px;
+  height: 64px;
+}
+.neuron-file-upload--lg .neuron-file-dropzone__prompt {
+  font-size: var(--fs-text-base, 16px);
+}
+
+/* ── Button Trigger Variant ── */
+.neuron-file-button-trigger-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  flex-wrap: wrap;
+}
+
+.neuron-file-button-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md, 8px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.neuron-file-button-trigger:hover:not(:disabled) {
+  background: var(--color-primary-hover, #9c4f34);
+  box-shadow: var(--shadow-sm);
+}
+
+.neuron-file-button-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(178, 94, 64, 0.35);
+}
+
+.neuron-file-button-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.neuron-file-button-trigger--sm {
+  padding: 6px 12px;
+  font-size: var(--fs-text-xs, 12px);
+}
+.neuron-file-button-trigger--md {
+  padding: 8px 16px;
+  font-size: var(--fs-text-sm, 14px);
+}
+.neuron-file-button-trigger--lg {
+  padding: 12px 20px;
+  font-size: var(--fs-text-base, 16px);
+}
+
+.neuron-file-button-hint {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+}
+
+/* ── Compact Bar Variant ── */
+.neuron-file-compact-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.neuron-file-compact-bar:hover:not(.is-disabled) {
+  border-color: var(--color-primary);
+}
+
+.neuron-file-compact-bar.is-dragover {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.05);
+  box-shadow: 0 0 0 3px rgba(178, 94, 64, 0.15);
+}
+
+.neuron-file-compact-bar.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.neuron-file-compact-bar__lead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.neuron-file-compact-bar__icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.neuron-file-compact-bar__text {
+  font-size: var(--fs-text-sm, 14px);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.neuron-file-compact-bar__btn {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  font-size: var(--fs-text-xs, 12px);
+  font-weight: 500;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  pointer-events: none;
+}
+
+/* ── Avatar Uploader Variant ── */
+.neuron-file-upload--avatar {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: auto;
+  gap: var(--space-2);
+}
+
+.neuron-file-upload--avatar .neuron-file-upload__label {
+  text-align: center;
+  font-size: var(--fs-text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+
+.neuron-file-upload--avatar .neuron-file-upload__hint {
+  text-align: center;
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  margin-top: 0;
+}
+
+.neuron-file-avatar-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+.neuron-file-avatar {
+  position: relative;
+  overflow: hidden;
+  border: 2px dashed var(--color-border);
+  background: var(--color-bg-subtle);
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-file-avatar:hover:not(.is-disabled) .neuron-file-avatar {
+  border-color: var(--color-primary);
+}
+
+.neuron-file-avatar.is-dragover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.2);
+}
+
+.neuron-file-avatar--circle {
+  border-radius: var(--radius-full, 9999px);
+}
+
+.neuron-file-avatar--rounded {
+  border-radius: var(--radius-2xl, 24px);
+}
+
+.neuron-file-upload--sm .neuron-file-avatar {
+  width: 64px;
+  height: 64px;
+}
+.neuron-file-upload--md .neuron-file-avatar {
+  width: 96px;
+  height: 96px;
+}
+.neuron-file-upload--lg .neuron-file-avatar {
+  width: 128px;
+  height: 128px;
+}
+
+.neuron-file-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.neuron-file-avatar__placeholder {
+  color: var(--color-text-tertiary, #94a3b8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuron-file-avatar__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.neuron-file-avatar:hover:not(.is-disabled) .neuron-file-avatar__overlay {
+  opacity: 1;
+}
+
+.neuron-file-avatar__overlay-text {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.neuron-file-avatar__progress-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuron-file-avatar__progress-ring {
+  width: 60%;
+  height: 60%;
+  transform: rotate(-90deg);
+}
+
+.neuron-file-avatar__progress-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 3.8;
+}
+
+.neuron-file-avatar__progress-fill {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.15s ease;
+}
+
+.neuron-file-avatar__progress-text {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.neuron-file-avatar__remove-btn {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.neuron-file-avatar__remove-btn:hover {
+  background: var(--color-error, #ef4444);
+  border-color: var(--color-error, #ef4444);
+  color: #ffffff;
+}
+
+/* Floating Camera Action Badge */
+.neuron-file-avatar__action-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: var(--color-bg-surface);
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full, 9999px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.neuron-file-upload--sm .neuron-file-avatar__action-badge {
+  width: 22px;
+  height: 22px;
+  bottom: -2px;
+  right: -2px;
+}
+
+.neuron-file-upload--md .neuron-file-avatar__action-badge {
+  width: 28px;
+  height: 28px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.neuron-file-upload--lg .neuron-file-avatar__action-badge {
+  width: 36px;
+  height: 36px;
+  bottom: 2px;
+  right: 2px;
+}
+
+.neuron-file-avatar-wrapper:hover .neuron-file-avatar__action-badge {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+/* ── Queued File List ── */
+.neuron-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  width: 100%;
+  margin-top: 4px;
+}
+
+.neuron-file-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  padding: 10px 14px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.neuron-file-item--uploading {
+  border-color: rgba(178, 94, 64, 0.4);
+}
+
+.neuron-file-item--error {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.02);
+}
+
+.neuron-file-item--success {
+  border-color: var(--color-border);
+}
+
+.neuron-file-item__visual {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.neuron-file-item__thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.neuron-file-item__icon-wrapper {
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuron-file-icon--image { color: #3b82f6; }
+.neuron-file-icon--pdf { color: #ef4444; }
+.neuron-file-icon--video { color: #8b5cf6; }
+.neuron-file-icon--audio { color: #ec4899; }
+.neuron-file-icon--archive { color: #f59e0b; }
+.neuron-file-icon--code { color: #10b981; }
+.neuron-file-icon--default { color: var(--color-primary); }
+
+.neuron-file-item__details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.neuron-file-item__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.neuron-file-item__name {
+  font-size: var(--fs-text-sm, 13px);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.neuron-file-item__size {
+  font-size: var(--fs-text-xs, 11px);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Progress bar inside file card */
+.neuron-file-item__progress-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.neuron-file-item__progress-track {
+  flex: 1;
+  height: 5px;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-full, 9999px);
+  overflow: hidden;
+}
+
+.neuron-file-item__progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-full, 9999px);
+  transition: width 0.15s ease-out;
+}
+
+.neuron-file-item__progress-pct {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  min-width: 28px;
+  text-align: right;
+}
+
+.neuron-file-item__error-msg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-error, #ef4444);
+  font-weight: 500;
+}
+
+.neuron-file-item__success-msg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-success, #10b981);
+  font-weight: 500;
+}
+
+.neuron-file-item__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.neuron-file-item__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.neuron-file-item__action-btn:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.neuron-file-item__action-btn--retry:hover {
+  color: var(--color-primary);
+}
+
+.neuron-file-item__action-btn--remove:hover {
+  color: var(--color-error, #ef4444);
+}
+
+/* ── Interactive File Anatomy Viewer Styles ── */
+.file-anatomy-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 20px);
+  margin-top: var(--space-4, 16px);
+  width: 100%;
+}
+
+.file-anatomy-stage-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 16px);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.file-anatomy-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3, 12px) var(--space-5, 20px);
+  background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.file-anatomy-stage-canvas {
+  position: relative;
+  padding: 44px 32px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(178, 94, 64, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.file-anatomy-demo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+}
+
+.file-anatomy-pin {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease;
+}
+
+.file-anatomy-pin:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.file-anatomy-pin__dot {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px rgba(178, 94, 64, 0.2), 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.file-anatomy-pin.is-active .file-anatomy-pin__dot {
+  background: var(--color-primary-hover, #9c4f34);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.3), 0 3px 8px rgba(178, 94, 64, 0.45);
+}
+
+.file-anatomy-stage-footer {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  padding: 0 var(--space-6, 24px);
+  background: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.file-anatomy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 16px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .file-anatomy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.file-anatomy-item-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  min-height: 124px;
+  box-sizing: border-box;
+}
+
+.file-anatomy-item-card:hover {
+  border-color: rgba(178, 94, 64, 0.4);
+  box-shadow: var(--shadow-sm);
+}
+
+.file-anatomy-item-card.is-active {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.05);
+  box-shadow: 0 0 0 1px var(--color-primary), 0 2px 8px rgba(178, 94, 64, 0.1);
+}
+
+/* ── Dark Theme Overrides for File Upload ── */
+.dark-theme .neuron-file-dropzone {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .neuron-file-dropzone:hover:not(.is-disabled) {
+  background: rgba(226, 132, 98, 0.06);
+}
+
+.dark-theme .neuron-file-dropzone.is-dragover {
+  background: rgba(226, 132, 98, 0.12);
+  box-shadow: 0 0 0 4px rgba(226, 132, 98, 0.25);
+}
+
+.dark-theme .neuron-file-dropzone__icon-badge {
+  background: rgba(226, 132, 98, 0.1);
+  border-color: rgba(226, 132, 98, 0.2);
+}
+
+.dark-theme .neuron-file-dropzone:hover:not(.is-disabled) .neuron-file-dropzone__icon-badge,
+.dark-theme .neuron-file-dropzone.is-dragover .neuron-file-dropzone__icon-badge,
+.dark-theme .neuron-file-dropzone__icon-badge:hover {
+  background: rgba(226, 132, 98, 0.15);
+  border-color: var(--color-primary);
+}
+
+.dark-theme .neuron-file-item {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .neuron-file-item--error {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.dark-theme .neuron-file-compact-bar {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .neuron-file-compact-bar.is-dragover {
+  background: rgba(226, 132, 98, 0.1);
+}
+
+.dark-theme .file-anatomy-item-card.is-active {
+  background: rgba(226, 132, 98, 0.12);
+}
+
+.dark-theme .neuron-file-avatar__action-badge {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .neuron-file-avatar-wrapper:hover .neuron-file-avatar__action-badge {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+
+
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NeuronStepper — Progress Step Indicator
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.neuron-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  font-family: var(--font-family);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-stepper__count {
+  font-size: var(--fs-text-xs, 12px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.3px;
+}
+
+.neuron-stepper__list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.neuron-stepper__list--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.neuron-stepper__list--vertical {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.neuron-step {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.neuron-step--label-bottom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.neuron-step--label-inline {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+}
+
+.neuron-step--label-inline:last-child {
+  flex: 0 0 auto;
+}
+
+.neuron-step__inline-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 10px);
+  flex-shrink: 0;
+}
+
+.neuron-step--vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: none;
+  width: 100%;
+}
+
+.neuron-step__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.neuron-step__line {
+  flex: 1;
+  height: 2px;
+  background-color: var(--color-border, #d0d5dd);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.28s ease, border-color 0.28s ease;
+  box-sizing: border-box;
+}
+
+.neuron-step__line--hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.neuron-step__line--completed {
+  background-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--dashed {
+  background-color: transparent !important;
+  border-top: 2px dashed var(--color-border, #d0d5dd);
+  height: 0;
+}
+
+.neuron-step__line--dashed.neuron-step__line--completed {
+  border-top-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--dotted {
+  background-color: transparent !important;
+  border-top: 2px dotted var(--color-border, #d0d5dd);
+  height: 0;
+}
+
+.neuron-step__line--dotted.neuron-step__line--completed {
+  border-top-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--gradient {
+  background: linear-gradient(90deg, var(--color-primary, #b25e40) 0%, var(--color-border, #d0d5dd) 100%);
+}
+
+.neuron-step__line--gradient.neuron-step__line--completed {
+  background: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--inline-bridge {
+  flex: 1;
+  height: 2px;
+  background-color: var(--color-border, #d0d5dd);
+  margin: 0 var(--space-4, 16px);
+  min-width: 24px;
+}
+
+.neuron-step__line--inline-bridge.neuron-step__line--completed {
+  background-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__vertical-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  position: relative;
+}
+
+.neuron-stepper--sm .neuron-step__vertical-rail { width: 28px; }
+.neuron-stepper--md .neuron-step__vertical-rail { width: 36px; }
+.neuron-stepper--lg .neuron-step__vertical-rail { width: 44px; }
+
+.neuron-step__line--vertical {
+  width: 2px;
+  flex: 1;
+  min-height: 28px;
+  background-color: var(--color-border, #d0d5dd);
+  margin: -1px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.neuron-step__line--vertical.neuron-step__line--completed {
+  background-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--vertical.neuron-step__line--dashed {
+  background-color: transparent !important;
+  border-left: 2px dashed var(--color-border, #d0d5dd);
+  border-top: none;
+  width: 2px;
+  box-sizing: border-box;
+}
+
+.neuron-step__line--vertical.neuron-step__line--dashed.neuron-step__line--completed {
+  border-left-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__line--vertical.neuron-step__line--dotted {
+  background-color: transparent !important;
+  border-left: 2px dotted var(--color-border, #d0d5dd);
+  border-top: none;
+  width: 2px;
+  box-sizing: border-box;
+}
+
+.neuron-step__line--vertical.neuron-step__line--dotted.neuron-step__line--completed {
+  border-left-color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-step__indicator-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: default;
+  line-height: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuron-step--clickable .neuron-step__indicator-btn {
+  cursor: pointer;
+}
+
+.neuron-step--clickable .neuron-step__indicator-btn:hover .neuron-step__indicator--upcoming {
+  border-color: var(--color-primary, #b25e40);
+  color: var(--color-primary, #b25e40);
+  transform: scale(1.06);
+}
+
+.neuron-step--clickable .neuron-step__indicator-btn:focus-visible .neuron-step__indicator {
+  outline: 2px solid var(--color-primary, #b25e40);
+  outline-offset: 2px;
+}
+
+.neuron-step__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full, 9999px);
+  border: 2px solid var(--color-border, #d0d5dd);
+  background: var(--color-bg-surface, #ffffff);
+  color: var(--color-text-tertiary, #98a2b3);
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.neuron-step__indicator--upcoming {
+  border-color: var(--color-border, #d0d5dd);
+  background: var(--color-bg-surface, #ffffff);
+  color: var(--color-text-tertiary, #98a2b3);
+}
+
+.neuron-step__indicator--active {
+  border-color: var(--color-primary, #b25e40);
+  background: var(--color-primary, #b25e40);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.18), 0 2px 6px rgba(178, 94, 64, 0.25);
+  animation: stepper-pulse 2.2s ease-in-out infinite;
+}
+
+.neuron-step__indicator--completed {
+  border-color: var(--color-primary, #b25e40);
+  background: var(--color-primary, #b25e40);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(178, 94, 64, 0.2);
+}
+
+.neuron-step__indicator--error {
+  border-color: var(--color-danger, #ef4444);
+  background: var(--color-danger, #ef4444);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.16);
+}
+
+.neuron-step__indicator--icon {
+  border-width: 2px;
+}
+
+.neuron-step__indicator--numbered {
+  border-width: 2px;
+  font-weight: 700;
+}
+
+.neuron-step__dot {
+  display: inline-block;
+  border-radius: var(--radius-full, 9999px);
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  flex-shrink: 0;
+}
+
+.neuron-step__dot--sm { width: 8px; height: 8px; }
+.neuron-step__dot--md { width: 10px; height: 10px; }
+.neuron-step__dot--lg { width: 14px; height: 14px; }
+
+.neuron-step__dot--upcoming { background: var(--color-border, #d0d5dd); }
+.neuron-step__dot--active {
+  background: var(--color-primary, #b25e40);
+  transform: scale(1.25);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.22);
+}
+.neuron-step__dot--completed { background: var(--color-primary, #b25e40); }
+.neuron-step__dot--error { background: var(--color-danger, #ef4444); }
+
+.neuron-step__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+.neuron-step__text--centered {
+  margin-top: var(--space-2, 8px);
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--space-2, 6px);
+}
+
+.neuron-step__text--inline {
+  margin-top: 0;
+  text-align: left;
+}
+
+.neuron-step__label {
+  font-size: var(--fs-text-xs, 12px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-secondary, #475467);
+  transition: color 0.2s ease;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.neuron-step__label--active {
+  color: var(--color-primary, #b25e40);
+  font-weight: var(--font-weight-bold, 700);
+}
+
+.neuron-step__label--completed {
+  color: var(--color-text-primary, #182230);
+}
+
+.neuron-step__label--error {
+  color: var(--color-danger, #ef4444);
+}
+
+.neuron-step__description {
+  font-size: 11px;
+  color: var(--color-text-tertiary, #98a2b3);
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.neuron-step__vertical-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-left: var(--space-3, 12px);
+  padding-bottom: var(--space-5, 20px);
+  min-width: 0;
+}
+
+.neuron-step:last-child .neuron-step__vertical-body {
+  padding-bottom: 0;
+}
+
+.neuron-step__content {
+  margin-top: var(--space-3, 10px);
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  background: var(--color-bg-subtle, #f8f9fa);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--color-border, #eaecf0);
+  font-size: var(--fs-text-sm, 14px);
+  color: var(--color-text-secondary, #475467);
+}
+
+.neuron-stepper--sm .neuron-step__label { font-size: 11px; }
+.neuron-stepper--sm .neuron-step__description { font-size: 10px; }
+.neuron-stepper--lg .neuron-step__label { font-size: var(--fs-text-sm, 14px); }
+.neuron-stepper--lg .neuron-step__description { font-size: var(--fs-text-xs, 12px); }
+
+.neuron-stepper--compact {
+  gap: var(--space-2, 8px);
+}
+
+.neuron-stepper-compact__track {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+}
+
+.neuron-stepper-compact__segment {
+  flex: 1;
+  border-radius: var(--radius-full, 9999px);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.neuron-stepper--sm .neuron-stepper-compact__segment { height: 4px; }
+.neuron-stepper--md .neuron-stepper-compact__segment { height: 6px; }
+.neuron-stepper--lg .neuron-stepper-compact__segment { height: 8px; }
+
+.neuron-stepper-compact__segment--upcoming { background: var(--color-border, #d0d5dd); }
+.neuron-stepper-compact__segment--active { background: var(--color-primary, #b25e40); }
+.neuron-stepper-compact__segment--completed { background: var(--color-primary, #b25e40); opacity: 0.65; }
+.neuron-stepper-compact__segment--error { background: var(--color-danger, #ef4444); }
+
+.neuron-stepper-compact__segment.is-clickable { cursor: pointer; }
+.neuron-stepper-compact__segment.is-clickable:hover { opacity: 0.85; }
+
+.neuron-stepper-compact__label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.neuron-stepper-compact__step-name {
+  font-size: var(--fs-text-sm, 14px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, #182230);
+}
+
+.neuron-stepper-compact__step-desc {
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary, #667085);
+}
+
+.neuron-step--disabled { opacity: 0.45; }
+.neuron-step--disabled .neuron-step__indicator-btn { cursor: not-allowed; }
+
+.dark-theme .neuron-step__indicator--upcoming {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: var(--color-bg-surface, #1e232d);
+  color: var(--color-text-tertiary, #98a2b3);
+}
+
+.dark-theme .neuron-step__indicator--active {
+  border-color: var(--color-primary, #e28462);
+  background: var(--color-primary, #e28462);
+  color: #12151b;
+  box-shadow: 0 0 0 4px rgba(226, 132, 98, 0.22), 0 2px 6px rgba(226, 132, 98, 0.3);
+}
+
+.dark-theme .neuron-step__indicator--completed {
+  border-color: var(--color-primary, #e28462);
+  background: var(--color-primary, #e28462);
+  color: #12151b;
+}
+
+.dark-theme .neuron-step__line {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark-theme .neuron-step__line--completed {
+  background-color: var(--color-primary, #e28462) !important;
+}
+
+.dark-theme .neuron-step__line--dashed {
+  border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+.dark-theme .neuron-step__line--dashed.neuron-step__line--completed {
+  border-top-color: var(--color-primary, #e28462) !important;
+}
+
+.dark-theme .neuron-step__line--vertical {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark-theme .neuron-step__line--vertical.neuron-step__line--completed {
+  background-color: var(--color-primary, #e28462) !important;
+}
+
+.dark-theme .neuron-step__line--vertical.neuron-step__line--dashed {
+  border-left-color: rgba(255, 255, 255, 0.16);
+}
+
+.dark-theme .neuron-step__line--vertical.neuron-step__line--dashed.neuron-step__line--completed {
+  border-left-color: var(--color-primary, #e28462) !important;
+}
+
+.dark-theme .neuron-step__line--vertical.neuron-step__line--dotted {
+  border-left-color: rgba(255, 255, 255, 0.16);
+}
+
+.dark-theme .neuron-step__line--vertical.neuron-step__line--dotted.neuron-step__line--completed {
+  border-left-color: var(--color-primary, #e28462) !important;
+}
+
+.dark-theme .neuron-step__dot--upcoming {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dark-theme .neuron-step__dot--active {
+  background: var(--color-primary, #e28462);
+  box-shadow: 0 0 0 4px rgba(226, 132, 98, 0.25);
+}
+
+.dark-theme .neuron-step__dot--completed {
+  background: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-step__label--active {
+  color: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-step__label--completed {
+  color: var(--color-text-primary, #f2f4f7);
+}
+
+.dark-theme .neuron-stepper-compact__segment--upcoming {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.dark-theme .neuron-stepper-compact__segment--active {
+  background: var(--color-primary, #e28462);
+}
+
+.dark-theme .neuron-step__content {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   STEPPER ANATOMY VIEWER
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.stepper-anatomy-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 20px);
+  width: 100%;
+}
+
+.stepper-anatomy-stage-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 12px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stepper-anatomy-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+}
+
+.stepper-anatomy-stage-body {
+  padding: 68px 32px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-bg-canvas, var(--color-bg-subtle));
+  position: relative;
+  overflow: visible;
+  min-height: 250px;
+}
+
+.stepper-anatomy-board {
+  position: relative;
+  width: 100%;
+  max-width: 660px;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg, 8px);
+  transition: all 0.2s ease;
+}
+
+.stepper-anatomy-board.is-active {
+  background: rgba(178, 94, 64, 0.04);
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 6px;
+}
+
+.stepper-anatomy-pin {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.stepper-anatomy-pin--top {
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+}
+
+.stepper-anatomy-pin--bottom {
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+}
+
+.stepper-anatomy-pin__stem {
+  width: 1.5px;
+  height: 22px;
+  background: var(--color-primary);
+  transition: background-color 0.15s ease, height 0.15s ease;
+}
+
+.stepper-anatomy-pin--bottom .stepper-anatomy-pin__stem {
+  order: -1;
+}
+
+.stepper-anatomy-pin__dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(178, 94, 64, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stepper-anatomy-pin:hover .stepper-anatomy-pin__dot,
+.stepper-anatomy-pin.is-active .stepper-anatomy-pin__dot {
+  background: var(--color-primary-hover, #9c4f34);
+  transform: scale(1.12);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.25), 0 3px 8px rgba(178, 94, 64, 0.4);
+}
+
+.stepper-anatomy-zone {
+  position: relative;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  transition: background-color 0.15s ease, outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stepper-anatomy-zone:hover,
+.stepper-anatomy-zone.is-active {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  background: rgba(178, 94, 64, 0.08);
+}
+
+.dark-theme .stepper-anatomy-zone:hover,
+.dark-theme .stepper-anatomy-zone.is-active {
+  background: rgba(226, 132, 98, 0.16);
+}
+
+.stepper-anatomy-stage-footer {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: var(--space-3, 12px) var(--space-5, 20px);
+  background: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-text-xs, 12px);
+  color: var(--color-text-secondary);
+  box-sizing: border-box;
+}
+
+.stepper-anatomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4, 16px);
+}
+
+.stepper-anatomy-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 8px);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  user-select: none;
+  min-height: 140px;
+  box-sizing: border-box;
+}
+
+.stepper-anatomy-card:hover {
+  border-color: rgba(178, 94, 64, 0.4);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.stepper-anatomy-card.is-active {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.04);
+  box-shadow: 0 0 0 1px var(--color-primary), 0 2px 8px rgba(178, 94, 64, 0.08);
+}
+
+.dark-theme .stepper-anatomy-card.is-active {
+  background: rgba(226, 132, 98, 0.12);
+}
+
+/* =============================================================================
+   NeuronAccordion — Expandable Collapsible Container
+   ============================================================================= */
+
+.neuron-accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Variant: Default (Clean bordered container with left accent bar on active) ── */
+.neuron-accordion--default {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 10px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-accordion--default:hover {
+  border-color: var(--color-border-hover, #d1d5db);
+}
+
+.neuron-accordion--default .neuron-accordion__item {
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.neuron-accordion--default .neuron-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.neuron-accordion--default .neuron-accordion__item.is-open {
+  background-color: rgba(178, 94, 64, 0.02);
+}
+
+.neuron-accordion--default .neuron-accordion__item.is-open::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3.5px;
+  background: var(--color-primary, #b25e40);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  z-index: 3;
+}
+
+/* ── Variant: Separated (Individual floating cards with elevation & subtle lift) ── */
+.neuron-accordion--separated {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--separated .neuron-accordion__item {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.2s ease;
+  overflow: hidden;
+}
+
+.neuron-accordion--separated .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border-color: var(--color-border-hover, #cbd5e1);
+  box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+.neuron-accordion--separated .neuron-accordion__item.is-open,
+.neuron-accordion--separated .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border-color: var(--color-primary, #b25e40) !important;
+  box-shadow: 0 0 0 1px var(--color-primary, #b25e40), 0 8px 24px -4px rgba(178, 94, 64, 0.14) !important;
+  background: var(--color-bg-surface) !important;
+  transform: none !important;
+}
+
+.neuron-accordion--separated .neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled) {
+  background: transparent !important;
+}
+
+/* ── Variant: Flush (Minimalist, borderless, clean dividers) ── */
+.neuron-accordion--flush {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.neuron-accordion--flush .neuron-accordion__item {
+  border-bottom: 1px solid var(--color-border);
+  background: transparent;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+
+.neuron-accordion--flush .neuron-accordion__trigger {
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: var(--radius-md, 6px);
+  transition: background-color 0.2s ease, padding 0.2s ease;
+}
+
+.neuron-accordion--flush .neuron-accordion__trigger:hover:not(:disabled) {
+  background-color: rgba(178, 94, 64, 0.035);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.neuron-accordion--flush .neuron-accordion__item.is-open .neuron-accordion__trigger {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.neuron-accordion--flush .neuron-accordion__item.is-open .neuron-accordion__title {
+  color: var(--color-primary, #b25e40);
+}
+
+.neuron-accordion--flush .neuron-accordion__content {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* ── Variant: Boxed (Distinct header container with contrast surface) ── */
+.neuron-accordion--boxed {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 10px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.neuron-accordion--boxed .neuron-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.neuron-accordion--boxed .neuron-accordion__trigger {
+  background: var(--color-bg-subtle, #f9fafb);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.neuron-accordion--boxed .neuron-accordion__trigger:hover:not(:disabled) {
+  background: rgba(178, 94, 64, 0.04);
+}
+
+.neuron-accordion--boxed .neuron-accordion__item.is-open .neuron-accordion__trigger {
+  background: rgba(178, 94, 64, 0.07);
+  border-bottom: 1px solid rgba(178, 94, 64, 0.16);
+}
+
+.neuron-accordion--boxed .neuron-accordion__item.is-open .neuron-accordion__trigger .neuron-accordion__title {
+  color: var(--color-primary, #b25e40);
+}
+
+/* ── Layout: Two-Column Grid (Style 2) ── */
+.neuron-accordion--columns-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4, 16px);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .neuron-accordion--columns-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Style 2: Borderless cards with hover-matched elevation and soft shadow (hilangkan border, samakan seperti ketika di-hover) */
+.neuron-accordion--columns-2 .neuron-accordion__item {
+  border: 1px solid transparent !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--color-bg-surface);
+}
+
+.neuron-accordion--columns-2 .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border: 1px solid transparent !important;
+  box-shadow: 0 8px 24px -3px rgba(0, 0, 0, 0.09) !important;
+  transform: translateY(-1px);
+}
+
+.neuron-accordion--columns-2 .neuron-accordion__item.is-open,
+.neuron-accordion--columns-2 .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border: 1px solid transparent !important;
+  box-shadow: 0 8px 24px -3px rgba(0, 0, 0, 0.09) !important;
+  background: var(--color-bg-surface) !important;
+  transform: none !important;
+}
+
+.neuron-accordion--columns-2 .neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled) {
+  background: transparent !important;
+}
+
+/* ── Variant: Minimal (Style 4: Hairline borderless dividers, soft active container) ── */
+.neuron-accordion--minimal {
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--minimal .neuron-accordion__item {
+  border-bottom: 1px solid var(--color-border);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: transparent;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 4px 0;
+}
+
+.neuron-accordion--minimal .neuron-accordion__item:last-child {
+  border-bottom: none;
+}
+
+.neuron-accordion--minimal .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  background: rgba(0, 0, 0, 0.015);
+  border-radius: var(--radius-md, 8px);
+}
+
+.neuron-accordion--minimal .neuron-accordion__item.is-open,
+.neuron-accordion--minimal .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  background: var(--color-bg-subtle, #f8fafc) !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid transparent !important;
+  border-radius: var(--radius-lg, 12px) !important;
+  padding: 6px 14px 14px 14px !important;
+  margin: 6px 0 !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
+  transform: none !important;
+}
+
+.neuron-accordion--minimal .neuron-accordion__item.is-open .neuron-accordion__title,
+.neuron-accordion--minimal .neuron-accordion__item.is-open:hover .neuron-accordion__title {
+  color: var(--color-primary, #b25e40) !important;
+  font-weight: 600;
+}
+
+.neuron-accordion--minimal .neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled) {
+  background: transparent !important;
+}
+
+.neuron-accordion--minimal .neuron-accordion__trigger {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neuron-accordion--minimal .neuron-accordion__trigger:focus,
+.neuron-accordion--minimal .neuron-accordion__trigger:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.neuron-accordion--minimal .neuron-accordion__trigger:focus-visible {
+  outline: 2px solid var(--color-primary, #b25e40) !important;
+  outline-offset: -2px;
+  border-radius: var(--radius-md, 8px);
+}
+
+/* ── Variant: Gradient (Style 7: High-impact gradient active card with white text) ── */
+.neuron-accordion--gradient {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open {
+  background: linear-gradient(135deg, var(--brand-500, #f97316) 0%, var(--brand-600, #ea580c) 50%, var(--brand-700, #c2410c) 100%);
+  border-color: transparent;
+  box-shadow: 0 10px 25px -4px rgba(234, 88, 12, 0.35), 0 4px 10px -2px rgba(194, 65, 12, 0.2);
+  color: #ffffff;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open .neuron-accordion__title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open .neuron-accordion__subtitle {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open .neuron-accordion__content {
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 12px;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open .neuron-accordion__indicator {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.neuron-accordion--gradient .neuron-accordion__item.is-open .neuron-accordion__leading-icon {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* ── Variant: Accent Left (Style 9: Left vertical accent indicator bar) ── */
+.neuron-accordion--accent-left {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.neuron-accordion--accent-left .neuron-accordion__item {
+  position: relative;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+}
+
+.neuron-accordion--accent-left .neuron-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.neuron-accordion--accent-left .neuron-accordion__item.is-open {
+  border-left: 4px solid var(--color-primary, #b25e40);
+  background-color: rgba(178, 94, 64, 0.03);
+}
+
+.neuron-accordion--accent-left .neuron-accordion__item.is-open .neuron-accordion__title {
+  color: var(--color-primary, #b25e40);
+  font-weight: 600;
+}
+
+/* ── Variant: Floating (Style 6: Elevated cards with circle avatars & badges) ── */
+.neuron-accordion--floating {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--floating .neuron-accordion__item {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 14px);
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.neuron-accordion--floating .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border-color: rgba(178, 94, 64, 0.35);
+  box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.neuron-accordion--floating .neuron-accordion__item.is-open,
+.neuron-accordion--floating .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border-color: var(--color-primary, #b25e40) !important;
+  background: rgba(178, 94, 64, 0.025) !important;
+  box-shadow: 0 8px 24px -4px rgba(178, 94, 64, 0.12) !important;
+  transform: none !important;
+}
+
+.neuron-accordion--floating .neuron-accordion__item.is-open .neuron-accordion__title,
+.neuron-accordion--floating .neuron-accordion__item.is-open:hover .neuron-accordion__title {
+  color: var(--color-primary, #b25e40) !important;
+  font-weight: 600;
+}
+
+.neuron-accordion--floating .neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled) {
+  background: transparent !important;
+}
+
+/* ── Variant: Pill (Style 8: Soft contained rounded pill cards) ── */
+.neuron-accordion--pill {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 10px);
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--pill .neuron-accordion__item {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: all 0.22s ease;
+  overflow: hidden;
+}
+
+.neuron-accordion--pill .neuron-accordion__item.is-open {
+  background: rgba(79, 70, 229, 0.05);
+  border-color: rgba(79, 70, 229, 0.3);
+}
+
+.neuron-accordion--pill .neuron-accordion__item.is-open .neuron-accordion__title {
+  color: var(--color-primary, #b25e40);
+  font-weight: 600;
+}
+
+/* ── Variant: Numbered (Style 3, 10: Automatic or explicit number prefix) ── */
+.neuron-accordion--numbered {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+}
+
+.neuron-accordion--numbered .neuron-accordion__item {
+  background: transparent;
+  border-bottom: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+  padding: 2px 0;
+}
+
+.neuron-accordion--numbered .neuron-accordion__item.is-open {
+  background: rgba(178, 94, 64, 0.02);
+}
+
+.neuron-accordion--numbered .neuron-accordion__item.is-open .neuron-accordion__title {
+  color: var(--color-primary, #b25e40);
+  font-weight: 600;
+}
+
+.neuron-accordion__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary, #b25e40);
+  letter-spacing: -0.02em;
+  margin-right: 12px;
+  min-width: 24px;
+  flex-shrink: 0;
+}
+
+/* Circle Avatar leading icon style (Style 6) */
+.neuron-accordion__leading-icon--avatar {
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: rgba(178, 94, 64, 0.08) !important;
+  color: var(--color-primary, #b25e40) !important;
+}
+
+.neuron-accordion__item.is-open .neuron-accordion__leading-icon--avatar {
+  background: var(--color-primary, #b25e40) !important;
+  color: #ffffff !important;
+}
+
+/* ── Header Wrapper ── */
+.neuron-accordion__header {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* ── Trigger Button ── */
+.neuron-accordion__trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-text-primary);
+  transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+  position: relative;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neuron-accordion__trigger:focus,
+.neuron-accordion__trigger:active {
+  outline: none !important;
+}
+
+.neuron-accordion__trigger:hover:not(:disabled) {
+  background-color: rgba(178, 94, 64, 0.025);
+}
+
+.neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled),
+.neuron-accordion__item.is-open:hover .neuron-accordion__trigger {
+  background-color: transparent !important;
+}
+
+.neuron-accordion__trigger:focus-visible {
+  outline: 2px solid var(--color-primary, #b25e40);
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+/* Sizing scales for trigger */
+.neuron-accordion__trigger--sm {
+  padding: 10px 14px;
+  gap: var(--space-2, 10px);
+  min-height: 44px;
+}
+
+.neuron-accordion__trigger--md {
+  padding: 14px 18px;
+  gap: var(--space-3, 12px);
+  min-height: 52px;
+}
+
+.neuron-accordion__trigger--lg {
+  padding: 18px 22px;
+  gap: var(--space-4, 16px);
+  min-height: 60px;
+}
+
+/* Title & Subtitle Stack */
+.neuron-accordion__title-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+.neuron-accordion__title {
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.35;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.neuron-accordion__trigger--sm .neuron-accordion__title {
+  font-size: 13px;
+}
+
+.neuron-accordion__trigger--md .neuron-accordion__title {
+  font-size: 14px;
+}
+
+.neuron-accordion__trigger--lg .neuron-accordion__title {
+  font-size: 15.5px;
+}
+
+.neuron-accordion__subtitle {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--color-text-tertiary);
+  margin-top: 1px;
+  font-weight: 400;
+}
+
+.neuron-accordion__trigger--lg .neuron-accordion__subtitle {
+  font-size: 12.5px;
+  margin-top: 2px;
+}
+
+/* Leading visual icon in squircle badge */
+.neuron-accordion__leading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(178, 94, 64, 0.08);
+  color: var(--color-primary, #b25e40);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neuron-accordion__trigger--sm .neuron-accordion__leading-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+}
+
+.neuron-accordion__trigger--lg .neuron-accordion__leading-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.neuron-accordion__trigger:hover:not(:disabled) .neuron-accordion__leading-icon,
+.neuron-accordion__item.is-open .neuron-accordion__leading-icon {
+  background: var(--color-primary, #b25e40);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(178, 94, 64, 0.3);
+  transform: scale(1.04);
+}
+
+/* Trailing group (Badge + Indicator on right side) */
+.neuron-accordion__trailing {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  margin-left: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.neuron-accordion__trigger--lg .neuron-accordion__trailing {
+  gap: var(--space-3, 10px);
+}
+
+/* Badge Slot */
+.neuron-accordion__badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Matrix Table cell accordion reset */
+.badge-matrix-table td .neuron-accordion,
+.badge-matrix-table td .neuron-accordion__trigger,
+.badge-matrix-table td .neuron-accordion__title-group {
+  white-space: normal;
+}
+
+/* Expansion Indicator Slot (Circular micro-button) */
+.neuron-accordion__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-bg-subtle, #f3f4f6);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neuron-accordion__trigger--sm .neuron-accordion__indicator {
+  width: 24px;
+  height: 24px;
+}
+
+.neuron-accordion__trigger--lg .neuron-accordion__indicator {
+  width: 32px;
+  height: 32px;
+}
+
+.neuron-accordion__trigger:hover:not(:disabled) .neuron-accordion__indicator {
+  background: rgba(178, 94, 64, 0.1);
+  color: var(--color-primary, #b25e40);
+  border-color: rgba(178, 94, 64, 0.25);
+}
+
+.neuron-accordion__item.is-open .neuron-accordion__indicator,
+.neuron-accordion__item.is-open .neuron-accordion__trigger:hover:not(:disabled) .neuron-accordion__indicator {
+  background: rgba(178, 94, 64, 0.14) !important;
+  color: var(--color-primary, #b25e40) !important;
+  border-color: rgba(178, 94, 64, 0.3) !important;
+}
+
+/* Icon glyph animations */
+.neuron-accordion__icon-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neuron-accordion__icon-glyph--chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.neuron-accordion__icon-glyph--arrow.is-open {
+  transform: rotate(90deg);
+}
+
+.neuron-accordion__icon-glyph--plus-minus.is-open {
+  transform: rotate(180deg);
+}
+
+/* ── Content Panel (Smooth Grid Row Expansion + Opacity Slide) ── */
+.neuron-accordion__collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neuron-accordion__collapse.is-open {
+  grid-template-rows: 1fr;
+}
+
+.neuron-accordion__collapse-wrapper {
+  overflow: hidden;
+}
+
+.neuron-accordion__content {
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.neuron-accordion__collapse.is-open .neuron-accordion__content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+}
+
+.neuron-accordion__content--sm {
+  padding: 4px 14px 14px 14px;
+  font-size: 13px;
+}
+
+.neuron-accordion__content--md {
+  padding: 6px 18px 18px 18px;
+  font-size: 14px;
+}
+
+.neuron-accordion__content--lg {
+  padding: 8px 22px 22px 22px;
+  font-size: 15px;
+}
+
+/* Boxed variant content has subtle top border */
+.neuron-accordion--boxed .neuron-accordion__item.is-open .neuron-accordion__content {
+  padding-top: 14px;
+}
+
+/* ── Disabled State ── */
+.neuron-accordion.is-disabled,
+.neuron-accordion__item.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.neuron-accordion__trigger:disabled,
+.neuron-accordion__trigger.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Dark Theme Overrides ── */
+.dark-theme .neuron-accordion--default {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .neuron-accordion--default .neuron-accordion__item.is-open {
+  background-color: rgba(226, 132, 98, 0.04);
+}
+
+.dark-theme .neuron-accordion--default .neuron-accordion__item.is-open::before {
+  background: var(--color-primary);
+}
+
+.dark-theme .neuron-accordion--separated .neuron-accordion__item {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.dark-theme .neuron-accordion--separated .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border-color: var(--color-border-hover, #475569);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .neuron-accordion--separated .neuron-accordion__item.is-open,
+.dark-theme .neuron-accordion--separated .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 1px var(--color-primary), 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  transform: none !important;
+}
+
+.dark-theme .neuron-accordion--columns-2 .neuron-accordion__item {
+  border: 1px solid transparent !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .neuron-accordion--columns-2 .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border: 1px solid transparent !important;
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.55) !important;
+}
+
+.dark-theme .neuron-accordion--columns-2 .neuron-accordion__item.is-open,
+.dark-theme .neuron-accordion--columns-2 .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border: 1px solid transparent !important;
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.55) !important;
+  transform: none !important;
+}
+
+.dark-theme .neuron-accordion--minimal .neuron-accordion__item {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .neuron-accordion--minimal .neuron-accordion__item.is-open,
+.dark-theme .neuron-accordion--minimal .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5) !important;
+  transform: none !important;
+}
+
+.dark-theme .neuron-accordion--minimal .neuron-accordion__item.is-open .neuron-accordion__title,
+.dark-theme .neuron-accordion--minimal .neuron-accordion__item.is-open:hover .neuron-accordion__title {
+  color: var(--brand-400, #fb923c) !important;
+}
+
+.dark-theme .neuron-accordion--floating .neuron-accordion__item:hover:not(.is-disabled):not(.is-open) {
+  border-color: rgba(226, 132, 98, 0.4);
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.45);
+}
+
+.dark-theme .neuron-accordion--floating .neuron-accordion__item.is-open,
+.dark-theme .neuron-accordion--floating .neuron-accordion__item.is-open:hover:not(.is-disabled) {
+  border-color: var(--color-primary) !important;
+  background: rgba(226, 132, 98, 0.08) !important;
+  box-shadow: 0 8px 24px -4px rgba(226, 132, 98, 0.25) !important;
+  transform: none !important;
+}
+
+.dark-theme .neuron-accordion--boxed {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .neuron-accordion--boxed .neuron-accordion__trigger {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dark-theme .neuron-accordion--boxed .neuron-accordion__item.is-open .neuron-accordion__trigger {
+  background: rgba(226, 132, 98, 0.12);
+  border-bottom-color: rgba(226, 132, 98, 0.25);
+}
+
+.dark-theme .neuron-accordion__indicator {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+}
+
+.dark-theme .neuron-accordion__trigger:hover:not(:disabled) .neuron-accordion__indicator {
+  background: rgba(226, 132, 98, 0.2);
+  border-color: rgba(226, 132, 98, 0.35);
+  color: var(--color-primary);
+}
+
+.dark-theme .neuron-accordion__item.is-open .neuron-accordion__indicator {
+  background: rgba(226, 132, 98, 0.25);
+  border-color: rgba(226, 132, 98, 0.4);
+  color: var(--color-primary);
+}
+
+.dark-theme .neuron-accordion__leading-icon {
+  background: rgba(226, 132, 98, 0.12);
+  color: var(--color-primary);
+}
+
+.dark-theme .neuron-accordion__trigger:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* =============================================================================
+   ACCORDION ANATOMY VIEWER
+   ============================================================================= */
+
+.accordion-anatomy-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6, 24px);
+  width: 100%;
+}
+
+.accordion-anatomy-stage-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 12px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-anatomy-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+  background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-anatomy-quick-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 18px;
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-anatomy-nav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.accordion-anatomy-nav-chip:hover {
+  border-color: rgba(178, 94, 64, 0.4);
+  background: rgba(178, 94, 64, 0.05);
+  color: var(--color-primary, #b25e40);
+}
+
+.accordion-anatomy-nav-chip.is-active {
+  border-color: var(--color-primary, #b25e40);
+  background: var(--color-primary, #b25e40);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(178, 94, 64, 0.25);
+}
+
+.accordion-anatomy-nav-chip .chip-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion-anatomy-nav-chip.is-active .chip-dot {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.dark-theme .accordion-anatomy-nav-chip {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.accordion-anatomy-stage-body {
+  padding: 80px 72px 72px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  background-color: var(--color-bg-subtle, #f9fafb);
+  background-image: radial-gradient(circle, rgba(178, 94, 64, 0.12) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  position: relative;
+  overflow: visible;
+}
+
+.dark-theme .accordion-anatomy-stage-body {
+  background-color: #111318;
+  background-image: radial-gradient(circle, rgba(226, 132, 98, 0.15) 1.2px, transparent 1.2px);
+}
+
+.accordion-anatomy-board {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* Anatomy Pins */
+.accordion-anatomy-pin {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+  user-select: none;
+}
+
+.accordion-anatomy-pin--top {
+  flex-direction: column;
+  transform: translate(-50%, -100%);
+}
+
+.accordion-anatomy-pin--bottom {
+  flex-direction: column;
+  transform: translate(-50%, 100%);
+}
+
+.accordion-anatomy-pin--left {
+  flex-direction: row-reverse;
+  transform: translate(-100%, -50%);
+}
+
+.accordion-anatomy-pin--right {
+  flex-direction: row;
+  transform: translate(100%, -50%);
+}
+
+.accordion-anatomy-pin__stem {
+  background: var(--color-primary, #b25e40);
+  opacity: 0.65;
+  transition: opacity 0.2s ease, background-color 0.2s ease, height 0.2s ease;
+}
+
+.accordion-anatomy-pin--top .accordion-anatomy-pin__stem,
+.accordion-anatomy-pin--bottom .accordion-anatomy-pin__stem {
+  width: 1.5px;
+}
+
+.accordion-anatomy-pin--left .accordion-anatomy-pin__stem,
+.accordion-anatomy-pin--right .accordion-anatomy-pin__stem {
+  height: 1.5px;
+}
+
+.accordion-anatomy-pin__dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary, #b25e40);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(178, 94, 64, 0.4);
+  border: 2px solid #ffffff;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dark-theme .accordion-anatomy-pin__dot {
+  border-color: #1a1d24;
+}
+
+.accordion-anatomy-pin.is-active .accordion-anatomy-pin__dot,
+.accordion-anatomy-pin:hover .accordion-anatomy-pin__dot {
+  transform: scale(1.24);
+  background: var(--color-primary-hover, #944b31);
+  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.3), 0 4px 12px rgba(178, 94, 64, 0.45);
+}
+
+.accordion-anatomy-pin.is-active .accordion-anatomy-pin__stem {
+  opacity: 1;
+}
+
+/* Zone Hover / Active highlighting */
+.accordion-anatomy-zone {
+  transition: background-color 0.15s ease, outline 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.accordion-anatomy-zone:hover,
+.accordion-anatomy-zone.is-active {
+  outline: 2px solid var(--color-primary, #b25e40);
+  outline-offset: 2px;
+  background: rgba(178, 94, 64, 0.08) !important;
+}
+
+.dark-theme .accordion-anatomy-zone:hover,
+.dark-theme .accordion-anatomy-zone.is-active {
+  background: rgba(226, 132, 98, 0.18) !important;
+}
+
+.accordion-anatomy-stage-footer {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 14px 20px;
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--color-border);
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-anatomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4, 16px);
+}
+
+.accordion-anatomy-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 8px);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  user-select: none;
+  min-height: 136px;
+  box-sizing: border-box;
+}
+
+.accordion-anatomy-card:hover {
+  border-color: rgba(178, 94, 64, 0.45);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.accordion-anatomy-card.is-active {
+  border-color: var(--color-primary);
+  background: rgba(178, 94, 64, 0.05);
+  box-shadow: 0 0 0 1px var(--color-primary), 0 4px 12px rgba(178, 94, 64, 0.12);
+}
+
+.dark-theme .accordion-anatomy-card.is-active {
+  background: rgba(226, 132, 98, 0.14);
+}
+
+/* Specification Matrix Size Tag */
+.badge-size-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-family: var(--font-family-mono, monospace);
+  font-weight: 600;
+  border-radius: var(--radius-sm, 4px);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+/* =============================================================================
+   ACCORDION STYLE GALLERY (STYLE 1 – STYLE 10)
+   ============================================================================= */
+
+.accordion-gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8, 32px);
+  width: 100%;
+}
+
+/* Gallery Top Search Bar ("Help") */
+.accordion-gallery-search-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-4, 16px) var(--space-6, 24px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  transition: all 0.2s ease;
+}
+
+.accordion-gallery-search-card:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.accordion-gallery-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: var(--fs-text-md, 15px);
+  color: var(--color-text-primary);
+  outline: none;
+  font-family: inherit;
+}
+
+.accordion-gallery-search-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Individual Style Card */
+.accordion-style-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl, 20px);
+  padding: var(--space-6, 24px);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-style-card:hover {
+  border-color: var(--color-border-hover, #cbd5e1);
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.06);
+}
+
+.section-card .accordion-style-card {
+  background: var(--color-bg-subtle, #f8fafc);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.section-card .accordion-style-card:hover {
+  border-color: var(--color-border-hover, #cbd5e1);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.04);
+}
+
+.dark-theme .section-card .accordion-style-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--color-border);
+}
+
+.dark-theme .section-card .accordion-style-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.3);
+}
+
+.accordion-style-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  margin-bottom: var(--space-1, 4px);
+  padding-bottom: var(--space-3, 12px);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.06));
+}
+
+.accordion-style-card-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 10px);
+  flex-wrap: wrap;
+}
+
+/* Top-Left Pill Badge: "Style 1", "Style 2", ... in Neudela Brand Style */
+.accordion-style-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background-color: var(--brand-50, #fff7ed);
+  border: 1px solid var(--brand-200, #fed7aa);
+  color: var(--brand-700, #c2410c);
+}
+
+.dark-theme .accordion-style-badge {
+  background-color: rgba(234, 88, 12, 0.15);
+  border-color: rgba(234, 88, 12, 0.35);
+  color: var(--brand-300, #fdba74);
+}
+
+.accordion-style-badge-sub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Style 3 Segmented Pill Filter Tabs */
+.accordion-tab-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: var(--space-4, 16px);
+}
+
+.accordion-tab-pill-btn {
+  padding: 6px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.accordion-tab-pill-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.accordion-tab-pill-btn.is-active {
+  background: var(--color-primary, #ea580c);
+  border-color: var(--color-primary, #ea580c);
+  color: #ffffff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+/* Style 5 Split Sidebar Layout */
+.accordion-split-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-6, 24px);
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .accordion-split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.accordion-split-hero {
+  background: linear-gradient(135deg, #9a3412 0%, #c2410c 45%, #ea580c 100%);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-6, 24px);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4, 16px);
+  box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.35);
+}
+
+.accordion-split-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  align-self: flex-start;
+}
+
+.accordion-split-hero-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0;
+  color: #ffffff;
+}
+
+.accordion-split-hero-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.accordion-split-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: var(--brand-700, #c2410c);
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.accordion-split-hero-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: var(--brand-800, #9a3412);
+}
+
+.accordion-split-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.accordion-split-topic-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.accordion-split-topic-item:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-surface);
+}
+
+/* Dark theme overrides for gallery */
+.dark-theme .accordion-gallery-search-card {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .accordion-style-card {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.dark-theme .accordion-tab-pill-btn {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.dark-theme .accordion-tab-pill-btn.is-active {
+  background: var(--brand-500, #f97316);
+  border-color: var(--brand-500, #f97316);
+}
+
+.dark-theme .accordion-split-hero {
+  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #c2410c 100%);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Accordion Do's & Don'ts Previews ── */
+.accordion-dodont-preview {
+  width: 100%;
+  min-height: 148px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-bg-subtle);
+}
+
+.accordion-dodont-box {
+  width: 100%;
+  max-width: 360px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-dodont-box--do {
+  border-color: color-mix(in srgb, var(--color-success) 35%, var(--color-border));
+}
+
+.accordion-dodont-box--dont {
+  border-color: color-mix(in srgb, var(--color-danger) 35%, var(--color-border));
+}
+
+.accordion-dodont-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  gap: 10px;
+  background: var(--color-bg-surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  user-select: none;
+}
+
+.accordion-dodont-content {
+  padding: 10px 14px 12px 14px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+}
+
+.accordion-dodont-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.accordion-dodont-tag--do {
+  background: var(--emerald-50);
+  color: var(--emerald-700);
+  border: 1px solid var(--emerald-200);
+}
+
+.accordion-dodont-tag--dont {
+  background: var(--red-50);
+  color: var(--red-700);
+  border: 1px solid var(--red-200);
+}
+
+.dark-theme .accordion-dodont-tag--do {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .accordion-dodont-tag--dont {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+

@@ -39,9 +39,10 @@ interface PlaygroundProps {
   codeTemplates: (state: KnobsState) => CodeTemplates;
   children: ((state: KnobsState) => React.ReactNode) | React.ReactNode;
   previewStyle?: React.CSSProperties;
+  defaultTab?: 'vue' | 'html' | 'react';
 }
 
-export default function Playground({ name: _name, knobs, codeTemplates, children, previewStyle }: PlaygroundProps) {
+export default function Playground({ name: _name, knobs, codeTemplates, children, previewStyle, defaultTab = 'react' }: PlaygroundProps) {
   const { t } = useLanguage();
 
   // Initialize state from knobs default values
@@ -53,7 +54,7 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
     return initialState;
   });
 
-  const [activeTab, setActiveTab] = useState<'vue' | 'html' | 'react'>('vue');
+  const [activeTab, setActiveTab] = useState<'vue' | 'html' | 'react'>(defaultTab);
   const [showToast, setShowToast] = useState(false);
 
   const handleKnobChange = (name: string, value: string | boolean) => {
@@ -91,6 +92,12 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
           <div className="playground-code-header">
             <div className="playground-tabs">
               <button
+                className={`playground-tab ${activeTab === 'react' ? 'active' : ''}`}
+                onClick={() => setActiveTab('react')}
+              >
+                React
+              </button>
+              <button
                 className={`playground-tab ${activeTab === 'vue' ? 'active' : ''}`}
                 onClick={() => setActiveTab('vue')}
               >
@@ -101,12 +108,6 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
                 onClick={() => setActiveTab('html')}
               >
                 HTML / CSS
-              </button>
-              <button
-                className={`playground-tab ${activeTab === 'react' ? 'active' : ''}`}
-                onClick={() => setActiveTab('react')}
-              >
-                React
               </button>
             </div>
             

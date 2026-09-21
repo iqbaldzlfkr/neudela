@@ -13,7 +13,9 @@ import NeuronBreadcrumb from '../components/NeuronBreadcrumb';
 import NeuronTree from '../components/NeuronTree';
 import NeuronTextArea from '../components/NeuronTextArea';
 import NeuronSlider from '../components/NeuronSlider';
-import { ArrowRight, Calendar, ChevronDown } from 'lucide-react';
+import NeuronTabBar from '../components/NeuronTabBar';
+import NeuronAccordion from '../components/NeuronAccordion';
+import { ArrowRight, Calendar, ChevronDown, UploadCloud } from 'lucide-react';
 
 interface ComponentsOverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -23,6 +25,28 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
   const { t } = useLanguage();
 
   const components = [
+    {
+      id: 'comp-accordion',
+      title: 'Accordion',
+      desc: 'Vertically stacked disclosure panels for progressively revealing details and conserving space.',
+      badge: 'Layout',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 260 }}>
+          <NeuronAccordion
+            size="sm"
+            variant="default"
+            defaultValue="overview-acc-1"
+            items={[
+              {
+                id: 'overview-acc-1',
+                title: 'Workspace Settings',
+                content: 'Configure SSO, team members, and billing preferences.',
+              },
+            ]}
+          />
+        </div>
+      ),
+    },
     {
       id: 'comp-alert',
       title: 'Alert',
@@ -153,6 +177,18 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
       ),
     },
     {
+      id: 'comp-file-upload',
+      title: 'File Upload',
+      desc: 'Drag-and-drop file uploader across 4 variants with validation, queue progress, and thumbnail previews.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ width: '85%', maxWidth: 220, padding: '8px 12px', border: '1.5px dashed var(--color-primary)', borderRadius: 'var(--radius-md)', background: 'rgba(178, 94, 64, 0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: '11px', color: 'var(--color-primary)', fontWeight: 500 }}>
+          <UploadCloud size={14} />
+          <span>Drop file or browse</span>
+        </div>
+      ),
+    },
+    {
       id: 'comp-input',
       title: 'Input',
       desc: 'Text fields with floating labels, leading/trailing icons, validation, and helper texts.',
@@ -232,6 +268,27 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
             <span>Cloud Audit</span>
             <NeuronBadge size="xs" variant="warning" pill>In Review</NeuronBadge>
           </div>
+        </div>
+      ),
+    },
+    {
+      id: 'comp-tab-bar',
+      title: 'Tab Bar',
+      desc: 'Contextual view switcher across 5 visual styles, responsive overflow, badges, and closable tabs.',
+      badge: 'Navigation',
+      renderPreview: () => (
+        <div style={{ width: '92%' }}>
+          <NeuronTabBar
+            variant="segment"
+            size="sm"
+            items={[
+              { id: '1', label: 'Design' },
+              { id: '2', label: 'Code', badge: '3' },
+              { id: '3', label: 'Preview' },
+            ]}
+            defaultValue="1"
+            renderPanels={false}
+          />
         </div>
       ),
     },
@@ -316,6 +373,48 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
             size="sm"
             defaultExpandedIds={['src']}
           />
+        </div>
+      ),
+    },
+    {
+      id: 'comp-stepper',
+      title: 'Stepper',
+      desc: 'Multi-step progress indicator with 4 variants, 2 orientations, clickable navigation, and animated states.',
+      badge: 'Navigation',
+      renderPreview: () => (
+        <div style={{ width: '100%', padding: '4px 8px', pointerEvents: 'none' }}>
+          {/* Minimal horizontal stepper preview */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 0, width: '100%' }}>
+            {[
+              { label: 'Info', status: 'completed' },
+              { label: 'Verify', status: 'active' },
+              { label: 'Submit', status: 'upcoming' },
+            ].map((step, i, arr) => (
+              <React.Fragment key={i}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 0 }}>
+                  <div style={{
+                    width: 28, height: 28, borderRadius: '50%',
+                    background: step.status === 'completed' ? 'var(--color-primary)' : step.status === 'active' ? 'var(--color-primary)' : 'var(--color-bg-subtle)',
+                    border: step.status === 'upcoming' ? '2px solid var(--color-border)' : '2px solid var(--color-primary)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: step.status !== 'upcoming' ? '#fff' : 'var(--color-text-tertiary)',
+                    fontSize: 11, fontWeight: 700,
+                    boxShadow: step.status === 'active' ? '0 0 0 3px rgba(178,94,64,0.18)' : 'none',
+                  }}>
+                    {step.status === 'completed' ? (
+                      <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    ) : i + 1}
+                  </div>
+                  <span style={{ fontSize: 10, fontWeight: 600, color: step.status === 'upcoming' ? 'var(--color-text-tertiary)' : 'var(--color-primary)', whiteSpace: 'nowrap' }}>
+                    {step.label}
+                  </span>
+                </div>
+                {i < arr.length - 1 && (
+                  <div style={{ flex: 1, height: 2, background: step.status === 'completed' ? 'var(--color-primary)' : 'var(--color-border)', margin: '0 4px', marginBottom: 20 }} />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       ),
     },

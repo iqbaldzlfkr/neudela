@@ -1019,7 +1019,7 @@ export default function TreeView({ setActiveTab }: TreeViewProps) {
 
           {/* ── 6. Do's and Don'ts ── */}
           <div className="section-card">
-            <h2 className="section-title">Best Practices</h2>
+            <h2 className="section-title">Do's & Don'ts</h2>
             <p className="section-description">
               Key design and interaction recommendations when utilizing tree views in enterprise user interfaces.
             </p>

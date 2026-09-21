@@ -977,7 +977,7 @@ export default function InputView({ setActiveTab }: InputViewProps) {
       )}
 
       <NextPrevious
-        prev={{ id: 'comp-dropdown', label: t.nav.compDropdown || 'Dropdown' }}
+        prev={{ id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' }}
         next={{ id: 'comp-modal', label: t.nav.compModal }}
         setActiveTab={setActiveTab}
       />

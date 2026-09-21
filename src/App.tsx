@@ -41,9 +41,13 @@ import DatePickerView from './views/DatePickerView';
 import ModalView from './views/ModalView';
 import DropdownView from './views/DropdownView';
 import TableView from './views/TableView';
+import TabBarView from './views/TabBarView';
 import TreeView from './views/TreeView';
 import TextAreaView from './views/TextAreaView';
 import SliderView from './views/SliderView';
+import FileUploadView from './views/FileUploadView';
+import StepperView from './views/StepperView';
+import AccordionView from './views/AccordionView';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
@@ -151,12 +155,51 @@ function PlaceholderView({ title, category }: PlaceholderViewProps) {
   );
 }
 
+const STANDALONE_NON_COMP_TABS = new Set([
+  'overview',
+  'about-neudela',
+  'contribute',
+  'release-notes',
+  'theme-generator',
+  'design-getting-started',
+  'dev-getting-started',
+  'foundation',
+  'foundation-overview',
+  'colors',
+  'grid',
+  'icons',
+  'spacing',
+  'typography',
+  'components',
+  'components-overview',
+  'components-section',
+  'pattern',
+  'pat-forms',
+  'pat-layouts',
+  'content',
+  'content-tone',
+  'illustrations',
+  'illus-gallery',
+]);
+
 function getTabFromHash(hashStr: string): string | null {
   const raw = hashStr.replace(/^#\/?/, '').trim();
   if (!raw) return null;
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
+  if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
+  if (raw === 'fileupload' || raw === 'file-upload' || raw === 'comp-fileupload' || raw === 'comp-file-upload') return 'comp-file-upload';
+  if (raw === 'stepper' || raw === 'comp-stepper') return 'comp-stepper';
+  if (raw === 'accordion' || raw === 'comp-accordion') return 'comp-accordion';
+  if (
+    raw === 'components-overview' ||
+    raw === 'comp-components-overview' ||
+    raw === 'components' ||
+    raw === 'components-section'
+  ) {
+    return 'components-overview';
+  }
+  if (STANDALONE_NON_COMP_TABS.has(raw)) return raw;
   if (raw.startsWith('comp-')) return raw;
-  if (raw === 'overview' || raw === 'colors' || raw === 'typography' || raw === 'spacing' || raw === 'foundation-overview') return raw;
   return `comp-${raw}`;
 }
 
@@ -238,6 +281,7 @@ export default function App() {
       icon: 'components',
       items: [
         { id: 'components-overview', label: t.nav.componentsOverview },
+        { id: 'comp-accordion', label: t.nav.compAccordion || 'Accordion' },
         { id: 'comp-alert', label: t.nav.compAlert },
         { id: 'comp-avatar', label: t.nav.compAvatar },
         { id: 'comp-badge', label: t.nav.compBadge },
@@ -248,12 +292,15 @@ export default function App() {
         { id: 'comp-checkbox', label: t.nav.compCheckbox },
         { id: 'comp-datepicker', label: t.nav.compDatePicker },
         { id: 'comp-dropdown', label: t.nav.compDropdown || t.nav.compSelect },
+        { id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' },
         { id: 'comp-input', label: t.nav.compInput },
         { id: 'comp-modal', label: t.nav.compModal },
         { id: 'comp-progress', label: t.nav.compProgress },
         { id: 'comp-radio', label: t.nav.compRadio },
         { id: 'comp-slider', label: t.nav.compSlider || 'Slider' },
+        { id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' },
         { id: 'comp-table', label: t.nav.compTable },
+        { id: 'comp-tab-bar', label: t.nav.compTabBar || 'Tab Bar' },
         { id: 'comp-textarea', label: t.nav.compTextArea || 'Text Area' },
         { id: 'comp-toggle', label: t.nav.compToggle },
         { id: 'comp-tooltip', label: t.nav.compTooltip },
@@ -418,6 +465,7 @@ export default function App() {
         return <FoundationOverview setActiveTab={setActiveTab} />;
       case 'components':
       case 'components-overview':
+      case 'comp-components-overview':
       case 'components-section':
         return <ComponentsOverview setActiveTab={setActiveTab} />;
       case 'colors':
@@ -444,6 +492,14 @@ export default function App() {
         return <CheckboxView setActiveTab={setActiveTab} />;
       case 'comp-datepicker':
         return <DatePickerView setActiveTab={setActiveTab} />;
+      case 'comp-file-upload':
+      case 'comp-fileupload':
+        return <FileUploadView setActiveTab={setActiveTab} />;
+      case 'comp-stepper':
+        return <StepperView setActiveTab={setActiveTab} />;
+      case 'comp-accordion':
+      case 'accordion':
+        return <AccordionView setActiveTab={setActiveTab} />;
       case 'comp-radio':
         return <RadioView setActiveTab={setActiveTab} />;
       case 'comp-slider':
@@ -463,6 +519,9 @@ export default function App() {
         return <ProgressView setActiveTab={setActiveTab} />;
       case 'comp-table':
         return <TableView setActiveTab={setActiveTab} />;
+      case 'comp-tab-bar':
+      case 'comp-tabbar':
+        return <TabBarView setActiveTab={setActiveTab} />;
       case 'comp-textarea':
         return <TextAreaView setActiveTab={setActiveTab} />;
       case 'comp-tree':

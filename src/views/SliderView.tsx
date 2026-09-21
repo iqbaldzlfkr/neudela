@@ -2851,7 +2851,7 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
       {/* ── Footer Navigation (Prev / Next) ── */}
       <NextPrevious
         prev={{ id: 'comp-radio', label: t.nav.compRadio }}
-        next={{ id: 'comp-table', label: t.nav.compTable }}
+        next={{ id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' }}
         setActiveTab={setActiveTab}
       />
     </div>

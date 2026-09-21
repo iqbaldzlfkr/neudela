@@ -2353,8 +2353,8 @@ export default function TableView({ setActiveTab }: TableViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-slider', label: t.nav.compSlider || 'Slider' }}
-        next={{ id: 'comp-toggle', label: t.nav.compToggle }}
+        prev={{ id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' }}
+        next={{ id: 'comp-tab-bar', label: t.nav.compTabBar || 'Tab Bar' }}
         setActiveTab={setActiveTab}
       />
     </div>

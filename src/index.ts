@@ -24,6 +24,16 @@ export type {
   BreadcrumbSeparator 
 } from './components/NeuronBreadcrumb';
 
+export { default as NeuronTabBar, NeuronTabs, NeuronTabPanel } from './components/NeuronTabBar';
+export type {
+  NeuronTabBarProps,
+  NeuronTabPanelProps,
+  TabItem,
+  TabBarVariant,
+  TabBarSize,
+  TabBarOrientation,
+} from './components/NeuronTabBar';
+
 // ── Badges & Avatars ──
 export { default as NeuronBadge } from './components/NeuronBadge';
 export type { 
@@ -61,6 +71,27 @@ export type {
   NeuronCardHoverEffect 
 } from './components/NeuronCard';
 
+export {
+  default as NeuronAccordion,
+  NeuronAccordionItem,
+  NeuronAccordionTrigger,
+  NeuronAccordionContent,
+  useAccordionContext,
+  useAccordionItemContext,
+} from './components/NeuronAccordion';
+export type {
+  NeuronAccordionProps,
+  NeuronAccordionItemProps,
+  NeuronAccordionTriggerProps,
+  NeuronAccordionContentProps,
+  AccordionItem,
+  AccordionType,
+  AccordionVariant,
+  AccordionSize,
+  AccordionIconPosition,
+  AccordionIconType,
+} from './components/NeuronAccordion';
+
 // ── Inputs & Form Controls ──
 export { default as NeuronInput } from './components/NeuronInput';
 export type { NeuronInputProps, InputState } from './components/NeuronInput';
@@ -76,6 +107,27 @@ export type {
   TextAreaToolType,
   TextAreaToolbarPosition
 } from './components/NeuronTextArea';
+
+export { default as NeuronFileUpload, formatFileSize, getFileCategoryIcon } from './components/NeuronFileUpload';
+export type {
+  NeuronFileUploadProps,
+  FileUploadVariant,
+  FileUploadSize,
+  FileUploadStatus,
+  UploadFileItem,
+} from './components/NeuronFileUpload';
+
+export { default as NeuronStepper } from './components/NeuronStepper';
+export type {
+  NeuronStepperProps,
+  StepperStep,
+  StepStatus,
+  StepperVariant,
+  StepperOrientation,
+  StepperSize,
+  StepperConnector,
+  StepperLabelPlacement,
+} from './components/NeuronStepper';
 
 export { default as NeuronCheckbox } from './components/NeuronCheckbox';
 export type { 
