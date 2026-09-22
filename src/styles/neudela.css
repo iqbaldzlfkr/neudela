@@ -12264,8 +12264,8 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   display: flex;
   align-items: center;
   z-index: 10;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
   user-select: none;
+  pointer-events: none;
 }
 
 .accordion-anatomy-pin--top {
@@ -12291,7 +12291,7 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
 .accordion-anatomy-pin__stem {
   background: var(--color-primary, #b25e40);
   opacity: 0.65;
-  transition: opacity 0.2s ease, background-color 0.2s ease, height 0.2s ease;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
 }
 
 .accordion-anatomy-pin--top .accordion-anatomy-pin__stem,
@@ -12319,7 +12319,7 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   border: 2px solid #ffffff;
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
   flex-shrink: 0;
 }
 
@@ -12327,44 +12327,42 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   border-color: #1a1d24;
 }
 
-.accordion-anatomy-pin.is-active .accordion-anatomy-pin__dot,
-.accordion-anatomy-pin:hover .accordion-anatomy-pin__dot {
-  transform: scale(1.24);
+.accordion-anatomy-pin.is-active .accordion-anatomy-pin__dot {
   background: var(--color-primary-hover, #944b31);
-  box-shadow: 0 0 0 4px rgba(178, 94, 64, 0.3), 0 4px 12px rgba(178, 94, 64, 0.45);
+  box-shadow: 0 0 0 3px rgba(178, 94, 64, 0.35), 0 3px 8px rgba(178, 94, 64, 0.45);
 }
 
 .accordion-anatomy-pin.is-active .accordion-anatomy-pin__stem {
   opacity: 1;
 }
 
-/* Zone Hover / Active highlighting */
+/* Zone Highlighting: strictly controlled by is-active to avoid nested hover bubbling */
 .accordion-anatomy-zone {
-  transition: background-color 0.15s ease, outline 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   cursor: pointer;
 }
 
-.accordion-anatomy-zone:hover,
 .accordion-anatomy-zone.is-active {
-  outline: 2px solid var(--color-primary, #b25e40);
-  outline-offset: 2px;
+  box-shadow: inset 0 0 0 2px var(--color-primary, #b25e40);
   background: rgba(178, 94, 64, 0.08) !important;
 }
 
-.dark-theme .accordion-anatomy-zone:hover,
 .dark-theme .accordion-anatomy-zone.is-active {
   background: rgba(226, 132, 98, 0.18) !important;
 }
 
+/* Zero-Layout-Shift Fixed Height Stage Footer */
 .accordion-anatomy-stage-footer {
   display: flex;
   align-items: center;
-  min-height: 64px;
-  padding: 14px 20px;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 0 20px;
   background: var(--color-bg-surface);
   border-top: 1px solid var(--color-border);
   box-sizing: border-box;
-  transition: background-color 0.2s ease;
+  overflow: hidden;
 }
 
 .accordion-anatomy-grid {
@@ -12382,7 +12380,7 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg, 8px);
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
   min-height: 136px;
   box-sizing: border-box;
@@ -12391,7 +12389,6 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
 .accordion-anatomy-card:hover {
   border-color: rgba(178, 94, 64, 0.45);
   box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
 }
 
 .accordion-anatomy-card.is-active {
@@ -12801,4 +12798,738 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   border-color: rgba(239, 68, 68, 0.3);
 }
 
+/* =============================================================================
+   NEURON DIVIDER COMPONENT
+   ============================================================================= */
+
+:root {
+  --divider-color-default: var(--color-border);
+  --divider-color-subtle: rgba(0, 0, 0, 0.06);
+  --divider-color-strong: #94a3b8;
+  --divider-color-brand: var(--color-primary, #b25e40);
+  --divider-color-accent: #c87557;
+  --divider-color-success: #10b981;
+  --divider-color-warning: #f59e0b;
+  --divider-color-error: #ef4444;
+  --divider-color-info: #3b82f6;
+}
+
+.dark-theme {
+  --divider-color-default: rgba(255, 255, 255, 0.12);
+  --divider-color-subtle: rgba(255, 255, 255, 0.06);
+  --divider-color-strong: rgba(255, 255, 255, 0.24);
+}
+
+/* Base Component */
+.neuron-divider {
+  --divider-color: var(--divider-color-default);
+  --divider-thickness: 1px;
+  --divider-style: solid;
+  position: relative;
+  box-sizing: border-box;
+  color: var(--color-text-secondary);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+/* Horizontal Divider (Default) */
+.neuron-divider--horizontal {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  clear: both;
+}
+
+.neuron-divider--horizontal:not(.neuron-divider--with-content) {
+  height: 0;
+  border: none;
+  border-top: var(--divider-thickness) var(--divider-style) var(--divider-color);
+}
+
+/* Vertical Divider */
+.neuron-divider--vertical {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.1em;
+  min-height: 16px;
+  width: 0;
+  vertical-align: middle;
+  border: none;
+  border-left: var(--divider-thickness) var(--divider-style) var(--divider-color);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* Horizontal with Content / Label */
+.neuron-divider--with-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+}
+
+.neuron-divider--with-content .neuron-divider__line {
+  display: block;
+  flex: 1;
+  height: 0;
+  border: none;
+  border-top: var(--divider-thickness) var(--divider-style) var(--divider-color);
+  transition: border-color 0.15s ease;
+}
+
+.neuron-divider--with-content .neuron-divider__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  padding: 0 var(--space-3, 12px);
+  font-size: var(--fs-text-xs, 12px);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Content Alignment Modifiers */
+.neuron-divider--content-center .neuron-divider__line--start,
+.neuron-divider--content-center .neuron-divider__line--end {
+  flex: 1;
+}
+
+.neuron-divider--content-left .neuron-divider__line--start {
+  flex: 0 0 24px;
+  max-width: 36px;
+}
+
+.neuron-divider--content-left .neuron-divider__line--end {
+  flex: 1;
+}
+
+.neuron-divider--content-right .neuron-divider__line--start {
+  flex: 1;
+}
+
+.neuron-divider--content-right .neuron-divider__line--end {
+  flex: 0 0 24px;
+  max-width: 36px;
+}
+
+/* Thickness Modifiers */
+.neuron-divider--hairline {
+  --divider-thickness: 0.5px;
+}
+
+.neuron-divider--thin {
+  --divider-thickness: 1px;
+}
+
+.neuron-divider--medium {
+  --divider-thickness: 2px;
+}
+
+.neuron-divider--thick {
+  --divider-thickness: 4px;
+}
+
+/* Variant Modifiers */
+.neuron-divider--solid {
+  --divider-style: solid;
+}
+
+.neuron-divider--dashed {
+  --divider-style: dashed;
+}
+
+.neuron-divider--dotted {
+  --divider-style: dotted;
+}
+
+.neuron-divider--double {
+  --divider-style: double;
+}
+
+.neuron-divider--double.neuron-divider--horizontal:not(.neuron-divider--with-content) {
+  border-top-width: 3px;
+}
+
+.neuron-divider--double.neuron-divider--vertical {
+  border-left-width: 3px;
+}
+
+.neuron-divider--double.neuron-divider--with-content .neuron-divider__line {
+  border-top-width: 3px;
+}
+
+/* Gradient Variant (Signature Neudela Feathered Edge) */
+.neuron-divider--gradient.neuron-divider--horizontal:not(.neuron-divider--with-content) {
+  border-top: none !important;
+  height: var(--divider-thickness);
+  background: linear-gradient(90deg, transparent 0%, var(--divider-color) 25%, var(--divider-color) 75%, transparent 100%);
+}
+
+.neuron-divider--gradient.neuron-divider--vertical {
+  border-left: none !important;
+  width: var(--divider-thickness);
+  background: linear-gradient(180deg, transparent 0%, var(--divider-color) 25%, var(--divider-color) 75%, transparent 100%);
+}
+
+.neuron-divider--gradient.neuron-divider--with-content .neuron-divider__line--start {
+  border-top: none !important;
+  height: var(--divider-thickness);
+  background: linear-gradient(90deg, transparent 0%, var(--divider-color) 100%);
+}
+
+.neuron-divider--gradient.neuron-divider--with-content .neuron-divider__line--end {
+  border-top: none !important;
+  height: var(--divider-thickness);
+  background: linear-gradient(90deg, var(--divider-color) 0%, transparent 100%);
+}
+
+/* Color Intent Modifiers */
+.neuron-divider--color-default {
+  --divider-color: var(--divider-color-default);
+}
+
+.neuron-divider--color-subtle {
+  --divider-color: var(--divider-color-subtle);
+}
+
+.neuron-divider--color-strong {
+  --divider-color: var(--divider-color-strong);
+}
+
+.neuron-divider--color-brand {
+  --divider-color: var(--divider-color-brand);
+}
+
+.neuron-divider--color-accent {
+  --divider-color: var(--divider-color-accent);
+}
+
+.neuron-divider--color-success {
+  --divider-color: var(--divider-color-success);
+}
+
+.neuron-divider--color-warning {
+  --divider-color: var(--divider-color-warning);
+}
+
+.neuron-divider--color-error {
+  --divider-color: var(--divider-color-error);
+}
+
+.neuron-divider--color-info {
+  --divider-color: var(--divider-color-info);
+}
+
+/* Spacing Modifiers */
+.neuron-divider--spacing-none.neuron-divider--horizontal {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.neuron-divider--spacing-none.neuron-divider--vertical {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.neuron-divider--spacing-xs.neuron-divider--horizontal {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.neuron-divider--spacing-xs.neuron-divider--vertical {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.neuron-divider--spacing-sm.neuron-divider--horizontal {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.neuron-divider--spacing-sm.neuron-divider--vertical {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.neuron-divider--spacing-md.neuron-divider--horizontal {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.neuron-divider--spacing-md.neuron-divider--vertical {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.neuron-divider--spacing-lg.neuron-divider--horizontal {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.neuron-divider--spacing-lg.neuron-divider--vertical {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.neuron-divider--spacing-xl.neuron-divider--horizontal {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.neuron-divider--spacing-xl.neuron-divider--vertical {
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+/* =============================================================================
+   DIVIDER ANATOMY & PLAYBOOK STYLES
+   ============================================================================= */
+
+.divider-anatomy-zone {
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.divider-anatomy-zone.is-active {
+  box-shadow: inset 0 0 0 2px var(--color-primary, #b25e40);
+  background: rgba(178, 94, 64, 0.08) !important;
+}
+
+.dark-theme .divider-anatomy-zone.is-active {
+  background: rgba(226, 132, 98, 0.18) !important;
+}
+
+.divider-anatomy-stage-footer {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 0 20px;
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--color-border);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.divider-showcase-card {
+  padding: 24px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NeuronChart — SVG Chart Component Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Base Container */
+.neuron-chart {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neuron-chart:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Sparkline compact mode */
+.neuron-chart--sparkline {
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  min-width: 80px;
+  box-shadow: none;
+}
+
+.neuron-chart--sparkline:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Header */
+.neuron-chart__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.neuron-chart__title {
+  font-size: var(--fs-text-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.neuron-chart__subtitle {
+  font-size: var(--fs-text-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Canvas Wrapper */
+.neuron-chart__canvas {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.neuron-chart__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Grid Lines */
+.neuron-chart__grid-line {
+  stroke: var(--color-border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: 0.5;
+}
+
+/* Axis Labels */
+.neuron-chart__axis-label {
+  font-family: var(--font-family);
+  font-size: 10px;
+  fill: var(--color-text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Bar Chart ─── */
+.neuron-chart__bar {
+  cursor: pointer;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.neuron-chart__bar:hover {
+  opacity: 0.85;
+  filter: brightness(1.08);
+}
+
+.neuron-chart__bar-label {
+  font-family: var(--font-family);
+  font-size: 10px;
+  fill: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Bar grow animation (vertical) */
+.neuron-chart__bar--animated {
+  animation: neuronChartBarGrow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes neuronChartBarGrow {
+  from {
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom center;
+    opacity: 1;
+  }
+}
+
+/* Bar grow animation (horizontal) */
+.neuron-chart__bar--h-animated {
+  animation: neuronChartBarGrowH 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes neuronChartBarGrowH {
+  from {
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left center;
+    opacity: 1;
+  }
+}
+
+/* ─── Line Chart ─── */
+.neuron-chart__line {
+  transition: opacity 0.2s ease;
+}
+
+.neuron-chart__line--animated {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: neuronChartLineDraw 1.2s ease-out forwards;
+}
+
+@keyframes neuronChartLineDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.neuron-chart__area {
+  opacity: 0.12;
+  animation: neuronChartAreaFade 0.8s ease-out both;
+}
+
+@keyframes neuronChartAreaFade {
+  from { opacity: 0; }
+  to { opacity: 0.12; }
+}
+
+.neuron-chart__dot {
+  cursor: pointer;
+  transition: r 0.15s ease, stroke-width 0.15s ease;
+}
+
+.neuron-chart__dot:hover {
+  r: 6;
+  stroke-width: 3;
+}
+
+/* ─── Pie / Donut ─── */
+.neuron-chart__pie-slice {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform-origin: center;
+}
+
+.neuron-chart__pie-slice:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+
+.neuron-chart__pie-slice--animated {
+  animation: neuronChartPieReveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes neuronChartPieReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.neuron-chart__pie-label {
+  font-family: var(--font-family);
+  font-size: 11px;
+  fill: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.neuron-chart__donut-center {
+  font-family: var(--font-family);
+  font-size: 20px;
+  fill: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Radar Chart ─── */
+.neuron-chart__radar-ring {
+  stroke: var(--color-border);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.neuron-chart__radar-axis {
+  stroke: var(--color-border);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.neuron-chart__radar-label {
+  font-family: var(--font-family);
+  font-size: 11px;
+  fill: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.neuron-chart__radar-polygon {
+  fill-opacity: 0.15;
+  stroke-width: 2;
+  transition: fill-opacity 0.2s ease;
+}
+
+.neuron-chart__radar-polygon:hover {
+  fill-opacity: 0.25;
+}
+
+.neuron-chart__radar-polygon--animated {
+  animation: neuronChartRadarReveal 0.6s ease-out both;
+}
+
+@keyframes neuronChartRadarReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+    transform-origin: center;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+/* ─── Sparkline ─── */
+.neuron-chart__sparkline-area {
+  opacity: 0.15;
+}
+
+/* ─── Tooltip ─── */
+.neuron-chart__tooltip {
+  position: absolute;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  box-shadow: var(--shadow-lg);
+  white-space: nowrap;
+  animation: neuronChartTooltipIn 0.15s ease-out;
+}
+
+@keyframes neuronChartTooltipIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -100%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%) translateY(0);
+  }
+}
+
+.neuron-chart__tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.neuron-chart__tooltip-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family);
+  font-size: var(--fs-text-xs);
+}
+
+.neuron-chart__tooltip-series {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.neuron-chart__tooltip-label {
+  color: var(--color-text-secondary);
+}
+
+.neuron-chart__tooltip-value {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Legend ─── */
+.neuron-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.neuron-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.neuron-chart__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.neuron-chart__legend-label {
+  font-family: var(--font-family);
+  font-size: var(--fs-text-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Size Variants ─── */
+.neuron-chart--sm .neuron-chart__title {
+  font-size: var(--fs-text-sm);
+}
+.neuron-chart--sm .neuron-chart__subtitle {
+  font-size: var(--fs-text-xs);
+}
+
+.neuron-chart--lg .neuron-chart__title {
+  font-size: var(--fs-text-lg);
+}
+
+.neuron-chart--xl .neuron-chart__title {
+  font-size: var(--fs-text-xl);
+}
+
+.neuron-chart--xl .neuron-chart__donut-center {
+  font-size: 28px;
+}
+
+/* ─── Dark Mode Overrides ─── */
+.dark-theme .neuron-chart {
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.dark-theme .neuron-chart__grid-line {
+  stroke: var(--color-border);
+  opacity: 0.35;
+}
+
+.dark-theme .neuron-chart__tooltip {
+  background: var(--slate-800);
+  border-color: var(--slate-700);
+}
+
+.dark-theme .neuron-chart__radar-ring {
+  stroke: var(--color-border);
+  opacity: 0.3;
+}
+
+.dark-theme .neuron-chart__legend {
+  border-top-color: var(--color-border);
+}
 

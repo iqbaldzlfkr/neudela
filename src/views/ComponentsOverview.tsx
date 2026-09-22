@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import NextPrevious from '../components/NextPrevious';
 import { useLanguage } from '../context/LanguageContext';
 import NeuronButton from '../components/NeuronButton';
@@ -15,6 +16,8 @@ import NeuronTextArea from '../components/NeuronTextArea';
 import NeuronSlider from '../components/NeuronSlider';
 import NeuronTabBar from '../components/NeuronTabBar';
 import NeuronAccordion from '../components/NeuronAccordion';
+import NeuronDivider from '../components/NeuronDivider';
+import NeuronChart from '../components/NeuronChart';
 import { ArrowRight, Calendar, ChevronDown, UploadCloud } from 'lucide-react';
 
 interface ComponentsOverviewProps {
@@ -141,6 +144,31 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
       ),
     },
     {
+      id: 'comp-chart',
+      title: 'Chart',
+      desc: 'SVG-based data visualization with 6 chart types, 5 color schemes, animated entries, and tooltips.',
+      badge: 'Data Display',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 240 }}>
+          <NeuronChart
+            type="bar"
+            data={[
+              { label: 'Q1', value: 42 },
+              { label: 'Q2', value: 68 },
+              { label: 'Q3', value: 53 },
+              { label: 'Q4', value: 81 },
+            ]}
+            size="sm"
+            colorScheme="spectrum"
+            showGrid={false}
+            showLegend={false}
+            showTooltip={false}
+            animated={false}
+          />
+        </div>
+      ),
+    },
+    {
       id: 'comp-checkbox',
       title: 'Checkbox',
       desc: 'Multi-selection controls supporting unchecked, checked, and indeterminate states.',
@@ -161,6 +189,21 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', fontSize: '11px', fontWeight: 500, color: 'var(--color-text-primary)' }}>
           <Calendar size={13} color="var(--brand-600)" />
           <span>Jan 6, 2025 – Jan 13, 2025</span>
+        </div>
+      ),
+    },
+    {
+      id: 'comp-divider',
+      title: 'Divider',
+      desc: 'Structural line separator for organizing content sections, establishing rhythm, and inline toolbars.',
+      badge: 'Layout',
+      renderPreview: () => (
+        <div style={{ width: '85%', maxWidth: 220, display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>Section Header</div>
+          <NeuronDivider contentPosition="center" spacing="xs">
+            <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-primary)' }}>OR</span>
+          </NeuronDivider>
+          <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>Next Block</div>
         </div>
       ),
     },
@@ -390,7 +433,7 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
               { label: 'Verify', status: 'active' },
               { label: 'Submit', status: 'upcoming' },
             ].map((step, i, arr) => (
-              <React.Fragment key={i}>
+              <Fragment key={i}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 0 }}>
                   <div style={{
                     width: 28, height: 28, borderRadius: '50%',
@@ -412,7 +455,7 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
                 {i < arr.length - 1 && (
                   <div style={{ flex: 1, height: 2, background: step.status === 'completed' ? 'var(--color-primary)' : 'var(--color-border)', margin: '0 4px', marginBottom: 20 }} />
                 )}
-              </React.Fragment>
+              </Fragment>
             ))}
           </div>
         </div>

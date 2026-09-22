@@ -48,6 +48,8 @@ import SliderView from './views/SliderView';
 import FileUploadView from './views/FileUploadView';
 import StepperView from './views/StepperView';
 import AccordionView from './views/AccordionView';
+import DividerView from './views/DividerView';
+import ChartView from './views/ChartView';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
@@ -183,13 +185,15 @@ const STANDALONE_NON_COMP_TABS = new Set([
 ]);
 
 function getTabFromHash(hashStr: string): string | null {
-  const raw = hashStr.replace(/^#\/?/, '').trim();
-  if (!raw) return null;
+  const raw = hashStr.replace(/^#\/?/, '').trim().toLowerCase();
+  if (!raw || raw === 'home' || raw === 'overview' || raw === 'beranda') return 'overview';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
   if (raw === 'fileupload' || raw === 'file-upload' || raw === 'comp-fileupload' || raw === 'comp-file-upload') return 'comp-file-upload';
   if (raw === 'stepper' || raw === 'comp-stepper') return 'comp-stepper';
   if (raw === 'accordion' || raw === 'comp-accordion') return 'comp-accordion';
+  if (raw === 'divider' || raw === 'comp-divider') return 'comp-divider';
+  if (raw === 'chart' || raw === 'comp-chart') return 'comp-chart';
   if (
     raw === 'components-overview' ||
     raw === 'comp-components-overview' ||
@@ -220,11 +224,17 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Update hash when activeTab changes
+  // Update hash when activeTab changes (Home/Overview stays clean at root without hash)
   useEffect(() => {
-    const targetHash = activeTab.replace(/^comp-/, '');
-    if (window.location.hash.replace(/^#\/?/, '') !== targetHash) {
-      window.location.hash = targetHash;
+    if (activeTab === 'overview') {
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    } else {
+      const targetHash = activeTab.replace(/^comp-/, '');
+      if (window.location.hash.replace(/^#\/?/, '') !== targetHash) {
+        window.location.hash = targetHash;
+      }
     }
   }, [activeTab]);
 
@@ -289,8 +299,10 @@ export default function App() {
         { id: 'comp-button', label: t.nav.compButton },
         { id: 'comp-button-group', label: t.nav.compButtonGroup },
         { id: 'comp-card', label: t.nav.compCard },
+        { id: 'comp-chart', label: t.nav.compChart || 'Chart' },
         { id: 'comp-checkbox', label: t.nav.compCheckbox },
         { id: 'comp-datepicker', label: t.nav.compDatePicker },
+        { id: 'comp-divider', label: t.nav.compDivider || 'Divider' },
         { id: 'comp-dropdown', label: t.nav.compDropdown || t.nav.compSelect },
         { id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' },
         { id: 'comp-input', label: t.nav.compInput },
@@ -492,6 +504,12 @@ export default function App() {
         return <CheckboxView setActiveTab={setActiveTab} />;
       case 'comp-datepicker':
         return <DatePickerView setActiveTab={setActiveTab} />;
+      case 'comp-chart':
+      case 'chart':
+        return <ChartView setActiveTab={setActiveTab} />;
+      case 'comp-divider':
+      case 'divider':
+        return <DividerView setActiveTab={setActiveTab} />;
       case 'comp-file-upload':
       case 'comp-fileupload':
         return <FileUploadView setActiveTab={setActiveTab} />;
@@ -540,7 +558,12 @@ export default function App() {
     <div className="app-container">
       {/* Sidebar Navigation */}
       <aside className="sidebar">
-        <div className="sidebar-header">
+        <div
+          className="sidebar-header"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setActiveTab('overview')}
+          title="Neudela Home"
+        >
           <div className="brand-logo">N</div>
           <span className="brand-name">NEUDELA</span>
         </div>

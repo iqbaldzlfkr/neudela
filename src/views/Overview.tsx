@@ -6,15 +6,13 @@ import {
   Terminal, 
   Sparkles, 
   Box, 
-  Layers, 
   LayoutGrid, 
-  Palette,
-  CheckCircle2,
-  Code2
+  Palette
 } from 'lucide-react';
 import HeroIconsGrid from '../components/HeroIconsGrid';
 import NextPrevious from '../components/NextPrevious';
 import { useLanguage } from '../context/LanguageContext';
+import { version } from '../../package.json';
 
 interface OverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -123,7 +121,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
                   transition: 'all 0.15s ease'
                 }}
               >
-                <span>npm v0.1.1</span>
+                <span>npm v{version}</span>
                 <ExternalLink size={10} />
               </a>
             </div>
@@ -197,7 +195,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
             borderRadius: 'var(--radius-full)' 
           }}>
             <Sparkles size={13} color="var(--brand-600)" />
-            Official NPM Package (v0.1.1)
+            Official NPM Package (v{version})
           </span>
         </div>
         
@@ -498,10 +496,10 @@ import 'neudela/style.css';`}
                 </p>
                 <div style={{ position: 'relative' }}>
                   <pre style={{ backgroundColor: 'var(--color-bg-canvas)', padding: 'var(--space-4) 70px var(--space-4) var(--space-4)', borderRadius: 'var(--radius-md)', fontFamily: 'JetBrains Mono, monospace', fontSize: 'var(--fs-text-xs)', overflowX: 'auto', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)' }}>
-                    {`<link rel="stylesheet" href="https://unpkg.com/neudela@0.1.1/dist/style.css">`}
+                    {`<link rel="stylesheet" href="https://unpkg.com/neudela@${version}/dist/style.css">`}
                   </pre>
                   <button
-                    onClick={() => handleCopy(`<link rel="stylesheet" href="https://unpkg.com/neudela@0.1.1/dist/style.css">`, 'html-font')}
+                    onClick={() => handleCopy(`<link rel="stylesheet" href="https://unpkg.com/neudela@${version}/dist/style.css">`, 'html-font')}
                     className="neuron-btn neuron-btn--secondary neuron-btn--sm"
                     style={{ position: 'absolute', top: '10px', right: '10px', height: '32px', padding: '0 8px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
                     type="button"
