@@ -1877,7 +1877,7 @@ export default function ModalView({ setActiveTab }: ModalViewProps) {
 
           {/* ── 2. Interactive Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">{isId ? '2. Playground Interaktif' : '2. Interactive Playground'}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               {isId
                 ? 'Sesuaikan semua prop dan lihat perubahan secara real-time.'
@@ -1941,7 +1941,7 @@ export default function ModalView({ setActiveTab }: ModalViewProps) {
                 return {
                   react: `<NeuronModal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  variant="${knobs.variant}"\n  size="${knobs.size}"\n  title="${knobs.title}"\n  description="${knobs.description}"${knobs.showIcon ? `\n  icon={<${iconName} size={24} />}` : ''}\n  showCloseButton={${knobs.showCloseButton}}${knobs.showFooter ? `\n  footer={\n    <>\n      <NeuronButton variant="secondary" size="md" onClick={() => setIsOpen(false)}>Cancel</NeuronButton>\n      <NeuronButton variant="primary" size="md" onClick={() => setIsOpen(false)}>Confirm</NeuronButton>\n    </>\n  }` : ''}\n/>`,
                   vue: `<NeuronModal\n  :open="isOpen"\n  variant="${knobs.variant}"\n  size="${knobs.size}"\n  title="${knobs.title}"\n  description="${knobs.description}"\n  :show-close-button="${knobs.showCloseButton}"\n  @close="isOpen = false"\n/>`,
-                  html: `<div class="neuron-modal-backdrop">\n  <div class="neuron-modal neuron-modal--${knobs.size} neuron-modal--${knobs.variant}">\n    <div class="neuron-modal__top-bar">\n      <div class="neuron-modal__icon neuron-modal__icon--${knobs.variant}"><!-- Icon with Ring Shadow --></div>\n      <button class="neuron-modal__close">&#10005;</button>\n    </div>\n    <div class="neuron-modal__content">\n      <h2 class="neuron-modal__title">${knobs.title}</h2>\n      <p class="neuron-modal__description">${knobs.description}</p>\n    </div>\n    <div class="neuron-modal__footer">\n      <button class="neuron-btn neuron-btn--secondary neuron-btn--md">Cancel</button>\n      <button class="neuron-btn neuron-btn--primary neuron-btn--md">Confirm</button>\n    </div>\n  </div>\n</div>`,
+                  html: `<div class="neuron-modal-backdrop">\n  <div class="neuron-modal neuron-modal--${knobs.size} neuron-modal--${knobs.variant}">\n    <div class="neuron-modal__top-bar">\n      <div class="neuron-modal__icon neuron-modal__icon--${knobs.variant}">\n        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>\n      </div>\n      <button class="neuron-modal__close" aria-label="Close modal">&#10005;</button>\n    </div>\n    <div class="neuron-modal__content">\n      <h2 class="neuron-modal__title">${knobs.title}</h2>\n      <p class="neuron-modal__description">${knobs.description}</p>\n    </div>\n    <div class="neuron-modal__footer">\n      <button class="neuron-btn neuron-btn--secondary neuron-btn--md">Cancel</button>\n      <button class="neuron-btn neuron-btn--primary neuron-btn--md">Confirm</button>\n    </div>\n  </div>\n</div>`,
                 };
               }}
             >

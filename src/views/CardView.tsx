@@ -1451,7 +1451,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
 
 
           <div className="section-card">
-            <h2 className="section-title">NeuronCard {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronCard"
               knobs={[
@@ -1690,7 +1690,7 @@ export default function CardView({ setActiveTab }: CardViewProps) {
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
         prev={{ id: 'comp-button-group', label: t.nav.compButtonGroup }}
-        next={{ id: 'comp-checkbox', label: t.nav.compCheckbox }}
+        next={{ id: 'comp-chart', label: t.nav.compChart || 'Chart' }}
         setActiveTab={setActiveTab}
       />
     </div>

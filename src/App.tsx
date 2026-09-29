@@ -50,6 +50,10 @@ import StepperView from './views/StepperView';
 import AccordionView from './views/AccordionView';
 import DividerView from './views/DividerView';
 import ChartView from './views/ChartView';
+import RatingView from './views/RatingView';
+import TimePickerView from './views/TimePickerView';
+import ToastView from './views/ToastView';
+import { ToastProvider } from './components/NeuronToast';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
@@ -187,6 +191,7 @@ const STANDALONE_NON_COMP_TABS = new Set([
 function getTabFromHash(hashStr: string): string | null {
   const raw = hashStr.replace(/^#\/?/, '').trim().toLowerCase();
   if (!raw || raw === 'home' || raw === 'overview' || raw === 'beranda') return 'overview';
+  if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
   if (raw === 'fileupload' || raw === 'file-upload' || raw === 'comp-fileupload' || raw === 'comp-file-upload') return 'comp-file-upload';
@@ -194,6 +199,8 @@ function getTabFromHash(hashStr: string): string | null {
   if (raw === 'accordion' || raw === 'comp-accordion') return 'comp-accordion';
   if (raw === 'divider' || raw === 'comp-divider') return 'comp-divider';
   if (raw === 'chart' || raw === 'comp-chart') return 'comp-chart';
+  if (raw === 'timepicker' || raw === 'time-picker' || raw === 'comp-timepicker' || raw === 'comp-time-picker') return 'comp-time-picker';
+  if (raw === 'toast' || raw === 'comp-toast') return 'comp-toast';
   if (
     raw === 'components-overview' ||
     raw === 'comp-components-overview' ||
@@ -309,11 +316,14 @@ export default function App() {
         { id: 'comp-modal', label: t.nav.compModal },
         { id: 'comp-progress', label: t.nav.compProgress },
         { id: 'comp-radio', label: t.nav.compRadio },
+        { id: 'comp-rating', label: t.nav.compRating || 'Rating' },
         { id: 'comp-slider', label: t.nav.compSlider || 'Slider' },
         { id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' },
         { id: 'comp-table', label: t.nav.compTable },
         { id: 'comp-tab-bar', label: t.nav.compTabBar || 'Tab Bar' },
         { id: 'comp-textarea', label: t.nav.compTextArea || 'Text Area' },
+        { id: 'comp-time-picker', label: t.nav.compTimePicker || 'Time Picker' },
+        { id: 'comp-toast', label: t.nav.compToast || 'Toast' },
         { id: 'comp-toggle', label: t.nav.compToggle },
         { id: 'comp-tooltip', label: t.nav.compTooltip },
         { id: 'comp-tree', label: t.nav.compTree || 'Tree View' },
@@ -520,6 +530,9 @@ export default function App() {
         return <AccordionView setActiveTab={setActiveTab} />;
       case 'comp-radio':
         return <RadioView setActiveTab={setActiveTab} />;
+      case 'comp-rating':
+      case 'rating':
+        return <RatingView setActiveTab={setActiveTab} />;
       case 'comp-slider':
         return <SliderView setActiveTab={setActiveTab} />;
       case 'comp-alert':
@@ -542,6 +555,14 @@ export default function App() {
         return <TabBarView setActiveTab={setActiveTab} />;
       case 'comp-textarea':
         return <TextAreaView setActiveTab={setActiveTab} />;
+      case 'comp-time-picker':
+      case 'comp-timepicker':
+      case 'time-picker':
+      case 'timepicker':
+        return <TimePickerView setActiveTab={setActiveTab} />;
+      case 'comp-toast':
+      case 'toast':
+        return <ToastView setActiveTab={setActiveTab} />;
       case 'comp-tree':
         return <TreeView setActiveTab={setActiveTab} />;
       default:
@@ -555,7 +576,8 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
+    <ToastProvider>
+      <div className="app-container">
       {/* Sidebar Navigation */}
       <aside className="sidebar">
         <div
@@ -697,5 +719,6 @@ export default function App() {
         {renderActiveView()}
       </main>
     </div>
+    </ToastProvider>
   );
 }

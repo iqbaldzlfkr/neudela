@@ -34,21 +34,32 @@ interface CodeTemplates {
 }
 
 interface PlaygroundProps {
-  name: string;
-  knobs: Knob[];
-  codeTemplates: (state: KnobsState) => CodeTemplates;
-  children: ((state: KnobsState) => React.ReactNode) | React.ReactNode;
+  name?: string;
+  knobs?: Knob[];
+  codeTemplates?: ((state: KnobsState) => CodeTemplates) | CodeTemplates;
+  code?: string;
+  preview?: React.ReactNode;
+  children?: ((state: KnobsState) => React.ReactNode) | React.ReactNode;
   previewStyle?: React.CSSProperties;
   defaultTab?: 'vue' | 'html' | 'react';
 }
 
-export default function Playground({ name: _name, knobs, codeTemplates, children, previewStyle, defaultTab = 'react' }: PlaygroundProps) {
+export default function Playground({
+  name: _name,
+  knobs = [],
+  codeTemplates = () => ({}),
+  code: directCode,
+  preview,
+  children,
+  previewStyle,
+  defaultTab = 'react',
+}: PlaygroundProps) {
   const { t } = useLanguage();
 
   // Initialize state from knobs default values
   const [knobsState, setKnobsState] = useState<KnobsState>(() => {
     const initialState: KnobsState = {};
-    knobs.forEach(knob => {
+    (knobs || []).forEach(knob => {
       initialState[knob.name] = knob.default;
     });
     return initialState;
@@ -60,15 +71,20 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
   const handleKnobChange = (name: string, value: string | boolean) => {
     setKnobsState(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const code = codeTemplates(knobsState)[activeTab] || '';
+  const templates = typeof codeTemplates === 'function'
+    ? codeTemplates(knobsState)
+    : (typeof codeTemplates === 'object' && codeTemplates !== null ? codeTemplates : {});
+  const code = (templates && templates[activeTab]) || directCode || '';
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    setShowToast(true);
+    if (code) {
+      navigator.clipboard.writeText(code);
+      setShowToast(true);
+    }
   };
 
   useEffect(() => {
@@ -82,7 +98,7 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
     <div className="playground-container">
       {/* Live Preview Panel */}
       <div className="playground-preview" style={previewStyle}>
-        {typeof children === 'function' ? children(knobsState) : children}
+        {preview || (typeof children === 'function' ? children(knobsState) : (knobs && knobs.length > 0 ? children : null))}
       </div>
 
       {/* Code and Knobs Container */}
@@ -127,69 +143,73 @@ export default function Playground({ name: _name, knobs, codeTemplates, children
         {/* Right Side: Knobs Controls */}
         <div className="playground-knobs">
           <div className="knobs-title">{t.playground.properties}</div>
-          {knobs.map(knob => {
-            if (knob.condition && !knob.condition(knobsState)) {
-              return null;
-            }
-            if (knob.type === 'boolean') {
-              return (
-                <div className="knob-control knob-control--switch" key={knob.name}>
-                  <label className="knob-switch-label">
-                    <span className="knob-label" style={{ margin: 0 }}>{knob.label || knob.name}</span>
-                    <div className="knob-switch">
-                      <input
-                        type="checkbox"
-                        className="knob-switch-input"
-                        checked={!!knobsState[knob.name]}
-                        onChange={e => handleKnobChange(knob.name, e.target.checked)}
-                      />
-                      <span className="knob-switch-slider" />
-                    </div>
-                  </label>
-                </div>
-              );
-            }
+          {knobs && knobs.length > 0 ? (
+            knobs.map(knob => {
+              if (knob.condition && !knob.condition(knobsState)) {
+                return null;
+              }
+              if (knob.type === 'boolean') {
+                return (
+                  <div className="knob-control knob-control--switch" key={knob.name}>
+                    <label className="knob-switch-label">
+                      <span className="knob-label" style={{ margin: 0 }}>{knob.label || knob.name}</span>
+                      <div className="knob-switch">
+                        <input
+                          type="checkbox"
+                          className="knob-switch-input"
+                          checked={!!knobsState[knob.name]}
+                          onChange={e => handleKnobChange(knob.name, e.target.checked)}
+                        />
+                        <span className="knob-switch-slider" />
+                      </div>
+                    </label>
+                  </div>
+                );
+              }
 
-            if (knob.type === 'select') {
-              return (
-                <div className="knob-control" key={knob.name}>
-                  <span className="knob-label">{knob.label || knob.name}</span>
-                  <div className="knob-select-wrapper">
-                    <select
-                      className="knob-select"
+              if (knob.type === 'select') {
+                return (
+                  <div className="knob-control" key={knob.name}>
+                    <span className="knob-label">{knob.label || knob.name}</span>
+                    <div className="knob-select-wrapper">
+                      <select
+                        className="knob-select"
+                        value={knobsState[knob.name] as string}
+                        onChange={e => handleKnobChange(knob.name, e.target.value)}
+                      >
+                        {knob.options.map(opt => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      <svg className="knob-select-arrow" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+                      </svg>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (knob.type === 'text') {
+                return (
+                  <div className="knob-control" key={knob.name}>
+                    <span className="knob-label">{knob.label || knob.name}</span>
+                    <input
+                      type="text"
+                      className="knob-input"
                       value={knobsState[knob.name] as string}
                       onChange={e => handleKnobChange(knob.name, e.target.value)}
-                    >
-                      {knob.options.map(opt => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                    <svg className="knob-select-arrow" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
-                    </svg>
+                    />
                   </div>
-                </div>
-              );
-            }
+                );
+              }
 
-            if (knob.type === 'text') {
-              return (
-                <div className="knob-control" key={knob.name}>
-                  <span className="knob-label">{knob.label || knob.name}</span>
-                  <input
-                    type="text"
-                    className="knob-input"
-                    value={knobsState[knob.name] as string}
-                    onChange={e => handleKnobChange(knob.name, e.target.value)}
-                  />
-                </div>
-              );
-            }
-
-            return null;
-          })}
+              return null;
+            })
+          ) : (
+            typeof children !== 'function' ? children : null
+          )}
         </div>
       </div>
 

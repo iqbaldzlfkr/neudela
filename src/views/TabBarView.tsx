@@ -2149,7 +2149,7 @@ const tabItems = [
 
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
-        prev={{ id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' }}
+        prev={{ id: 'comp-table', label: t.nav.compTable || 'Table' }}
         next={{ id: 'comp-textarea', label: t.nav.compTextArea || 'Text Area' }}
         setActiveTab={setActiveTab}
       />

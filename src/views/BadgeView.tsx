@@ -965,7 +965,7 @@ export default function BadgeView({ setActiveTab }: BadgeViewProps) {
 
           {/* ── 5. INTERACTIVE PLAYGROUND: NEURON BADGE ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronBadge {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronBadge"
               knobs={[
@@ -1091,7 +1091,7 @@ export default function BadgeView({ setActiveTab }: BadgeViewProps) {
 
           {/* ── 6. INTERACTIVE PLAYGROUND: NEURON BADGE GROUP ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronBadgeGroup {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground — Badge Group</h2>
             <Playground
               name="NeuronBadgeGroup"
               knobs={[

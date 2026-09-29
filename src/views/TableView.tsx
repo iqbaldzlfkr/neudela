@@ -2170,7 +2170,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
 
           {/* ── 5. Interactive Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">5. {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               Configure properties interactively to preview layout variants, sizes, and code snippets across frameworks.
             </p>

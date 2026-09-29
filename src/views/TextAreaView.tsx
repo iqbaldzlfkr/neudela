@@ -1555,7 +1555,7 @@ export default function TextAreaView({ setActiveTab }: TextAreaViewProps) {
         <div className="tab-content">
           {/* ── Interactive Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               {language === 'id' 
                 ? 'Uji ukuran, varian kontainer, perilaku auto-resize, status validasi, dan batas penghitung karakter secara langsung dengan pembuatan kode dinamis.'
@@ -2861,8 +2861,8 @@ export default function TextAreaView({ setActiveTab }: TextAreaViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-tree', label: t.nav.compTree || 'Tree View' }}
-        next={{ id: 'comp-dropdown', label: t.nav.compDropdown }}
+        prev={{ id: 'comp-tab-bar', label: t.nav.compTabBar || 'Tab Bar' }}
+        next={{ id: 'comp-time-picker', label: t.nav.compTimePicker || 'Time Picker' }}
         setActiveTab={setActiveTab}
       />
     </div>

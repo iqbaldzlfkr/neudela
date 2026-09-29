@@ -732,7 +732,7 @@ export default function BreadcrumbView({ setActiveTab }: BreadcrumbViewProps) {
 
           {/* ── 7. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronBreadcrumb"
               knobs={[

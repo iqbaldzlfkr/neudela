@@ -1023,7 +1023,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
 
           {/* ── 4. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronCheckbox {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronCheckbox"
               knobs={[
@@ -1253,7 +1253,7 @@ export const CheckboxView: React.FC<CheckboxViewProps> = ({ setActiveTab }) => {
 
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
-        prev={{ id: 'comp-card', label: t.nav.compCard }}
+        prev={{ id: 'comp-chart', label: t.nav.compChart || 'Chart' }}
         next={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
         setActiveTab={setActiveTab}
       />

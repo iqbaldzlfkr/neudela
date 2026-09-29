@@ -883,7 +883,7 @@ export default function ButtonGroupView({ setActiveTab }: ButtonGroupViewProps) 
 
           {/* ── INTERACTIVE PLAYGROUND (NEUTRAL VARIANTS) ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronButtonGroup"
               knobs={[

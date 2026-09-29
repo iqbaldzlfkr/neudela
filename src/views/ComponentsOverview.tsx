@@ -14,10 +14,12 @@ import NeuronBreadcrumb from '../components/NeuronBreadcrumb';
 import NeuronTree from '../components/NeuronTree';
 import NeuronTextArea from '../components/NeuronTextArea';
 import NeuronSlider from '../components/NeuronSlider';
+import NeuronRating from '../components/NeuronRating';
 import NeuronTabBar from '../components/NeuronTabBar';
 import NeuronAccordion from '../components/NeuronAccordion';
 import NeuronDivider from '../components/NeuronDivider';
 import NeuronChart from '../components/NeuronChart';
+import NeuronTimePicker from '../components/NeuronTimePicker';
 import { ArrowRight, Calendar, ChevronDown, UploadCloud } from 'lucide-react';
 
 interface ComponentsOverviewProps {
@@ -352,6 +354,40 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
       ),
     },
     {
+      id: 'comp-time-picker',
+      title: 'Time Picker',
+      desc: 'Intuitive input selector for hours, minutes, seconds, and AM/PM with 12h/24h and duration ranges.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ width: '90%', maxWidth: 200 }}>
+          <NeuronTimePicker
+            size="sm"
+            defaultValue="14:30"
+          />
+        </div>
+      ),
+    },
+    {
+      id: 'comp-rating',
+      title: 'Rating',
+      desc: 'Interactive evaluation and score display component supporting stars, hearts, moods, precision half-steps, and clearable values.',
+      badge: 'Forms',
+      renderPreview: () => (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <NeuronRating
+            size="md"
+            value={4.5}
+            allowHalf
+            variant="amber"
+            readOnly
+          />
+          <span style={{ fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 500 }}>
+            4.5 / 5.0 (2,480 ulasan)
+          </span>
+        </div>
+      ),
+    },
+    {
       id: 'comp-slider',
       title: 'Slider',
       desc: 'Interactive continuous and discrete range controls with single or dual thumbs, tooltips, and tick marks.',
@@ -525,7 +561,7 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
 
       <NextPrevious
         prev={{ id: 'typography', label: t.nav.typography }}
-        next={{ id: 'comp-alert', label: t.nav.compAlert }}
+        next={{ id: 'comp-accordion', label: t.nav.compAccordion || 'Accordion' }}
         setActiveTab={setActiveTab}
       />
     </div>

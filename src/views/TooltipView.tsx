@@ -1300,7 +1300,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
           {/* ── Footer Navigation ── */}
           <NextPrevious
             prev={{ id: 'comp-toggle', label: t.nav.compToggle }}
-            next={{ id: 'pat-forms', label: t.nav.patForms }}
+            next={{ id: 'comp-tree', label: t.nav.compTree || 'Tree View' }}
             setActiveTab={setActiveTab}
           />
         </div>
@@ -1314,7 +1314,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
 
           {/* ── 0. INTERACTIVE PLAYGROUND & CODE GENERATOR ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronTooltip {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">Test all tooltip props, interactive triggers, variants, and copy production-ready code.</p>
 
             <Playground
@@ -2028,7 +2028,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
           {/* ── Footer Navigation ── */}
           <NextPrevious
             prev={{ id: 'comp-toggle', label: t.nav.compToggle }}
-            next={{ id: 'pat-forms', label: t.nav.patForms }}
+            next={{ id: 'comp-tree', label: t.nav.compTree || 'Tree View' }}
             setActiveTab={setActiveTab}
           />
         </div>

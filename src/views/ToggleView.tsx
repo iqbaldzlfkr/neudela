@@ -660,7 +660,7 @@ export default function ToggleView({ setActiveTab }: ToggleViewProps) {
 
           {/* ── 4. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronToggle {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronToggle"
               knobs={[
@@ -921,7 +921,7 @@ export default function ToggleView({ setActiveTab }: ToggleViewProps) {
 
       {/* ── Page Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-table', label: t.nav.compTable }}
+        prev={{ id: 'comp-toast', label: t.nav.compToast || 'Toast' }}
         next={{ id: 'comp-tooltip', label: t.nav.compTooltip }}
         setActiveTab={setActiveTab}
       />

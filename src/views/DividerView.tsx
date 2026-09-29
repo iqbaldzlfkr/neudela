@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react';
+import { useState, useMemo, ReactNode } from 'react';
 import { 
   Sliders, 
   Copy, 
@@ -73,16 +73,169 @@ export default function DividerView({ setActiveTab }: { setActiveTab: (tabId: st
   const [pgHasContent, setPgHasContent] = useState(true);
   const [pgContentText, setPgContentText] = useState('SECTION DIVIDER');
   const [pgContentType, setPgContentType] = useState<'text' | 'badge' | 'icon'>('badge');
+  const [pgCodeTab, setPgCodeTab] = useState<'react' | 'vue' | 'html'>('react');
   const [copiedCode, setCopiedCode] = useState(false);
 
   // Playground code generation
-  const generatedCode = `<NeuronDivider
-  orientation="${pgOrientation}"
-  variant="${pgVariant}"
-  thickness="${pgThickness}"
-  color="${pgColor}"${pgOrientation === 'horizontal' && pgHasContent ? `\n  contentPosition="${pgContentPosition}"` : ''}
-  spacing="${pgSpacing}"${pgInset ? `\n  inset` : ''}
->${pgOrientation === 'horizontal' && pgHasContent ? `\n  ${pgContentType === 'badge' ? `<NeuronBadge size="sm" variant="brand">${pgContentText}</NeuronBadge>` : pgContentType === 'icon' ? `<Sparkles size={14} color="var(--color-primary)" />` : `<span>${pgContentText}</span>`}\n` : ''}</NeuronDivider>`;
+  const generatedCode = useMemo(() => {
+    if (pgCodeTab === 'vue') {
+      const props: string[] = [];
+      if (pgOrientation !== 'horizontal') props.push(`orientation="${pgOrientation}"`);
+      if (pgVariant !== 'solid') props.push(`variant="${pgVariant}"`);
+      if (pgThickness !== 'thin') props.push(`thickness="${pgThickness}"`);
+      if (pgColor !== 'default') props.push(`color="${pgColor}"`);
+      if (pgOrientation === 'horizontal' && pgHasContent && pgContentPosition !== 'center') {
+        props.push(`content-position="${pgContentPosition}"`);
+      }
+      if (pgSpacing !== 'md') props.push(`spacing="${pgSpacing}"`);
+      if (pgInset) props.push(':inset="true"');
+
+      const propsStr = props.length > 0 ? `\n    ${props.join('\n    ')}` : '';
+
+      if (pgOrientation === 'horizontal' && pgHasContent) {
+        let childContent = '';
+        if (pgContentType === 'badge') {
+          const badgeVariant = pgColor === 'brand' || pgColor === 'accent' ? 'brand' : 'default';
+          childContent = `<NeuronBadge size="sm" variant="${badgeVariant}">${pgContentText}</NeuronBadge>`;
+        } else if (pgContentType === 'icon') {
+          childContent = `<Sparkles :size="14" color="var(--color-primary)" />`;
+        } else {
+          childContent = `<span>${pgContentText}</span>`;
+        }
+        return `<template>
+  <NeuronDivider${propsStr}
+  >
+    ${childContent}
+  </NeuronDivider>
+</template>
+
+<script setup lang="ts">
+import { NeuronDivider${pgContentType === 'badge' ? ', NeuronBadge' : ''} } from '@neudela/vue';
+${pgContentType === 'icon' ? `import { Sparkles } from 'lucide-vue-next';\n` : ''}</script>`;
+      }
+
+      return `<template>
+  <NeuronDivider${propsStr ? propsStr + '\n  ' : ' '} />
+</template>
+
+<script setup lang="ts">
+import { NeuronDivider } from '@neudela/vue';
+</script>`;
+    }
+
+    if (pgCodeTab === 'html') {
+      const classes = [
+        'neuron-divider',
+        `neuron-divider--${pgOrientation}`,
+        `neuron-divider--${pgVariant}`,
+        `neuron-divider--${pgThickness}`,
+        `neuron-divider--color-${pgColor}`,
+        `neuron-divider--spacing-${pgSpacing}`,
+        pgOrientation === 'horizontal' && pgHasContent ? 'neuron-divider--with-content' : '',
+        pgOrientation === 'horizontal' && pgHasContent ? `neuron-divider--content-${pgContentPosition}` : '',
+        pgInset ? 'neuron-divider--inset' : '',
+      ]
+        .filter(Boolean)
+        .join(' ');
+
+      if (pgOrientation === 'vertical') {
+        return `<!-- Vertical Divider -->
+<div
+  role="separator"
+  aria-orientation="vertical"
+  class="${classes}"
+  style="height: 60px;"
+></div>`;
+      }
+
+      if (pgHasContent) {
+        let childHtml = '';
+        if (pgContentType === 'badge') {
+          childHtml = `<span class="neuron-badge neuron-badge--sm neuron-badge--${pgColor === 'brand' || pgColor === 'accent' ? 'brand' : 'default'}">${pgContentText}</span>`;
+        } else if (pgContentType === 'icon') {
+          childHtml = `<svg class="neuron-icon" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
+        } else {
+          childHtml = `<span>${pgContentText}</span>`;
+        }
+
+        return `<!-- Horizontal Divider with Content -->
+<div
+  role="separator"
+  aria-orientation="horizontal"
+  class="${classes}"
+>
+  <span class="neuron-divider__line neuron-divider__line--start"></span>
+  <span class="neuron-divider__content">
+    ${childHtml}
+  </span>
+  <span class="neuron-divider__line neuron-divider__line--end"></span>
+</div>`;
+      }
+
+      return `<!-- Horizontal Divider -->
+<div
+  role="separator"
+  aria-orientation="horizontal"
+  class="${classes}"
+></div>`;
+    }
+
+    // React
+    const props: string[] = [];
+    if (pgOrientation !== 'horizontal') props.push(`orientation="${pgOrientation}"`);
+    if (pgVariant !== 'solid') props.push(`variant="${pgVariant}"`);
+    if (pgThickness !== 'thin') props.push(`thickness="${pgThickness}"`);
+    if (pgColor !== 'default') props.push(`color="${pgColor}"`);
+    if (pgOrientation === 'horizontal' && pgHasContent && pgContentPosition !== 'center') {
+      props.push(`contentPosition="${pgContentPosition}"`);
+    }
+    if (pgSpacing !== 'md') props.push(`spacing="${pgSpacing}"`);
+    if (pgInset) props.push('inset');
+
+    if (pgOrientation === 'horizontal' && pgHasContent) {
+      let childContent = '';
+      if (pgContentType === 'badge') {
+        const badgeVariant = pgColor === 'brand' || pgColor === 'accent' ? 'brand' : 'default';
+        childContent = `<NeuronBadge size="sm" variant="${badgeVariant}">${pgContentText}</NeuronBadge>`;
+      } else if (pgContentType === 'icon') {
+        childContent = `<Sparkles size={14} color="var(--color-primary)" />`;
+      } else {
+        childContent = `<span>${pgContentText}</span>`;
+      }
+
+      if (props.length > 0) {
+        return `<NeuronDivider
+  ${props.join('\n  ')}
+>
+  ${childContent}
+</NeuronDivider>`;
+      }
+
+      return `<NeuronDivider>
+  ${childContent}
+</NeuronDivider>`;
+    }
+
+    if (props.length > 0) {
+      return `<NeuronDivider
+  ${props.join('\n  ')}
+/>`;
+    }
+
+    return `<NeuronDivider />`;
+  }, [
+    pgCodeTab,
+    pgOrientation,
+    pgVariant,
+    pgThickness,
+    pgColor,
+    pgContentPosition,
+    pgSpacing,
+    pgInset,
+    pgHasContent,
+    pgContentText,
+    pgContentType,
+  ]);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(generatedCode);
@@ -783,7 +936,7 @@ export default function DividerView({ setActiveTab }: { setActiveTab: (tabId: st
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-4)' }}>
               <div>
                 <h2 className="section-title">
-                  {isId ? '1. Playground Interaktif' : '1. Interactive Playground'}
+                  Interactive Playground
                 </h2>
                 <p className="section-description">
                   {isId
@@ -985,86 +1138,110 @@ export default function DividerView({ setActiveTab }: { setActiveTab: (tabId: st
                 )}
               </div>
 
-              {/* Preview & Code Column */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {/* Live Preview Canvas */}
-                <div style={{ flex: 1, padding: 32, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 240, overflow: 'hidden' }}>
-                  {pgOrientation === 'horizontal' ? (
-                    <div>
-                      <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>
-                        Top Section Content Block
-                      </div>
-
-                      <NeuronDivider
-                        orientation={pgOrientation}
-                        variant={pgVariant}
-                        thickness={pgThickness}
-                        color={pgColor}
-                        contentPosition={pgContentPosition}
-                        spacing={pgSpacing}
-                        inset={pgInset}
-                      >
-                        {pgHasContent && (
-                          pgContentType === 'badge' ? (
-                            <NeuronBadge size="sm" variant={pgColor === 'brand' || pgColor === 'accent' ? 'brand' : 'default'}>
-                              {pgContentText}
-                            </NeuronBadge>
-                          ) : pgContentType === 'icon' ? (
-                            <Sparkles size={15} color="var(--color-primary)" />
-                          ) : (
-                            <span style={{ fontWeight: 600, fontSize: 12 }}>{pgContentText}</span>
-                          )
-                        )}
-                      </NeuronDivider>
-
-                      <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginTop: 8 }}>
-                        Bottom Section Content Block
-                      </div>
+              {/* Preview Column */}
+              <div style={{ padding: 32, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 280, overflow: 'hidden' }}>
+                {pgOrientation === 'horizontal' ? (
+                  <div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>
+                      Top Section Content Block
                     </div>
-                  ) : (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, height: 120 }}>
-                      <div style={{ fontSize: 13, fontWeight: 500 }}>Previous Item</div>
-                      <NeuronDivider
-                        orientation="vertical"
-                        variant={pgVariant}
-                        thickness={pgThickness}
-                        color={pgColor}
-                        spacing={pgSpacing}
-                        inset={pgInset}
-                        style={{ height: 60 }}
-                      />
-                      <div style={{ fontSize: 13, fontWeight: 500 }}>Next Item</div>
-                    </div>
-                  )}
-                </div>
 
-                {/* Generated Code Snippet */}
-                <div style={{ position: 'relative', background: 'var(--slate-900, #0f172a)', padding: '16px 20px', borderRadius: 'var(--radius-lg)', color: '#f8fafc', fontFamily: 'monospace', fontSize: 12, overflowX: 'auto' }}>
-                  <button
-                    type="button"
-                    onClick={handleCopyCode}
-                    style={{
-                      position: 'absolute',
-                      top: 12,
-                      right: 12,
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      color: copiedCode ? '#34d399' : '#fff',
-                      borderRadius: 4,
-                      padding: '4px 8px',
-                      fontSize: 11,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 4,
-                    }}
-                  >
-                    {copiedCode ? <Check size={12} /> : <Copy size={12} />}
-                    <span>{copiedCode ? 'Copied' : 'Copy JSX'}</span>
-                  </button>
-                  <pre style={{ margin: 0, paddingRight: 60 }}>{generatedCode}</pre>
-                </div>
+                    <NeuronDivider
+                      orientation={pgOrientation}
+                      variant={pgVariant}
+                      thickness={pgThickness}
+                      color={pgColor}
+                      contentPosition={pgContentPosition}
+                      spacing={pgSpacing}
+                      inset={pgInset}
+                    >
+                      {pgHasContent && (
+                        pgContentType === 'badge' ? (
+                          <NeuronBadge size="sm" variant={pgColor === 'brand' || pgColor === 'accent' ? 'brand' : 'default'}>
+                            {pgContentText}
+                          </NeuronBadge>
+                        ) : pgContentType === 'icon' ? (
+                          <Sparkles size={15} color="var(--color-primary)" />
+                        ) : (
+                          <span style={{ fontWeight: 600, fontSize: 12 }}>{pgContentText}</span>
+                        )
+                      )}
+                    </NeuronDivider>
+
+                    <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginTop: 8 }}>
+                      Bottom Section Content Block
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, height: 160 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500 }}>Previous Item</div>
+                    <NeuronDivider
+                      orientation="vertical"
+                      variant={pgVariant}
+                      thickness={pgThickness}
+                      color={pgColor}
+                      spacing={pgSpacing}
+                      inset={pgInset}
+                      style={{ height: 80 }}
+                    />
+                    <div style={{ fontSize: 13, fontWeight: 500 }}>Next Item</div>
+                  </div>
+                )}
               </div>
+            </div>
+
+            {/* Generated Code Snippet Box (Full-width underneath playground) */}
+            <div style={{
+              marginTop: 'var(--space-6)',
+              borderRadius: 'var(--radius-lg)',
+              background: 'var(--color-bg-muted, #101828)',
+              border: '1px solid var(--color-border)',
+              padding: '16px 20px',
+              position: 'relative'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  {(['react', 'vue', 'html'] as const).map((tab) => (
+                    <button
+                      key={tab}
+                      type="button"
+                      onClick={() => setPgCodeTab(tab)}
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: 11,
+                        fontWeight: 600,
+                        borderRadius: 'var(--radius-sm)',
+                        border: 'none',
+                        background: pgCodeTab === tab ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.08)',
+                        color: pgCodeTab === tab ? '#ffffff' : '#94a3b8',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {tab === 'react' ? 'React' : tab === 'vue' ? 'Vue 3' : 'HTML / CSS'}
+                    </button>
+                  ))}
+                </div>
+                <NeuronButton
+                  size="xs"
+                  variant="secondary"
+                  onClick={handleCopyCode}
+                >
+                  {copiedCode ? <Check size={12} style={{ marginRight: 4 }} /> : <Copy size={12} style={{ marginRight: 4 }} />}
+                  {copiedCode ? (isId ? 'Tersalin!' : 'Copied!') : (isId ? 'Salin Kode' : 'Copy Code')}
+                </NeuronButton>
+              </div>
+              <pre style={{
+                margin: 0,
+                color: '#e4e7ec',
+                fontSize: 12.5,
+                fontFamily: 'var(--font-mono, monospace)',
+                lineHeight: 1.6,
+                overflowX: 'auto',
+                whiteSpace: 'pre'
+              }}>
+                {generatedCode}
+              </pre>
             </div>
           </div>
 

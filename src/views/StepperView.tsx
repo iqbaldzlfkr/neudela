@@ -1236,7 +1236,7 @@ export default function StepperView({ setActiveTab }: StepperViewProps) {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, flexWrap: 'wrap', gap: 12 }}>
                 <div>
                   <h2 className="section-title" style={{ margin: 0 }}>
-                    {isId ? '1. Playground Interaktif' : '1. Interactive Playground'}
+                    Interactive Playground
                   </h2>
                 </div>
                 <NeuronBadge size="sm" variant="brand">

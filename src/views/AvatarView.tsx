@@ -1763,7 +1763,7 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
 
           {/* ── 2. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronAvatar {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronAvatar"
               knobs={[
@@ -1861,10 +1861,18 @@ export const AvatarView: React.FC<AvatarViewProps> = ({ setActiveTab }) => {
                 const reactAttr = reactProps.length ? ` ${reactProps.join(' ')}` : '';
                 const vueAttr = vueProps.length ? ` ${vueProps.join(' ')}` : '';
 
+                const initials = (knobs.name as string || 'SS').split(' ').map(n => n[0]).join('').slice(0, 2);
+                const htmlInner = knobs.type === 'image'
+                  ? '  <img src="/avatars/sophia.jpg" alt="Avatar" class="neuron-avatar__img" />'
+                  : `  <span class="neuron-avatar__initials">${initials}</span>`;
+                const htmlStatus = knobs.status !== 'none'
+                  ? `\n  <span class="neuron-avatar__status neuron-avatar__status--${knobs.status}"></span>`
+                  : '';
+
                 return {
                   react: `<NeuronAvatar${reactAttr}${knobs.hasBadge ? ' badge={<NeuronAvatarVerifiedBadge />}' : ''} />`,
                   vue: `<NeuronAvatar${vueAttr} />`,
-                  html: `<div class="neuron-avatar neuron-avatar--${knobs.size} neuron-avatar--${knobs.shape} neuron-avatar--${knobs.variant}">\n  <!-- Avatar Media -->\n</div>`,
+                  html: `<div class="neuron-avatar neuron-avatar--${knobs.size} neuron-avatar--${knobs.shape} neuron-avatar--${knobs.variant}">\n${htmlInner}${htmlStatus}\n</div>`,
                 };
               }}
             >

@@ -3,7 +3,7 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 // ─────────────────────────────────────────────────────────────────────────────
 // Type Definitions
 // ─────────────────────────────────────────────────────────────────────────────
-export type NeuronChartType = 'bar' | 'line' | 'pie' | 'donut' | 'radar' | 'sparkline';
+export type NeuronChartType = 'bar' | 'line' | 'pie' | 'donut' | 'radar' | 'sparkline' | 'sankey';
 export type NeuronChartSize = 'sm' | 'md' | 'lg' | 'xl';
 export type NeuronChartColorScheme = 'brand' | 'spectrum' | 'mono' | 'pastel' | 'vivid';
 export type NeuronChartOrientation = 'vertical' | 'horizontal';
@@ -20,6 +20,27 @@ export interface ChartSeries {
   color?: string;
 }
 
+export interface SankeyNode {
+  id: string;
+  label: string;
+  stage: number; // 0-based column stage index
+  color?: string;
+  value?: number;
+}
+
+export interface SankeyLink {
+  source: string; // source node id
+  target: string; // target node id
+  value: number;
+  color?: string;
+}
+
+export interface SankeyData {
+  stages?: string[]; // Column stage headers (e.g. ['INTAKE', 'GOVERNANCE', 'OUTCOME'])
+  nodes: SankeyNode[];
+  links: SankeyLink[];
+}
+
 export interface NeuronChartProps {
   /** Chart visualization type */
   type: NeuronChartType;
@@ -29,6 +50,8 @@ export interface NeuronChartProps {
   series?: ChartSeries[];
   /** Category labels for x-axis (used with series) */
   categories?: string[];
+  /** Sankey / Flow diagram data */
+  sankeyData?: SankeyData;
   /** Bar chart direction */
   orientation?: NeuronChartOrientation;
   /** Stack bars on top of each other */
@@ -230,7 +253,8 @@ function BarChartSVG({
   onLeave: () => void;
 }) {
   const isVertical = orientation === 'vertical';
-  const chartW = width - padding * 2;
+  const leftPad = isVertical ? padding : Math.max(padding + 58, 92);
+  const chartW = width - leftPad - (isVertical ? padding : padding * 0.5);
   const chartH = height - padding * 2;
   const isMultiSeries = series && series.length > 0 && categories && categories.length > 0;
 
@@ -261,7 +285,7 @@ function BarChartSVG({
             </text>
           );
         } else {
-          const x = padding + frac * chartW;
+          const x = leftPad + frac * chartW;
           gridLines.push(
             <line key={`g${i}`} x1={x} y1={padding} x2={x} y2={height - padding}
               className="neuron-chart__grid-line" />
@@ -316,20 +340,20 @@ function BarChartSVG({
             return (
               <g key={i}>
                 <rect
-                  x={padding} y={y} width={barW} height={barSize}
+                  x={leftPad} y={y} width={barW} height={barSize}
                   rx={3}
                   fill={c}
                   className={animated ? 'neuron-chart__bar neuron-chart__bar--h-animated' : 'neuron-chart__bar'}
                   style={animated ? { '--bar-width': `${barW}px`, animationDelay: `${i * 60}ms` } as React.CSSProperties : undefined}
-                  onMouseEnter={() => onHover({ x: padding + barW, y: y + barSize / 2, label: d.label, value: formatNumber(d.value), color: c })}
+                  onMouseEnter={() => onHover({ x: leftPad + barW, y: y + barSize / 2, label: d.label, value: formatNumber(d.value), color: c })}
                   onMouseLeave={onLeave}
                 />
                 {showLabels && (
-                  <text x={padding + barW + 8} y={y + barSize / 2 + 4} className="neuron-chart__bar-label" textAnchor="start">
+                  <text x={leftPad + barW + 8} y={y + barSize / 2 + 4} className="neuron-chart__bar-label" textAnchor="start">
                     {formatNumber(d.value)}
                   </text>
                 )}
-                <text x={padding - 8} y={y + barSize / 2 + 4} className="neuron-chart__axis-label" textAnchor="end">
+                <text x={leftPad - 8} y={y + barSize / 2 + 4} className="neuron-chart__axis-label" textAnchor="end">
                   {d.label}
                 </text>
               </g>
@@ -876,6 +900,332 @@ function SparklineSVG({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Sankey / Flow Chart Renderer
+// ─────────────────────────────────────────────────────────────────────────────
+interface SankeyChartSVGProps {
+  data?: SankeyData;
+  colors: string[];
+  width: number;
+  height: number;
+  animated?: boolean;
+  onHover?: (data: TooltipData) => void;
+  onLeave?: () => void;
+}
+
+function SankeyChartSVG({
+  data,
+  colors,
+  width,
+  height,
+  onHover,
+  onLeave,
+}: SankeyChartSVGProps) {
+  const [hoveredLinkId, setHoveredLinkId] = useState<string | null>(null);
+  const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+
+  if (!data || !data.nodes || data.nodes.length === 0) {
+    return (
+      <text x={width / 2} y={height / 2} textAnchor="middle" fill="var(--color-text-tertiary)" fontSize="13">
+        No Sankey data provided
+      </text>
+    );
+  }
+
+  const { stages, nodes, links } = data;
+
+  // Determine stage columns
+  const stageIndices = useMemo(() => {
+    if (stages && stages.length > 0) {
+      return stages.map((_, i) => i);
+    }
+    return Array.from(new Set(nodes.map(n => n.stage))).sort((a, b) => a - b);
+  }, [stages, nodes]);
+
+  const numStages = Math.max(2, stageIndices.length);
+
+  // Compute node values from links
+  const computedNodes = useMemo(() => {
+    return nodes.map((node, i) => {
+      const outgoing = links
+        .filter(l => l.source === node.id)
+        .reduce((sum, l) => sum + l.value, 0);
+      const incoming = links
+        .filter(l => l.target === node.id)
+        .reduce((sum, l) => sum + l.value, 0);
+      const val = node.value ?? Math.max(outgoing, incoming, 1);
+      return {
+        ...node,
+        computedValue: val,
+        color: node.color || colors[i % colors.length],
+      };
+    });
+  }, [nodes, links, colors]);
+
+  // Layout bounds
+  const hasStageHeaders = stages && stages.length > 0;
+  const topPad = hasStageHeaders ? 36 : 20;
+  const bottomPad = 24;
+  const leftPad = 24;
+  const rightPad = 24;
+  const nodeWidth = 14;
+
+  const chartW = width - leftPad - rightPad - nodeWidth;
+  const chartH = height - topPad - bottomPad;
+
+  // Compute node and link geometries
+  const { layoutNodes, layoutLinks } = useMemo(() => {
+    const nodesByStage: Record<number, typeof computedNodes> = {};
+    stageIndices.forEach(s => {
+      nodesByStage[s] = computedNodes.filter(n => n.stage === s);
+    });
+
+    // Stage value totals
+    const stageTotals = stageIndices.map(s => {
+      const stageList = nodesByStage[s] || [];
+      return stageList.reduce((sum, n) => sum + n.computedValue, 0);
+    });
+    const maxStageTotal = Math.max(...stageTotals, 1);
+
+    // Dynamic vertical gap between nodes in a column
+    const maxNodesInStage = Math.max(...stageIndices.map(s => (nodesByStage[s] || []).length), 1);
+    const gap = Math.max(8, Math.min(20, (chartH * 0.28) / Math.max(1, maxNodesInStage - 1)));
+    const usableHeight = Math.max(40, chartH - (maxNodesInStage - 1) * gap);
+    const valueScale = usableHeight / maxStageTotal;
+
+    const nodeMap = new Map<string, {
+      id: string;
+      label: string;
+      stage: number;
+      color: string;
+      computedValue: number;
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+      sourceOffsetY: number;
+      targetOffsetY: number;
+    }>();
+
+    stageIndices.forEach((sIdx, colIdx) => {
+      const stageList = nodesByStage[sIdx] || [];
+      const colX = leftPad + (colIdx / (numStages - 1)) * chartW;
+
+      const heights = stageList.map(n => Math.max(12, n.computedValue * valueScale));
+      const totalColHeight = heights.reduce((sum, h) => sum + h, 0) + Math.max(0, stageList.length - 1) * gap;
+      let startY = topPad + Math.max(0, (chartH - totalColHeight) / 2);
+
+      stageList.forEach((n, idx) => {
+        const h = heights[idx];
+        nodeMap.set(n.id, {
+          ...n,
+          x: colX,
+          y: startY,
+          w: nodeWidth,
+          h,
+          sourceOffsetY: 0,
+          targetOffsetY: 0,
+        });
+        startY += h + gap;
+      });
+    });
+
+    // Build link curves
+    const computedLinksList = links.map(link => {
+      const src = nodeMap.get(link.source);
+      const tgt = nodeMap.get(link.target);
+      if (!src || !tgt) return null;
+
+      const hSource = Math.max(2, (link.value / src.computedValue) * src.h);
+      const hTarget = Math.max(2, (link.value / tgt.computedValue) * tgt.h);
+
+      const x0 = src.x + src.w;
+      const y0_top = src.y + src.sourceOffsetY;
+      const y0_bot = y0_top + hSource;
+      src.sourceOffsetY += hSource;
+
+      const x1 = tgt.x;
+      const y1_top = tgt.y + tgt.targetOffsetY;
+      const y1_bot = y1_top + hTarget;
+      tgt.targetOffsetY += hTarget;
+
+      const curvature = 0.5;
+      const cx0 = x0 + (x1 - x0) * curvature;
+      const cx1 = x1 - (x1 - x0) * curvature;
+
+      const path = `M ${x0} ${y0_top} C ${cx0} ${y0_top}, ${cx1} ${y1_top}, ${x1} ${y1_top} L ${x1} ${y1_bot} C ${cx1} ${y1_bot}, ${cx0} ${y0_bot}, ${x0} ${y0_bot} Z`;
+      const id = `${link.source}->${link.target}`;
+
+      return {
+        id,
+        link,
+        src,
+        tgt,
+        x0,
+        x1,
+        y0_top,
+        y1_top,
+        path,
+        color: link.color || src.color,
+      };
+    }).filter(Boolean);
+
+    return {
+      layoutNodes: Array.from(nodeMap.values()),
+      layoutLinks: computedLinksList as NonNullable<typeof computedLinksList[0]>[],
+    };
+  }, [stageIndices, computedNodes, links, leftPad, rightPad, topPad, chartW, chartH, numStages]);
+
+  return (
+    <g className="neuron-chart__sankey">
+      {/* Gradient Definitions for Flow Ribbons */}
+      <defs>
+        {layoutLinks.map(l => (
+          <linearGradient
+            key={`sankey-grad-${l.id}`}
+            id={`sankey-grad-${l.id.replace(/[^a-zA-Z0-9]/g, '_')}`}
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor={l.src.color} stopOpacity="0.45" />
+            <stop offset="100%" stopColor={l.tgt.color} stopOpacity="0.45" />
+          </linearGradient>
+        ))}
+      </defs>
+
+      {/* Stage Column Headers */}
+      {stages && stages.length > 0 && stages.map((stageName, s) => {
+        const colX = leftPad + (s / (numStages - 1)) * chartW;
+        const anchor = s === 0 ? 'start' : s === numStages - 1 ? 'end' : 'middle';
+        const textX = s === 0 ? colX : s === numStages - 1 ? colX + nodeWidth : colX + nodeWidth / 2;
+        return (
+          <text
+            key={stageName}
+            x={textX}
+            y={18}
+            textAnchor={anchor}
+            className="neuron-chart__sankey-stage-header"
+            fontSize="11"
+            fontWeight="700"
+            letterSpacing="0.08em"
+            fill="var(--color-text-secondary)"
+          >
+            {stageName.toUpperCase()}
+          </text>
+        );
+      })}
+
+      {/* Links (Bezier Flow Ribbons) */}
+      <g className="neuron-chart__sankey-links">
+        {layoutLinks.map(l => {
+          const gradId = `sankey-grad-${l.id.replace(/[^a-zA-Z0-9]/g, '_')}`;
+          const isDirectlyHovered = hoveredLinkId === l.id;
+          const isConnectedNodeHovered = hoveredNodeId === l.src.id || hoveredNodeId === l.tgt.id;
+          const isDimmed = (hoveredLinkId && !isDirectlyHovered) || (hoveredNodeId && !isConnectedNodeHovered);
+
+          return (
+            <path
+              key={l.id}
+              d={l.path}
+              fill={`url(#${gradId})`}
+              stroke={isDirectlyHovered || isConnectedNodeHovered ? l.src.color : 'transparent'}
+              strokeWidth={isDirectlyHovered || isConnectedNodeHovered ? 1.5 : 0}
+              opacity={isDimmed ? 0.15 : isDirectlyHovered || isConnectedNodeHovered ? 0.85 : 0.4}
+              style={{
+                cursor: 'pointer',
+                transition: 'opacity 0.22s ease, stroke-width 0.2s ease',
+              }}
+              onMouseEnter={() => {
+                setHoveredLinkId(l.id);
+                onHover?.({
+                  label: `${l.src.label} → ${l.tgt.label}`,
+                  value: String(l.link.value),
+                  color: l.src.color,
+                  x: (l.x0 + l.x1) / 2,
+                  y: (l.y0_top + l.y1_top) / 2,
+                });
+              }}
+              onMouseLeave={() => {
+                setHoveredLinkId(null);
+                onLeave?.();
+              }}
+            />
+          );
+        })}
+      </g>
+
+      {/* Nodes (Vertical Bars) & Inline Labels */}
+      <g className="neuron-chart__sankey-nodes">
+        {layoutNodes.map(node => {
+          const isNodeHovered = hoveredNodeId === node.id;
+          const isColLast = node.stage === numStages - 1;
+
+          // Label placement
+          const labelX = isColLast ? node.x - 8 : node.x + node.w + 8;
+          const labelAnchor = isColLast ? 'end' : 'start';
+          const labelY = node.y + Math.min(14, node.h / 2 + 4);
+
+          return (
+            <g
+              key={node.id}
+              className="neuron-chart__sankey-node"
+              style={{ cursor: 'pointer' }}
+              onMouseEnter={() => {
+                setHoveredNodeId(node.id);
+                onHover?.({
+                  label: node.label,
+                  value: String(node.computedValue),
+                  color: node.color,
+                  x: node.x + node.w / 2,
+                  y: node.y + node.h / 2,
+                });
+              }}
+              onMouseLeave={() => {
+                setHoveredNodeId(null);
+                onLeave?.();
+              }}
+            >
+              {/* Vertical node bar */}
+              <rect
+                x={node.x}
+                y={node.y}
+                width={node.w}
+                height={node.h}
+                rx={3}
+                fill={node.color}
+                filter={isNodeHovered ? 'drop-shadow(0 0 4px rgba(0,0,0,0.25))' : undefined}
+                style={{
+                  transition: 'transform 0.2s ease, filter 0.2s ease',
+                  transformOrigin: `${node.x + node.w / 2}px ${node.y + node.h / 2}px`,
+                  transform: isNodeHovered ? 'scaleX(1.15)' : 'scaleX(1)',
+                }}
+              />
+
+              {/* Node Label Text */}
+              <text
+                x={labelX}
+                y={labelY}
+                textAnchor={labelAnchor}
+                fontSize="11.5"
+                fill="var(--color-text-primary)"
+                style={{
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                }}
+              >
+                <tspan fontWeight="500">{node.label} </tspan>
+                <tspan fontWeight="700" fill={node.color}>{node.computedValue}</tspan>
+              </text>
+            </g>
+          );
+        })}
+      </g>
+    </g>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Main NeuronChart Component
 // ─────────────────────────────────────────────────────────────────────────────
 export default function NeuronChart({
@@ -883,6 +1233,7 @@ export default function NeuronChart({
   data,
   series,
   categories,
+  sankeyData,
   orientation = 'vertical',
   stacked = false,
   smooth = true,
@@ -911,10 +1262,11 @@ export default function NeuronChart({
       data?.length || 0,
       series?.length || 0,
       categories?.length || 0,
+      sankeyData?.nodes?.length || 0,
       8
     );
     return getColors(colorScheme, count);
-  }, [colorScheme, data, series, categories]);
+  }, [colorScheme, data, series, categories, sankeyData]);
 
   const handleHover = useCallback((d: TooltipData) => {
     if (showTooltip) setTooltip(d);
@@ -1050,6 +1402,18 @@ export default function NeuronChart({
             width={width}
             height={height}
             showLabels={showLabels !== false}
+            animated={animated}
+            onHover={handleHover}
+            onLeave={handleLeave}
+          />
+        );
+      case 'sankey':
+        return (
+          <SankeyChartSVG
+            data={sankeyData}
+            colors={colors}
+            width={width}
+            height={height}
             animated={animated}
             onHover={handleHover}
             onLeave={handleLeave}

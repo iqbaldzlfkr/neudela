@@ -1261,7 +1261,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
 
           {/* 6. Interactive Playground */}
           <div className="section-card">
-            <h2 className="section-title">NeuronProgress {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronProgress"
               previewStyle={{ background: 'var(--color-bg-surface, #ffffff)' }}
@@ -1279,21 +1279,58 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               ]}
               codeTemplates={(knobs) => {
                 const rp: string[] = [];
-                if (knobs.type !== 'bar')             rp.push(`type="${knobs.type}"`);
-                if (Number(knobs.value) !== 65)       rp.push(`value={${knobs.value}}`);
-                if (knobs.size !== 'md')              rp.push(`size="${knobs.size}"`);
-                if (knobs.variant !== 'brand')        rp.push(`variant="${knobs.variant}"`);
-                if (knobs.showValue)                  rp.push(`showValue`);
-                if (knobs.valuePosition !== 'top' && knobs.type === 'bar') rp.push(`valuePosition="${knobs.valuePosition}"`);
-                if (knobs.label)                      rp.push(`label="${knobs.label}"`);
-                if (knobs.showPin && knobs.type === 'bar') rp.push(`showPin`);
-                if (knobs.striped && knobs.type === 'bar') rp.push(`striped`);
-                if (knobs.indeterminate)              rp.push(`indeterminate`);
-                const attr = rp.length ? ` ${rp.join(' ')}` : '';
+                const vp: string[] = [];
+                if (knobs.type !== 'bar') {
+                  rp.push(`type="${knobs.type}"`);
+                  vp.push(`type="${knobs.type}"`);
+                }
+                if (Number(knobs.value) !== 65) {
+                  rp.push(`value={${knobs.value}}`);
+                  vp.push(`:value="${knobs.value}"`);
+                }
+                if (knobs.size !== 'md') {
+                  rp.push(`size="${knobs.size}"`);
+                  vp.push(`size="${knobs.size}"`);
+                }
+                if (knobs.variant !== 'brand') {
+                  rp.push(`variant="${knobs.variant}"`);
+                  vp.push(`variant="${knobs.variant}"`);
+                }
+                if (knobs.showValue) {
+                  rp.push(`showValue`);
+                  vp.push(`show-value`);
+                }
+                if (knobs.valuePosition !== 'top' && knobs.type === 'bar') {
+                  rp.push(`valuePosition="${knobs.valuePosition}"`);
+                  vp.push(`value-position="${knobs.valuePosition}"`);
+                }
+                if (knobs.label) {
+                  rp.push(`label="${knobs.label}"`);
+                  vp.push(`label="${knobs.label}"`);
+                }
+                if (knobs.showPin && knobs.type === 'bar') {
+                  rp.push(`showPin`);
+                  vp.push(`show-pin`);
+                }
+                if (knobs.striped && knobs.type === 'bar') {
+                  rp.push(`striped`);
+                  vp.push(`striped`);
+                }
+                if (knobs.indeterminate) {
+                  rp.push(`indeterminate`);
+                  vp.push(`indeterminate`);
+                }
+                const reactAttr = rp.length ? ` ${rp.join(' ')}` : '';
+                const vueAttr = vp.length ? ` ${vp.join(' ')}` : '';
+
+                const htmlContent = knobs.type === 'bar'
+                  ? `${knobs.label ? `  <div class="neuron-progress__header"><span class="neuron-progress__label">${knobs.label}</span>${knobs.showValue ? `<span class="neuron-progress__value">${knobs.value}%</span>` : ''}</div>\n` : ''}  <div class="neuron-progress__track">\n    <div class="neuron-progress__fill" style="width: ${knobs.value}%;"></div>\n  </div>`
+                  : `  <svg class="neuron-progress__svg" viewBox="0 0 100 100">\n    <circle class="neuron-progress__meter" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="${251.2 * (1 - Number(knobs.value) / 100)}" />\n  </svg>${knobs.showValue ? `\n  <span class="neuron-progress__text">${knobs.value}%</span>` : ''}`;
+
                 return {
-                  react: `<NeuronProgress${attr} />`,
-                  vue:   `<NeuronProgress${attr} />`,
-                  html:  `<div class="neuron-progress neuron-progress--${knobs.type} neuron-progress--${knobs.size} neuron-progress--${knobs.variant}" role="progressbar" aria-valuenow="${knobs.value}" aria-valuemin="0" aria-valuemax="100"></div>`,
+                  react: `<NeuronProgress${reactAttr} />`,
+                  vue:   `<NeuronProgress${vueAttr} />`,
+                  html:  `<div class="neuron-progress neuron-progress--${knobs.type} neuron-progress--${knobs.size} neuron-progress--${knobs.variant}" role="progressbar" aria-valuenow="${knobs.value}" aria-valuemin="0" aria-valuemax="100">\n${htmlContent}\n</div>`,
                 };
               }}
             >

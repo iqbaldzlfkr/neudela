@@ -2373,8 +2373,8 @@ export default function AccordionView({ setActiveTab }: AccordionViewProps) {
 
           {/* Next Previous Navigation Footer */}
           <NextPrevious
-            prev={{ id: 'comp-stepper', label: 'Stepper' }}
-            next={{ id: 'comp-alert', label: 'Alert' }}
+            prev={{ id: 'components-overview', label: t.nav.componentsOverview }}
+            next={{ id: 'comp-alert', label: t.nav.compAlert }}
             setActiveTab={setActiveTab}
           />
 
@@ -2393,7 +2393,7 @@ export default function AccordionView({ setActiveTab }: AccordionViewProps) {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, flexWrap: 'wrap', gap: 12 }}>
                 <div>
                   <h2 className="section-title" style={{ margin: 0 }}>
-                    {isId ? '1. Playground Interaktif' : '1. Interactive Playground'}
+                    Interactive Playground
                   </h2>
                 </div>
                 <NeuronBadge size="sm" variant="brand">
@@ -2517,7 +2517,7 @@ export default function AccordionView({ setActiveTab }: AccordionViewProps) {
                     reactProps.push('columns={2}');
                   }
                   if (type === 'single' && !collapsible) {
-                    reactProps.push(':collapsible="false"');
+                    reactProps.push('collapsible={false}');
                   }
                   if (iconPosition !== 'right') {
                     reactProps.push(`iconPosition="${iconPosition}"`);
@@ -3218,8 +3218,8 @@ const accordionItems = [
 
           {/* Next Previous Navigation Footer */}
           <NextPrevious
-            prev={{ id: 'comp-stepper', label: 'Stepper' }}
-            next={{ id: 'comp-alert', label: 'Alert' }}
+            prev={{ id: 'components-overview', label: t.nav.componentsOverview }}
+            next={{ id: 'comp-alert', label: t.nav.compAlert }}
             setActiveTab={setActiveTab}
           />
 

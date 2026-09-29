@@ -611,7 +611,7 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
 
           {/* ── INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronButton"
               knobs={[
@@ -635,10 +635,10 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
                   reactProps.push(`size="${knobs.size}"`);
                   vueProps.push(`size="${knobs.size}"`);
                 }
-                if (icon === 'leading') { reactProps.push('leadingIcon={<Icon />}'); vueProps.push(':leading-icon="iconComponent"'); }
-                if (icon === 'trailing') { reactProps.push('trailingIcon={<Icon />}'); vueProps.push(':trailing-icon="iconComponent"'); }
+                if (icon === 'leading') { reactProps.push('leadingIcon={<ArrowRight size={16} />}'); vueProps.push(':leading-icon="ArrowRight"'); }
+                if (icon === 'trailing') { reactProps.push('trailingIcon={<ArrowRight size={16} />}'); vueProps.push(':trailing-icon="ArrowRight"'); }
                 if (icon === 'dot') { reactProps.push('dot'); vueProps.push('dot'); }
-                if (icon === 'only') { reactProps.push('iconOnly'); reactProps.push('leadingIcon={<Icon />}'); reactProps.push(`aria-label="${knobs.text}"`); vueProps.push('icon-only'); }
+                if (icon === 'only') { reactProps.push('iconOnly'); reactProps.push('leadingIcon={<ArrowRight size={16} />}'); reactProps.push(`aria-label="${knobs.text}"`); vueProps.push('icon-only'); }
                 if (knobs.loading) { reactProps.push('loading'); vueProps.push('loading'); }
                 if (knobs.disabled) { reactProps.push('disabled'); vueProps.push('disabled'); }
 
@@ -646,15 +646,16 @@ export default function ButtonView({ setActiveTab }: ButtonViewProps) {
                 const vueAttr = vueProps.length ? `\n  ${vueProps.join('\n  ')}\n` : ' ';
                 const htmlDisabled = knobs.disabled || knobs.loading ? ' disabled' : '';
                 const htmlClasses = `neuron-btn neuron-btn--${knobs.variant} neuron-btn--${knobs.size}${icon === 'only' ? ' neuron-btn--icon-only' : ''}`;
+                const arrowSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
                 const htmlContent = knobs.loading
                   ? '<span class="neuron-spinner"></span>'
                   : icon === 'only'
-                    ? '<span class="neuron-btn-icon"><!-- svg icon --></span>'
+                    ? `<span class="neuron-btn-icon">${arrowSvg}</span>`
                     : [
-                        icon === 'leading' ? '<span class="neuron-btn-icon neuron-btn-icon--leading"><!-- svg --></span>' : '',
+                        icon === 'leading' ? `<span class="neuron-btn-icon neuron-btn-icon--leading">${arrowSvg}</span>` : '',
                         icon === 'dot' ? '<span class="neuron-btn-dot"></span>' : '',
                         `  ${knobs.text}`,
-                        icon === 'trailing' ? '<span class="neuron-btn-icon neuron-btn-icon--trailing"><!-- svg --></span>' : '',
+                        icon === 'trailing' ? `<span class="neuron-btn-icon neuron-btn-icon--trailing">${arrowSvg}</span>` : '',
                       ].filter(Boolean).join('\n  ');
 
                 const reactChild = icon === 'only' ? '' : `\n  ${knobs.text}\n`;

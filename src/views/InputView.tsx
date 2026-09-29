@@ -678,7 +678,7 @@ export default function InputView({ setActiveTab }: InputViewProps) {
 
           {/* ── INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronInput"
               knobs={[

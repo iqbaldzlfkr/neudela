@@ -13981,6 +13981,14 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   z-index: 2;
   border-radius: calc(var(--radius-lg, 12px) - 3px);
   color: var(--color-text-secondary, #667085);
+  transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.12s ease;
+  outline: none !important;
+}
+
+.neuron-tab-bar--segment .neuron-tab:focus,
+.neuron-tab-bar--segment .neuron-tab:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .neuron-tab-bar--segment .neuron-tab:not(.neuron-tab--active):hover:not(:disabled) {
@@ -13989,9 +13997,10 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
 }
 
 .neuron-tab-bar--segment .neuron-tab:active:not(:disabled) {
-  outline: none;
-  box-shadow: none;
+  outline: none !important;
+  box-shadow: none !important;
   color: var(--color-primary, #b25e40);
+  transform: scale(0.96);
 }
 
 .neuron-tab-bar--segment .neuron-tab--active {
@@ -14011,8 +14020,8 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   background-color: var(--color-bg-surface, #ffffff);
   border-radius: calc(var(--radius-lg, 12px) - 3px);
   box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
-  transition: left 0.22s cubic-bezier(0.2, 0, 0, 1), width 0.22s cubic-bezier(0.2, 0, 0, 1),
-              top 0.22s cubic-bezier(0.2, 0, 0, 1), height 0.22s cubic-bezier(0.2, 0, 0, 1);
+  transition: left 0.28s cubic-bezier(0.16, 1, 0.3, 1), width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.28s cubic-bezier(0.16, 1, 0.3, 1), height 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 1;
 }
@@ -15990,4 +15999,62 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.1);
 }
+
+/* ─── Gallery Cards Smooth Fade & Slide Animation ─── */
+@keyframes chartGalleryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chart-gallery-fade-in {
+  animation: chartGalleryFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Sankey Diagram Styles ─── */
+.neuron-chart--sankey .neuron-chart__canvas {
+  overflow: visible;
+}
+
+.neuron-chart__sankey-stage-header {
+  font-family: inherit;
+  fill: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.dark-theme .neuron-chart__sankey-stage-header {
+  fill: var(--color-text-tertiary);
+}
+
+.neuron-chart__sankey-node rect {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease, opacity 0.2s ease;
+}
+
+.neuron-chart__sankey-node:hover rect {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+}
+
+.neuron-chart__sankey-node text {
+  font-family: inherit;
+  fill: var(--color-text-primary);
+  paint-order: stroke fill;
+  stroke: var(--color-bg-surface);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.dark-theme .neuron-chart__sankey-node text {
+  stroke: var(--color-bg-surface);
+}
+
 

@@ -245,8 +245,57 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
     };
   }, [loanAmount, loanTenureYears, interestRate]);
 
+  const [pgCodeTab, setPgCodeTab] = useState<'react' | 'vue' | 'html'>('react');
+
   // Generate Playground Code Snippet
   const generatedCode = useMemo(() => {
+    if (pgCodeTab === 'vue') {
+      const vueProps: string[] = [];
+      if (pgRange) {
+        vueProps.push('range');
+        vueProps.push(`v-model="rangeVal"`);
+      } else {
+        vueProps.push(`v-model="singleVal"`);
+      }
+      if (pgVariant !== 'brand') vueProps.push(`variant="${pgVariant}"`);
+      if (pgSize !== 'md') vueProps.push(`size="${pgSize}"`);
+      if (pgShowTooltip) {
+        vueProps.push('show-tooltip');
+        if (pgTooltipPlacement !== 'top') vueProps.push(`tooltip-placement="${pgTooltipPlacement}"`);
+        if (pgTooltipVisible !== 'hover') vueProps.push(`tooltip-visible="${pgTooltipVisible}"`);
+      }
+      if (pgShowLabels) vueProps.push('show-labels');
+      if (pgMarks) vueProps.push('marks');
+      if (pgDisabled) vueProps.push('disabled');
+
+      return `<template>
+  <NeuronSlider
+    ${vueProps.join('\n    ')}
+  />
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { NeuronSlider } from '@neudela/vue';
+
+${pgRange ? `const rangeVal = ref([${pgRangeVal[0]}, ${pgRangeVal[1]}]);` : `const singleVal = ref(${pgSingleVal});`}
+</script>`;
+    }
+
+    if (pgCodeTab === 'html') {
+      const fillWidth = pgRange ? Math.max(0, pgRangeVal[1] - pgRangeVal[0]) : pgSingleVal;
+      const fillLeft = pgRange ? pgRangeVal[0] : 0;
+      return `<!-- Neudela Slider Component (${pgVariant}, ${pgSize}) -->
+<div class="neuron-slider neuron-slider--${pgVariant} neuron-slider--${pgSize}${pgDisabled ? ' neuron-slider--disabled' : ''}">
+  <div class="neuron-slider__track">
+    <div class="neuron-slider__fill" style="left: ${fillLeft}%; width: ${fillWidth}%;"></div>
+    <div class="neuron-slider__thumb" role="slider" aria-valuenow="${pgRange ? pgRangeVal[0] : pgSingleVal}" tabindex="0"${pgDisabled ? ' aria-disabled="true"' : ''}>
+      ${pgShowTooltip ? `<div class="neuron-slider__tooltip">${pgRange ? pgRangeVal[0] : pgSingleVal}</div>` : ''}
+    </div>
+  </div>
+</div>`;
+    }
+
     const props: string[] = [];
     if (pgRange) {
       props.push('range');
@@ -269,6 +318,7 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
 
     return `<NeuronSlider\n  ${props.join('\n  ')}\n/>`;
   }, [
+    pgCodeTab,
     pgRange,
     pgSingleVal,
     pgRangeVal,
@@ -293,7 +343,7 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
         <div>
           <h2 style={{ fontSize: '18px', fontWeight: 700, margin: '0' }}>
-            {isId ? 'Playground Interaktif' : 'Interactive Playground'}
+            Interactive Playground
           </h2>
         </div>
         <NeuronBadge size="sm" variant="brand">Live Component</NeuronBadge>
@@ -599,17 +649,37 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
         padding: '16px',
         position: 'relative'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#98a2b3', textTransform: 'uppercase' }}>
-            JSX Code Preview
-          </span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '6px' }}>
+            {(['react', 'vue', 'html'] as const).map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setPgCodeTab(tab)}
+                style={{
+                  padding: '4px 10px',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  borderRadius: 'var(--radius-sm)',
+                  border: 'none',
+                  background: pgCodeTab === tab ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.08)',
+                  color: pgCodeTab === tab ? '#ffffff' : '#94a3b8',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  textTransform: tab === 'html' ? 'uppercase' : 'capitalize',
+                }}
+              >
+                {tab === 'react' ? 'React' : tab === 'vue' ? 'Vue 3' : 'HTML/CSS'}
+              </button>
+            ))}
+          </div>
           <NeuronButton
             size="xs"
             variant="secondary"
             onClick={handleCopyCode}
           >
             {copiedCode ? <Check size={12} style={{ marginRight: 4 }} /> : <Copy size={12} style={{ marginRight: 4 }} />}
-            {copiedCode ? (isId ? 'Tersalin!' : 'Copied!') : (isId ? 'Salin Kode' : 'Copy JSX')}
+            {copiedCode ? (isId ? 'Tersalin!' : 'Copied!') : (isId ? 'Salin Kode' : 'Copy Code')}
           </NeuronButton>
         </div>
         <pre style={{
@@ -2850,7 +2920,7 @@ export default function SliderView({ setActiveTab }: SliderViewProps) {
 
       {/* ── Footer Navigation (Prev / Next) ── */}
       <NextPrevious
-        prev={{ id: 'comp-radio', label: t.nav.compRadio }}
+        prev={{ id: 'comp-rating', label: t.nav.compRating || 'Rating' }}
         next={{ id: 'comp-stepper', label: t.nav.compStepper || 'Stepper' }}
         setActiveTab={setActiveTab}
       />

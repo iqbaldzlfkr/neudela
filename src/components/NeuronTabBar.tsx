@@ -147,17 +147,20 @@ export default function NeuronTabBar({
   const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
 
   const checkScroll = useCallback(() => {
-    if (orientation === 'vertical' || !tabsNavRef.current) {
-      setCanScrollLeft(false);
-      setCanScrollRight(false);
+    if (!scrollable || orientation === 'vertical' || !tabsNavRef.current) {
+      setCanScrollLeft(prev => (prev ? false : prev));
+      setCanScrollRight(prev => (prev ? false : prev));
       return;
     }
     const el = tabsNavRef.current;
-    setCanScrollLeft(el.scrollLeft > 2);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 2);
-  }, [orientation]);
+    const canLeft = el.scrollLeft > 2;
+    const canRight = el.scrollLeft + el.clientWidth < el.scrollWidth - 2;
+    setCanScrollLeft(prev => (prev !== canLeft ? canLeft : prev));
+    setCanScrollRight(prev => (prev !== canRight ? canRight : prev));
+  }, [scrollable, orientation]);
 
   useEffect(() => {
+    if (!scrollable) return;
     checkScroll();
     const el = tabsNavRef.current;
     if (el) {
@@ -168,40 +171,50 @@ export default function NeuronTabBar({
         window.removeEventListener('resize', checkScroll);
       };
     }
-  }, [checkScroll, items]);
+  }, [scrollable, checkScroll]);
 
   // Update animated indicator position
   useEffect(() => {
-    const activeEl = tabRefs.current.get(activeId);
-    const navEl = tabsNavRef.current;
-    if (activeEl && navEl) {
-      if (orientation === 'horizontal') {
-        const navRect = navEl.getBoundingClientRect();
-        const activeRect = activeEl.getBoundingClientRect();
-        const left = activeRect.left - navRect.left + navEl.scrollLeft;
-        const width = activeRect.width;
+    const updateIndicator = () => {
+      const activeEl = tabRefs.current.get(activeId);
+      const navEl = tabsNavRef.current;
+      if (activeEl && navEl) {
+        if (orientation === 'horizontal') {
+          const navRect = navEl.getBoundingClientRect();
+          const activeRect = activeEl.getBoundingClientRect();
+          const left = `${Math.round(activeRect.left - navRect.left + navEl.scrollLeft)}px`;
+          const width = `${Math.round(activeRect.width)}px`;
 
-        setIndicatorStyle({
-          left: `${left}px`,
-          width: `${width}px`,
-          opacity: 1,
-        });
+          setIndicatorStyle(prev => {
+            if (prev.left === left && prev.width === width && prev.opacity === 1) {
+              return prev;
+            }
+            return { left, width, opacity: 1 };
+          });
+        } else {
+          const navRect = navEl.getBoundingClientRect();
+          const activeRect = activeEl.getBoundingClientRect();
+          const top = `${Math.round(activeRect.top - navRect.top + navEl.scrollTop)}px`;
+          const height = `${Math.round(activeRect.height)}px`;
+
+          setIndicatorStyle(prev => {
+            if (prev.top === top && prev.height === height && prev.opacity === 1) {
+              return prev;
+            }
+            return { top, height, opacity: 1 };
+          });
+        }
       } else {
-        const navRect = navEl.getBoundingClientRect();
-        const activeRect = activeEl.getBoundingClientRect();
-        const top = activeRect.top - navRect.top + navEl.scrollTop;
-        const height = activeRect.height;
-
-        setIndicatorStyle({
-          top: `${top}px`,
-          height: `${height}px`,
-          opacity: 1,
-        });
+        setIndicatorStyle(prev => (prev.opacity === 0 ? prev : { opacity: 0 }));
       }
-    } else {
-      setIndicatorStyle({ opacity: 0 });
-    }
-  }, [activeId, items, orientation, variant, size]);
+    };
+
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    return () => {
+      window.removeEventListener('resize', updateIndicator);
+    };
+  }, [activeId, orientation]);
 
   const handleSelectTab = (id: string, disabled?: boolean) => {
     if (disabled) return;

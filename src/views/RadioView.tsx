@@ -1356,7 +1356,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
 
           {/* ── 2. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">NeuronRadio {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronRadio"
               knobs={[
@@ -1609,7 +1609,7 @@ export const RadioView: React.FC<RadioViewProps> = ({ setActiveTab }) => {
       {/* ── Next / Previous Navigation Footer ── */}
       <NextPrevious
         prev={{ id: 'comp-progress', label: t.nav.compProgress }}
-        next={{ id: 'comp-slider', label: t.nav.compSlider || 'Slider' }}
+        next={{ id: 'comp-rating', label: t.nav.compRating || 'Rating' }}
         setActiveTab={setActiveTab}
       />
 

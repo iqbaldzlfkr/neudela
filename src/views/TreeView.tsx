@@ -1115,7 +1115,7 @@ export default function TreeView({ setActiveTab }: TreeViewProps) {
 
           {/* ── Interactive Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               Customize scale sizes, container variants, selection modes, icon visibility, and cascading checkboxes in real time with live code generation.
             </p>
@@ -1164,6 +1164,10 @@ export default function TreeView({ setActiveTab }: TreeViewProps) {
                 const vueIcons = !state.showIcons ? '\n  :show-icons="false"' : '';
                 const vueCascade = state.selectionMode === 'checkbox' && !state.cascadeCheck ? '\n  :cascade-check="false"' : '';
 
+                const checkHtml = state.selectionMode === 'checkbox'
+                  ? '      <input type="checkbox" class="neuron-checkbox" checked />\n'
+                  : '';
+
                 return {
                   react: `<NeuronTree
   data={treeData}
@@ -1184,7 +1188,20 @@ export default function TreeView({ setActiveTab }: TreeViewProps) {
   @checked-change="handleChecked"
 />`,
                   html: `<div class="neuron-tree neuron-tree--${state.size} neuron-tree--${state.variant}" role="tree">
-  <!-- Hierarchical tree nodes -->
+  <div class="neuron-tree-node" role="treeitem" aria-expanded="true">
+    <div class="neuron-tree-node__row">
+      <span class="neuron-tree-node__arrow">▼</span>
+${checkHtml}      <span class="neuron-tree-node__label">src</span>
+    </div>
+    <div class="neuron-tree-node__children" role="group">
+      <div class="neuron-tree-node" role="treeitem">
+        <div class="neuron-tree-node__row">
+          <span class="neuron-tree-node__indent"></span>
+          <span class="neuron-tree-node__label">App.tsx</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>`,
                 };
               }}
@@ -1650,7 +1667,7 @@ export default function TreeView({ setActiveTab }: TreeViewProps) {
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
         prev={{ id: 'comp-tooltip', label: t.nav.compTooltip }}
-        next={{ id: 'comp-textarea', label: t.nav.compTextArea || 'Text Area' }}
+        next={{ id: 'pat-forms', label: t.nav.patForms }}
         setActiveTab={setActiveTab}
       />
     </div>

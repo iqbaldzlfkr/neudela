@@ -1680,7 +1680,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
 
           {/* ── Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">5. {t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               Configure props interactively and see the generated Vue 3, React, and HTML code in real time.
             </p>
@@ -1758,7 +1758,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
                 return {
                   react: `<NeuronDropdown\n${reactLines.join('\n')}\n/>`,
                   vue:   `<NeuronDropdown\n${vueLines.join('\n')}\n/>`,
-                  html:  `<div class="neuron-dropdown neuron-dropdown--${state.size}${disabledCls}${stateCls}">\n  <button class="neuron-dropdown__trigger">\n    Select team member\n    <svg class="neuron-dropdown__chevron">...</svg>\n  </button>\n</div>`,
+                  html:  `<div class="neuron-dropdown neuron-dropdown--${state.size}${disabledCls}${stateCls}">\n  <button class="neuron-dropdown__trigger">\n    <span>Select team member</span>\n    <svg class="neuron-dropdown__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>\n  </button>\n</div>`,
                 };
               }}
             >
@@ -1791,7 +1791,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
+        prev={{ id: 'comp-divider', label: t.nav.compDivider || 'Divider' }}
         next={{ id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' }}
         setActiveTab={setActiveTab}
       />

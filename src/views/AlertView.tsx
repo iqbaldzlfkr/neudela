@@ -668,7 +668,7 @@ export default function AlertView({ setActiveTab }: AlertViewProps) {
 
           {/* ── 7. INTERACTIVE PLAYGROUND ── */}
           <div className="section-card">
-            <h2 className="section-title">{t.compShared.playground}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <Playground
               name="NeuronAlert"
               knobs={[
@@ -721,7 +721,7 @@ export default function AlertView({ setActiveTab }: AlertViewProps) {
                 return {
                   react: `<NeuronAlert${reactAttr}/>`,
                   vue:   `<NeuronAlert${vueAttr}/>`,
-                  html:  `<div class="neuron-alert neuron-alert--${knobs.variant} neuron-alert--${knobs.size} neuron-alert--${knobs.fill}" role="alert">\n  <span class="neuron-alert__icon-wrap"><!-- svg icon --></span>\n  <div class="neuron-alert__body">\n    ${knobs.title ? `<div class="neuron-alert__title">${knobs.title}</div>\n    ` : ''}<div class="neuron-alert__desc">${knobs.description}</div>\n  </div>\n  ${knobs.dismissible ? '<button class="neuron-alert__close" aria-label="Dismiss alert">&#10005;</button>' : ''}\n</div>`,
+                  html:  `<div class="neuron-alert neuron-alert--${knobs.variant} neuron-alert--${knobs.size} neuron-alert--${knobs.fill}" role="alert">\n  <span class="neuron-alert__icon-wrap">\n    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>\n  </span>\n  <div class="neuron-alert__body">\n    ${knobs.title ? `<div class="neuron-alert__title">${knobs.title}</div>\n    ` : ''}<div class="neuron-alert__desc">${knobs.description}</div>\n  </div>\n  ${knobs.dismissible ? '<button class="neuron-alert__close" aria-label="Dismiss alert">&#10005;</button>' : ''}\n</div>`,
                 };
               }}
             >
@@ -828,7 +828,7 @@ export default function AlertView({ setActiveTab }: AlertViewProps) {
       )}
 
       <NextPrevious
-        prev={{ id: 'components-overview', label: t.nav.componentsOverview }}
+        prev={{ id: 'comp-accordion', label: t.nav.compAccordion || 'Accordion' }}
         next={{ id: 'comp-avatar', label: t.nav.compAvatar }}
         setActiveTab={setActiveTab}
       />

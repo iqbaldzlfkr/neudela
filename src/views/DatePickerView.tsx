@@ -2003,7 +2003,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
 
           {/* ── 3. Interactive Component Playground ── */}
           <div className="section-card">
-            <h2 className="section-title">{dp.playgroundTitle}</h2>
+            <h2 className="section-title">Interactive Playground</h2>
             <p className="section-description">
               {dp.playgroundDesc}
             </p>
@@ -2096,10 +2096,14 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
                 const rp = reactProps.length > 0 ? '\n  ' + reactProps.join('\n  ') + '\n' : ' ';
                 const vp = vueProps.length > 0 ? '\n  ' + vueProps.join('\n  ') + '\n' : ' ';
 
+                const htmlTrigger = knobs.trigger === 'popover'
+                  ? `  <div class="neuron-datepicker__trigger" role="combobox" aria-haspopup="dialog" tabindex="0">\n    <svg class="neuron-datepicker__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>\n    <span class="neuron-datepicker__value">2025-01-06</span>\n  </div>`
+                  : `  <div class="neuron-datepicker__calendar">\n    <div class="neuron-datepicker__header">January 2025</div>\n    <div class="neuron-datepicker__grid"><!-- Calendar Grid --></div>\n  </div>`;
+
                 return {
                   react: `<NeuronDatePicker${rp}/>`,
                   vue: `<NeuronDatePicker${vp}/>`,
-                  html: `<div class="neuron-datepicker neuron-datepicker--${knobs.mode} neuron-datepicker--${knobs.size}">\n  <!-- Datepicker markup -->\n</div>`,
+                  html: `<div class="neuron-datepicker neuron-datepicker--${knobs.mode} neuron-datepicker--${knobs.size} neuron-datepicker--${knobs.variant}">\n${htmlTrigger}\n</div>`,
                 };
               }}
             >
@@ -2365,7 +2369,7 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
       {/* ── Page Footer Navigation ── */}
       <NextPrevious
         prev={{ id: 'comp-checkbox', label: t.nav.compCheckbox }}
-        next={{ id: 'comp-dropdown', label: t.nav.compDropdown || 'Dropdown' }}
+        next={{ id: 'comp-divider', label: t.nav.compDivider || 'Divider' }}
         setActiveTab={setActiveTab}
       />
     </div>
