@@ -11,6 +11,7 @@ import NeuronToast, {
   ToastSize,
   ToastStyleVariant,
   ToastPlacement,
+  ToastAction,
   toast,
 } from '../components/NeuronToast';
 import NeuronButton from '../components/NeuronButton';
@@ -70,26 +71,102 @@ function SizeGuideRow({
   label,
   usage,
   variant,
+  isDefault = false,
+  sampleTitle,
+  sampleDesc,
+  action,
+  dismissible = false,
+  padding,
+  fontSize,
+  iconSize,
 }: {
   size: ToastSize;
   label: string;
   usage: string;
   variant: ToastVariant;
+  isDefault?: boolean;
+  sampleTitle: string;
+  sampleDesc: string;
+  action?: ToastAction;
+  dismissible?: boolean;
+  padding: string;
+  fontSize: string;
+  iconSize: string;
 }) {
   return (
-    <div className="size-guide-row">
-      <div className="size-guide-preview" style={{ minWidth: '320px', maxWidth: '380px' }}>
+    <div className="size-guide-row toast-size-guide-row">
+      <div className="size-guide-preview">
         <NeuronToast
           variant={variant}
           size={size}
-          title={label}
-          description={usage}
-          dismissible={false}
+          title={sampleTitle}
+          description={sampleDesc}
+          action={action}
+          dismissible={dismissible}
+          preventDismiss={true}
           duration={0}
         />
       </div>
       <div className="size-guide-info">
-        <div className="size-guide-name">{label}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
+          <span className="size-guide-name" style={{ margin: 0 }}>
+            {label}
+          </span>
+          {isDefault && (
+            <span
+              style={{
+                fontSize: '10px',
+                padding: '2px 8px',
+                background: 'rgba(223, 126, 48, 0.12)',
+                color: 'var(--brand-600, #df7e30)',
+                borderRadius: 'var(--radius-full, 999px)',
+                fontWeight: 600,
+                border: '1px solid rgba(223, 126, 48, 0.25)',
+              }}
+            >
+              Default
+            </span>
+          )}
+          <span
+            style={{
+              fontSize: '11px',
+              padding: '2px 8px',
+              background: 'var(--color-bg-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm, 6px)',
+              color: 'var(--color-text-secondary)',
+              fontFamily: 'monospace',
+            }}
+          >
+            {padding}
+          </span>
+          <span
+            style={{
+              fontSize: '11px',
+              padding: '2px 8px',
+              background: 'var(--color-bg-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm, 6px)',
+              color: 'var(--color-text-secondary)',
+              fontFamily: 'monospace',
+            }}
+          >
+            {fontSize}
+          </span>
+          <span
+            style={{
+              fontSize: '11px',
+              padding: '2px 8px',
+              background: 'var(--color-bg-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm, 6px)',
+              color: 'var(--color-text-secondary)',
+              fontFamily: 'monospace',
+            }}
+          >
+            {iconSize}
+          </span>
+        </div>
         <div className="size-guide-usage">{usage}</div>
       </div>
     </div>
@@ -1143,6 +1220,11 @@ export default function ToastView({ setActiveTab }: ToastViewProps) {
               <SizeGuideRow
                 size="sm"
                 label={t.toast?.small || 'Small (sm)'}
+                sampleTitle={isId ? 'Tautan Disalin' : 'Link Copied'}
+                sampleDesc={isId ? 'Tersimpan ke papan klip Anda.' : 'Copied to your clipboard.'}
+                padding="Padding: 10px 14px"
+                fontSize="Text: 12px"
+                iconSize="Icon: 16px"
                 usage={
                   isId
                     ? 'Konfirmasi cepat satu kalimat: "Tersimpan", "Tautan disalin", atau update status kompak.'
@@ -1153,6 +1235,13 @@ export default function ToastView({ setActiveTab }: ToastViewProps) {
               <SizeGuideRow
                 size="md"
                 label={t.toast?.medium || 'Medium (md)'}
+                isDefault={true}
+                sampleTitle={isId ? 'Pengaturan Disimpan' : 'Settings Saved'}
+                sampleDesc={isId ? 'Preferensi notifikasi Anda berhasil diperbarui.' : 'Your notification preferences have been updated.'}
+                padding="Padding: 14px 16px"
+                fontSize="Text: 13px"
+                iconSize="Icon: 18px"
+                dismissible={true}
                 usage={
                   isId
                     ? 'Ukuran default standar untuk 90% notifikasi aplikasi dengan judul dan kalimat penjelasan.'
@@ -1163,6 +1252,20 @@ export default function ToastView({ setActiveTab }: ToastViewProps) {
               <SizeGuideRow
                 size="lg"
                 label={t.toast?.large || 'Large (lg)'}
+                sampleTitle={isId ? 'Penyimpanan Hampir Penuh' : 'Storage Limit Warning'}
+                sampleDesc={
+                  isId
+                    ? 'Ruang cloud tersisa 5%. Tingkatkan paket sekarang.'
+                    : 'Cloud workspace is at 95% capacity. Upgrade plan now.'
+                }
+                padding="Padding: 18px 20px"
+                fontSize="Text: 14px"
+                iconSize="Icon: 20px"
+                dismissible={true}
+                action={{
+                  label: isId ? 'Tingkatkan' : 'Upgrade',
+                  onClick: () => {},
+                }}
                 usage={
                   isId
                     ? 'Notifikasi berbobot tinggi yang memuat tombol aksi inline, teks rincian teknis, atau aksi Undo.'
@@ -1463,6 +1566,7 @@ const showToast = () => {
                       dismissible={dismissible}
                       showProgress={showProgress}
                       pauseOnHover={pauseOnHover}
+                      preventDismiss={true}
                       action={
                         showAction
                           ? {

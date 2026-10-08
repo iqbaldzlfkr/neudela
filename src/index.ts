@@ -275,6 +275,15 @@ export type {
   ModalVariant 
 } from './components/NeuronModal';
 
+export { default as NeuronDrawer } from './components/NeuronDrawer';
+export type {
+  NeuronDrawerProps,
+  DrawerPlacement,
+  DrawerSize,
+  DrawerVariant,
+  DrawerBackdropVariant,
+} from './components/NeuronDrawer';
+
 export {
   default as NeuronToast,
   NeuronToast as NeuronToastCard,

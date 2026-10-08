@@ -20,7 +20,7 @@ import NeuronAccordion from '../components/NeuronAccordion';
 import NeuronDivider from '../components/NeuronDivider';
 import NeuronChart from '../components/NeuronChart';
 import NeuronTimePicker from '../components/NeuronTimePicker';
-import { ArrowRight, Calendar, ChevronDown, UploadCloud } from 'lucide-react';
+import { ArrowRight, Calendar, ChevronDown, UploadCloud, PanelRight } from 'lucide-react';
 
 interface ComponentsOverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -206,6 +206,18 @@ export default function ComponentsOverview({ setActiveTab }: ComponentsOverviewP
             <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-primary)' }}>OR</span>
           </NeuronDivider>
           <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)' }}>Next Block</div>
+        </div>
+      ),
+    },
+    {
+      id: 'comp-drawer',
+      title: 'Drawer',
+      desc: 'Slide-over contextual edge panels supporting 4 placements, 3 surfaces, and frosted glass backdrops.',
+      badge: 'Overlay',
+      renderPreview: () => (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 14px', background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', fontSize: '11px', fontWeight: 600, color: 'var(--color-primary)' }}>
+          <PanelRight size={14} />
+          <span>Open Slide Panel</span>
         </div>
       ),
     },

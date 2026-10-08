@@ -1791,7 +1791,7 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
 
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
-        prev={{ id: 'comp-divider', label: t.nav.compDivider || 'Divider' }}
+        prev={{ id: 'comp-drawer', label: t.nav.compDrawer || 'Drawer' }}
         next={{ id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' }}
         setActiveTab={setActiveTab}
       />

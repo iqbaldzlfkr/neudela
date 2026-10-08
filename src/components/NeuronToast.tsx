@@ -44,8 +44,9 @@ export type ToastPlacement =
 
 export interface ToastAction {
   label: string;
-  onClick: (e?: React.MouseEvent) => void;
+  onClick?: (e?: React.MouseEvent) => void;
   altText?: string;
+  disabled?: boolean;
 }
 
 export interface ToastOptions {
@@ -195,7 +196,7 @@ export function NeuronToast({
   };
 
   const isActionObject = (act: any): act is ToastAction => {
-    return act && typeof act === 'object' && 'label' in act && 'onClick' in act;
+    return act && typeof act === 'object' && 'label' in act;
   };
 
   const classNames = [
@@ -238,11 +239,17 @@ export function NeuronToast({
               isActionObject(action) ? (
                 <button
                   type="button"
+                  disabled={action.disabled}
                   onClick={(e) => {
-                    action.onClick(e);
+                    if (action.disabled) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      return;
+                    }
+                    action.onClick?.(e);
                     handleDismiss(e);
                   }}
-                  className="neuron-toast__action-btn"
+                  className={`neuron-toast__action-btn ${action.disabled ? 'neuron-toast__action-btn--disabled' : ''}`}
                 >
                   {action.label}
                 </button>

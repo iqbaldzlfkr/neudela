@@ -53,6 +53,7 @@ import ChartView from './views/ChartView';
 import RatingView from './views/RatingView';
 import TimePickerView from './views/TimePickerView';
 import ToastView from './views/ToastView';
+import DrawerView from './views/DrawerView';
 import { ToastProvider } from './components/NeuronToast';
 import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
@@ -198,6 +199,7 @@ function getTabFromHash(hashStr: string): string | null {
   if (raw === 'stepper' || raw === 'comp-stepper') return 'comp-stepper';
   if (raw === 'accordion' || raw === 'comp-accordion') return 'comp-accordion';
   if (raw === 'divider' || raw === 'comp-divider') return 'comp-divider';
+  if (raw === 'drawer' || raw === 'comp-drawer') return 'comp-drawer';
   if (raw === 'chart' || raw === 'comp-chart') return 'comp-chart';
   if (raw === 'timepicker' || raw === 'time-picker' || raw === 'comp-timepicker' || raw === 'comp-time-picker') return 'comp-time-picker';
   if (raw === 'toast' || raw === 'comp-toast') return 'comp-toast';
@@ -310,6 +312,7 @@ export default function App() {
         { id: 'comp-checkbox', label: t.nav.compCheckbox },
         { id: 'comp-datepicker', label: t.nav.compDatePicker },
         { id: 'comp-divider', label: t.nav.compDivider || 'Divider' },
+        { id: 'comp-drawer', label: t.nav.compDrawer || 'Drawer' },
         { id: 'comp-dropdown', label: t.nav.compDropdown || t.nav.compSelect },
         { id: 'comp-file-upload', label: t.nav.compFileUpload || 'File Upload' },
         { id: 'comp-input', label: t.nav.compInput },
@@ -520,6 +523,9 @@ export default function App() {
       case 'comp-divider':
       case 'divider':
         return <DividerView setActiveTab={setActiveTab} />;
+      case 'comp-drawer':
+      case 'drawer':
+        return <DrawerView setActiveTab={setActiveTab} />;
       case 'comp-file-upload':
       case 'comp-fileupload':
         return <FileUploadView setActiveTab={setActiveTab} />;

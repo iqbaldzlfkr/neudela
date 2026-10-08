@@ -1,6 +1,6 @@
 {
   "name": "neudela",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Neudela Design System - Enterprise React UI Component Library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iqbaldzlfkr/neudela.git"
+    "url": "git+https://github.com/iqbaldzlfkr/neudela.git"
   },
   "files": [
     "dist",

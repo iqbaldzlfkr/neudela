@@ -6129,6 +6129,10 @@ body {
   padding: 4px 6px;
 }
 
+.size-guide-info {
+  min-width: 0;
+}
+
 .size-guide-name {
   font-size: var(--fs-text-sm);
   font-weight: var(--font-weight-semibold);
@@ -6140,6 +6144,39 @@ body {
   font-size: var(--fs-text-sm);
   color: var(--color-text-secondary);
   line-height: 1.5;
+}
+
+/* ── Toast Specific Size Guide ── */
+.toast-size-guide-row {
+  grid-template-columns: 360px 1fr;
+  align-items: flex-start;
+}
+
+.toast-size-guide-row .size-guide-preview {
+  width: 100%;
+  max-width: 360px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0;
+  overflow: visible;
+}
+
+.toast-size-guide-row .size-guide-preview .neuron-toast {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  animation: none;
+}
+
+@media (max-width: 960px) {
+  .toast-size-guide-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .toast-size-guide-row .size-guide-preview {
+    max-width: 100%;
+  }
 }
 
 /* ── Accessibility List ── */

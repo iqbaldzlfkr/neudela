@@ -1513,7 +1513,7 @@ import { NeuronDivider } from '@neudela/vue';
       {/* Footer Navigation */}
       <NextPrevious
         prev={{ id: 'comp-datepicker', label: t.nav.compDatePicker }}
-        next={{ id: 'comp-dropdown', label: t.nav.compDropdown || 'Dropdown' }}
+        next={{ id: 'comp-drawer', label: t.nav.compDrawer || 'Drawer' }}
         setActiveTab={setActiveTab}
       />
     </div>
