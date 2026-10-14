@@ -23,6 +23,8 @@ import Overview from './views/Overview';
 import Colors from './views/Colors';
 import Typography from './views/Typography';
 import Spacing from './views/Spacing';
+import GridView from './views/GridView';
+import IconsView from './views/IconsView';
 import FoundationOverview from './views/FoundationOverview';
 import ButtonView from './views/ButtonView';
 import ButtonGroupView from './views/ButtonGroupView';
@@ -211,6 +213,7 @@ function getTabFromHash(hashStr: string): string | null {
   ) {
     return 'components-overview';
   }
+  if (raw.startsWith('icons')) return 'icons';
   if (STANDALONE_NON_COMP_TABS.has(raw)) return raw;
   if (raw.startsWith('comp-')) return raw;
   return `comp-${raw}`;
@@ -218,7 +221,11 @@ function getTabFromHash(hashStr: string): string | null {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(() => getTabFromHash(window.location.hash) || 'overview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('neudela_theme') === 'dark' ||
+      window.location.search.includes('theme=dark') ||
+      window.location.hash.includes('theme=dark');
+  });
   const [searchQuery, setSearchQuery] = useState('');
   
   const { language, setLanguage, t } = useLanguage();
@@ -389,8 +396,10 @@ export default function App() {
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
+      localStorage.setItem('neudela_theme', 'dark');
     } else {
       document.body.classList.remove('dark-theme');
+      localStorage.setItem('neudela_theme', 'light');
     }
   }, [isDarkMode]);
 
@@ -495,6 +504,10 @@ export default function App() {
         return <ComponentsOverview setActiveTab={setActiveTab} />;
       case 'colors':
         return <Colors setActiveTab={setActiveTab} />;
+      case 'grid':
+        return <GridView setActiveTab={setActiveTab} />;
+      case 'icons':
+        return <IconsView setActiveTab={setActiveTab} />;
       case 'typography':
         return <Typography setActiveTab={setActiveTab} />;
       case 'spacing':

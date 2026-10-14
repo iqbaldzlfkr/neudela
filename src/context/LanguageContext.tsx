@@ -11,6 +11,7 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
+    if (window.location.search.includes('lang=id') || window.location.hash.includes('lang=id')) return 'id';
     const saved = localStorage.getItem('neudela_language');
     if (saved === 'en' || saved === 'id') {
       return saved;

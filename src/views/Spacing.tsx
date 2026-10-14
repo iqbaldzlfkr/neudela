@@ -76,7 +76,7 @@ export default function Spacing({ setActiveTab }: SpacingProps) {
       </div>
 
       <NextPrevious
-        prev={{ id: 'colors', label: t.nav.colors }}
+        prev={{ id: 'icons', label: t.nav.icons }}
         next={{ id: 'typography', label: t.nav.typography }}
         setActiveTab={setActiveTab}
       />

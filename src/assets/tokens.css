@@ -50,6 +50,44 @@
   --space-20: 5rem;     /* 80px */
   --space-24: 6rem;     /* 96px */
 
+  /* Grid & Breakpoint Tokens */
+  --grid-columns: 12;
+  --grid-gutter-xs: 1rem;       /* 16px */
+  --grid-gutter-sm: 1rem;       /* 16px */
+  --grid-gutter-md: 1.25rem;    /* 20px */
+  --grid-gutter-lg: 1.5rem;     /* 24px */
+  --grid-gutter-xl: 2rem;       /* 32px */
+  --grid-margin-xs: 1rem;       /* 16px */
+  --grid-margin-sm: 1.5rem;     /* 24px */
+  --grid-margin-md: 2rem;       /* 32px */
+  --grid-margin-lg: 2rem;       /* 32px */
+  --grid-margin-xl: 2.5rem;     /* 40px */
+  --grid-margin-2xl: 3rem;      /* 48px */
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-2xl: 1380px;
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+
+  /* Icon Size & Stroke Tokens */
+  --icon-size-xs: 0.875rem;   /* 14px */
+  --icon-size-sm: 1rem;       /* 16px */
+  --icon-size-md: 1.25rem;    /* 20px */
+  --icon-size-lg: 1.5rem;     /* 24px (Standard Canvas) */
+  --icon-size-xl: 2rem;       /* 32px */
+  --icon-size-2xl: 2.5rem;    /* 40px */
+  --icon-stroke-hairline: 1px;
+  --icon-stroke-light: 1.5px;
+  --icon-stroke-regular: 2px;  /* Standard Default */
+  --icon-stroke-medium: 2.5px;
+  --icon-stroke-bold: 3px;
+
   /* Border Radii */
   --radius-xs: 4px;
   --radius-sm: 6px;
