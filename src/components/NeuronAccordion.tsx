@@ -6,6 +6,7 @@ import React, {
   useRef,
   useCallback,
   useEffect,
+  useMemo,
 } from 'react';
 import { ChevronDown, Plus, Minus, ArrowRight } from 'lucide-react';
 
@@ -446,13 +447,18 @@ export default function NeuronAccordion({
 
   // Controlled vs uncontrolled resolution
   const isControlled = controlledValue !== undefined;
-  const openValues = isControlled
-    ? Array.isArray(controlledValue)
-      ? controlledValue.map(String)
-      : controlledValue !== '' && controlledValue !== null && controlledValue !== undefined
-        ? [String(controlledValue)]
-        : []
-    : internalValues;
+  const openValues = useMemo(() => {
+    if (isControlled) {
+      if (Array.isArray(controlledValue)) {
+        return controlledValue.map(String);
+      }
+      if (controlledValue !== '' && controlledValue !== null && controlledValue !== undefined) {
+        return [String(controlledValue)];
+      }
+      return [];
+    }
+    return internalValues;
+  }, [isControlled, controlledValue, internalValues]);
 
   // Toggle item handler with single/multiple and collapsible rules
   const toggleItem = useCallback(

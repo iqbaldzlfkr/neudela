@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import NeuronFileUpload, {
   FileUploadVariant,
   FileUploadSize,
-} from '../components/NeuronFileUpload';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronFileUpload';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   UploadCloud,
   FileText,

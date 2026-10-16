@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import NeuronRadio, { 
   NeuronRadioSize, 
   NeuronRadioVariant,
   NeuronRadioGroup 
-} from '../components/NeuronRadio';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import NeuronButton from '../components/NeuronButton';
+} from '../../components/NeuronRadio';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import NeuronButton from '../../components/NeuronButton';
 import { 
   CheckCircle2, 
   XCircle, 
@@ -32,10 +32,7 @@ import {
   Globe,
   Lock,
   UserCheck,
-  Users,
   Check,
-  ArrowRight,
-  Shield,
   CreditCard,
   Cpu
 } from 'lucide-react';

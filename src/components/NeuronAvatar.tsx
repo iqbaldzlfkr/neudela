@@ -21,6 +21,8 @@ export interface NeuronAvatarProps {
   src?: string;
   /** Image alternative description */
   alt?: string;
+  /** Hover tooltip / native title attribute */
+  title?: string;
   /** Full name (used for initials calculation if initials prop is omitted) */
   name?: string;
   /** Explicit initials to display if no image is available */
@@ -88,6 +90,7 @@ export const NeuronAvatar: React.FC<NeuronAvatarProps> = ({
   src,
   alt = '',
   name,
+  title,
   initials,
   icon,
   size = 'md',
@@ -121,6 +124,7 @@ export const NeuronAvatar: React.FC<NeuronAvatarProps> = ({
         effectiveContrastBorder ? 'neuron-avatar--contrast-ring' : ''
       } ${isClickable ? 'neuron-avatar--clickable' : ''} ${className}`}
       style={style}
+      title={title || name}
       onClick={onClick}
       role={isClickable ? 'button' : undefined}
       tabIndex={isClickable ? 0 : undefined}

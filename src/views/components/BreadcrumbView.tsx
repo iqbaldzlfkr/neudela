@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import NeuronBreadcrumb, { BreadcrumbVariant, BreadcrumbSize, BreadcrumbSeparator } from '../components/NeuronBreadcrumb';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
-import { ShieldCheck, Check, Keyboard, Home, Settings, Users, FileText, FolderOpen, ChevronRight, Globe } from 'lucide-react';
+import NeuronBreadcrumb, { BreadcrumbVariant, BreadcrumbSize, BreadcrumbSeparator } from '../../components/NeuronBreadcrumb';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import { ShieldCheck, Check, Keyboard, Home, Settings, Users, FileText, FolderOpen, Globe } from 'lucide-react';
 
 interface BreadcrumbViewProps {
   setActiveTab: (tabId: string) => void;

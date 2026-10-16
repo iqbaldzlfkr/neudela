@@ -19,45 +19,59 @@ import {
   Search,
   BookOpen
 } from 'lucide-react';
-import Overview from './views/Overview';
-import Colors from './views/Colors';
-import Typography from './views/Typography';
-import Spacing from './views/Spacing';
-import GridView from './views/GridView';
-import IconsView from './views/IconsView';
-import FoundationOverview from './views/FoundationOverview';
-import ButtonView from './views/ButtonView';
-import ButtonGroupView from './views/ButtonGroupView';
-import InputView from './views/InputView';
-import CardView from './views/CardView';
-import BadgeView from './views/BadgeView';
-import ToggleView from './views/ToggleView';
-import CheckboxView from './views/CheckboxView';
-import RadioView from './views/RadioView';
-import AlertView from './views/AlertView';
-import AvatarView from './views/AvatarView';
-import TooltipView from './views/TooltipView';
-import ProgressView from './views/ProgressView';
-import BreadcrumbView from './views/BreadcrumbView';
-import DatePickerView from './views/DatePickerView';
-import ModalView from './views/ModalView';
-import DropdownView from './views/DropdownView';
-import TableView from './views/TableView';
-import TabBarView from './views/TabBarView';
-import TreeView from './views/TreeView';
-import TextAreaView from './views/TextAreaView';
-import SliderView from './views/SliderView';
-import FileUploadView from './views/FileUploadView';
-import StepperView from './views/StepperView';
-import AccordionView from './views/AccordionView';
-import DividerView from './views/DividerView';
-import ChartView from './views/ChartView';
-import RatingView from './views/RatingView';
-import TimePickerView from './views/TimePickerView';
-import ToastView from './views/ToastView';
-import DrawerView from './views/DrawerView';
+// Views: Overview & Foundations
+import { Overview } from './views/overview';
+import {
+  FoundationOverview,
+  Colors,
+  Typography,
+  Spacing,
+  GridView,
+  IconsView,
+} from './views/foundation';
+
+// Views: UI Components
+import {
+  ComponentsOverview,
+  ButtonView,
+  ButtonGroupView,
+  InputView,
+  CardView,
+  BadgeView,
+  ToggleView,
+  CheckboxView,
+  RadioView,
+  AlertView,
+  AvatarView,
+  TooltipView,
+  ProgressView,
+  BreadcrumbView,
+  DatePickerView,
+  ModalView,
+  DropdownView,
+  TableView,
+  TabBarView,
+  TreeView,
+  TextAreaView,
+  SliderView,
+  FileUploadView,
+  StepperView,
+  AccordionView,
+  DividerView,
+  ChartView,
+  RatingView,
+  TimePickerView,
+  ToastView,
+  DrawerView,
+} from './views/components';
+
+// Views: Composition Patterns
+import {
+  SidebarPatternView,
+  StandaloneSidebarPreview,
+} from './views/patterns';
+
 import { ToastProvider } from './components/NeuronToast';
-import ComponentsOverview from './views/ComponentsOverview';
 import { useLanguage } from './context/LanguageContext';
 
 // Navigation icon helper
@@ -183,6 +197,8 @@ const STANDALONE_NON_COMP_TABS = new Set([
   'components-overview',
   'components-section',
   'pattern',
+  'pat-sidebar',
+  'sidebar',
   'pat-forms',
   'pat-layouts',
   'content',
@@ -194,6 +210,8 @@ const STANDALONE_NON_COMP_TABS = new Set([
 function getTabFromHash(hashStr: string): string | null {
   const raw = hashStr.replace(/^#\/?/, '').trim().toLowerCase();
   if (!raw || raw === 'home' || raw === 'overview' || raw === 'beranda') return 'overview';
+  if (raw.startsWith('preview-sidebar-') || raw.startsWith('sidebar-live-')) return raw;
+  if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'pattern' || raw === 'sidebar-pattern') return 'pat-sidebar';
   if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
@@ -214,6 +232,10 @@ function getTabFromHash(hashStr: string): string | null {
     return 'components-overview';
   }
   if (raw.startsWith('icons')) return 'icons';
+  if (raw.startsWith('colors')) return 'colors';
+  if (raw.startsWith('spacing')) return 'spacing';
+  if (raw.startsWith('grid')) return 'grid';
+  if (raw.startsWith('typography')) return 'typography';
   if (STANDALONE_NON_COMP_TABS.has(raw)) return raw;
   if (raw.startsWith('comp-')) return raw;
   return `comp-${raw}`;
@@ -345,6 +367,7 @@ export default function App() {
       type: 'dropdown',
       icon: 'pattern',
       items: [
+        { id: 'pat-sidebar', label: (t.nav as any).patSidebar || 'Sidebar' },
         { id: 'pat-forms', label: t.nav.patForms },
         { id: 'pat-layouts', label: t.nav.patLayouts },
       ],
@@ -392,13 +415,15 @@ export default function App() {
     illustrations: false,
   });
 
-  // Apply dark mode theme class to body
+  // Apply dark mode theme class to body and data-theme to root
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
       localStorage.setItem('neudela_theme', 'dark');
     } else {
       document.body.classList.remove('dark-theme');
+      document.documentElement.removeAttribute('data-theme');
       localStorage.setItem('neudela_theme', 'light');
     }
   }, [isDarkMode]);
@@ -584,6 +609,11 @@ export default function App() {
         return <ToastView setActiveTab={setActiveTab} />;
       case 'comp-tree':
         return <TreeView setActiveTab={setActiveTab} />;
+      case 'pattern':
+      case 'pat-sidebar':
+      case 'sidebar':
+      case 'sidebar-pattern':
+        return <SidebarPatternView setActiveTab={setActiveTab} />;
       default:
         return (
           <PlaceholderView 
@@ -593,6 +623,24 @@ export default function App() {
         );
     }
   };
+
+  // Fullscreen Standalone App Preview Mode (New Tab)
+  if (activeTab.startsWith('preview-sidebar-') || activeTab.startsWith('sidebar-live-')) {
+    const variantId = activeTab.replace(/^(preview-sidebar-|sidebar-live-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneSidebarPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-sidebar';
+            setActiveTab('pat-sidebar');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
 
   return (
     <ToastProvider>

@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { 
   Check, 
   X, 
-  User, 
   Users, 
-  ShieldCheck, 
-  Sparkles, 
   Plus, 
   Clock, 
-  MessageSquare, 
-  CornerDownRight, 
-  ExternalLink,
   ChevronDown,
   Mail,
   MoreHorizontal,
@@ -34,13 +28,13 @@ import {
   NeuronAvatarShape, 
   NeuronAvatarStatus, 
   NeuronAvatarVariant 
-} from '../components/NeuronAvatar';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronInput from '../components/NeuronInput';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronAvatar';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronInput from '../../components/NeuronInput';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 export interface AvatarViewProps {
   setActiveTab: (tab: string) => void;

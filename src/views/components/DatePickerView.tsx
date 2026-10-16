@@ -5,20 +5,19 @@ import NeuronDatePicker, {
   DatePickerVariant,
   DateRange,
   formatDate,
-} from '../components/NeuronDatePicker';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronButtonGroup from '../components/NeuronButtonGroup';
-import NeuronAvatar, { NeuronAvatarGroup } from '../components/NeuronAvatar';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronDatePicker';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronButtonGroup from '../../components/NeuronButtonGroup';
+import NeuronAvatar, { NeuronAvatarGroup } from '../../components/NeuronAvatar';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   Calendar,
   ShieldCheck,
   Check,
   Keyboard,
-  Filter,
   Plane,
   Layers,
   Clock,
@@ -32,13 +31,9 @@ import {
   UserCheck,
   SlidersHorizontal,
   Smartphone,
-  ArrowRight,
   Download,
   Search,
   Sparkles,
-  RefreshCw,
-  MapPin,
-  Users,
 } from 'lucide-react';
 
 interface DatePickerViewProps {
@@ -116,8 +111,8 @@ export default function DatePickerView({ setActiveTab }: DatePickerViewProps) {
     endDate: new Date(2025, 4, 22),
   });
   const [flightSingleDate, setFlightSingleDate] = useState<Date | null>(new Date(2025, 4, 15));
-  const [flightOrigin] = useState('CGK · Jakarta');
-  const [flightDestination] = useState('DPS · Bali');
+  const [flightOrigin, setFlightOrigin] = useState('CGK · Jakarta');
+  const [flightDestination, setFlightDestination] = useState('DPS · Bali');
   const [isFlightSearched, setIsFlightSearched] = useState(false);
 
   // Pattern 2: Financial Telemetry & Analytics State

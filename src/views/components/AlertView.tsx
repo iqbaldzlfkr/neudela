@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import NeuronAlert, { AlertVariant, AlertSize, AlertFill } from '../components/NeuronAlert';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronAlert, { AlertVariant, AlertSize, AlertFill } from '../../components/NeuronAlert';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { ShieldCheck, Check, Bell } from 'lucide-react';
 
 interface AlertViewProps {

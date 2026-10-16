@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
-import NeuronDropdown, { DropdownOption } from '../components/NeuronDropdown';
-import NeuronButton from '../components/NeuronButton';
+import { useLanguage } from '../../context/LanguageContext';
+import NeuronDropdown, { DropdownOption } from '../../components/NeuronDropdown';
+import NeuronButton from '../../components/NeuronButton';
 import NeuronDropdownMenu, {
   DropdownMenuGroup,
   DropdownMenuHeader,
-} from '../components/NeuronDropdownMenu';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import NeuronAvatar from '../components/NeuronAvatar';
+} from '../../components/NeuronDropdownMenu';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import NeuronAvatar from '../../components/NeuronAvatar';
 import {
   ChevronDown,
   Users,
@@ -173,9 +173,6 @@ export default function DropdownView({ setActiveTab }: DropdownViewProps) {
   const [valSupport, setValSupport] = useState('');
 
   // Button-Triggered Dropdown Menu states
-  const [prefDark, setPrefDark] = useState(true);
-  const [prefNotify, setPrefNotify] = useState(true);
-  const [prefSounds, setPrefSounds] = useState(false);
   const [lastAction, setLastAction] = useState<string | null>(null);
 
   // Profile Menu Header definition

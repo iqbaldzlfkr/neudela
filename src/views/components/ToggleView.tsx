@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
-import { NeuronToggle, NeuronToggleSize, NeuronToggleVariant } from '../components/NeuronToggle';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import { NeuronToggle, NeuronToggleSize, NeuronToggleVariant } from '../../components/NeuronToggle';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
 import { Check, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface ToggleViewProps {

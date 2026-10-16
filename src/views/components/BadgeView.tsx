@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import NeuronBadge, { NeuronBadgeVariant, NeuronBadgeSize } from '../components/NeuronBadge';
-import NeuronBadgeGroup from '../components/NeuronBadgeGroup';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronBadge, { NeuronBadgeVariant, NeuronBadgeSize } from '../../components/NeuronBadge';
+import NeuronBadgeGroup from '../../components/NeuronBadgeGroup';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { 
   ArrowUp, 
   Plus, 

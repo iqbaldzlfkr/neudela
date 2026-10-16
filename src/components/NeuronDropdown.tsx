@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import NeuronCheckbox from './NeuronCheckbox';
 import NeuronDropdownMenu, {
   type DropdownMenuItem,
@@ -182,11 +182,11 @@ export default function NeuronDropdown({
   const listRef = useRef<HTMLDivElement>(null);
 
   // Normalise value to array for consistency
-  const selectedValues: string[] = Array.isArray(value)
-    ? value
-    : value !== undefined && value !== ''
-      ? [value]
-      : [];
+  const selectedValues: string[] = useMemo(() => {
+    if (Array.isArray(value)) return value;
+    if (value !== undefined && value !== '') return [value];
+    return [];
+  }, [value]);
 
   const isControlled = controlledIsOpen !== undefined;
   const isOpen = forceOpen ? true : isControlled ? controlledIsOpen : internalIsOpen;

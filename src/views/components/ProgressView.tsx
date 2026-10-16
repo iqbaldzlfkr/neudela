@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import NeuronProgress, {
   NeuronProgressSize,
   NeuronProgressVariant,
   NeuronProgressType,
-} from '../components/NeuronProgress';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronCard from '../components/NeuronCard';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
+} from '../../components/NeuronProgress';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronCard from '../../components/NeuronCard';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
 import {
   Upload,
   Download,
@@ -21,20 +21,13 @@ import {
   ShieldCheck,
   Zap,
   RefreshCw,
-  Layers,
-  ArrowRight,
   Activity,
-  Server,
   Sparkles,
   Clock,
   Check,
-  Database,
   HardDrive,
-  Cpu,
-  Flame,
   Truck,
   Package,
-  ShoppingBag,
 } from 'lucide-react';
 
 interface ProgressViewProps {
@@ -114,7 +107,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
   // Upload simulation
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
-  const uploadTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const uploadTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const runUpload = () => {
     if (uploading) return;
@@ -1267,7 +1260,7 @@ export default function ProgressView({ setActiveTab }: ProgressViewProps) {
               previewStyle={{ background: 'var(--color-bg-surface, #ffffff)' }}
               knobs={[
                 { name: 'type',          type: 'select',  options: ['bar', 'circle', 'half-circle'],                                     default: 'bar',     label: 'Type' },
-                { name: 'value',         type: 'number',  default: 65,                                                                                       label: 'Value (0–100)' },
+                { name: 'value',         type: 'select',  options: ['15', '25', '50', '65', '80', '100'],                                default: '65',      label: 'Value (0–100)' },
                 { name: 'size',          type: 'select',  options: ['xs', 'sm', 'md', 'lg', 'xl'],                                       default: 'md',      label: 'Size' },
                 { name: 'variant',       type: 'select',  options: ['brand','success','warning','error','info','neutral'],                default: 'brand',   label: 'Variant' },
                 { name: 'showValue',     type: 'boolean', default: true,                                                                                      label: 'Show Value' },

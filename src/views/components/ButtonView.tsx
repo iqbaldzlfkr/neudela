@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Plus, Download, Filter, ArrowRight, Settings } from 'lucide-react';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface ButtonViewProps {
   setActiveTab: (tabId: string) => void;

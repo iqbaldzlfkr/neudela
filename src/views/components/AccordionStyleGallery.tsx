@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import NeuronAccordion, { AccordionItem } from '../components/NeuronAccordion';
-import NeuronBadge from '../components/NeuronBadge';
+import { useState, useMemo } from 'react';
+import NeuronAccordion, { AccordionItem } from '../../components/NeuronAccordion';
+import NeuronBadge from '../../components/NeuronBadge';
 import {
   ShieldCheck,
   Headphones,
@@ -111,7 +111,7 @@ export default function AccordionStyleGallery({ isId }: AccordionStyleGalleryPro
   // ─────────────────────────────────────────────────────────────────────────────
   // Style 3 Items (Categorized Tabs + Numbered)
   // ─────────────────────────────────────────────────────────────────────────────
-  const allStyle3Items = [
+  const allStyle3Items = useMemo(() => [
     {
       id: 's3-1',
       category: 'billing',
@@ -158,12 +158,12 @@ export default function AccordionStyleGallery({ isId }: AccordionStyleGalleryPro
         ? 'Metrik throughput dan kuota panggilan API dapat dipantau langsung pada dashboard Developer Analytics.'
         : 'Live throughput graphs and remaining request allowances are displayed in the Developer Analytics dashboard.',
     },
-  ];
+  ], [isId]);
 
   const filteredStyle3Items = useMemo(() => {
     if (style3Category === 'all') return allStyle3Items;
     return allStyle3Items.filter((item) => item.category === style3Category);
-  }, [style3Category]);
+  }, [style3Category, allStyle3Items]);
 
   // ─────────────────────────────────────────────────────────────────────────────
   // Style 4 Items (Minimalist Hairline with Soft Active Card)

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import NeuronInput from '../components/NeuronInput';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronInput from '../../components/NeuronInput';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface InputViewProps {
   setActiveTab: (tabId: string) => void;

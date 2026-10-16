@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';
-import NeuronTable, { NeuronTableColumn } from '../components/NeuronTable';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronAvatar from '../components/NeuronAvatar';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import NeuronTable, { NeuronTableColumn } from '../../components/NeuronTable';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronAvatar from '../../components/NeuronAvatar';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
 import {
   MoreHorizontal,
   Download,
@@ -24,8 +24,6 @@ import {
   Search,
   ArrowUpDown,
   X,
-  ChevronLeft,
-  ChevronRight,
   ChevronDown,
   LayoutGrid,
   List,
@@ -2051,7 +2049,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
                     label: 'Amount',
                     align: 'right',
                     sortable: true,
-                    render: (amount, rec) => (
+                    render: (amount) => (
                       <span style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>
                         ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </span>

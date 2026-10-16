@@ -11,24 +11,30 @@ interface NextPreviousProps {
   prev?: TabItem;
   next?: TabItem;
   setActiveTab: (tabId: string) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function NextPrevious({ prev, next, setActiveTab }: NextPreviousProps) {
+export default function NextPrevious({ prev, next, setActiveTab, className, style }: NextPreviousProps) {
   const [hoveredPrev, setHoveredPrev] = useState(false);
   const [hoveredNext, setHoveredNext] = useState(false);
   const { t } = useLanguage();
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      gap: 'var(--space-6)',
-      marginTop: 'var(--space-16)',
-      borderTop: '1px solid var(--color-border)',
-      paddingTop: 'var(--space-8)',
-      width: '100%',
-      boxSizing: 'border-box'
-    }}>
+    <div 
+      className={`next-previous-container ${className || ''}`}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: 'var(--space-6)',
+        marginTop: 'var(--space-8, 32px)',
+        borderTop: '1px solid var(--color-border)',
+        paddingTop: 'var(--space-6, 24px)',
+        width: '100%',
+        boxSizing: 'border-box',
+        ...style
+      }}
+    >
       {/* Previous Link */}
       {prev ? (
         <div

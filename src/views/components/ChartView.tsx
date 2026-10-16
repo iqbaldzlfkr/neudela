@@ -27,12 +27,12 @@ import NeuronChart, {
   ChartDataPoint,
   ChartSeries,
   SankeyData,
-} from '../components/NeuronChart';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import NeuronTabBar from '../components/NeuronTabBar';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronChart';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import NeuronTabBar from '../../components/NeuronTabBar';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Do / Don't Rule Card
@@ -3092,7 +3092,7 @@ const chartData = ${JSON.stringify(pd, null, 2).replace(/\n/g, '\n')};
                     <NeuronBadge size="sm" variant="gray">
                       {pgSize.toUpperCase()} ({pgSize === 'sm' ? '320×200' : pgSize === 'md' ? '480×300' : pgSize === 'lg' ? '640×400' : '800×500'})
                     </NeuronBadge>
-                    <NeuronBadge size="sm" variant="outline">
+                    <NeuronBadge size="sm" variant="gray" fill="outline">
                       {pgColorScheme}
                     </NeuronBadge>
                   </div>

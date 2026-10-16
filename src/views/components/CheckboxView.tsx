@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import NeuronCheckbox, { 
   NeuronCheckboxSize, 
   NeuronCheckboxShape, 
   NeuronCheckboxVariant 
-} from '../components/NeuronCheckbox';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
+} from '../../components/NeuronCheckbox';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
 import { 
   ListFilter, 
   ShieldCheck, 

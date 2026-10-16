@@ -491,6 +491,7 @@ function LineChartSVG({
   onHover: (d: TooltipData) => void;
   onLeave: () => void;
 }) {
+  const uniqueId = useMemo(() => Math.random().toString(36).slice(2, 8), []);
   const chartW = width - padding * 2;
   const chartH = height - padding * 2;
 
@@ -543,7 +544,6 @@ function LineChartSVG({
 
   // Render each series
   const lineElements: React.ReactNode[] = [];
-  const uniqueId = useMemo(() => Math.random().toString(36).slice(2, 8), []);
 
   allSeries.forEach((s, si) => {
     const c = (series && series[si]?.color) || colors[si % colors.length];
@@ -923,15 +923,9 @@ function SankeyChartSVG({
   const [hoveredLinkId, setHoveredLinkId] = useState<string | null>(null);
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
 
-  if (!data || !data.nodes || data.nodes.length === 0) {
-    return (
-      <text x={width / 2} y={height / 2} textAnchor="middle" fill="var(--color-text-tertiary)" fontSize="13">
-        No Sankey data provided
-      </text>
-    );
-  }
-
-  const { stages, nodes, links } = data;
+  const stages = data?.stages;
+  const nodes = useMemo(() => data?.nodes ?? [], [data?.nodes]);
+  const links = useMemo(() => data?.links ?? [], [data?.links]);
 
   // Determine stage columns
   const stageIndices = useMemo(() => {
@@ -1073,7 +1067,15 @@ function SankeyChartSVG({
       layoutNodes: Array.from(nodeMap.values()),
       layoutLinks: computedLinksList as NonNullable<typeof computedLinksList[0]>[],
     };
-  }, [stageIndices, computedNodes, links, leftPad, rightPad, topPad, chartW, chartH, numStages]);
+  }, [stageIndices, computedNodes, links, leftPad, topPad, chartW, chartH, numStages]);
+
+  if (!data || !data.nodes || data.nodes.length === 0) {
+    return (
+      <text x={width / 2} y={height / 2} textAnchor="middle" fill="var(--color-text-tertiary)" fontSize="13">
+        No Sankey data provided
+      </text>
+    );
+  }
 
   return (
     <g className="neuron-chart__sankey">

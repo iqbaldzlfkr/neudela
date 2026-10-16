@@ -224,7 +224,10 @@ export default function NeuronTimePicker({
     ? singleValue
     : (activeRangeTab === 'start' ? rangeValue.startTime : rangeValue.endTime);
 
-  const parsed = parseTimeString(activeTimeString, use12Hours, showSeconds);
+  const parsed = useMemo(
+    () => parseTimeString(activeTimeString, use12Hours, showSeconds),
+    [activeTimeString, use12Hours, showSeconds]
+  );
 
   // Transient state while panel is open
   const now = new Date();
@@ -244,7 +247,7 @@ export default function NeuronTimePicker({
       setSelectedSecond(parsed.second);
       setSelectedPeriod(parsed.period);
     }
-  }, [activeTimeString, use12Hours, showSeconds]);
+  }, [parsed]);
 
   // Click outside to close popover
   useEffect(() => {

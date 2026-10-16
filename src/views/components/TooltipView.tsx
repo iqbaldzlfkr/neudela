@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import NeuronTooltip, { NeuronTooltipPlacement, NeuronTooltipVariant, NeuronTooltipSize } from '../components/NeuronTooltip';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronInput from '../components/NeuronInput';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronTooltip, { NeuronTooltipPlacement, NeuronTooltipVariant } from '../../components/NeuronTooltip';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronInput from '../../components/NeuronInput';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import {
-  Info, Edit2, Trash2, Copy, Download, Share2, Lock, Settings, Star,
+  Trash2, Copy, Download, Share2, Lock, Settings, Star,
   Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, AlignJustify,
   Link, Image, Table, Code, List, Eye, ZoomIn, ZoomOut, RotateCcw,
   ChevronRight, ShieldCheck, Mail, HelpCircle, Users, Activity,
-  AlertTriangle, CheckCircle, XCircle, ExternalLink, Bookmark, MoreHorizontal,
-  User, Filter, Search, Pencil, Send, ArrowUpRight, Sparkles, Layers,
+  ExternalLink,
+  User, Filter, Pencil, Send, ArrowUpRight, Sparkles, Layers,
   ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ArrowUpLeft, ArrowDownLeft,
-  ArrowDownRight, Compass, Crosshair
+  ArrowDownRight, Compass
 } from 'lucide-react';
 
 interface TooltipViewProps {
@@ -97,9 +97,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
 
   const [activeTab, setTab] = useState<'guideline' | 'playbook'>('guideline');
 
-  // Placement Compass interactive state
-  const [compassPlacement, setCompassPlacement] = useState<NeuronTooltipPlacement>('top');
-  const [compassVariant, setCompassVariant] = useState<NeuronTooltipVariant>('dark');
+  // Placement filter interactive state
   const [placementFilter, setPlacementFilter] = useState<'all' | 'top' | 'bottom' | 'left' | 'right'>('all');
   const [manualTriggerOpen, setManualTriggerOpen] = useState(false);
 
@@ -116,14 +114,6 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
   ];
 
   const STATUS_COLOR: Record<string, string> = { online: '#10b981', busy: '#ef4444', away: '#f59e0b', offline: '#6b7280' };
-
-  const PLACEMENTS: NeuronTooltipPlacement[] = [
-    'top-start', 'top', 'top-end',
-    'left-start', '', 'right-start',
-    'left', '', 'right',
-    'left-end', '', 'right-end',
-    'bottom-start', 'bottom', 'bottom-end',
-  ] as NeuronTooltipPlacement[];
 
   const VARIANTS: { key: NeuronTooltipVariant; label: string; desc: string }[] = [
     { key: 'dark', label: gl.variantDark, desc: gl.variantDarkDesc },
@@ -695,7 +685,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       { p: 'top-start' as const, align: 'Start Alignment (Left)', desc: 'Anchors to the left edge above trigger' },
                       { p: 'top' as const, align: 'Center Alignment', desc: 'Anchors horizontally centered above trigger' },
                       { p: 'top-end' as const, align: 'End Alignment (Right)', desc: 'Anchors to the right edge above trigger' },
-                    ].map(({ p, align, desc }) => (
+                    ].map(({ p, desc }) => (
                       <div key={p} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <div>
                           <div style={{ fontSize: 12, fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: 'var(--color-primary)' }}>placement="{p}"</div>
@@ -727,7 +717,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       { p: 'bottom-start' as const, align: 'Start Alignment (Left)', desc: 'Anchors to the left edge below trigger' },
                       { p: 'bottom' as const, align: 'Center Alignment', desc: 'Anchors horizontally centered below trigger' },
                       { p: 'bottom-end' as const, align: 'End Alignment (Right)', desc: 'Anchors to the right edge below trigger' },
-                    ].map(({ p, align, desc }) => (
+                    ].map(({ p, desc }) => (
                       <div key={p} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <div>
                           <div style={{ fontSize: 12, fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: 'var(--color-primary)' }}>placement="{p}"</div>
@@ -759,7 +749,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       { p: 'left-start' as const, align: 'Top-Aligned Left', desc: 'Anchors to top edge on the left of trigger' },
                       { p: 'left' as const, align: 'Center-Aligned Left', desc: 'Anchors vertically centered to the left' },
                       { p: 'left-end' as const, align: 'Bottom-Aligned Left', desc: 'Anchors to bottom edge on the left of trigger' },
-                    ].map(({ p, align, desc }) => (
+                    ].map(({ p, desc }) => (
                       <div key={p} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <div>
                           <div style={{ fontSize: 12, fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: 'var(--color-primary)' }}>placement="{p}"</div>
@@ -791,7 +781,7 @@ export default function TooltipView({ setActiveTab }: TooltipViewProps) {
                       { p: 'right-start' as const, align: 'Top-Aligned Right', desc: 'Anchors to top edge on the right of trigger' },
                       { p: 'right' as const, align: 'Center-Aligned Right', desc: 'Anchors vertically centered to the right' },
                       { p: 'right-end' as const, align: 'Bottom-Aligned Right', desc: 'Anchors to bottom edge on the right of trigger' },
-                    ].map(({ p, align, desc }) => (
+                    ].map(({ p, desc }) => (
                       <div key={p} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--color-bg-subtle)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                         <div>
                           <div style={{ fontSize: 12, fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: 'var(--color-primary)' }}>placement="{p}"</div>

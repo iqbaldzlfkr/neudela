@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import NeuronTree, { TreeNode, TreeVariant, TreeSize, TreeSelectionMode } from '../components/NeuronTree';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronInput from '../components/NeuronInput';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronTree, { TreeNode, TreeVariant, TreeSize, TreeSelectionMode } from '../../components/NeuronTree';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronInput from '../../components/NeuronInput';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { 
   Folder,
   FolderOpen, 
@@ -1667,7 +1667,7 @@ ${checkHtml}      <span class="neuron-tree-node__label">src</span>
       {/* ── Next / Previous Navigation ── */}
       <NextPrevious
         prev={{ id: 'comp-tooltip', label: t.nav.compTooltip }}
-        next={{ id: 'pat-forms', label: t.nav.patForms }}
+        next={{ id: 'pat-sidebar', label: (t.nav as any).patSidebar || 'Sidebar' }}
         setActiveTab={setActiveTab}
       />
     </div>

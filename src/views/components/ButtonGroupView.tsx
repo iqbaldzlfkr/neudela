@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import NeuronButton from '../components/NeuronButton';
-import NeuronButtonGroup, { ButtonGroupOption } from '../components/NeuronButtonGroup';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronButtonGroup, { ButtonGroupOption } from '../../components/NeuronButtonGroup';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { 
   ArrowLeft, 
   Plus, 

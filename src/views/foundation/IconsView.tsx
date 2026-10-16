@@ -8,24 +8,15 @@ import {
   Layers, 
   LayoutGrid as GridIcon, 
   SlidersHorizontal, 
-  Info, 
   CircleCheck, 
   CircleX, 
   CircleAlert,
   Sparkles, 
-  Eye, 
-  Terminal, 
-  Palette,
-  Maximize2,
-  Box,
-  Circle,
-  Square,
-  ShieldAlert,
-  ArrowRight
+  Box
 } from 'lucide-react';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
-import NeuronButton from '../components/NeuronButton';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import NeuronButton from '../../components/NeuronButton';
 
 function RuleCard({ type, children }: { type: 'do' | 'dont'; children: React.ReactNode }) {
   const isDo = type === 'do';

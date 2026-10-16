@@ -26,11 +26,11 @@ import NeuronDivider, {
   NeuronDividerColor, 
   NeuronDividerContentPosition, 
   NeuronDividerSpacing 
-} from '../components/NeuronDivider';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronDivider';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Do / Don't Rule Card

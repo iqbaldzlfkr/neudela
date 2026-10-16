@@ -4,12 +4,12 @@ import NeuronTabBar, {
   TabBarSize, 
   TabBarOrientation, 
   TabItem 
-} from '../components/NeuronTabBar';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronTabBar';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { 
   Layers, 
   Settings, 
@@ -850,7 +850,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                         />
                       </td>
                       <td>
-                        <NeuronBadge variant="secondary" size="xs">Floating Pill on Sunken Track</NeuronBadge>
+                        <NeuronBadge variant="gray" size="xs">Floating Pill on Sunken Track</NeuronBadge>
                       </td>
                       <td style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                         {isId ? 'Filter rentang waktu, view switcher, kontrol padat' : 'Timeframe filters, view switchers, dense controls'}
@@ -922,7 +922,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                         />
                       </td>
                       <td>
-                        <NeuronBadge variant="outline" size="xs">Card Outline & Top Header</NeuronBadge>
+                        <NeuronBadge variant="gray" fill="outline" size="xs">Card Outline & Top Header</NeuronBadge>
                       </td>
                       <td style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                         {isId ? 'Editor kode, penampil dokumen, browser-like tabs' : 'Code editors, multi-document viewers, browser tabs'}
@@ -958,7 +958,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                         />
                       </td>
                       <td>
-                        <NeuronBadge variant="secondary" size="xs">Tinted Brand Surface</NeuronBadge>
+                        <NeuronBadge variant="gray" size="xs">Tinted Brand Surface</NeuronBadge>
                       </td>
                       <td style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                         {isId ? 'Sidebar pengaturan akun, dialog modal bersih' : 'Account settings sidebar, clean modal dialogues'}
@@ -1076,7 +1076,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                       Sunken track with a floating surface pill. Exceptional for view toggle controls, time horizons, and filters.
                     </p>
                   </div>
-                  <NeuronBadge variant="secondary" size="sm">Compact & Modern</NeuronBadge>
+                  <NeuronBadge variant="gray" size="sm">Compact & Modern</NeuronBadge>
                 </div>
                 <div style={{ display: 'inline-block' }}>
                   <NeuronTabBar
@@ -1130,7 +1130,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                       Emulates desktop tab bars with seamless border integration into the content area below.
                     </p>
                   </div>
-                  <NeuronBadge variant="outline" size="sm">IDE & Editor</NeuronBadge>
+                  <NeuronBadge variant="gray" fill="outline" size="sm">IDE & Editor</NeuronBadge>
                 </div>
                 <NeuronTabBar
                   variant="enclosed"
@@ -1155,7 +1155,7 @@ export default function TabBarView({ setActiveTab }: TabBarViewProps) {
                       Subtle tinted brand background with clean rounded corners. Perfect for modal dialogues and settings sidebars.
                     </p>
                   </div>
-                  <NeuronBadge variant="secondary" size="sm">Subtle Tint</NeuronBadge>
+                  <NeuronBadge variant="gray" size="sm">Subtle Tint</NeuronBadge>
                 </div>
                 <NeuronTabBar
                   variant="soft"

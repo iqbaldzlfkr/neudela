@@ -1,42 +1,29 @@
-import React, { useState, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import {
   Star,
   Heart,
   ThumbsUp,
   Smile,
-  Frown,
-  Meh,
   Sparkles,
   Sliders,
-  Layers,
   Eye,
   Palette,
   Check,
   Copy,
   RotateCcw,
   CheckCircle2,
-  XCircle,
-  AlertCircle,
-  MessageSquare,
-  ShoppingCart,
-  UserCheck,
-  TrendingUp,
-  Award,
-  Smartphone,
   ShieldCheck,
-  HelpCircle,
   Info,
 } from 'lucide-react';
 import NeuronRating, {
   NeuronRatingSize,
   NeuronRatingVariant,
   NeuronRatingIconType,
-} from '../components/NeuronRating';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import NeuronTabBar from '../components/NeuronTabBar';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronRating';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Rule Card (Do / Don't)
@@ -206,9 +193,8 @@ export default function RatingView({ setActiveTab }: { setActiveTab: (tabId: str
   const [copiedCode, setCopiedCode] = useState<boolean>(false);
 
   // Demo Interactive States for Use Cases
-  const [productRating, setProductRating] = useState<number>(4.8);
+  const productRating = 4.8;
   const [serviceRating, setServiceRating] = useState<number>(5);
-  const [csatMood, setCsatMood] = useState<number>(4);
   const [selectedTags, setSelectedTags] = useState<string[]>(['Pengiriman Cepat', 'Packing Aman']);
   const [reviewSubmitted, setReviewSubmitted] = useState<boolean>(false);
 
@@ -2045,7 +2031,7 @@ ${items}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <NeuronBadge size="sm" variant="brand">{pgIcon.toUpperCase()}</NeuronBadge>
                     <NeuronBadge size="sm" variant="gray">{pgSize.toUpperCase()}</NeuronBadge>
-                    <NeuronBadge size="sm" variant="outline">{pgVariant}</NeuronBadge>
+                    <NeuronBadge size="sm" variant="gray" fill="outline">{pgVariant}</NeuronBadge>
                   </div>
                 </div>
 

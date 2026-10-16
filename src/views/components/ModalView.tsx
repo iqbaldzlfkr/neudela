@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import NeuronModal, { ModalSize, ModalVariant } from '../components/NeuronModal';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NeuronModal, { ModalSize, ModalVariant } from '../../components/NeuronModal';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   AlertTriangle,
   CheckCircle2,

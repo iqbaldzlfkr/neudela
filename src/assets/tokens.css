@@ -301,7 +301,7 @@
 }
 
 /* Dark Mode Tokens Override */
-.dark-theme {
+:is(.dark-theme, [data-theme='dark']) {
   /* Semantic UI Tokens - Dark Mode */
   --color-primary: var(--brand-400);
   --color-primary-hover: var(--brand-300);

@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { NeuronCheckbox } from '../components/NeuronCheckbox';
+import { NeuronCheckbox } from '../../components/NeuronCheckbox';
 import NeuronSlider, {
   NeuronSliderSize,
   NeuronSliderVariant,
   SliderTooltipPlacement,
   SliderTooltipVisible
-} from '../components/NeuronSlider';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronSlider';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   Volume2,
   VolumeX,

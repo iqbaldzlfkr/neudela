@@ -6,15 +6,15 @@ import NeuronAccordion, {
   AccordionIconPosition,
   AccordionIconType,
   AccordionItem,
-} from '../components/NeuronAccordion';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronInput from '../components/NeuronInput';
-import NeuronToggle from '../components/NeuronToggle';
-import NextPrevious from '../components/NextPrevious';
-import Playground from '../components/Playground';
+} from '../../components/NeuronAccordion';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronInput from '../../components/NeuronInput';
+import NeuronToggle from '../../components/NeuronToggle';
+import NextPrevious from '../../components/NextPrevious';
+import Playground from '../../components/Playground';
 import AccordionStyleGallery from './AccordionStyleGallery';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   HelpCircle,
   ShieldCheck,

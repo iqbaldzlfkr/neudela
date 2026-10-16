@@ -20,8 +20,8 @@ import {
   XCircle,
   X,
 } from 'lucide-react';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Do / Don't Rule Card Component

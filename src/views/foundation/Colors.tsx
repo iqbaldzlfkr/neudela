@@ -1,34 +1,25 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Palette,
   Search,
   Copy,
   Check,
   Eye,
-  Sliders,
   Moon,
-  Sun,
-  Info,
-  AlertTriangle,
   CircleCheck,
   CircleX,
   Sparkles,
   Layers,
   ShieldCheck,
-  ArrowRight,
   RotateCcw,
   X,
-  SlidersHorizontal,
   CheckCheck,
-  Box,
-  Contrast,
-  Sliders as SlidersIcon,
-  HelpCircle
+  Sliders as SlidersIcon
 } from 'lucide-react';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types & Math Helpers (WCAG 2.1 Contrast & Format Conversion)
@@ -590,7 +581,7 @@ interface ColorsProps {
 }
 
 export default function Colors({ setActiveTab }: ColorsProps) {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const isId = language === 'id';
 
   // Subtabs state

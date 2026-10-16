@@ -21,14 +21,14 @@ import NeuronDrawer, {
   DrawerSize,
   DrawerVariant,
   DrawerBackdropVariant,
-} from '../components/NeuronDrawer';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronInput from '../components/NeuronInput';
-import NeuronToggle from '../components/NeuronToggle';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronDrawer';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronInput from '../../components/NeuronInput';
+import NeuronToggle from '../../components/NeuronToggle';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface DrawerViewProps {
   setActiveTab: (tabId: string) => void;

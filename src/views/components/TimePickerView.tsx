@@ -5,13 +5,13 @@ import NeuronTimePicker, {
   TimePickerMode,
   TimeRange,
   TimePreset,
-} from '../components/NeuronTimePicker';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NeuronCheckbox from '../components/NeuronCheckbox';
-import NextPrevious from '../components/NextPrevious';
-import Playground from '../components/Playground';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronTimePicker';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
+import NextPrevious from '../../components/NextPrevious';
+import Playground from '../../components/Playground';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   Clock,
   Check,

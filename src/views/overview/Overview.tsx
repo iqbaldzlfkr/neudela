@@ -9,10 +9,10 @@ import {
   LayoutGrid, 
   Palette
 } from 'lucide-react';
-import HeroIconsGrid from '../components/HeroIconsGrid';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
-import { version } from '../../package.json';
+import HeroIconsGrid from '../../components/HeroIconsGrid';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
+import { version } from '../../../package.json';
 
 interface OverviewProps {
   setActiveTab: (tabId: string) => void;
@@ -164,7 +164,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
           </p>
         </div>
 
-        <div className="feature-card" onClick={() => setActiveTab('pat-forms')}>
+        <div className="feature-card" onClick={() => setActiveTab('pat-sidebar')}>
           <div className="feature-icon-wrapper">
             <LayoutGrid size={24} color="#10b981" />
           </div>

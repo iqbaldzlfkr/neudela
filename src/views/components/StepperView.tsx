@@ -6,18 +6,17 @@ import NeuronStepper, {
   StepperConnector,
   StepperLabelPlacement,
   StepperStep,
-} from '../components/NeuronStepper';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import NextPrevious from '../components/NextPrevious';
-import Playground from '../components/Playground';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronStepper';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import NextPrevious from '../../components/NextPrevious';
+import Playground from '../../components/Playground';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   CheckCircle2,
   AlertCircle,
   User,
   CreditCard,
-  Package,
   ShieldCheck,
   ChevronRight,
   ChevronLeft,
@@ -28,11 +27,8 @@ import {
   MapPin,
   FileText,
   Check,
-  X,
   Info,
   Sparkles,
-  ArrowRight,
-  Copy,
   RotateCcw,
   Truck,
   PackageCheck,

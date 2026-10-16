@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import NeuronCard, { 
   NeuronCardVariant, 
   NeuronCardPadding, 
   NeuronCardRadius,
   NeuronCardHoverEffect
-} from '../components/NeuronCard';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronButton from '../components/NeuronButton';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
+} from '../../components/NeuronCard';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronButton from '../../components/NeuronButton';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -38,10 +38,7 @@ import {
   ChevronRight,
   Quote,
   UserPlus,
-  X,
   AlertTriangle,
-  BarChart2,
-  Cpu,
   GitBranch,
   Play
 } from 'lucide-react';

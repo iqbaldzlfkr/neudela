@@ -5,14 +5,14 @@ import NeuronTextArea, {
   TextAreaVariant, 
   TextAreaResize, 
   TextAreaState 
-} from '../components/NeuronTextArea';
-import NeuronButton from '../components/NeuronButton';
-import NeuronBadge from '../components/NeuronBadge';
-import NeuronInput from '../components/NeuronInput';
-import NeuronAvatar from '../components/NeuronAvatar';
-import Playground from '../components/Playground';
-import NextPrevious from '../components/NextPrevious';
-import { useLanguage } from '../context/LanguageContext';
+} from '../../components/NeuronTextArea';
+import NeuronButton from '../../components/NeuronButton';
+import NeuronBadge from '../../components/NeuronBadge';
+import NeuronInput from '../../components/NeuronInput';
+import NeuronAvatar from '../../components/NeuronAvatar';
+import Playground from '../../components/Playground';
+import NextPrevious from '../../components/NextPrevious';
+import { useLanguage } from '../../context/LanguageContext';
 import { 
   Send, 
   Paperclip, 

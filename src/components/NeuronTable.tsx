@@ -177,7 +177,7 @@ export default function NeuronTable<T extends Record<string, any>>({
   const pageSizeOptions = paginationObj.pageSizeOptions || [10, 25, 50, 100];
 
   // Helper to extract unique row key
-  const getRowKey = (record: T, index: number): string | number => {
+  const getRowKey = useCallback((record: T, index: number): string | number => {
     if (typeof rowKey === 'function') {
       return rowKey(record, index);
     }
@@ -188,7 +188,7 @@ export default function NeuronTable<T extends Record<string, any>>({
       return record.key;
     }
     return index;
-  };
+  }, [rowKey]);
 
   // 1. Search Filter Logic (if activeSearch provided)
   const filteredData = useMemo(() => {
@@ -301,7 +301,7 @@ export default function NeuronTable<T extends Record<string, any>>({
   // Selection handlers
   const currentPageKeys = useMemo(() => {
     return paginatedData.map((rec, i) => getRowKey(rec, i));
-  }, [paginatedData]);
+  }, [paginatedData, getRowKey]);
 
   const isAllSelected = currentPageKeys.length > 0 && currentPageKeys.every(k => activeSelectedKeys.includes(k));
   const isPartiallySelected = currentPageKeys.some(k => activeSelectedKeys.includes(k)) && !isAllSelected;
