@@ -67,6 +67,7 @@ import {
 
 // Views: Composition Patterns
 import {
+  PatternsOverview,
   SidebarPatternView,
   StandaloneSidebarPreview,
 } from './views/patterns';
@@ -197,6 +198,8 @@ const STANDALONE_NON_COMP_TABS = new Set([
   'components-overview',
   'components-section',
   'pattern',
+  'pat-overview',
+  'patterns-overview',
   'pat-sidebar',
   'sidebar',
   'pat-forms',
@@ -211,7 +214,8 @@ function getTabFromHash(hashStr: string): string | null {
   const raw = hashStr.replace(/^#\/?/, '').trim().toLowerCase();
   if (!raw || raw === 'home' || raw === 'overview' || raw === 'beranda') return 'overview';
   if (raw.startsWith('preview-sidebar-') || raw.startsWith('sidebar-live-')) return raw;
-  if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'pattern' || raw === 'sidebar-pattern') return 'pat-sidebar';
+  if (raw === 'pattern' || raw === 'patterns' || raw === 'patterns-overview' || raw === 'pat-overview') return 'pat-overview';
+  if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'sidebar-pattern') return 'pat-sidebar';
   if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
@@ -367,6 +371,7 @@ export default function App() {
       type: 'dropdown',
       icon: 'pattern',
       items: [
+        { id: 'pat-overview', label: (t.nav as any).patternsOverview || 'Overview' },
         { id: 'pat-sidebar', label: (t.nav as any).patSidebar || 'Sidebar' },
         { id: 'pat-forms', label: t.nav.patForms },
         { id: 'pat-layouts', label: t.nav.patLayouts },
@@ -610,6 +615,9 @@ export default function App() {
       case 'comp-tree':
         return <TreeView setActiveTab={setActiveTab} />;
       case 'pattern':
+      case 'pat-overview':
+      case 'patterns-overview':
+        return <PatternsOverview setActiveTab={setActiveTab} />;
       case 'pat-sidebar':
       case 'sidebar':
       case 'sidebar-pattern':

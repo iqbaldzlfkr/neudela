@@ -1487,7 +1487,7 @@ export function WorkflowStepperSidebar() {
 
       {/* ── Navigation Footer ── */}
       <NextPrevious 
-        prev={{ id: 'comp-tree', label: isId ? 'Pohon Tampilan (Tree View)' : 'Tree View' }}
+        prev={{ id: 'pat-overview', label: isId ? 'Ikhtisar Pola (Patterns Overview)' : 'Patterns Overview' }}
         next={{ id: 'pat-forms', label: isId ? 'Formulir (Forms)' : 'Forms Pattern' }}
         setActiveTab={setActiveTab}
       />

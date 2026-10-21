@@ -54,6 +54,7 @@ export const translations = {
       compTimePicker: 'Time Picker',
       compToast: 'Toast',
       pattern: 'Pattern',
+      patternsOverview: 'Overview',
       patSidebar: 'Sidebar Navigation',
       patForms: 'Forms',
       patLayouts: 'Layouts',
@@ -184,6 +185,52 @@ export const translations = {
       radiusDesc: 'Corner radius specifications to reinforce Neudela brand characteristics, from sharp to full circular shapes.',
       elevationTitle: 'Elevation',
       elevationDesc: 'Interface element depth indication using shadow systems to define visual stack hierarchy.',
+    },
+
+    // Patterns Overview View
+    patternsOverview: {
+      categoryLabel: 'Patterns',
+      pageTitle: 'Patterns Overview',
+      pageSubtitle: 'Pre-composed interface architectures, structural layouts, and interaction blueprints built with Neudela design tokens and Neuron components.',
+      pillBlueprints: '4 Core Blueprints',
+      pillVariants: '5 Sidebar Architectures',
+      pillWcag: 'WCAG 2.1 AA',
+      pillResponsive: 'Fully Responsive',
+      explorePattern: 'View documentation',
+      livePreviewBtn: 'Live Fullscreen Preview',
+
+      // Pattern Items
+      sidebarTitle: 'Sidebar Navigation',
+      sidebarDesc: 'Enterprise-grade multi-level navigation system offering 5 distinct variants: Standard Collapsible, Icon Rail, Dual-Tier Category, Grouped Accordion, and Floating SaaS Card with live fullscreen preview mode.',
+      sidebarBadge: 'Navigation & Shell',
+      sidebarTag: 'Ready · 5 Variants',
+
+      formsTitle: 'Form Patterns & Data Entry',
+      formsDesc: 'Structured data entry patterns including multi-step wizards with sequential step validation, inline feedback states, complex filter query toolbars, and responsive form action bars.',
+      formsBadge: 'Data Entry',
+      formsTag: 'Guidelines · Flows',
+
+      layoutsTitle: 'Application Layouts & Shells',
+      layoutsDesc: 'Standardized application layout scaffolds: Admin Dashboard with sticky header, Metric KPI Grids, Master-Detail split canvas, and fluid multi-breakpoint container frames.',
+      layoutsBadge: 'Page Structure',
+      layoutsTag: 'Scaffolding',
+
+      overlaysTitle: 'Modal & Contextual Overlays',
+      overlaysDesc: 'Patterns for secondary actions and contextual flows: Confirmation dialogs, slide-out inspector drawers, multi-step configuration sidebars, and non-blocking toast alerts.',
+      overlaysBadge: 'Contextual Workflow',
+      overlaysTag: 'Modals & Panels',
+
+      // Architecture Principles
+      principlesTitle: 'Pattern Architecture Principles',
+      principlesSubtitle: 'Design standards and engineering invariants governing composite layouts in Neudela.',
+      principle1Title: '8pt Spatial Baseline',
+      principle1Desc: 'All layouts, gutters, card paddings, and header elevations adhere strictly to 4px and 8pt token increments (--space-*).',
+      principle2Title: 'Adaptive Breakpoints',
+      principle2Desc: 'Seamless responsiveness from 320px mobile offcanvas drawers up to 1440px+ dual-pane widescreen workspaces.',
+      principle3Title: 'Lifecycle State Completeness',
+      principle3Desc: 'Every pattern comprehensively supports Default, Hover, Active, Loading Skeletons, Empty States, and Error boundaries.',
+      principle4Title: 'Accessibility by Default',
+      principle4Desc: 'Full keyboard navigation (Tab, Arrow keys, Esc), screen reader ARIA landmarks, and WCAG 2.1 AA contrast compliance across themes.',
     },
 
     // Colors View
@@ -2239,6 +2286,7 @@ export const translations = {
       compTimePicker: 'Time Picker',
       compToast: 'Notifikasi Toast',
       pattern: 'Pola Layout',
+      patternsOverview: 'Ringkasan',
       patSidebar: 'Navigasi Sidebar',
       patForms: 'Formulir',
       patLayouts: 'Tata Letak',
@@ -2369,6 +2417,52 @@ export const translations = {
       radiusDesc: 'Ketentuan kelengkungan sudut elemen visual Neudela untuk memperkuat karakteristik brand, mulai dari bentuk tajam hingga melingkar penuh.',
       elevationTitle: 'Elevasi (Depth)',
       elevationDesc: 'Indikasi kedalaman elemen pada antarmuka pengguna melalui sistem bayangan (shadow) untuk mendefinisikan hirarki tumpukan visual.',
+    },
+
+    // Patterns Overview View
+    patternsOverview: {
+      categoryLabel: 'Pola Desain',
+      pageTitle: 'Ikhtisar Pola Desain (Patterns Overview)',
+      pageSubtitle: 'Komposisi antarmuka terstruktur, arsitektur tata letak aplikasi, dan cetak biru interaksi yang dibangun dengan mengorkestrasi token desain Neudela dan komponen Neuron.',
+      pillBlueprints: '4 Cetak Biru Utama',
+      pillVariants: '5 Arsitektur Sidebar',
+      pillWcag: 'WCAG 2.1 AA',
+      pillResponsive: 'Responsif Penuh',
+      explorePattern: 'Lihat dokumentasi',
+      livePreviewBtn: 'Pratinjau Layar Penuh',
+
+      // Pattern Items
+      sidebarTitle: 'Navigasi Sidebar',
+      sidebarDesc: 'Sistem navigasi enterprise multi-varian dengan 5 tata letak: Standar Lipat, Rel Ikon Mini, Dual-Tier Kategori, Akordeon Terkelompok, dan Kartu SaaS Mengambang dengan mode pratinjau interaktif layar penuh.',
+      sidebarBadge: 'Navigasi & Shell',
+      sidebarTag: 'Tersedia · 5 Varian',
+
+      formsTitle: 'Formulir & Entri Data',
+      formsDesc: 'Pola entri data terstruktur mencakup wizard multi-langkah dengan validasi sekuensial, indikator umpan balik inline, bilah filter query, dan tombol aksi responsif.',
+      formsBadge: 'Entri Data',
+      formsTag: 'Panduan & Alur',
+
+      layoutsTitle: 'Tata Letak & Shell Aplikasi',
+      layoutsDesc: 'Kerangka tata letak aplikasi standar: Dashboard Admin dengan header tetap, Grid Metrik KPI, pembagian Master-Detail, dan kontainer responsif multi-breakpoint.',
+      layoutsBadge: 'Struktur Halaman',
+      layoutsTag: 'Scaffolding',
+
+      overlaysTitle: 'Modal & Panel Laci (Drawer)',
+      overlaysDesc: 'Pola alur kontekstual dan aksi sekunder: Dialog konfirmasi destruktif, panel inspektor slide-out, laci konfigurasi multi-langkah, dan notifikasi toast.',
+      overlaysBadge: 'Alur Kontekstual',
+      overlaysTag: 'Modal & Panel',
+
+      // Architecture Principles
+      principlesTitle: 'Prinsip Arsitektur Pola Desain',
+      principlesSubtitle: 'Standar desain dan invarian rekayasa yang mendasari tata letak komposit pada Neudela.',
+      principle1Title: 'Baseline Spasial 8pt',
+      principle1Desc: 'Seluruh tata letak, margin, padding kartu, dan elevasi header mengacu ketat pada kelipatan token 4px dan 8pt (--space-*).',
+      principle2Title: 'Breakpoint Adaptif',
+      principle2Desc: 'Responsivitas mulus dari drawer offcanvas mobile 320px hingga ruang kerja layar lebar multi-panel 1440px+.',
+      principle3Title: 'Kelengkapan State Siklus Hidup',
+      principle3Desc: 'Setiap pola secara menyeluruh menangani Default, Hover, Aktif, Kerangka Loading (Skeleton), State Kosong (Empty), dan Batas Kesalahan.',
+      principle4Title: 'Aksesibilitas Bawaan',
+      principle4Desc: 'Navigasi keyboard lengkap (Tab, Panah, Esc), landmark ARIA untuk pembaca layar, dan kepatuhan kontras WCAG 2.1 AA di seluruh tema.',
     },
 
     // Colors View

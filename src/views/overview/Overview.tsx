@@ -164,7 +164,7 @@ export default function Overview({ setActiveTab, isDarkMode: _isDarkMode }: Over
           </p>
         </div>
 
-        <div className="feature-card" onClick={() => setActiveTab('pat-sidebar')}>
+        <div className="feature-card" onClick={() => setActiveTab('pat-overview')}>
           <div className="feature-icon-wrapper">
             <LayoutGrid size={24} color="#10b981" />
           </div>
