@@ -55,3 +55,29 @@ This repository is equipped with **Rudis (Rapid Utility & Development Intelligen
 3. **Artifact Integrity**:
    - Always adhere to the established directory structure (`docs/brd/`, `docs/specs/`, `.rudis/memory/`).
    - Maintain progressive disclosure: keep plans and summaries compact, structured, and citable.
+
+---
+
+## 4. Invariant Wajib Pola Desain (Pattern Modul) Neudela
+
+Setiap kali membuat atau memperbarui modul pola (`src/views/patterns/*PatternView.tsx`), **WAJIB 100% KONSISTEN** mengikuti cetak biru (blueprint) standar yang ada di `MapPatternView`, `DataGridPatternView`, `AuthPatternView`, dan `SidebarPatternView`:
+
+1. **Header Modal Interaktif**:
+   - **Sisi Kiri**:
+     - Dot aksen 12x12px dengan shadow warna aksen varian.
+     - Judul: `fontSize: '16px'`, `fontWeight: 700`.
+     - Badge varian: `fontSize: '11px'`, `padding: '2px 8px'`, `borderRadius: '10px'`, background `${accentColor}20`.
+     - Subtitle/Tagline: `fontSize: '11.5px'`, `color: 'var(--color-text-secondary)'`.
+   - **Sisi Kanan**:
+     - **Subtabs Tab**: `Kanvas Interaktif` / `Interactive Canvas` vs `React (TSX)` (padding: 3, border-radius: 8).
+     - **Tombol Tab Baru**: Tombol solid terracotta (`var(--color-primary)`): `<ExternalLink size={14} />` + `Buka di Tab Baru (Real App)`.
+     - **Tombol Tutup (X)**: Tombol bordered berlatar surface dengan icon `<X size={16} />` dan title `Tutup (Esc)`.
+     - **DILARANG** menambahkan tombol switcher viewport (desktop/tablet/mobile) di dalam header modal! Kontrol viewport HANYA ada di `Standalone<Pattern>Preview.tsx`.
+2. **Body Modal**:
+   - `modalTab === 'preview'`: Render full width & height dengan `padding: 24px` dan `overflowY: 'auto'`.
+   - `modalTab === 'tsx'`: Tampilkan cuplikan kode TSX dengan tombol salin (copy).
+3. **Kartu Galeri Overview**:
+   - Garis aksen atas 3.5px gradien (`position: 'absolute', top: 0, left: 0, right: 0, height: '3.5px', background: 'linear-gradient(90deg, ' + variant.accentColor + ' 0%, ' + variant.accentColor + '30 100%)'`).
+   - Avatar icon 42x42px berlatar `15%` aksen.
+   - Dua tombol aksi bawah: `Preview di Modal` (tinted primary) dan `Tab Baru` (canvas neutral dengan icon external-link).
+

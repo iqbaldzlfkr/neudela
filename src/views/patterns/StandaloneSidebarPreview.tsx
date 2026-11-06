@@ -39,16 +39,22 @@ import {
   Target,
   ListChecks,
   Lock,
-  Check
+  Check,
+  Monitor,
+  Tablet,
+  Smartphone,
+  PanelLeft,
 } from 'lucide-react';
 import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronButton from '../../components/NeuronButton';
+import NeuronSelect from '../../components/NeuronSelect';
 import NeuronProgress from '../../components/NeuronProgress';
 import NeuronTooltip from '../../components/NeuronTooltip';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronDivider from '../../components/NeuronDivider';
 import type { SidebarVariantId } from './SidebarPatternView';
+import { SIDEBAR_VARIANTS } from './SidebarPatternView';
 
 interface StandaloneSidebarPreviewProps {
   variantId?: string;
@@ -56,6 +62,8 @@ interface StandaloneSidebarPreviewProps {
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
 }
+
+type ViewportMode = 'desktop' | 'tablet' | 'mobile';
 
 export default function StandaloneSidebarPreview({
   variantId = 'enterprise-suite',
@@ -66,6 +74,7 @@ export default function StandaloneSidebarPreview({
   const [activeVariant, setActiveVariant] = useState<SidebarVariantId>(
     (variantId as SidebarVariantId) || 'enterprise-suite'
   );
+  const [viewportMode, setViewportMode] = useState<ViewportMode>('desktop');
 
   useEffect(() => {
     if (variantId) {
@@ -93,6 +102,16 @@ export default function StandaloneSidebarPreview({
     'workflow-stepper': 'Guided Workflow & Lifecycle Stepper',
   };
 
+  const getViewportWidth = () => {
+    switch (viewportMode) {
+      case 'desktop': return '100%';
+      case 'tablet': return '768px';
+      case 'mobile': return '420px';
+    }
+  };
+
+  const currentMeta = SIDEBAR_VARIANTS.find(v => v.id === activeVariant) || SIDEBAR_VARIANTS[0];
+
   return (
     <div
       className={`standalone-sidebar-app ${isDarkMode ? 'dark-theme' : ''}`}
@@ -101,7 +120,7 @@ export default function StandaloneSidebarPreview({
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        background: 'var(--color-bg-canvas)',
+        background: isDarkMode ? '#0a0f1d' : '#f8fafc',
         color: 'var(--color-text-primary)',
         overflow: 'hidden',
         fontFamily: "'Inter', sans-serif",
@@ -110,18 +129,20 @@ export default function StandaloneSidebarPreview({
       {/* ── Top Floating Neudela Controller Banner ── */}
       <div
         style={{
-          height: '42px',
-          background: isDarkMode ? '#0a0f1d' : '#1e293b',
+          height: '52px',
+          background: isDarkMode ? '#0d1322' : '#1e293b',
           color: '#f8fafc',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 16px',
+          padding: '0 18px',
           fontSize: '12.5px',
-          zIndex: 100,
+          zIndex: 1000,
           borderBottom: '1px solid rgba(255,255,255,0.1)',
           boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
           flexShrink: 0,
+          flexWrap: 'wrap',
+          gap: 12,
         }}
       >
         {/* Left: Brand & Back to Docs */}
@@ -136,73 +157,152 @@ export default function StandaloneSidebarPreview({
             Kembali ke Neudela Docs
           </NeuronButton>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ color: '#94a3b8' }}>Real Application Preview:</span>
-            <strong style={{ color: '#df7e30' }}>{variantTitles[activeVariant]}</strong>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: '#94a3b8' }}>Sidebar Pattern:</span>
+            <strong style={{ color: currentMeta.accentColor }}>{currentMeta.nameEn}</strong>
             <span
               style={{
-                fontSize: '10px',
+                fontSize: '11px',
+                padding: '2px 8px',
+                borderRadius: '12px',
                 background: 'rgba(223, 126, 48, 0.2)',
                 color: '#df7e30',
-                padding: '1px 6px',
-                borderRadius: '10px',
-                fontWeight: 700,
+                fontWeight: 600,
               }}
             >
-              100% Fullscreen
+              Real App Mode
             </span>
           </div>
         </div>
 
-        {/* Right: Variant Quick Switcher & Theme */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>Ganti Varian:</span>
-            <select
+        {/* Right: Switcher, Viewport Mode, Dark Mode */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Quick Variant Switcher Dropdown */}
+          <div style={{ width: '280px', position: 'relative', zIndex: 1100 }}>
+            <NeuronSelect
+              size="sm"
+              options={SIDEBAR_VARIANTS.map((v) => ({
+                value: v.id,
+                label: v.nameEn,
+                description: v.badge,
+              }))}
               value={activeVariant}
-              onChange={(e) => setActiveVariant(e.target.value as SidebarVariantId)}
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                color: '#fff',
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '6px',
-                padding: '3px 8px',
-                fontSize: '11.5px',
-                outline: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              <option value="enterprise-suite" style={{ background: '#1e293b' }}>Enterprise Suite</option>
-              <option value="compact-rail" style={{ background: '#1e293b' }}>Compact Icon Rail</option>
-              <option value="dual-tier" style={{ background: '#1e293b' }}>Dual-Tier Split</option>
-              <option value="floating-dock" style={{ background: '#1e293b' }}>Floating Dock</option>
-              <option value="workspace-tree" style={{ background: '#1e293b' }}>Workspace Tree</option>
-              <option value="ecommerce-merchant" style={{ background: '#1e293b' }}>E-Commerce Merchant</option>
-              <option value="productivity-spaces" style={{ background: '#1e293b' }}>Productivity Spaces</option>
-              <option value="workflow-stepper" style={{ background: '#1e293b' }}>Workflow Stepper</option>
-            </select>
+              onChange={(val) => setActiveVariant(val as SidebarVariantId)}
+              leadingIcon={<PanelLeft size={13} />}
+            />
           </div>
 
-          <NeuronButton
-            size="xs"
-            variant="secondary"
-            iconOnly
+          {/* Viewport Width Buttons */}
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', borderRadius: '6px', padding: '2px' }}>
+            <button
+              type="button"
+              onClick={() => setViewportMode('desktop')}
+              title="Desktop (100%)"
+              style={{
+                border: 'none',
+                background: viewportMode === 'desktop' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                color: viewportMode === 'desktop' ? '#fff' : '#94a3b8',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Monitor size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewportMode('tablet')}
+              title="Tablet (768px)"
+              style={{
+                border: 'none',
+                background: viewportMode === 'tablet' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                color: viewportMode === 'tablet' ? '#fff' : '#94a3b8',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Tablet size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewportMode('mobile')}
+              title="Mobile (420px)"
+              style={{
+                border: 'none',
+                background: viewportMode === 'mobile' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                color: viewportMode === 'mobile' ? '#fff' : '#94a3b8',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Smartphone size={14} />
+            </button>
+          </div>
+
+          {/* Theme Toggle */}
+          <button
+            type="button"
             onClick={() => setIsDarkMode(!isDarkMode)}
-            title="Toggle Light / Dark Mode"
+            style={{
+              border: 'none',
+              background: 'rgba(255,255,255,0.1)',
+              color: '#fff',
+              padding: '5px 10px',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '12px',
+            }}
           >
-            {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
-          </NeuronButton>
+            {isDarkMode ? <Sun size={13} color="#f59e0b" /> : <Moon size={13} color="#94a3b8" />}
+            <span>{isDarkMode ? 'Light' : 'Dark'}</span>
+          </button>
         </div>
       </div>
 
-      {/* ── Main Application Viewport Shell ── */}
+      {/* ── Real Fullscreen Frame ── */}
       <div
         style={{
           flex: 1,
-          display: 'flex',
           overflow: 'hidden',
-          position: 'relative',
-          background: activeVariant === 'floating-dock'
+          background: isDarkMode ? '#070b14' : '#f1f5f9',
+          display: 'flex',
+          justifyContent: 'center',
+          padding: viewportMode === 'desktop' ? '0' : '24px 0',
+          minHeight: 0,
+        }}
+      >
+        <div
+          style={{
+            width: getViewportWidth(),
+            height: '100%',
+            transition: 'width 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            boxShadow: viewportMode !== 'desktop' ? '0 16px 48px rgba(0,0,0,0.3)' : 'none',
+            borderRadius: viewportMode !== 'desktop' ? '12px' : '0',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+          }}
+        >
+          {/* ── Main Application Viewport Shell ── */}
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              overflow: 'hidden',
+              position: 'relative',
+              background: activeVariant === 'floating-dock'
             ? (isDarkMode 
                 ? 'radial-gradient(ellipse at 25% 40%, rgba(139, 92, 246, 0.35) 0%, rgba(15, 23, 42, 0.98) 60%)' 
                 : 'radial-gradient(ellipse at 25% 40%, rgba(139, 92, 246, 0.2) 0%, #f8fafc 60%)')
@@ -237,7 +337,7 @@ export default function StandaloneSidebarPreview({
                       AC
                     </div>
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 600 }}>Acme Corp</div>
+                      <div style={{ fontSize: 13, fontWeight: 600 }}>Neuronworks</div>
                       <div style={{ fontSize: 10, color: 'var(--color-text-tertiary)' }}>Enterprise</div>
                     </div>
                   </div>
@@ -595,7 +695,7 @@ export default function StandaloneSidebarPreview({
               <div style={{ fontSize: 10.5, color: 'var(--color-text-secondary)', marginBottom: 8 }}>
                 Full glassmorphic surface blur active.
               </div>
-              <NeuronButton size="xs" variant="primary" style={{ width: '100%', background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }}>
+              <NeuronButton size="xs" variant="purple" style={{ width: '100%', background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }}>
                 Explore Presets
               </NeuronButton>
             </div>
@@ -986,10 +1086,10 @@ export default function StandaloneSidebarPreview({
             </div>
 
             <div style={{ padding: '10px 14px', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <NeuronAvatar name="Alex Vance" size="xs" status="online" />
+              <NeuronAvatar name="Iqbal Dzulfikar" size="xs" status="online" />
               {!isCollapsed && (
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>Alex Vance</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>Iqbal Dzulfikar</div>
                   <div style={{ fontSize: 10, color: 'var(--color-text-tertiary)' }}>🎯 Sprint Planning</div>
                 </div>
               )}
@@ -1454,6 +1554,8 @@ export default function StandaloneSidebarPreview({
             </div>
           </div>
         </main>
+          </div>
+        </div>
       </div>
     </div>
   );

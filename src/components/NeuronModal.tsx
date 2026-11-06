@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import { X } from 'lucide-react';
 import NeuronButton from './NeuronButton';
 
-export type ModalSize = 'sm' | 'md' | 'lg';
+export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type ModalVariant = 'default' | 'danger' | 'warning' | 'success' | 'info';
 
 export interface NeuronModalProps {
@@ -38,6 +38,8 @@ export interface NeuronModalProps {
   showCloseButton?: boolean;
   /** Optional additional className for the dialog panel */
   className?: string;
+  /** Optional inline style for the dialog panel */
+  style?: React.CSSProperties;
 }
 
 export default function NeuronModal({
@@ -57,6 +59,7 @@ export default function NeuronModal({
   closeOnEscape = true,
   showCloseButton = true,
   className = '',
+  style,
 }: NeuronModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -108,6 +111,7 @@ export default function NeuronModal({
       <div
         ref={dialogRef}
         className={`neuron-modal neuron-modal--${size} neuron-modal--${variant} ${className}`.trim()}
+        style={style}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'neuron-modal-title' : undefined}

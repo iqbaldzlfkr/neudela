@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface NeuronButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'destructive' | 'danger';
+  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'destructive' | 'danger' | 'purple';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   disabled?: boolean;
@@ -43,6 +43,7 @@ export default function NeuronButton({
 
   return (
     <button
+      type={props.type || 'button'}
       className={combinedClassName}
       disabled={isDisabled}
       aria-pressed={active ? true : undefined}

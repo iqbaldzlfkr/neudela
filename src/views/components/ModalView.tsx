@@ -1897,7 +1897,7 @@ export default function ModalView({ setActiveTab }: ModalViewProps) {
                   name: 'size',
                   label: 'Size',
                   type: 'select',
-                  options: ['sm', 'md', 'lg'],
+                  options: ['sm', 'md', 'lg', 'xl', '2xl'],
                   default: 'md',
                 },
                 {

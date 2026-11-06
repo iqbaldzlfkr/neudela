@@ -70,6 +70,20 @@ import {
   PatternsOverview,
   SidebarPatternView,
   StandaloneSidebarPreview,
+  HeaderPatternView,
+  StandaloneHeaderPreview,
+  FormPatternView,
+  StandaloneFormPreview,
+  DashboardPatternView,
+  StandaloneDashboardPreview,
+  AuthPatternView,
+  StandaloneAuthPreview,
+  DataGridPatternView,
+  StandaloneDataGridPreview,
+  MapPatternView,
+  StandaloneMapPreview,
+  CheckoutPatternView,
+  StandaloneCheckoutPreview,
 } from './views/patterns';
 
 import { ToastProvider } from './components/NeuronToast';
@@ -202,8 +216,31 @@ const STANDALONE_NON_COMP_TABS = new Set([
   'patterns-overview',
   'pat-sidebar',
   'sidebar',
+  'pat-header',
+  'header',
   'pat-forms',
   'pat-layouts',
+  'pat-dashboard',
+  'dashboard',
+  'layouts',
+  'pat-data-grid',
+  'data-grid',
+  'tables',
+  'data-table',
+  'pat-auth',
+  'auth',
+  'authentication',
+  'auth-pattern',
+  'auth-patterns',
+  'pat-maps',
+  'maps',
+  'map',
+  'geospatial',
+  'pat-checkout',
+  'checkout',
+  'payment',
+  'payments',
+  'checkout-pattern',
   'content',
   'content-tone',
   'illustrations',
@@ -214,8 +251,65 @@ function getTabFromHash(hashStr: string): string | null {
   const raw = hashStr.replace(/^#\/?/, '').trim().toLowerCase();
   if (!raw || raw === 'home' || raw === 'overview' || raw === 'beranda') return 'overview';
   if (raw.startsWith('preview-sidebar-') || raw.startsWith('sidebar-live-')) return raw;
+  if (raw.startsWith('preview-header-') || raw.startsWith('header-live-')) return raw;
+  if (
+    raw.startsWith('preview-form-') ||
+    raw.startsWith('form-live-') ||
+    raw.startsWith('forms-live-') ||
+    raw.startsWith('standalone-form-') ||
+    raw.startsWith('form-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-dashboard-') ||
+    raw.startsWith('dashboard-live-') ||
+    raw.startsWith('standalone-dashboard-') ||
+    raw.startsWith('dashboard-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-auth-') ||
+    raw.startsWith('auth-live-') ||
+    raw.startsWith('standalone-auth-') ||
+    raw.startsWith('auth-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-data-grid-') ||
+    raw.startsWith('data-grid-live-') ||
+    raw.startsWith('standalone-data-grid-') ||
+    raw.startsWith('data-grid-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-map-') ||
+    raw.startsWith('map-live-') ||
+    raw.startsWith('standalone-map-') ||
+    raw.startsWith('map-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-checkout-') ||
+    raw.startsWith('checkout-live-') ||
+    raw.startsWith('standalone-checkout-') ||
+    raw.startsWith('checkout-standalone-')
+  ) {
+    return raw;
+  }
   if (raw === 'pattern' || raw === 'patterns' || raw === 'patterns-overview' || raw === 'pat-overview') return 'pat-overview';
   if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'sidebar-pattern') return 'pat-sidebar';
+  if (raw === 'header' || raw === 'pat-header' || raw === 'header-pattern' || raw === 'header-navigation') return 'pat-header';
+  if (raw === 'forms' || raw === 'pat-forms' || raw === 'form-pattern' || raw === 'form-patterns') return 'pat-forms';
+  if (raw === 'layouts' || raw === 'pat-layouts' || raw === 'dashboard' || raw === 'pat-dashboard' || raw === 'dashboard-pattern' || raw === 'dashboard-layouts') return 'pat-layouts';
+  if (raw === 'data-grid' || raw === 'pat-data-grid' || raw === 'tables' || raw === 'data-table' || raw === 'data-management') return 'pat-data-grid';
+  if (raw === 'auth' || raw === 'pat-auth' || raw === 'authentication' || raw === 'auth-pattern' || raw === 'auth-patterns') return 'pat-auth';
+  if (raw === 'maps' || raw === 'map' || raw === 'pat-maps' || raw === 'geospatial') return 'pat-maps';
+  if (raw === 'checkout' || raw === 'pat-checkout' || raw === 'payments' || raw === 'payment' || raw === 'checkout-pattern') return 'pat-checkout';
   if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
@@ -373,8 +467,13 @@ export default function App() {
       items: [
         { id: 'pat-overview', label: (t.nav as any).patternsOverview || 'Overview' },
         { id: 'pat-sidebar', label: (t.nav as any).patSidebar || 'Sidebar' },
+        { id: 'pat-header', label: (t.nav as any).patHeader || 'Header Navigation' },
         { id: 'pat-forms', label: t.nav.patForms },
         { id: 'pat-layouts', label: t.nav.patLayouts },
+        { id: 'pat-data-grid', label: (t.nav as any).patDataGrid || 'Data Grid & Table' },
+        { id: 'pat-auth', label: (t.nav as any).patAuth || 'Authentication & Identity' },
+        { id: 'pat-maps', label: (t.nav as any).patMaps || 'Maps & Geospatial' },
+        { id: 'pat-checkout', label: (t.nav as any).patCheckout || 'Checkout & Payments' },
       ],
     },
     {
@@ -622,6 +721,46 @@ export default function App() {
       case 'sidebar':
       case 'sidebar-pattern':
         return <SidebarPatternView setActiveTab={setActiveTab} />;
+      case 'pat-header':
+      case 'header':
+      case 'header-pattern':
+      case 'header-navigation':
+        return <HeaderPatternView setActiveTab={setActiveTab} />;
+      case 'pat-forms':
+      case 'forms':
+      case 'form-pattern':
+      case 'form-patterns':
+        return <FormPatternView setActiveTab={setActiveTab} />;
+      case 'pat-layouts':
+      case 'pat-dashboard':
+      case 'dashboard':
+      case 'layouts':
+      case 'dashboard-pattern':
+      case 'dashboard-layouts':
+        return <DashboardPatternView setActiveTab={setActiveTab} />;
+      case 'pat-auth':
+      case 'auth':
+      case 'authentication':
+      case 'auth-pattern':
+      case 'auth-patterns':
+        return <AuthPatternView setActiveTab={setActiveTab} />;
+      case 'pat-data-grid':
+      case 'data-grid':
+      case 'tables':
+      case 'data-table':
+      case 'data-management':
+        return <DataGridPatternView setActiveTab={setActiveTab} />;
+      case 'pat-maps':
+      case 'maps':
+      case 'map':
+      case 'geospatial':
+        return <MapPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-checkout':
+      case 'checkout':
+      case 'payments':
+      case 'payment':
+      case 'checkout-pattern':
+        return <CheckoutPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
       default:
         return (
           <PlaceholderView 
@@ -644,6 +783,151 @@ export default function App() {
           onBackToDocs={() => {
             window.location.hash = '#pat-sidebar';
             setActiveTab('pat-sidebar');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (activeTab.startsWith('preview-header-') || activeTab.startsWith('header-live-')) {
+    const variantId = activeTab.replace(/^(preview-header-|header-live-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneHeaderPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-header';
+            setActiveTab('pat-header');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-form-') ||
+    activeTab.startsWith('form-live-') ||
+    activeTab.startsWith('forms-live-') ||
+    activeTab.startsWith('standalone-form-') ||
+    activeTab.startsWith('form-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-form-|form-live-|forms-live-|standalone-form-|form-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneFormPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-forms';
+            setActiveTab('pat-forms');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-dashboard-') ||
+    activeTab.startsWith('dashboard-live-') ||
+    activeTab.startsWith('standalone-dashboard-') ||
+    activeTab.startsWith('dashboard-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-dashboard-|dashboard-live-|standalone-dashboard-|dashboard-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneDashboardPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-layouts';
+            setActiveTab('pat-layouts');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-auth-') ||
+    activeTab.startsWith('auth-live-') ||
+    activeTab.startsWith('standalone-auth-') ||
+    activeTab.startsWith('auth-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-auth-|auth-live-|standalone-auth-|auth-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneAuthPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-auth';
+            setActiveTab('pat-auth');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-data-grid-') ||
+    activeTab.startsWith('data-grid-live-') ||
+    activeTab.startsWith('standalone-data-grid-') ||
+    activeTab.startsWith('data-grid-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-data-grid-|data-grid-live-|standalone-data-grid-|data-grid-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneDataGridPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-data-grid';
+            setActiveTab('pat-data-grid');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (activeTab.startsWith('preview-map-') || activeTab.startsWith('map-live-')) {
+    const variantId = activeTab.replace(/^(preview-map-|map-live-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneMapPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-maps';
+            setActiveTab('pat-maps');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-checkout-') ||
+    activeTab.startsWith('checkout-live-') ||
+    activeTab.startsWith('standalone-checkout-') ||
+    activeTab.startsWith('checkout-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-checkout-|checkout-live-|standalone-checkout-|checkout-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneCheckoutPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-checkout';
+            setActiveTab('pat-checkout');
           }}
         />
       </ToastProvider>

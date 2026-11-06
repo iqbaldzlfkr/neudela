@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './assets/main.css'
 import './styles/neudela.css'
+import 'leaflet/dist/leaflet.css'
 import App from './App.tsx'
 import { LanguageProvider } from './context/LanguageContext'
 

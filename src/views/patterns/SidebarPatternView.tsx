@@ -80,7 +80,7 @@ interface VariantMeta {
   accentColor: string;
 }
 
-const SIDEBAR_VARIANTS: VariantMeta[] = [
+export const SIDEBAR_VARIANTS: VariantMeta[] = [
   {
     id: 'enterprise-suite',
     nameEn: 'Enterprise Suite (Collapsible)',
@@ -601,8 +601,8 @@ export function EnterpriseSidebar() {
               AC
             </div>
             <div>
-              <div style={{ fontWeight: 600, fontSize: '13.5px', color: 'var(--color-text-primary)' }}>Acme Corp</div>
-              <NeuronBadge size="xs" variant="brand">Enterprise Pro</NeuronBadge>
+              <div style={{ fontWeight: 600, fontSize: '13.5px', color: 'var(--color-text-primary)' }}>Neuronworks</div>
+              <NeuronBadge size="xs" variant="brand">Enterprise</NeuronBadge>
             </div>
           </div>
         )}
@@ -1013,8 +1013,8 @@ export function ProductivitySpacesSidebar() {
         <SpaceItem icon={<Users size={15} />} label="Product Ops" active={active === 'ops'} onClick={() => setActive('ops')} />
       </div>
       <div style={{ padding: '10px 14px', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <NeuronAvatar name="Alex Vance" size="xs" status="online" />
-        <div style={{ fontSize: 12, fontWeight: 600 }}>Alex Vance</div>
+        <NeuronAvatar name="Iqbal Dzulfikar" size="xs" status="online" />
+        <div style={{ fontSize: 12, fontWeight: 600 }}>Iqbal Dzulfikar</div>
       </div>
     </aside>
   );
@@ -1163,10 +1163,10 @@ export function WorkflowStepperSidebar() {
                 }}
                 className="sidebar-pattern-card"
               >
-                {/* Accent Top Border */}
+                {/* Accent Top Border with Gradient */}
                 <div style={{
                   position: 'absolute', top: 0, left: 0, right: 0, height: '3.5px',
-                  background: variant.accentColor
+                  background: `linear-gradient(90deg, ${variant.accentColor} 0%, ${variant.accentColor}30 100%)`
                 }} />
 
                 {/* Card Header & Badge */}
@@ -1538,13 +1538,12 @@ export function WorkflowStepperSidebar() {
                 padding: '14px 22px',
                 borderBottom: '1px solid var(--color-border)',
                 background: 'var(--color-bg-canvas)',
-                flexWrap: 'wrap',
-                gap: '12px',
+                gap: '16px',
                 flexShrink: 0,
               }}
             >
               {/* Left: Title & Variant Badge */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
                 <div
                   style={{
                     width: 12,
@@ -1552,11 +1551,12 @@ export function WorkflowStepperSidebar() {
                     borderRadius: '50%',
                     background: currentMeta.accentColor,
                     boxShadow: `0 0 10px ${currentMeta.accentColor}`,
+                    flexShrink: 0,
                   }}
                 />
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--color-text-primary)', whiteSpace: 'nowrap' }}>
                       {isId ? currentMeta.nameId : currentMeta.nameEn}
                     </h3>
                     <span
@@ -1567,117 +1567,134 @@ export function WorkflowStepperSidebar() {
                         background: `${currentMeta.accentColor}20`,
                         color: currentMeta.accentColor,
                         fontWeight: 700,
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
                       }}
                     >
                       {currentMeta.badge}
                     </span>
                   </div>
-                  <div style={{ fontSize: '11.5px', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
+                  <div
+                    style={{
+                      fontSize: '11.5px',
+                      color: 'var(--color-text-secondary)',
+                      marginTop: '2px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                    title={isId ? currentMeta.taglineId : currentMeta.taglineEn}
+                  >
                     {isId ? currentMeta.taglineId : currentMeta.taglineEn}
                   </div>
                 </div>
               </div>
 
-              {/* Center: Modal Subtabs (Preview vs TSX vs CSS) */}
-              <div
-                style={{
-                  display: 'flex',
-                  background: 'var(--color-bg-surface)',
-                  padding: 3,
-                  borderRadius: 8,
-                  border: '1px solid var(--color-border)',
-                }}
-              >
-                <button
-                  onClick={() => setModalTab('preview')}
-                  style={{
-                    background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
-                    color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
-                    border: 'none',
-                    borderRadius: 6,
-                    padding: '5px 12px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
-                >
-                  {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
-                </button>
-                <button
-                  onClick={() => setModalTab('tsx')}
-                  style={{
-                    background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
-                    color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
-                    border: 'none',
-                    borderRadius: 6,
-                    padding: '5px 12px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
-                >
-                  React (TSX)
-                </button>
-                <button
-                  onClick={() => setModalTab('css')}
-                  style={{
-                    background: modalTab === 'css' ? 'var(--color-primary)' : 'transparent',
-                    color: modalTab === 'css' ? '#fff' : 'var(--color-text-secondary)',
-                    border: 'none',
-                    borderRadius: 6,
-                    padding: '5px 12px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
-                >
-                  CSS Tokens
-                </button>
-              </div>
-
-              {/* Right: Real App in New Tab + Close */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {/* Standalone New Tab Button */}
-                <button
-                  onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
-                  title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
+              {/* Right Side: Subtabs + Action Buttons (ALWAYS pinned in top right corner) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0, marginLeft: 'auto' }}>
+                {/* Modal Subtabs (Preview vs TSX vs CSS) */}
+                <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    background: 'var(--color-primary)',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '6px 12px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    boxShadow: '0 2px 8px rgba(223, 126, 48, 0.3)',
-                  }}
-                >
-                  <ExternalLink size={14} />
-                  <span>{isId ? 'Buka di Tab Baru (Real App)' : 'Open in New Tab (Real App)'}</span>
-                </button>
-
-                {/* Close Button */}
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  style={{
                     background: 'var(--color-bg-surface)',
-                    border: '1px solid var(--color-border)',
+                    padding: 3,
                     borderRadius: 8,
-                    padding: 6,
-                    cursor: 'pointer',
-                    color: 'var(--color-text-primary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    border: '1px solid var(--color-border)',
                   }}
-                  title="Close modal (Esc)"
                 >
-                  <X size={16} />
-                </button>
+                  <button
+                    onClick={() => setModalTab('preview')}
+                    style={{
+                      background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
+                      color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
+                      border: 'none',
+                      borderRadius: 6,
+                      padding: '5px 12px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
+                  </button>
+                  <button
+                    onClick={() => setModalTab('tsx')}
+                    style={{
+                      background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
+                      color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
+                      border: 'none',
+                      borderRadius: 6,
+                      padding: '5px 12px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    React (TSX)
+                  </button>
+                  <button
+                    onClick={() => setModalTab('css')}
+                    style={{
+                      background: modalTab === 'css' ? 'var(--color-primary)' : 'transparent',
+                      color: modalTab === 'css' ? '#fff' : 'var(--color-text-secondary)',
+                      border: 'none',
+                      borderRadius: 6,
+                      padding: '5px 12px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    CSS Tokens
+                  </button>
+                </div>
+
+                {/* Real App in New Tab + Close */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <button
+                    onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
+                    title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      background: 'var(--color-primary)',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 8,
+                      padding: '6px 12px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(223, 126, 48, 0.3)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    <ExternalLink size={14} />
+                    <span>{isId ? 'Buka di Tab Baru (Real App)' : 'Open in New Tab (Real App)'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    style={{
+                      background: 'var(--color-bg-surface)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 8,
+                      padding: 6,
+                      cursor: 'pointer',
+                      color: 'var(--color-text-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    title={isId ? 'Tutup (Esc)' : 'Close (Esc)'}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -1835,7 +1852,7 @@ export function WorkflowStepperSidebar() {
                                     AC
                                   </div>
                                   <div>
-                                    <div style={{ fontSize: 13, fontWeight: 600 }}>Acme Corp</div>
+                                    <div style={{ fontSize: 13, fontWeight: 600 }}>Neuronworks</div>
                                     <div style={{ fontSize: 10, color: 'var(--color-text-tertiary)' }}>Enterprise</div>
                                   </div>
                                 </div>
@@ -2084,7 +2101,7 @@ export function WorkflowStepperSidebar() {
                             <div style={{ fontSize: 10.5, color: 'var(--color-text-secondary)', marginBottom: 8 }}>
                               Full glassmorphic surface blur active.
                             </div>
-                            <NeuronButton size="xs" variant="primary" style={{ width: '100%', background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }}>
+                            <NeuronButton size="xs" variant="purple" style={{ width: '100%', background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }}>
                               Explore Presets
                             </NeuronButton>
                           </div>
@@ -2403,9 +2420,9 @@ export function WorkflowStepperSidebar() {
                             <MockModalNavItem icon={<Users size={15} />} label="Product Ops" active={activeRoute === 'ops'} onClick={() => setActiveRoute('ops')} />
                           </div>
                           <div style={{ padding: '10px 14px', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <NeuronAvatar name="Alex Vance" size="xs" status="online" />
+                            <NeuronAvatar name="Iqbal Dzulfikar" size="xs" status="online" />
                             <div style={{ flex: 1, minWidth: 0 }}>
-                              <div style={{ fontSize: 12, fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>Alex Vance</div>
+                              <div style={{ fontSize: 12, fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>Iqbal Dzulfikar</div>
                               <div style={{ fontSize: 10, color: 'var(--color-text-tertiary)' }}>🎯 Sprint Planning</div>
                             </div>
                           </div>

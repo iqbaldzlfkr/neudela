@@ -155,7 +155,7 @@ interface ServerMetricRecord {
 // Dataset: Generic Enterprise Projects & Tasks (Dummy Data)
 // ─────────────────────────────────────────────
 const DUMMY_PROJECT_DATA: ProjectTaskRecord[] = [
-  { id: 1, no: 1, projectName: 'Design System Token Migration', category: 'Design System', owner: 'Alex Morgan', status: 'Approved', priority: 'High', recordsCount: 1420, created: '2026-03-15' },
+  { id: 1, no: 1, projectName: 'Design System Token Migration', category: 'Design System', owner: 'Iqbal Dzulfikar', status: 'Approved', priority: 'High', recordsCount: 1420, created: '2026-03-15' },
   { id: 2, no: 2, projectName: 'Cloud Infrastructure Audit', category: 'DevOps', owner: 'Sarah Chen', status: 'Pending', priority: 'Medium', recordsCount: 890, created: '2026-03-12' },
   { id: 3, no: 3, projectName: 'API Gateway Rate Limiting', category: 'Backend', owner: 'Marcus Brody', status: 'Active', priority: 'High', recordsCount: 3240, created: '2026-03-10' },
   { id: 4, no: 4, projectName: 'Customer Portal Redesign', category: 'Frontend', owner: 'Elena Rostova', status: 'In Review', priority: 'Medium', recordsCount: 512, created: '2026-03-08' },
@@ -1058,7 +1058,7 @@ export default function TableView({ setActiveTab }: TableViewProps) {
                             </div>
                           </td>
                           <td className="neuron-table__td">
-                            <span style={{ color: 'var(--color-text-secondary)' }}>Alex Morgan</span>
+                            <span style={{ color: 'var(--color-text-secondary)' }}>Iqbal Dzulfikar</span>
                           </td>
                           <td className="neuron-table__td">
                             <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>2026-03-15</span>

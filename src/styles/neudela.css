@@ -133,6 +133,79 @@
   outline: none;
 }
 
+.neuron-btn--purple {
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+  --color-primary-active: #6d28d9;
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
+  color: #ffffff;
+  outline: none;
+}
+
+.neuron-btn--purple:hover:not(:disabled) {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  color: #ffffff;
+}
+
+.neuron-btn--purple:focus:not(:focus-visible):not(:active) {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.neuron-btn--purple:focus-visible {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.35) !important;
+  outline: none !important;
+}
+
+.neuron-btn--purple:active:not(:disabled) {
+  background-color: #6d28d9 !important;
+  border-color: #6d28d9 !important;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.35) !important;
+}
+
+/* Any button with purple accent or inline styling */
+.neuron-btn[style*="8b5cf6"]:focus:not(:focus-visible):not(:active),
+.neuron-btn[style*="#8b5cf6"]:focus:not(:focus-visible):not(:active),
+.neuron-btn[style*="rgb(139, 92, 246)"]:focus:not(:focus-visible):not(:active),
+.neuron-btn[style*="purple"]:focus:not(:focus-visible):not(:active) {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.neuron-btn[style*="8b5cf6"]:focus-visible,
+.neuron-btn[style*="#8b5cf6"]:focus-visible,
+.neuron-btn[style*="rgb(139, 92, 246)"]:focus-visible,
+.neuron-btn[style*="purple"]:focus-visible {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.35) !important;
+  outline: none !important;
+}
+
+.neuron-btn[style*="8b5cf6"]:active:not(:disabled),
+.neuron-btn[style*="#8b5cf6"]:active:not(:disabled),
+.neuron-btn[style*="rgb(139, 92, 246)"]:active:not(:disabled),
+.neuron-btn[style*="purple"]:active:not(:disabled) {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.35) !important;
+}
+
+/* Dark theme */
+.dark-theme .neuron-btn--purple:focus-visible,
+.dark-theme .neuron-btn[style*="8b5cf6"]:focus-visible,
+.dark-theme .neuron-btn[style*="#8b5cf6"]:focus-visible,
+.dark-theme .neuron-btn[style*="rgb(139, 92, 246)"]:focus-visible,
+.dark-theme .neuron-btn[style*="purple"]:focus-visible {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.45) !important;
+}
+
+.dark-theme .neuron-btn--purple:active:not(:disabled),
+.dark-theme .neuron-btn[style*="8b5cf6"]:active:not(:disabled),
+.dark-theme .neuron-btn[style*="#8b5cf6"]:active:not(:disabled),
+.dark-theme .neuron-btn[style*="rgb(139, 92, 246)"]:active:not(:disabled),
+.dark-theme .neuron-btn[style*="purple"]:active:not(:disabled) {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.45) !important;
+}
+
 .neuron-spinner {
   width: 1rem;
   height: 1rem;
@@ -5962,6 +6035,28 @@
 
 .neuron-modal--lg {
   max-width: 448px; padding: 24px;
+}
+
+.neuron-modal--xl {
+  max-width: 640px; padding: 24px;
+}
+
+.neuron-modal--2xl {
+  max-width: 780px; padding: 28px;
+}
+
+.neuron-modal--inspect-wide {
+  max-width: 780px !important;
+  width: 92vw !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.neuron-modal--inspect-wide .neuron-modal__body {
+  overflow-y: auto !important;
+  max-height: calc(90vh - 150px) !important;
+  padding-right: 6px !important;
 }
 
 .neuron-modal__top-bar {
@@ -19045,15 +19140,18 @@ th.table-anatomy-zone.is-active.neuron-table__col--sticky-right {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Sidebar Pattern Styles ── */
-.sidebar-pattern-card:hover {
-  transform: translateY(-3px);
+/* ── Sidebar & Header Pattern Styles ── */
+.sidebar-pattern-card:hover,
+.header-pattern-card:hover {
+  transform: translateY(-4px) !important;
   border-color: rgba(223, 126, 48, 0.45) !important;
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.14) !important;
 }
 
-.dark-theme .sidebar-pattern-card:hover {
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.45) !important;
+.dark-theme .sidebar-pattern-card:hover,
+.dark-theme .header-pattern-card:hover {
+  border-color: rgba(223, 126, 48, 0.55) !important;
+  box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.5) !important;
 }
 
 @keyframes fadeIn {

@@ -1,4 +1,26 @@
 export { default as PatternsOverview } from './PatternsOverview';
 export { default as SidebarPatternView } from './SidebarPatternView';
 export { default as StandaloneSidebarPreview } from './StandaloneSidebarPreview';
+export { default as HeaderPatternView } from './HeaderPatternView';
+export { default as StandaloneHeaderPreview } from './StandaloneHeaderPreview';
+export { default as FormPatternView } from './FormPatternView';
+export { default as StandaloneFormPreview } from './StandaloneFormPreview';
+export { default as DashboardPatternView } from './DashboardPatternView';
+export { default as StandaloneDashboardPreview } from './StandaloneDashboardPreview';
+export { default as AuthPatternView } from './AuthPatternView';
+export { default as StandaloneAuthPreview } from './StandaloneAuthPreview';
+export { default as DataGridPatternView } from './DataGridPatternView';
+export { default as StandaloneDataGridPreview } from './StandaloneDataGridPreview';
+export { default as MapPatternView } from './MapPatternView';
+export { default as StandaloneMapPreview } from './StandaloneMapPreview';
+export { default as CheckoutPatternView } from './CheckoutPatternView';
+export { default as StandaloneCheckoutPreview } from './StandaloneCheckoutPreview';
 export type { SidebarVariantId } from './SidebarPatternView';
+export type { HeaderVariantId } from './HeaderPatternView';
+export type { FormVariantId } from './FormPatternView';
+export type { DashboardVariantId } from './DashboardPatternView';
+export type { AuthVariantId } from './AuthPatternView';
+export type { DataGridVariantId } from './DataGridPatternView';
+export type { MapVariantId } from './MapPatternView';
+export type { CheckoutVariantId } from './CheckoutPatternView';
+

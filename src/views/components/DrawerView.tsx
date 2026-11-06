@@ -832,8 +832,8 @@ export default function DrawerView({ setActiveTab }: DrawerViewProps) {
   const [scenarioFilterOpen, setScenarioFilterOpen] = useState(false);
 
   // Scenario Profile Form State
-  const [profileName, setProfileName] = useState('Sarah Jenkins');
-  const [profileEmail, setProfileEmail] = useState('s.jenkins@neudela.enterprise');
+  const [profileName, setProfileName] = useState('Iqbal Dzulfikar');
+  const [profileEmail, setProfileEmail] = useState('iqbal.dzulfikar@neudela.enterprise');
   const [profileRole, setProfileRole] = useState('Lead Product Designer');
   const [profileMfa, setProfileMfa] = useState(true);
   const [profileApiAccess, setProfileApiAccess] = useState(false);
