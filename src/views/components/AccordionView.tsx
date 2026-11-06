@@ -11,6 +11,7 @@ import NeuronBadge from '../../components/NeuronBadge';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronToggle from '../../components/NeuronToggle';
+import NeuronSelect from '../../components/NeuronSelect';
 import NextPrevious from '../../components/NextPrevious';
 import Playground from '../../components/Playground';
 import AccordionStyleGallery from './AccordionStyleGallery';
@@ -2993,25 +2994,21 @@ const accordionItems = [
                     content: (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                          <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                          <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>
                             {isId ? 'Masa Simpan Log:' : 'Log Retention Period:'}
                           </span>
-                          <select
-                            value={auditLogRetention}
-                            onChange={(e) => setAuditLogRetention(e.target.value)}
-                            style={{
-                              padding: '6px 12px',
-                              borderRadius: 'var(--radius-md)',
-                              border: '1px solid var(--color-border)',
-                              background: 'var(--color-bg-surface)',
-                              color: 'var(--color-text-primary)',
-                              fontSize: 12,
-                            }}
-                          >
-                            <option value="30">30 {isId ? 'Hari' : 'Days'}</option>
-                            <option value="90">90 {isId ? 'Hari (Rekomendasi)' : 'Days (Recommended)'}</option>
-                            <option value="365">1 {isId ? 'Tahun (Enterprise)' : 'Year (Enterprise)'}</option>
-                          </select>
+                          <div style={{ width: 220 }}>
+                            <NeuronSelect
+                              size="sm"
+                              value={auditLogRetention}
+                              onChange={(val) => setAuditLogRetention(val as string)}
+                              options={[
+                                { value: '30', label: isId ? '30 Hari' : '30 Days' },
+                                { value: '90', label: isId ? '90 Hari (Rekomendasi)' : '90 Days (Recommended)' },
+                                { value: '365', label: isId ? '1 Tahun (Enterprise)' : '1 Year (Enterprise)' },
+                              ]}
+                            />
+                          </div>
                         </div>
                       </div>
                     ),

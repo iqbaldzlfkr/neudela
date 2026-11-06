@@ -578,6 +578,8 @@
 }
 
 .neuron-input-wrapper--has-addon {
+  height: 38px;
+  box-sizing: border-box;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background-color: var(--color-bg-surface);
@@ -623,6 +625,7 @@
 }
 
 .neuron-input-wrapper--has-addon .neuron-input {
+  height: 100%;
   border: none;
   border-radius: 0;
   background: transparent;
@@ -672,6 +675,8 @@
 
 .neuron-input {
   width: 100%;
+  height: 38px;
+  box-sizing: border-box;
   padding: var(--space-2) var(--space-3);
   font-family: inherit;
   font-size: var(--fs-text-sm);
@@ -1119,6 +1124,44 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.neuron-select__dropdown--top,
+.neuron-dropdown__dropdown--top {
+  animation: neuronSelectSlideUp 0.15s ease;
+}
+
+@keyframes neuronSelectSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
   }
 }
 

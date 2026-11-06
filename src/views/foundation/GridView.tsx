@@ -21,6 +21,7 @@ import {
   X,
 } from 'lucide-react';
 import NextPrevious from '../../components/NextPrevious';
+import NeuronSelect from '../../components/NeuronSelect';
 import { useLanguage } from '../../context/LanguageContext';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1612,28 +1613,19 @@ ${template.blocks
             </div>
 
             {/* Template selector */}
-            <div className="grid-control-group">
+            <div className="grid-control-group" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span className="grid-control-label">{isId ? 'Susunan Kolom:' : 'Layout Template:'}</span>
-              <select
-                value={activeTemplate}
-                onChange={(e) => setActiveTemplate(e.target.value)}
-                style={{
-                  padding: '5px 10px',
-                  borderRadius: 'var(--radius-md, 8px)',
-                  border: '1px solid var(--color-border)',
-                  background: 'var(--color-bg-surface)',
-                  color: 'var(--color-text-primary)',
-                  fontSize: 12,
-                  fontFamily: 'inherit',
-                  cursor: 'pointer',
-                }}
-              >
-                {Object.entries(TEMPLATES).map(([key, item]) => (
-                  <option key={key} value={key}>
-                    {isId ? item.titleId : item.titleEn}
-                  </option>
-                ))}
-              </select>
+              <div style={{ width: 180 }}>
+                <NeuronSelect
+                  size="sm"
+                  value={activeTemplate}
+                  onChange={(val) => setActiveTemplate(val as string)}
+                  options={Object.entries(TEMPLATES).map(([key, item]) => ({
+                    value: key,
+                    label: isId ? item.titleId : item.titleEn,
+                  }))}
+                />
+              </div>
             </div>
 
             {/* Toggle guides */}

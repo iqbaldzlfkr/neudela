@@ -1536,39 +1536,18 @@ export default function StandaloneHeaderPreview({
 
                 {/* Right: Currency, Wishlist, Cart, User */}
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    background: 'var(--color-bg-subtle)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: 8,
-                    padding: '0 8px',
-                    height: 36,
-                    position: 'relative',
-                  }}>
-                    <Globe size={13} style={{ color: 'var(--color-text-tertiary)' }} />
-                    <select
+                  <div style={{ width: 110 }}>
+                    <NeuronSelect
+                      size="sm"
                       value={currency}
-                      onChange={(e) => setCurrency(e.target.value as any)}
-                      style={{
-                        appearance: 'none',
-                        WebkitAppearance: 'none',
-                        MozAppearance: 'none',
-                        background: 'transparent',
-                        border: 'none',
-                        outline: 'none',
-                        paddingRight: 14,
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: 'var(--color-text-primary)',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <option value="IDR">IDR (Rp)</option>
-                      <option value="USD">USD ($)</option>
-                    </select>
-                    <ChevronDown size={10} style={{ position: 'absolute', right: 6, pointerEvents: 'none', color: 'var(--color-text-tertiary)' }} />
+                      onChange={(val) => setCurrency(val as any)}
+                      options={[
+                        { value: 'IDR', label: 'IDR (Rp)' },
+                        { value: 'USD', label: 'USD ($)' },
+                      ]}
+                      leadingType="icon"
+                      leadingIcon={<Globe size={13} />}
+                    />
                   </div>
 
                   {/* Wishlist Button */}

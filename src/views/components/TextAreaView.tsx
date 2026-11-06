@@ -10,6 +10,7 @@ import NeuronButton from '../../components/NeuronButton';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronAvatar from '../../components/NeuronAvatar';
+import NeuronSelect from '../../components/NeuronSelect';
 import Playground from '../../components/Playground';
 import NextPrevious from '../../components/NextPrevious';
 import { useLanguage } from '../../context/LanguageContext';
@@ -1867,40 +1868,38 @@ export default function TextAreaView({ setActiveTab }: TextAreaViewProps) {
                     {/* Field 2: Category & Severity Row */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
                       {/* Category */}
-                      <div className="neuron-form-group">
+                      <div>
                         <label className="neuron-label">
                           {isId ? 'Kategori Masalah' : 'Issue Category'} <span className="neuron-label__required" aria-hidden="true">*</span>
                         </label>
-                        <select 
-                          className="neuron-input"
+                        <NeuronSelect
                           value={bugCategory}
-                          onChange={(e) => setBugCategory(e.target.value)}
-                          style={{ background: 'var(--color-bg-surface)', cursor: 'pointer' }}
-                        >
-                          <option value="ui">{isId ? 'UI & Tampilan Komponen' : 'UI & Component Rendering'}</option>
-                          <option value="perf">{isId ? 'Performa & Kebocoran Memori' : 'Performance & Memory'}</option>
-                          <option value="api">{isId ? 'API & Komunikasi Jaringan' : 'API & Network Request'}</option>
-                          <option value="auth">{isId ? 'Autentikasi & Akses Akun' : 'Authentication & SSO'}</option>
-                          <option value="a11y">{isId ? 'Aksesibilitas & Navigasi Keyboard' : 'Accessibility & Keyboard'}</option>
-                        </select>
+                          onChange={(val) => setBugCategory(val as string)}
+                          options={[
+                            { value: 'ui', label: isId ? 'UI & Tampilan Komponen' : 'UI & Component Rendering' },
+                            { value: 'perf', label: isId ? 'Performa & Kebocoran Memori' : 'Performance & Memory' },
+                            { value: 'api', label: isId ? 'API & Komunikasi Jaringan' : 'API & Network Request' },
+                            { value: 'auth', label: isId ? 'Autentikasi & Akses Akun' : 'Authentication & SSO' },
+                            { value: 'a11y', label: isId ? 'Aksesibilitas & Navigasi Keyboard' : 'Accessibility & Keyboard' },
+                          ]}
+                        />
                       </div>
 
                       {/* Severity */}
-                      <div className="neuron-form-group">
+                      <div>
                         <label className="neuron-label">
                           {isId ? 'Tingkat Keparahan (Severity)' : 'Severity Level'} <span className="neuron-label__required" aria-hidden="true">*</span>
                         </label>
-                        <select 
-                          className="neuron-input"
+                        <NeuronSelect
                           value={bugSeverity}
-                          onChange={(e) => setBugSeverity(e.target.value)}
-                          style={{ background: 'var(--color-bg-surface)', cursor: 'pointer' }}
-                        >
-                          <option value="p1">{isId ? '🔴 P1 - Kritis (Layanan Terhenti)' : '🔴 P1 - Critical (System Blocker)'}</option>
-                          <option value="p2">{isId ? '🟠 P2 - Tinggi (Fitur Utama Terganggu)' : '🟠 P2 - High (Major Feature Broken)'}</option>
-                          <option value="p3">{isId ? '🟡 P3 - Sedang (Prioritas Normal)' : '🟡 P3 - Medium (Normal Priority)'}</option>
-                          <option value="p4">{isId ? '🟢 P4 - Rendah (Kosmetik / Ringan)' : '🟢 P4 - Low (Cosmetic / Minor)'}</option>
-                        </select>
+                          onChange={(val) => setBugSeverity(val as string)}
+                          options={[
+                            { value: 'p1', label: isId ? '🔴 P1 - Kritis (Layanan Terhenti)' : '🔴 P1 - Critical (System Blocker)' },
+                            { value: 'p2', label: isId ? '🟠 P2 - Tinggi (Fitur Utama Terganggu)' : '🟠 P2 - High (Major Feature Broken)' },
+                            { value: 'p3', label: isId ? '🟡 P3 - Sedang (Prioritas Normal)' : '🟡 P3 - Medium (Normal Priority)' },
+                            { value: 'p4', label: isId ? '🟢 P4 - Rendah (Kosmetik / Ringan)' : '🟢 P4 - Low (Cosmetic / Minor)' },
+                          ]}
+                        />
                       </div>
                     </div>
 

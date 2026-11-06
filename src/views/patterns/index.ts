@@ -15,6 +15,10 @@ export { default as MapPatternView } from './MapPatternView';
 export { default as StandaloneMapPreview } from './StandaloneMapPreview';
 export { default as CheckoutPatternView } from './CheckoutPatternView';
 export { default as StandaloneCheckoutPreview } from './StandaloneCheckoutPreview';
+export { default as SettingsPatternView } from './SettingsPatternView';
+export { default as StandaloneSettingsPreview } from './StandaloneSettingsPreview';
+export { default as EmptyStatePatternView } from './EmptyStatePatternView';
+export { default as StandaloneEmptyStatePreview } from './StandaloneEmptyStatePreview';
 export type { SidebarVariantId } from './SidebarPatternView';
 export type { HeaderVariantId } from './HeaderPatternView';
 export type { FormVariantId } from './FormPatternView';
@@ -23,4 +27,6 @@ export type { AuthVariantId } from './AuthPatternView';
 export type { DataGridVariantId } from './DataGridPatternView';
 export type { MapVariantId } from './MapPatternView';
 export type { CheckoutVariantId } from './CheckoutPatternView';
+export type { SettingsVariantId } from './SettingsPatternView';
+export type { EmptyStateVariantId } from './EmptyStatePatternView';
 

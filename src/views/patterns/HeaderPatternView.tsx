@@ -5,6 +5,7 @@ import NeuronBadge from '../../components/NeuronBadge';
 import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronTooltip from '../../components/NeuronTooltip';
+import NeuronSelect from '../../components/NeuronSelect';
 import {
   Check,
   Copy,
@@ -763,6 +764,7 @@ function MarketingNavHeader() {
 
 function EcommerceHeader({ cartCount = 3 }: { cartCount?: number }) {
   const [wishlistCount] = useState(7);
+  const [currency, setCurrency] = useState('IDR');
   const [activeCategory, setActiveCategory] = useState('new-arrivals');
   const [searchFocused, setSearchFocused] = useState(false);
   const categories = ['New Arrivals', 'Men', 'Women', 'Accessories', 'Sale'];
@@ -826,36 +828,18 @@ function EcommerceHeader({ cartCount = 3 }: { cartCount?: number }) {
           </button>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginLeft: 'auto' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            background: 'var(--color-bg-subtle)',
-            border: '1px solid var(--color-border)',
-            borderRadius: 8,
-            padding: '0 8px',
-            height: 36,
-            position: 'relative',
-          }}>
-            <Globe size={13} style={{ color: 'var(--color-text-tertiary)' }} />
-            <select
-              style={{
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                background: 'transparent',
-                border: 'none',
-                outline: 'none',
-                paddingRight: 14,
-                fontSize: 12,
-                fontWeight: 600,
-                color: 'var(--color-text-primary)',
-                cursor: 'pointer',
-              }}
-            >
-              <option value="IDR">IDR (Rp)</option>
-              <option value="USD">USD ($)</option>
-            </select>
-            <ChevronDown size={10} style={{ position: 'absolute', right: 6, pointerEvents: 'none', color: 'var(--color-text-tertiary)' }} />
+          <div style={{ width: 110 }}>
+            <NeuronSelect
+              size="sm"
+              value={currency}
+              onChange={(val) => setCurrency(val as string)}
+              options={[
+                { value: 'IDR', label: 'IDR (Rp)' },
+                { value: 'USD', label: 'USD ($)' },
+              ]}
+              leadingType="icon"
+              leadingIcon={<Globe size={13} />}
+            />
           </div>
           <NeuronTooltip content="Wishlist" placement="bottom">
             <button style={{ position: 'relative', width: 36, height: 36, borderRadius: 8, border: '1px solid var(--color-border)', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--color-text-secondary)' }}>

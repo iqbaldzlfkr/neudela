@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 import NeuronCheckbox from './NeuronCheckbox';
 import NeuronDropdownMenu, {
   type DropdownMenuItem,
@@ -60,6 +61,7 @@ export interface NeuronDropdownProps {
   defaultOpen?: boolean;
   forceOpen?: boolean;
   isFocused?: boolean;
+  portal?: boolean;
 }
 
 export type NeuronSelectProps = NeuronDropdownProps;
@@ -145,6 +147,45 @@ function ChevronSvg({ open }: { open: boolean }) {
   );
 }
 
+// ── Helper to calculate floating coords ──
+function computeFloatingCoords(triggerEl: HTMLElement) {
+  const rect = triggerEl.getBoundingClientRect();
+
+  // If completely scrolled off screen
+  if (rect.bottom < 0 || rect.top > window.innerHeight) {
+    return null;
+  }
+
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const spaceAbove = rect.top;
+  const estimatedHeight = 220;
+  const placement: 'top' | 'bottom' =
+    spaceBelow < estimatedHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
+
+  const left = Math.max(8, Math.min(rect.left, window.innerWidth - rect.width - 8));
+  const width = Math.min(rect.width, window.innerWidth - 16);
+
+  if (placement === 'bottom') {
+    return {
+      top: Math.round(rect.bottom + 4),
+      bottom: undefined,
+      left: Math.round(left),
+      width: Math.round(width),
+      placement: 'bottom' as const,
+      maxHeight: Math.min(260, Math.max(120, spaceBelow - 16)),
+    };
+  } else {
+    return {
+      top: undefined,
+      bottom: Math.round(window.innerHeight - rect.top + 4),
+      left: Math.round(left),
+      width: Math.round(width),
+      placement: 'top' as const,
+      maxHeight: Math.min(260, Math.max(120, spaceAbove - 16)),
+    };
+  }
+}
+
 // ─────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────
@@ -171,6 +212,7 @@ export default function NeuronDropdown({
   defaultOpen = false,
   forceOpen = false,
   isFocused = false,
+  portal = true,
 }: NeuronDropdownProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(defaultOpen);
   const [isTriggerFocused, setIsTriggerFocused] = useState(false);
@@ -178,8 +220,18 @@ export default function NeuronDropdown({
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [activeOptionValue, setActiveOptionValue] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+
+  const [floatingCoords, setFloatingCoords] = useState<{
+    top?: number;
+    bottom?: number;
+    left: number;
+    width: number;
+    placement: 'top' | 'bottom';
+    maxHeight: number;
+  } | null>(null);
 
   // Normalise value to array for consistency
   const selectedValues: string[] = useMemo(() => {
@@ -201,11 +253,52 @@ export default function NeuronDropdown({
       )
     : options;
 
+  // ── Floating Coordinates Calculator ──
+  const updateCoords = useCallback(() => {
+    if (!portal || !isOpen) return;
+    const triggerEl = triggerButtonRef.current;
+    if (!triggerEl) return;
+    const coords = computeFloatingCoords(triggerEl);
+
+    if (!coords) {
+      if (!forceOpen) {
+        setInternalIsOpen(false);
+      }
+      return;
+    }
+
+    setFloatingCoords(coords);
+  }, [portal, isOpen, forceOpen]);
+
+  useLayoutEffect(() => {
+    if (isOpen && portal) {
+      updateCoords();
+    }
+  }, [isOpen, portal, updateCoords]);
+
+  useEffect(() => {
+    if (!isOpen || !portal) return;
+    const handleScrollOrResize = () => {
+      updateCoords();
+    };
+    window.addEventListener('resize', handleScrollOrResize);
+    window.addEventListener('scroll', handleScrollOrResize, true);
+    return () => {
+      window.removeEventListener('resize', handleScrollOrResize);
+      window.removeEventListener('scroll', handleScrollOrResize, true);
+    };
+  }, [isOpen, portal, updateCoords]);
+
   // ── Click outside ──
   useEffect(() => {
     const handleOutside = (e: MouseEvent) => {
       if (forceOpen) return;
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(target) &&
+        (!listRef.current || !listRef.current.contains(target))
+      ) {
         setInternalIsOpen(false);
         setSearchQuery('');
         setFocusedIndex(-1);
@@ -236,13 +329,21 @@ export default function NeuronDropdown({
   const toggleOpen = useCallback(() => {
     if (disabled || forceOpen) return;
     setInternalIsOpen(prev => {
-      if (prev) {
+      const next = !prev;
+      if (next) {
+        if (portal && triggerButtonRef.current) {
+          const coords = computeFloatingCoords(triggerButtonRef.current);
+          if (coords) {
+            setFloatingCoords(coords);
+          }
+        }
+      } else {
         setSearchQuery('');
         setFocusedIndex(-1);
       }
-      return !prev;
+      return next;
     });
-  }, [disabled, forceOpen]);
+  }, [disabled, forceOpen, portal]);
 
   // ── Select handler ──
   const handleSelect = useCallback(
@@ -516,6 +617,7 @@ export default function NeuronDropdown({
       <div className={rootClass} onKeyDown={handleKeyDown}>
         {/* Trigger */}
         <button
+          ref={triggerButtonRef}
           type="button"
           className="neuron-dropdown__trigger neuron-select__trigger"
           onClick={toggleOpen}
@@ -546,88 +648,129 @@ export default function NeuronDropdown({
         </button>
 
         {/* Dropdown menu */}
-        {isOpen && (
-          <div className="neuron-dropdown__menu neuron-dropdown__dropdown neuron-select__dropdown" role="listbox" ref={listRef}>
-            {searchable && filteredOptions.length === 0 && (
-              <div className="neuron-dropdown__empty neuron-select__empty">No results found</div>
-            )}
-            {filteredOptions.map((opt, idx) => {
-              const isSelected = selectedValues.includes(opt.value);
-              const isFocusedItem = focusedIndex === idx;
-              const optClass = [
-                'neuron-dropdown__option',
-                'neuron-select__option',
-                isSelected && 'neuron-dropdown__option--selected neuron-select__option--selected',
-                isFocusedItem && 'neuron-dropdown__option--focused neuron-select__option--focused',
-              ]
-                .filter(Boolean)
-                .join(' ');
+        {isOpen && (() => {
+          if (portal && !floatingCoords) {
+            return null;
+          }
 
-              const optIcon = opt.icon || (hasIconLeading ? leadingIcon : null);
-              const showAvatar = hasAvatarLeading || Boolean(opt.avatar);
-              const showDot = hasDotLeading || Boolean(opt.dotColor);
+          const isDarkTheme =
+            (typeof document !== 'undefined' &&
+              (document.documentElement.classList.contains('dark-theme') ||
+                document.body.classList.contains('dark-theme'))) ||
+            Boolean(containerRef.current?.closest('.dark-theme'));
 
-              return (
-                <div
-                  key={opt.value}
-                  className={optClass}
-                  role="option"
-                  aria-selected={isSelected}
-                  onMouseDown={() => {
-                    if (!opt.disabled) {
-                      setActiveOptionValue(opt.value);
+          const isTop = floatingCoords?.placement === 'top';
+
+          const menuNode = (
+            <div
+              className={`neuron-dropdown__menu neuron-dropdown__dropdown neuron-select__dropdown ${
+                isTop ? 'neuron-select__dropdown--top' : ''
+              } ${isDarkTheme ? 'dark-theme' : ''}`}
+              role="listbox"
+              ref={listRef}
+              style={
+                portal && floatingCoords
+                  ? {
+                      position: 'fixed',
+                      top: floatingCoords.top !== undefined ? `${floatingCoords.top}px` : 'auto',
+                      bottom: floatingCoords.bottom !== undefined ? `${floatingCoords.bottom}px` : 'auto',
+                      left: `${floatingCoords.left}px`,
+                      right: 'auto',
+                      width: `${floatingCoords.width}px`,
+                      maxHeight: `${floatingCoords.maxHeight}px`,
+                      margin: 0,
+                      zIndex: 10050,
+                      boxSizing: 'border-box',
                     }
-                  }}
-                  onClick={() => {
-                    setActiveOptionValue(opt.value);
-                    setTimeout(() => setActiveOptionValue(null), 220);
-                    handleSelect(opt.value);
-                  }}
-                  onMouseEnter={() => setFocusedIndex(idx)}
-                >
-                  {optIcon && (
-                    <span className="neuron-dropdown__option-icon neuron-select__option-icon">
-                      {optIcon}
-                    </span>
-                  )}
-                  {showAvatar && (
-                    <AvatarCircle name={opt.label} src={opt.avatar} size={24} />
-                  )}
-                  {showDot && (
-                    <span
-                      className="neuron-dropdown__dot neuron-select__dot"
-                      style={{ backgroundColor: opt.dotColor || dotColor || '#10B981' }}
-                    />
-                  )}
-                  <div className="neuron-dropdown__option-text neuron-select__option-text">
-                    <div className="neuron-dropdown__option-header neuron-select__option-header">
-                      <span className="neuron-dropdown__option-label neuron-select__option-label">{opt.label}</span>
-                      {opt.username && (
-                        <span className="neuron-dropdown__option-username neuron-select__option-username">@{opt.username}</span>
+                  : undefined
+              }
+            >
+              {searchable && filteredOptions.length === 0 && (
+                <div className="neuron-dropdown__empty neuron-select__empty">No results found</div>
+              )}
+              {filteredOptions.map((opt, idx) => {
+                const isSelected = selectedValues.includes(opt.value);
+                const isFocusedItem = focusedIndex === idx;
+                const optClass = [
+                  'neuron-dropdown__option',
+                  'neuron-select__option',
+                  isSelected && 'neuron-dropdown__option--selected neuron-select__option--selected',
+                  isFocusedItem && 'neuron-dropdown__option--focused neuron-select__option--focused',
+                ]
+                  .filter(Boolean)
+                  .join(' ');
+
+                const optIcon = opt.icon || (hasIconLeading ? leadingIcon : null);
+                const showAvatar = hasAvatarLeading || Boolean(opt.avatar);
+                const showDot = hasDotLeading || Boolean(opt.dotColor);
+
+                return (
+                  <div
+                    key={opt.value}
+                    className={optClass}
+                    role="option"
+                    aria-selected={isSelected}
+                    onMouseDown={() => {
+                      if (!opt.disabled) {
+                        setActiveOptionValue(opt.value);
+                      }
+                    }}
+                    onClick={() => {
+                      setActiveOptionValue(opt.value);
+                      setTimeout(() => setActiveOptionValue(null), 220);
+                      handleSelect(opt.value);
+                    }}
+                    onMouseEnter={() => setFocusedIndex(idx)}
+                  >
+                    {optIcon && (
+                      <span className="neuron-dropdown__option-icon neuron-select__option-icon">
+                        {optIcon}
+                      </span>
+                    )}
+                    {showAvatar && (
+                      <AvatarCircle name={opt.label} src={opt.avatar} size={24} />
+                    )}
+                    {showDot && (
+                      <span
+                        className="neuron-dropdown__dot neuron-select__dot"
+                        style={{ backgroundColor: opt.dotColor || dotColor || '#10B981' }}
+                      />
+                    )}
+                    <div className="neuron-dropdown__option-text neuron-select__option-text">
+                      <div className="neuron-dropdown__option-header neuron-select__option-header">
+                        <span className="neuron-dropdown__option-label neuron-select__option-label">{opt.label}</span>
+                        {opt.username && (
+                          <span className="neuron-dropdown__option-username neuron-select__option-username">@{opt.username}</span>
+                        )}
+                      </div>
+                      {opt.description && (
+                        <span className="neuron-dropdown__option-desc neuron-select__option-desc">{opt.description}</span>
                       )}
                     </div>
-                    {opt.description && (
-                      <span className="neuron-dropdown__option-desc neuron-select__option-desc">{opt.description}</span>
+                    {multiple ? (
+                      <span className="neuron-dropdown__option-checkbox" style={{ pointerEvents: 'none', marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+                        <NeuronCheckbox
+                          checked={isSelected}
+                          size="sm"
+                          variant="brand"
+                          tabIndex={-1}
+                          isFocused={activeOptionValue === opt.value}
+                        />
+                      </span>
+                    ) : (
+                      isSelected && <CheckSvg />
                     )}
                   </div>
-                  {multiple ? (
-                    <span className="neuron-dropdown__option-checkbox" style={{ pointerEvents: 'none', marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
-                      <NeuronCheckbox
-                        checked={isSelected}
-                        size="sm"
-                        variant="brand"
-                        tabIndex={-1}
-                        isFocused={activeOptionValue === opt.value}
-                      />
-                    </span>
-                  ) : (
-                    isSelected && <CheckSvg />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          );
+
+          if (portal && typeof document !== 'undefined') {
+            return createPortal(menuNode, document.body);
+          }
+          return menuNode;
+        })()}
       </div>
       {helperText && (
         <span className={`neuron-helper-text ${state === 'error' ? 'neuron-helper-text--error' : ''} ${state === 'success' ? 'neuron-helper-text--success' : ''}`}>

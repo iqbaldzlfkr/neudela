@@ -80,4 +80,9 @@ Setiap kali membuat atau memperbarui modul pola (`src/views/patterns/*PatternVie
    - Garis aksen atas 3.5px gradien (`position: 'absolute', top: 0, left: 0, right: 0, height: '3.5px', background: 'linear-gradient(90deg, ' + variant.accentColor + ' 0%, ' + variant.accentColor + '30 100%)'`).
    - Avatar icon 42x42px berlatar `15%` aksen.
    - Dua tombol aksi bawah: `Preview di Modal` (tinted primary) dan `Tab Baru` (canvas neutral dengan icon external-link).
+4. **Header Halaman Utama (Page Header)**:
+   - Eyebrow label WAJIB menggunakan: `<span className="page-category-label">Pattern</span>` (DILARANG menggunakan teks kustom atau custom inline styling).
+   - Judul: `<h1 className="page-title" style={{ fontSize: '2.4rem', fontWeight: 800, letterSpacing: '-0.02em', margin: '4px 0 10px 0' }}>`.
+   - Subjudul: `<p className="page-subtitle" style={{ width: '100%', maxWidth: '100%', lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>`.
+   - Stats Pills: Menggunakan container `<div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-4)' }}>` dengan format card pill Neudela standar berlatar surface, border `var(--color-border)`, radius `20px`, dan icon Lucide 14px (DILARANG menggunakan emoji informal).
 

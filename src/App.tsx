@@ -84,6 +84,10 @@ import {
   StandaloneMapPreview,
   CheckoutPatternView,
   StandaloneCheckoutPreview,
+  SettingsPatternView,
+  StandaloneSettingsPreview,
+  EmptyStatePatternView,
+  StandaloneEmptyStatePreview,
 } from './views/patterns';
 
 import { ToastProvider } from './components/NeuronToast';
@@ -241,6 +245,13 @@ const STANDALONE_NON_COMP_TABS = new Set([
   'payment',
   'payments',
   'checkout-pattern',
+  'pat-settings',
+  'workspace-settings',
+  'rbac',
+  'pat-empty-states',
+  'empty-states',
+  'onboarding',
+  'error-pages',
   'content',
   'content-tone',
   'illustrations',
@@ -301,6 +312,22 @@ function getTabFromHash(hashStr: string): string | null {
   ) {
     return raw;
   }
+  if (
+    raw.startsWith('preview-settings-') ||
+    raw.startsWith('settings-live-') ||
+    raw.startsWith('standalone-settings-') ||
+    raw.startsWith('settings-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-empty-state-') ||
+    raw.startsWith('empty-state-live-') ||
+    raw.startsWith('standalone-empty-state-') ||
+    raw.startsWith('empty-state-standalone-')
+  ) {
+    return raw;
+  }
   if (raw === 'pattern' || raw === 'patterns' || raw === 'patterns-overview' || raw === 'pat-overview') return 'pat-overview';
   if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'sidebar-pattern') return 'pat-sidebar';
   if (raw === 'header' || raw === 'pat-header' || raw === 'header-pattern' || raw === 'header-navigation') return 'pat-header';
@@ -310,6 +337,17 @@ function getTabFromHash(hashStr: string): string | null {
   if (raw === 'auth' || raw === 'pat-auth' || raw === 'authentication' || raw === 'auth-pattern' || raw === 'auth-patterns') return 'pat-auth';
   if (raw === 'maps' || raw === 'map' || raw === 'pat-maps' || raw === 'geospatial') return 'pat-maps';
   if (raw === 'checkout' || raw === 'pat-checkout' || raw === 'payments' || raw === 'payment' || raw === 'checkout-pattern') return 'pat-checkout';
+  if (raw === 'settings' || raw === 'pat-settings' || raw === 'workspace-settings' || raw === 'rbac') return 'pat-settings';
+  if (
+    raw === 'empty-states' ||
+    raw === 'pat-empty-states' ||
+    raw === 'onboarding' ||
+    raw === 'error-pages' ||
+    raw === 'empty-state' ||
+    raw === 'empty-state-pattern'
+  ) {
+    return 'pat-empty-states';
+  }
   if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
   if (raw === 'tabbar' || raw === 'tab-bar' || raw === 'comp-tabbar' || raw === 'comp-tab-bar') return 'comp-tab-bar';
@@ -474,6 +512,8 @@ export default function App() {
         { id: 'pat-auth', label: (t.nav as any).patAuth || 'Authentication & Identity' },
         { id: 'pat-maps', label: (t.nav as any).patMaps || 'Maps & Geospatial' },
         { id: 'pat-checkout', label: (t.nav as any).patCheckout || 'Checkout & Payments' },
+        { id: 'pat-settings', label: (t.nav as any).patSettings || 'Workspace Settings & RBAC' },
+        { id: 'pat-empty-states', label: (t.nav as any).patEmptyState || 'Empty States & Error Pages' },
       ],
     },
     {
@@ -761,6 +801,18 @@ export default function App() {
       case 'payment':
       case 'checkout-pattern':
         return <CheckoutPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-settings':
+      case 'settings':
+      case 'workspace-settings':
+      case 'rbac':
+        return <SettingsPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-empty-states':
+      case 'empty-states':
+      case 'onboarding':
+      case 'error-pages':
+      case 'empty-state':
+      case 'empty-state-pattern':
+        return <EmptyStatePatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
       default:
         return (
           <PlaceholderView 
@@ -928,6 +980,50 @@ export default function App() {
           onBackToDocs={() => {
             window.location.hash = '#pat-checkout';
             setActiveTab('pat-checkout');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-settings-') ||
+    activeTab.startsWith('settings-live-') ||
+    activeTab.startsWith('standalone-settings-') ||
+    activeTab.startsWith('settings-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-settings-|settings-live-|standalone-settings-|settings-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneSettingsPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-settings';
+            setActiveTab('pat-settings');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-empty-state-') ||
+    activeTab.startsWith('empty-state-live-') ||
+    activeTab.startsWith('standalone-empty-state-') ||
+    activeTab.startsWith('empty-state-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-empty-state-|empty-state-live-|standalone-empty-state-|empty-state-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneEmptyStatePreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-empty-states';
+            setActiveTab('pat-empty-states');
           }}
         />
       </ToastProvider>

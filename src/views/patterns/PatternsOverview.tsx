@@ -583,6 +583,121 @@ export default function PatternsOverview({ setActiveTab }: PatternsOverviewProps
         </div>
       ),
     },
+    {
+      id: 'pat-settings',
+      title: isId ? 'Pengaturan & Akses RBAC' : 'Workspace Settings & RBAC',
+      desc: isId
+        ? 'Arsitektur tata kelola organisasi enterprise: Profil workspace, direktori tim & matriks izin RBAC, kredensial kunci API & webhook, audit keamanan 2FA, dan zona berbahaya transfer kepemilikan.'
+        : 'Enterprise organizational governance: Workspace identity, team directory & granular RBAC permission matrix, developer API credentials & webhooks, 2FA security audit, and danger zones.',
+      badge: 'Governance & RBAC',
+      renderPreview: () => (
+        <div
+          style={{
+            width: '90%',
+            maxWidth: 220,
+            height: 80,
+            borderRadius: 6,
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            display: 'flex',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Mini Left Settings Nav */}
+          <div
+            style={{
+              width: 58,
+              backgroundColor: 'var(--color-bg-canvas)',
+              borderRight: '1px solid var(--color-border)',
+              padding: '6px 4px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 3,
+            }}
+          >
+            <div style={{ height: 6, width: '80%', borderRadius: 2, backgroundColor: 'rgba(223, 126, 48, 0.2)', border: '1px solid #df7e30' }} />
+            <div style={{ height: 6, width: '90%', borderRadius: 2, backgroundColor: 'var(--color-border)' }} />
+            <div style={{ height: 6, width: '70%', borderRadius: 2, backgroundColor: 'var(--color-border)' }} />
+            <div style={{ height: 6, width: '85%', borderRadius: 2, backgroundColor: 'var(--color-border)' }} />
+          </div>
+
+          {/* Mini Right Content: RBAC Table */}
+          <div
+            style={{
+              flex: 1,
+              padding: '6px 8px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4,
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: 'var(--color-text-secondary)' }} />
+              <div style={{ width: 18, height: 6, borderRadius: 2, backgroundColor: '#df7e30' }} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2px 4px', borderRadius: 2, backgroundColor: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#df7e30' }} />
+                <div style={{ width: 26, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-secondary)' }} />
+              </div>
+              <div style={{ width: 14, height: 4, borderRadius: 2, backgroundColor: 'rgba(59, 130, 246, 0.3)' }} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2px 4px', borderRadius: 2, backgroundColor: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#3b82f6' }} />
+                <div style={{ width: 30, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-secondary)' }} />
+              </div>
+              <div style={{ width: 14, height: 4, borderRadius: 2, backgroundColor: 'rgba(16, 185, 129, 0.3)' }} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2px 4px', borderRadius: 2, backgroundColor: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#8b5cf6' }} />
+                <div style={{ width: 22, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-secondary)' }} />
+              </div>
+              <div style={{ width: 14, height: 4, borderRadius: 2, backgroundColor: 'rgba(245, 158, 11, 0.3)' }} />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'pat-empty-states',
+      title: isId ? 'Status Kosong, Onboarding & Halaman Error' : 'Empty States, Onboarding & Error Pages',
+      desc: isId
+        ? 'Cetak biru penanganan kondisi batas (edge cases): Tabel kosong & pencarian nihil, checklist aktivasi onboarding, pemulihan ramah halaman 404, gerbang otorisasi RBAC 403, dan pemulihan gangguan server 500.'
+        : 'Enterprise edge-case handling blueprints: Zero-data tables & search failures, activation onboarding milestones, high-empathy 404 recovery, security-conscious 403 RBAC permission gates, and 500 outage retries.',
+      badge: 'Edge Cases & Recovery',
+      renderPreview: () => (
+        <div
+          style={{
+            width: '90%',
+            maxWidth: 220,
+            height: 80,
+            borderRadius: 6,
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '8px',
+            gap: 4,
+          }}
+        >
+          <div style={{ width: 24, height: 24, borderRadius: '50%', backgroundColor: 'rgba(223, 126, 48, 0.15)', border: '1px dashed #df7e30', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 8, height: 8, borderRadius: 1.5, backgroundColor: '#df7e30' }} />
+          </div>
+          <div style={{ width: 60, height: 4, borderRadius: 2, backgroundColor: '#df7e30', opacity: 0.8 }} />
+          <div style={{ width: 90, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-secondary)', opacity: 0.4 }} />
+          <div style={{ display: 'flex', gap: 4, marginTop: 2 }}>
+            <div style={{ width: 32, height: 8, borderRadius: 2, backgroundColor: '#df7e30' }} />
+            <div style={{ width: 26, height: 8, borderRadius: 2, backgroundColor: 'var(--color-border)' }} />
+          </div>
+        </div>
+      ),
+    },
   ];
 
   return (

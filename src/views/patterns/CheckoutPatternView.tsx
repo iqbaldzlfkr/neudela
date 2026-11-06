@@ -2057,68 +2057,37 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
   };
 
   return (
-    <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
+    <div className="pattern-checkout-view" style={{ paddingBottom: 'var(--space-16)', animation: 'fadeIn 0.5s ease-out' }}>
       {/* ── Page Header ── */}
-      <div className="page-header">
-        <span
-          style={{
-            fontSize: 'var(--fs-text-xs)',
-            fontWeight: 'var(--font-weight-bold)',
-            color: 'var(--color-primary)',
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            display: 'block',
-            marginBottom: 'var(--space-2)',
-          }}
-        >
-          {isId ? 'Pola Komposit & Alur Transaksi' : 'Composite Patterns & Transaction Flows'}
-        </span>
-        <h1 className="page-title">
+      <div className="page-header" style={{ marginBottom: 'var(--space-8)' }}>
+        <span className="page-category-label">Pattern</span>
+
+        <h1 className="page-title" style={{ fontSize: '2.4rem', fontWeight: 800, letterSpacing: '-0.02em', margin: '4px 0 10px 0' }}>
           {isId ? 'Alur Checkout & Transaksi Pembayaran' : 'Checkout & Payment Flows'}
         </h1>
-        <p className="page-subtitle">
+        <p className="page-subtitle" style={{ width: '100%', maxWidth: '100%', lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
           {isId
             ? 'Arsitektur checkout enterprise berkonversi tinggi: Alur bertahap dengan NeuronStepper, akordion satu halaman ekspres, gateway pembayaran QRIS dinamis & Virtual Account, pengadaan PO B2B dengan e-Faktur Pajak, dan konfirmasi resi sukses.'
             : 'Enterprise-grade transaction & purchasing architectures: Multi-step linear checkout with NeuronStepper, express single-page accordions, omnichannel QRIS & VA payment hubs, B2B procurement with tax invoicing, and post-purchase confirmation receipts.'}
         </p>
 
-        {/* Feature Tags Pill Header */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: 'var(--space-4)' }}>
-          <span
-            style={{
-              fontSize: '12px',
-              padding: '4px 10px',
-              borderRadius: '20px',
-              background: 'rgba(223, 126, 48, 0.1)',
-              color: 'var(--color-primary)',
-              fontWeight: 600,
-            }}
-          >
-            💳 5 Arsitektur Transaksi Siap Pakai
-          </span>
-          <span
-            style={{
-              fontSize: '12px',
-              padding: '4px 10px',
-              borderRadius: '20px',
-              background: 'var(--color-bg-subtle)',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            Steppers · Accodions · QRIS · Virtual Account · B2B PO
-          </span>
-          <span
-            style={{
-              fontSize: '12px',
-              padding: '4px 10px',
-              borderRadius: '20px',
-              background: 'rgba(16, 185, 129, 0.1)',
-              color: '#10b981',
-              fontWeight: 600,
-            }}
-          >
-            ✓ WCAG 2.1 AA Compliant
-          </span>
+        {/* Stats Header Pills */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-4)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '12px' }}>
+            <CreditCard size={14} color="#df7e30" />
+            <span>{isId ? 'Total Arsitektur:' : 'Total Architectures:'}</span>
+            <strong style={{ color: 'var(--color-primary)' }}>5 {isId ? 'Varian Transaksi' : 'Variants'}</strong>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '12px' }}>
+            <Receipt size={14} color="#3b82f6" />
+            <span>{isId ? 'Alur Transaksi:' : 'Transaction Flows:'}</span>
+            <strong style={{ color: '#3b82f6' }}>Stepper · Accordion · QRIS & VA · B2B PO · Receipt</strong>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '12px' }}>
+            <ShieldCheck size={14} color="#10b981" />
+            <span>{isId ? 'Kepatuhan:' : 'Compliance Standard:'}</span>
+            <strong style={{ color: '#10b981' }}>WCAG 2.1 AA · PCI-DSS Ready</strong>
+          </div>
         </div>
       </div>
 
@@ -2568,8 +2537,8 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
           onClick: () => setActiveTab('pat-maps'),
         }}
         next={{
-          label: isId ? 'Kembali ke Ringkasan Pola' : 'Patterns Overview',
-          onClick: () => setActiveTab('pat-overview'),
+          label: isId ? 'Pengaturan & Akses RBAC' : 'Workspace Settings & RBAC',
+          onClick: () => setActiveTab('pat-settings'),
         }}
       />
     </div>
