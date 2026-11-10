@@ -3,11 +3,10 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useLanguage } from '../../context/LanguageContext';
 import NextPrevious from '../../components/NextPrevious';
-import NeuronBadge, { NeuronBadgeVariant } from '../../components/NeuronBadge';
+import NeuronBadge from '../../components/NeuronBadge';
 import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
-import NeuronSelect from '../../components/NeuronSelect';
 import {
   MapPin,
   Navigation,
@@ -30,7 +29,6 @@ import {
   Flame,
   Activity,
   LocateFixed,
-  Layers,
   Plus,
   Minus,
   FastForward,
@@ -941,7 +939,7 @@ function LiveOrderTrackingPreview({ isDarkProp }: { isDarkProp?: boolean }) {
     tileLayerRef.current.setUrl(isDarkMode ? TILE_CARTO_DARK : TILE_CARTO_VOYAGER);
   }, [isDarkMode]);
 
-  const remainingDistance = Math.max(0, ((100 - progress) * 0.038).toFixed(1));
+  const remainingDistance = Math.max(0, (100 - progress) * 0.038).toFixed(1);
   const remainingMinutes = Math.max(1, Math.round((100 - progress) * 0.14));
 
   return (
@@ -2834,6 +2832,9 @@ export default function MapPatternView({ setActiveTab, isDarkMode: isDarkProp }:
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2844,15 +2845,20 @@ export default function MapPatternView({ setActiveTab, isDarkMode: isDarkProp }:
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2861,15 +2867,20 @@ export default function MapPatternView({ setActiveTab, isDarkMode: isDarkProp }:
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2882,14 +2893,17 @@ export default function MapPatternView({ setActiveTab, isDarkMode: isDarkProp }:
                     onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                     style={{
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      height: 36,
+                      boxSizing: 'border-box',
                       gap: 6,
                       background: 'var(--color-primary)',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 8,
-                      padding: '6px 12px',
+                      padding: '0 14px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -2905,13 +2919,16 @@ export default function MapPatternView({ setActiveTab, isDarkMode: isDarkProp }:
                     type="button"
                     onClick={() => setIsModalOpen(false)}
                     style={{
+                      height: 36,
+                      width: 36,
+                      boxSizing: 'border-box',
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
                       borderRadius: 8,
-                      padding: 6,
+                      padding: 0,
                       cursor: 'pointer',
                       color: 'var(--color-text-primary)',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}

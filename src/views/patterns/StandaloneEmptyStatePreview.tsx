@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronSelect from '../../components/NeuronSelect';
 import type { EmptyStateVariantId } from './EmptyStatePatternView';
@@ -10,7 +10,6 @@ import {
   Monitor,
   Tablet,
   Smartphone,
-  Compass,
 } from 'lucide-react';
 
 interface StandaloneEmptyStatePreviewProps {
@@ -125,7 +124,7 @@ export default function StandaloneEmptyStatePreview({
               value={activeVariant}
               onChange={(newVal) => {
                 setActiveVariant(newVal as EmptyStateVariantId);
-                window.location.hash = `#standalone-empty-state-${newVal}`;
+                window.location.hash = `#preview-empty-state-${newVal}`;
               }}
               options={EMPTY_STATE_VARIANTS.map((v) => ({
                 value: v.id,

@@ -6,7 +6,6 @@ import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronCheckbox from '../../components/NeuronCheckbox';
 import NeuronCard from '../../components/NeuronCard';
-import NeuronProgress from '../../components/NeuronProgress';
 import NeuronButtonGroup from '../../components/NeuronButtonGroup';
 import NeuronDivider from '../../components/NeuronDivider';
 import NeuronAlert from '../../components/NeuronAlert';
@@ -17,13 +16,11 @@ import {
   Key,
   ShieldCheck,
   CheckCircle2,
-  AlertCircle,
   Eye,
   EyeOff,
   Smartphone,
   MessageSquare,
   Building2,
-  Users,
   Copy,
   Check,
   ExternalLink,
@@ -31,23 +28,15 @@ import {
   Sun,
   Moon,
   Monitor,
-  Tablet,
-  ChevronRight,
-  ArrowRight,
   Sparkles,
   Fingerprint,
-  RefreshCw,
   Search,
   Globe,
   Plus,
   Trash2,
   Laptop,
   Layers,
-  FileCode,
   Shield,
-  HelpCircle,
-  Server,
-  Code2,
   Sliders,
   LayoutDashboard,
   X,
@@ -1218,7 +1207,6 @@ function MagicLinkPasswordlessForm() {
   const isId = language === 'id';
   const [email, setEmail] = useState('sarah.developer@acme.com');
   const [isSent, setIsSent] = useState(false);
-  const [timer, setTimer] = useState(60);
 
   return (
     <NeuronCard
@@ -3549,6 +3537,9 @@ export default function AuthPatternView({ setActiveTab }: AuthPatternViewProps) 
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -3559,15 +3550,20 @@ export default function AuthPatternView({ setActiveTab }: AuthPatternViewProps) 
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -3576,15 +3572,20 @@ export default function AuthPatternView({ setActiveTab }: AuthPatternViewProps) 
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -3598,14 +3599,17 @@ export default function AuthPatternView({ setActiveTab }: AuthPatternViewProps) 
                     onClick={(e) => handleOpenStandalone(modalVariant, e)}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                     style={{
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      height: 36,
+                      boxSizing: 'border-box',
                       gap: 6,
                       background: 'var(--color-primary)',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 8,
-                      padding: '6px 12px',
+                      padding: '0 14px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -3621,13 +3625,16 @@ export default function AuthPatternView({ setActiveTab }: AuthPatternViewProps) 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
                     style={{
+                      height: 36,
+                      width: 36,
+                      boxSizing: 'border-box',
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
                       borderRadius: 8,
-                      padding: 6,
+                      padding: 0,
                       cursor: 'pointer',
                       color: 'var(--color-text-primary)',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}

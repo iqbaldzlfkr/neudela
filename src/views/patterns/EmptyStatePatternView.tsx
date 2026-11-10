@@ -9,7 +9,6 @@ import {
   Search,
   Plus,
   RefreshCw,
-  SlidersHorizontal,
   CheckCircle2,
   Circle,
   ExternalLink,
@@ -17,42 +16,23 @@ import {
   Copy,
   Check,
   Eye,
-  Code2,
   ShieldAlert,
   Lock,
-  AlertTriangle,
   ServerCrash,
   Compass,
   Home,
-  ArrowLeft,
   HelpCircle,
   Send,
   Terminal,
   Activity,
-  FileText,
-  Layers,
-  Sparkles,
-  Clock,
   ChevronDown,
   ChevronUp,
-  UploadCloud,
   CheckCircle,
-  AlertCircle,
   Cpu,
   Database,
-  Globe,
-  Radio,
-  Share2,
   Shield,
-  Key,
-  Users,
-  Calendar,
-  FileCode,
   ArrowRight,
-  TrendingUp,
-  Sliders,
   Play,
-  RotateCcw,
 } from 'lucide-react';
 
 export type EmptyStateVariantId =
@@ -896,17 +876,13 @@ function OnboardingChecklistPreview() {
       {/* ── Welcome Header Card with Real-Case Metrics ── */}
       <div
         style={{
-          background: 'linear-gradient(135deg, var(--color-bg-surface) 0%, var(--color-bg-canvas) 100%)',
+          background: 'var(--color-bg-surface)',
           border: '1px solid var(--color-border)',
-          borderRadius: '20px',
-          padding: '28px',
+          borderRadius: '16px',
+          padding: '24px 28px',
           boxShadow: 'var(--shadow-sm)',
-          position: 'relative',
-          overflow: 'hidden',
         }}
       >
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #3b82f6 0%, #10b981 100%)' }} />
-
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px', marginBottom: '20px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
@@ -1199,84 +1175,163 @@ function Error404Preview({ onBackToDashboard }: { onBackToDashboard?: () => void
 
   return (
     <div style={{ maxWidth: '840px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* ── Top Breadcrumb Path Diagnostic Trail ── */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '8px 16px',
-          borderRadius: '10px',
-          background: 'var(--color-bg-canvas)',
-          border: '1px solid var(--color-border)',
-          fontSize: '12px',
-          fontFamily: 'monospace',
-          color: 'var(--color-text-secondary)',
-          width: 'fit-content',
-        }}
-      >
-        <span>Dashboard</span>
-        <span>/</span>
-        <span>Keuangan</span>
-        <span>/</span>
-        <span>Faktur Pajak</span>
-        <span>/</span>
-        <span style={{ color: '#8b5cf6', fontWeight: 700 }}>[INV-2026-90214-ID ✕]</span>
-      </div>
-
-      {/* ── Main High-Impact 404 Graphic Card ── */}
+      {/* ── Main High-Impact 404 Diagnostic Window Card ── */}
       <div
         style={{
           background: 'var(--color-bg-surface)',
           border: '1px solid var(--color-border)',
-          borderRadius: '20px',
-          padding: '40px 32px',
-          textAlign: 'center',
+          borderRadius: '16px',
           boxShadow: 'var(--shadow-sm)',
-          position: 'relative',
           overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #8b5cf6 0%, #c084fc 100%)' }} />
+        {/* Diagnostic URL & Route Header Bar */}
+        <div
+          style={{
+            padding: '12px 20px',
+            background: 'var(--color-bg-canvas)',
+            borderBottom: '1px solid var(--color-border)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Left: Icon Badge + Context Breadcrumbs */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '7px',
+                background: 'rgba(139, 92, 246, 0.12)',
+                border: '1px solid rgba(139, 92, 246, 0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#8b5cf6',
+                flexShrink: 0,
+              }}
+            >
+              <Compass size={14} strokeWidth={2} />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontSize: '12px',
+                color: 'var(--color-text-secondary)',
+              }}
+            >
+              <span style={{ fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                {isId ? 'Diagnostik URL' : 'URL Diagnostics'}
+              </span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>·</span>
+              <span>Dashboard</span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>/</span>
+              <span>{isId ? 'Keuangan' : 'Finance'}</span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>/</span>
+              <span style={{ color: '#8b5cf6', fontWeight: 600, fontFamily: 'monospace' }}>INV-2026-90214-ID</span>
+            </div>
+          </div>
 
-        {/* 404 Large Typographic Header */}
-        <div style={{ position: 'relative', display: 'inline-block', marginBottom: '8px' }}>
-          <span
-            style={{
-              fontSize: '104px',
-              fontWeight: 900,
-              letterSpacing: '-0.06em',
-              lineHeight: 1,
-              background: 'linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              display: 'inline-block',
-            }}
-          >
-            404
-          </span>
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '14px',
-              right: '-18px',
-              width: '44px',
-              height: '44px',
-              borderRadius: '50%',
-              background: 'var(--color-bg-surface)',
-              border: '2px solid #8b5cf6',
-              boxShadow: '0 4px 14px rgba(139, 92, 246, 0.25)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#8b5cf6',
-            }}
-          >
-            <Compass size={24} />
+          {/* Right: HTTP 404 Status Pill */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: 700,
+                fontFamily: 'monospace',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                background: 'rgba(139, 92, 246, 0.12)',
+                color: '#8b5cf6',
+                border: '1px solid rgba(139, 92, 246, 0.25)',
+              }}
+            >
+              HTTP 404 · NOT FOUND
+            </span>
           </div>
         </div>
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.12)', color: '#8b5cf6', fontSize: '12px', fontWeight: 800, marginBottom: '14px' }}>
+        {/* Card Body */}
+        <div
+          style={{
+            padding: '40px 32px 36px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* 404 Large Typographic Header */}
+          <div style={{ position: 'relative', display: 'inline-block', marginBottom: '16px' }}>
+            <span
+              style={{
+                fontSize: '104px',
+                fontWeight: 900,
+                letterSpacing: '-0.06em',
+                lineHeight: 1,
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block',
+              }}
+            >
+              404
+            </span>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '14px',
+                right: '-18px',
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'var(--color-bg-surface)',
+                border: '2px solid #8b5cf6',
+                boxShadow: '0 4px 14px rgba(139, 92, 246, 0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#8b5cf6',
+              }}
+            >
+              <Compass size={24} />
+            </div>
+          </div>
+
+        {/* Status Badge */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '5px 14px',
+            borderRadius: '20px',
+            background: 'rgba(139, 92, 246, 0.12)',
+            border: '1px solid rgba(139, 92, 246, 0.25)',
+            color: '#8b5cf6',
+            fontSize: '11.5px',
+            fontWeight: 800,
+            marginBottom: '16px',
+            letterSpacing: '0.01em',
+          }}
+        >
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: '#8b5cf6',
+              display: 'inline-block',
+              boxShadow: '0 0 6px #8b5cf6',
+            }}
+          />
           <span>HTTP 404 • Resource Relocated or Retention Expired</span>
         </div>
 
@@ -1310,7 +1365,7 @@ function Error404Preview({ onBackToDashboard }: { onBackToDashboard?: () => void
           </NeuronButton>
           <NeuronButton
             size="md"
-            variant="tertiary"
+            variant="outline"
             leadingIcon={<Send size={15} />}
             onClick={() => {
               setReportSent(true);
@@ -1355,6 +1410,7 @@ function Error404Preview({ onBackToDashboard }: { onBackToDashboard?: () => void
         </div>
       </div>
     </div>
+  </div>
   );
 }
 
@@ -1387,16 +1443,77 @@ function Error403Preview() {
         style={{
           background: 'var(--color-bg-surface)',
           border: '1px solid var(--color-border)',
-          borderRadius: '20px',
-          padding: '32px',
+          borderRadius: '16px',
           boxShadow: 'var(--shadow-sm)',
-          position: 'relative',
           overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)' }} />
+        {/* IAM Gateway Verification Header */}
+        <div
+          style={{
+            padding: '12px 20px',
+            background: 'var(--color-bg-canvas)',
+            borderBottom: '1px solid var(--color-border)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Left: Icon Badge + Gateway Route */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '7px',
+                background: 'rgba(245, 158, 11, 0.12)',
+                border: '1px solid rgba(245, 158, 11, 0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#d97706',
+                flexShrink: 0,
+              }}
+            >
+              <ShieldAlert size={14} strokeWidth={2} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--color-text-secondary)' }}>
+              <span style={{ fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                {isId ? 'Otorisasi IAM Gateway' : 'IAM Gateway Clearance'}
+              </span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>·</span>
+              <span style={{ fontFamily: 'monospace', fontSize: '11.5px', color: 'var(--color-text-secondary)' }}>
+                iam.neudela.dev/rbac/clearance-denied
+              </span>
+            </div>
+          </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start' }}>
+          {/* Right: HTTP 403 Badge */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: 700,
+                fontFamily: 'monospace',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                background: 'rgba(245, 158, 11, 0.12)',
+                color: '#d97706',
+                border: '1px solid rgba(245, 158, 11, 0.25)',
+              }}
+            >
+              HTTP 403 · RESTRICTED
+            </span>
+          </div>
+        </div>
+
+        {/* Card Body */}
+        <div style={{ padding: '32px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start' }}>
           <div
             style={{
               width: '64px',
@@ -1415,7 +1532,33 @@ function Error403Preview() {
           </div>
 
           <div style={{ flex: 1, minWidth: '280px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.15)', color: '#d97706', fontSize: '11px', fontWeight: 800, marginBottom: '8px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '4px 12px',
+                borderRadius: '20px',
+                background: 'rgba(245, 158, 11, 0.15)',
+                border: '1px solid rgba(245, 158, 11, 0.3)',
+                color: '#d97706',
+                fontSize: '11.5px',
+                fontWeight: 800,
+                marginBottom: '10px',
+                letterSpacing: '0.01em',
+              }}
+            >
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background: '#f59e0b',
+                  display: 'inline-block',
+                  boxShadow: '0 0 6px rgba(245, 158, 11, 0.8)',
+                  animation: 'pulseGlow 2s infinite ease-in-out',
+                }}
+              />
               <span>HTTP 403 • Restricted Permission Clearance Required</span>
             </div>
 
@@ -1623,6 +1766,7 @@ function Error403Preview() {
             </div>
           </form>
         )}
+        </div>
       </div>
     </div>
   );
@@ -1676,36 +1820,158 @@ Failover Replica: jkt-db-standby-03 synchronized at 99.4%`;
         style={{
           background: 'var(--color-bg-surface)',
           border: '1px solid var(--color-border)',
-          borderRadius: '20px',
-          padding: '36px',
-          textAlign: 'center',
+          borderRadius: '16px',
           boxShadow: 'var(--shadow-sm)',
-          position: 'relative',
           overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #ef4444 0%, #f87171 100%)' }} />
-
-        {/* Server Alert Graphic */}
+        {/* SRE Incident Console Header */}
         <div
           style={{
-            width: '76px',
-            height: '76px',
-            borderRadius: '20px',
-            background: 'rgba(239, 68, 68, 0.12)',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
-            display: 'inline-flex',
+            padding: '12px 20px',
+            background: 'var(--color-bg-canvas)',
+            borderBottom: '1px solid var(--color-border)',
+            display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: '#ef4444',
-            marginBottom: '16px',
-            boxShadow: '0 8px 24px rgba(239, 68, 68, 0.15)',
+            justifyContent: 'space-between',
+            gap: '12px',
+            flexWrap: 'wrap',
           }}
         >
-          <ServerCrash size={38} strokeWidth={1.8} />
+          {/* Left: Icon Badge + Cluster Host + Incident Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '7px',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#ef4444',
+                flexShrink: 0,
+              }}
+            >
+              <Activity size={14} strokeWidth={2} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--color-text-secondary)' }}>
+              <span style={{ fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                {isId ? 'Konsol Insiden SRE' : 'SRE Incident Console'}
+              </span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>·</span>
+              <span style={{ fontFamily: 'monospace', fontSize: '11.5px', color: 'var(--color-text-secondary)' }}>
+                cluster-db-primary.jkt
+              </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: '#ef4444',
+                  background: 'rgba(239, 68, 68, 0.1)',
+                  padding: '1px 6px',
+                  borderRadius: '4px',
+                }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444', animation: 'pulseGlow 1.5s infinite ease-in-out' }} />
+                SEV-1 FAILOVER
+              </span>
+            </div>
+          </div>
+
+          {/* Right: HTTP Status Code Pill */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: 700,
+                fontFamily: 'monospace',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                background: 'rgba(239, 68, 68, 0.12)',
+                color: '#ef4444',
+                border: '1px solid rgba(239, 68, 68, 0.25)',
+              }}
+            >
+              HTTP 500 · CRITICAL
+            </span>
+          </div>
         </div>
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', borderRadius: '10px', background: 'rgba(239, 68, 68, 0.12)', color: '#dc2626', fontSize: '11px', fontWeight: 800, marginBottom: '10px' }}>
+        {/* Card Body */}
+        <div
+          style={{
+            padding: '40px 32px 36px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Server Alert Graphic */}
+          <div style={{ position: 'relative', width: '84px', height: '84px', marginBottom: '18px' }}>
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              borderRadius: '24px',
+              background: 'radial-gradient(circle, rgba(239, 68, 68, 0.28) 0%, rgba(239, 68, 68, 0) 70%)',
+              animation: 'pulseGlow 2.4s infinite ease-in-out',
+            }}
+          />
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              borderRadius: '24px',
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1.5px solid rgba(239, 68, 68, 0.3)',
+              boxShadow: '0 12px 30px rgba(239, 68, 68, 0.16)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ef4444',
+            }}
+          >
+            <ServerCrash size={42} strokeWidth={1.8} />
+          </div>
+        </div>
+
+        {/* Severity Status Badge */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '5px 14px',
+            borderRadius: '20px',
+            background: 'rgba(239, 68, 68, 0.12)',
+            border: '1px solid rgba(239, 68, 68, 0.25)',
+            color: '#dc2626',
+            fontSize: '11.5px',
+            fontWeight: 800,
+            marginBottom: '16px',
+            letterSpacing: '0.01em',
+          }}
+        >
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: '#ef4444',
+              display: 'inline-block',
+              boxShadow: '0 0 8px rgba(239, 68, 68, 0.8)',
+              animation: 'pulseGlow 1.8s infinite ease-in-out',
+            }}
+          />
           <span>CRITICAL SEV-1 • Cluster Database Failover Engaged</span>
         </div>
 
@@ -1758,7 +2024,7 @@ Failover Replica: jkt-db-standby-03 synchronized at 99.4%`;
             {isId ? 'Status Layanan Publik (99.98%)' : 'Public Status Page (99.98%)'}
           </NeuronButton>
 
-          <NeuronButton size="md" variant="tertiary" leadingIcon={<Terminal size={14} />} onClick={() => setShowTrace(!showTrace)}>
+          <NeuronButton size="md" variant="outline" leadingIcon={<Terminal size={14} />} onClick={() => setShowTrace(!showTrace)}>
             {showTrace ? (isId ? 'Sembunyikan Trace' : 'Hide Trace') : (isId ? 'Lihat Trace Developer' : 'Developer Trace')}
           </NeuronButton>
         </div>
@@ -1832,6 +2098,7 @@ Failover Replica: jkt-db-standby-03 synchronized at 99.4%`;
             <pre style={{ margin: 0, overflowX: 'auto' }}>{debugTrace}</pre>
           </div>
         )}
+        </div>
       </div>
 
       {/* Microservice Health Matrix Grid */}
@@ -1863,7 +2130,7 @@ Failover Replica: jkt-db-standby-03 synchronized at 99.4%`;
 // ─────────────────────────────────────────────
 export function renderLiveEmptyStatePreview(
   variantId: EmptyStateVariantId,
-  isDarkMode: boolean,
+  _isDarkMode: boolean,
   setActiveTab?: (tab: string) => void
 ) {
   switch (variantId) {
@@ -2072,9 +2339,10 @@ export default function EmptyStatePatternView({
     setIsModalOpen(true);
   };
 
-  const handleOpenNewTab = (vId: EmptyStateVariantId) => {
-    window.location.hash = `#standalone-empty-state-${vId}`;
-    setActiveTab(`standalone-empty-state-${vId}`);
+  const handleOpenNewTab = (vId: EmptyStateVariantId, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const url = `${window.location.origin}${window.location.pathname}#preview-empty-state-${vId}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyTSX = () => {
@@ -2447,6 +2715,9 @@ export default function EmptyStatePatternView({
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2457,15 +2728,20 @@ export default function EmptyStatePatternView({
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2474,15 +2750,20 @@ export default function EmptyStatePatternView({
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2495,14 +2776,17 @@ export default function EmptyStatePatternView({
                   onClick={() => handleOpenNewTab(selectedVariant)}
                   title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                   style={{
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     gap: 6,
                     background: 'var(--color-primary)',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: 8,
-                    padding: '6px 12px',
+                    padding: '0 14px',
                     fontSize: 12,
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -2520,12 +2804,15 @@ export default function EmptyStatePatternView({
                   onClick={() => setIsModalOpen(false)}
                   title={isId ? 'Tutup (Esc)' : 'Close (Esc)'}
                   style={{
+                    height: 36,
+                    width: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     border: '1px solid var(--color-border)',
                     borderRadius: 8,
-                    padding: 6,
+                    padding: 0,
                     cursor: 'pointer',
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'var(--color-text-primary)',

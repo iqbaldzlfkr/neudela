@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface NeuronButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'destructive' | 'danger' | 'purple';
+  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'destructive' | 'danger' | 'purple' | 'ghost' | 'tertiary';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   disabled?: boolean;
@@ -39,7 +39,8 @@ export default function NeuronButton({
 
   const activeClasses = active ? 'neuron-btn--active is-active' : '';
   const iconOnlyClass = iconOnly ? 'neuron-btn--icon-only' : '';
-  const combinedClassName = `neuron-btn neuron-btn--${variant} neuron-btn--${size} ${iconOnlyClass} ${activeClasses} ${className}`.trim().replace(/\s+/g, ' ');
+  const normalizedVariant = variant === 'ghost' ? 'text' : variant === 'tertiary' ? 'outline' : variant;
+  const combinedClassName = `neuron-btn neuron-btn--${normalizedVariant} neuron-btn--${size} ${iconOnlyClass} ${activeClasses} ${className}`.trim().replace(/\s+/g, ' ');
 
   return (
     <button

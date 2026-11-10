@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronSelect from '../../components/NeuronSelect';
 import type { MapVariantId } from './MapPatternView';
@@ -10,7 +10,6 @@ import {
   Monitor,
   Tablet,
   Smartphone,
-  Compass,
 } from 'lucide-react';
 
 interface StandaloneMapPreviewProps {

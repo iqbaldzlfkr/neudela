@@ -32,7 +32,7 @@ export interface DropdownOption {
 
 export type SelectOption = DropdownOption;
 
-export type NeuronDropdownSize = 'sm' | 'md' | 'lg';
+export type NeuronDropdownSize = 'xs' | 'sm' | 'md' | 'lg';
 export type NeuronSelectSize = NeuronDropdownSize;
 
 export type NeuronDropdownState = 'default' | 'success' | 'error';

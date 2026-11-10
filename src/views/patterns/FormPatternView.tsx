@@ -4,7 +4,6 @@ import NextPrevious from '../../components/NextPrevious';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronButton from '../../components/NeuronButton';
-import NeuronTooltip from '../../components/NeuronTooltip';
 import NeuronProgress from '../../components/NeuronProgress';
 import NeuronStepper, { type StepperStep } from '../../components/NeuronStepper';
 import NeuronInput from '../../components/NeuronInput';
@@ -19,8 +18,6 @@ import {
   Copy,
   Eye,
   X,
-  Search,
-  ChevronDown,
   Layers,
   ShieldCheck,
   Star,
@@ -34,23 +31,17 @@ import {
   Sparkles,
   Lock,
   EyeOff,
-  AlertCircle,
   CreditCard,
-  ShoppingBag,
   User,
   Building,
   Building2,
   Server,
   Users,
   Rocket,
-  Cloud,
   Mail,
   Key,
   Send,
-  HelpCircle,
-  Save,
   CheckCircle2,
-  Calendar,
   Tag,
 } from 'lucide-react';
 
@@ -2883,6 +2874,9 @@ export function ApiKeyDialog() {
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2892,15 +2886,20 @@ export function ApiKeyDialog() {
                   <button
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2908,15 +2907,20 @@ export function ApiKeyDialog() {
                   <button
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2924,15 +2928,20 @@ export function ApiKeyDialog() {
                   <button
                     onClick={() => setModalTab('css')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'css' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'css' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     CSS Tokens
@@ -2945,14 +2954,17 @@ export function ApiKeyDialog() {
                     onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                     style={{
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      height: 36,
+                      boxSizing: 'border-box',
                       gap: 6,
                       background: 'var(--color-primary)',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 8,
-                      padding: '6px 12px',
+                      padding: '0 14px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -2967,13 +2979,16 @@ export function ApiKeyDialog() {
                   <button
                     onClick={() => setIsModalOpen(false)}
                     style={{
+                      height: 36,
+                      width: 36,
+                      boxSizing: 'border-box',
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
                       borderRadius: 8,
-                      padding: 6,
+                      padding: 0,
                       cursor: 'pointer',
                       color: 'var(--color-text-primary)',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}

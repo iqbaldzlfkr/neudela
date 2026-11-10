@@ -17,6 +17,10 @@ export interface NeuronProgressProps {
   size?: NeuronProgressSize;
   /** Color variant */
   variant?: NeuronProgressVariant;
+  /** Alias or custom color for variant (e.g. success, primary, danger) */
+  color?: string;
+  /** Custom bar height in px */
+  height?: number;
   /** Show percentage label */
   showValue?: boolean;
   /** Where to position the percentage value (bar only) */
@@ -108,6 +112,8 @@ function ProgressBar({
   value = 0,
   size = 'md',
   variant = 'brand',
+  color,
+  height: customHeight,
   showValue = false,
   valuePosition = 'top',
   label,
@@ -119,10 +125,15 @@ function ProgressBar({
   className = '',
   style,
 }: NeuronProgressProps) {
+  const effectiveVariant: NeuronProgressVariant = (
+    color === 'primary' ? 'brand' :
+    color === 'danger' ? 'error' :
+    (color as NeuronProgressVariant) || variant
+  );
   const clamp = Math.min(100, Math.max(0, value));
-  const height = BAR_HEIGHT[size];
-  const fillColor = VARIANT_COLOR[variant];
-  const trackColor = VARIANT_TRACK[variant];
+  const height = customHeight ?? BAR_HEIGHT[size];
+  const fillColor = VARIANT_COLOR[effectiveVariant] || VARIANT_COLOR.brand;
+  const trackColor = VARIANT_TRACK[effectiveVariant] || VARIANT_TRACK.brand;
 
   const fillStyle: React.CSSProperties = {
     width: indeterminate ? '40%' : `${clamp}%`,

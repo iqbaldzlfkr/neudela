@@ -4,11 +4,8 @@ import NextPrevious from '../../components/NextPrevious';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
-import NeuronCard from '../../components/NeuronCard';
-import NeuronDivider from '../../components/NeuronDivider';
 import NeuronAlert from '../../components/NeuronAlert';
 import { NeuronToggle } from '../../components/NeuronToggle';
-import NeuronCheckbox from '../../components/NeuronCheckbox';
 import NeuronSelect from '../../components/NeuronSelect';
 import {
   Settings,
@@ -26,27 +23,14 @@ import {
   UserPlus,
   Trash2,
   Globe,
-  Lock,
   Clock,
   Laptop,
   Smartphone,
   Activity,
   Send,
-  RefreshCw,
-  LogOut,
-  Sliders,
   CheckCircle2,
-  ChevronRight,
   Search,
-  Filter,
-  Code2,
-  Server,
-  Database,
-  Radio,
-  FileText,
   Download,
-  AlertCircle,
-  Sparkles,
 } from 'lucide-react';
 
 export type SettingsVariantId =
@@ -431,10 +415,9 @@ function SettingsMiniSilhouette({ id, isDarkMode }: { id: SettingsVariantId; isD
 // Interactive Variant 1: General Workspace & Company Branding
 // ─────────────────────────────────────────────────────────────────────────────
 
-function GeneralWorkspacePreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function GeneralWorkspacePreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [workspaceName, setWorkspaceName] = useState('Acme Global Technologies');
   const [workspaceSlug, setWorkspaceSlug] = useState('acme-global');
@@ -627,7 +610,7 @@ function GeneralWorkspacePreview({ isDarkProp }: { isDarkProp?: boolean }) {
         {/* Form Fields */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
           <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: 'var(--color-text-secondary)', marginBottom: 6 }}>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: 'var(--color-text-secondary)', marginBottom: 6, lineHeight: '16px' }}>
               {isId ? 'Nama Legal Perusahaan' : 'Legal Workspace Name'}
             </label>
             <NeuronInput
@@ -638,7 +621,7 @@ function GeneralWorkspacePreview({ isDarkProp }: { isDarkProp?: boolean }) {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: 'var(--color-text-secondary)', marginBottom: 6 }}>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: 'var(--color-text-secondary)', marginBottom: 6, lineHeight: '16px' }}>
               {isId ? 'Slug URL Workspace' : 'Workspace Slug URL'}
             </label>
             <NeuronInput
@@ -910,10 +893,9 @@ const INITIAL_MEMBERS: TeamMember[] = [
   { id: '6', name: 'Alya Putri', email: 'alya.p@acme.com', role: 'Viewer', twoFactor: true, lastActive: '5 days ago', avatarColor: '#10b981', isOnline: false },
 ];
 
-function TeamRbacMembersPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function TeamRbacMembersPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [members, setMembers] = useState<TeamMember[]>(INITIAL_MEMBERS);
   const [searchQuery, setSearchQuery] = useState('');
@@ -932,8 +914,8 @@ function TeamRbacMembersPreview({ isDarkProp }: { isDarkProp?: boolean }) {
     return matchesQuery && matchesRole;
   });
 
-  const handleSend2FaReminder = (email: string, name: string) => {
-    setReminderToast(isId ? `Pengingat aktivasi 2FA berhasil dikirim ke ${email}!` : `2FA Setup reminder sent to ${email}!`);
+  const handleSend2FaReminder = (email: string, name?: string) => {
+    setReminderToast(isId ? `Pengingat aktivasi 2FA berhasil dikirim ke ${name || email}!` : `2FA Setup reminder sent to ${name || email}!`);
     setTimeout(() => setReminderToast(null), 3500);
   };
 
@@ -1055,6 +1037,7 @@ function TeamRbacMembersPreview({ isDarkProp }: { isDarkProp?: boolean }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
           <div style={{ flex: 1, minWidth: 240 }}>
             <NeuronInput
+              size="sm"
               placeholder={isId ? 'Cari nama atau email anggota tim...' : 'Search members by name or email...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -1163,8 +1146,25 @@ function TeamRbacMembersPreview({ isDarkProp }: { isDarkProp?: boolean }) {
               </tr>
             </thead>
             <tbody>
-              {filteredMembers.map((m) => (
-                <tr key={m.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+              {filteredMembers.length === 0 ? (
+                <tr>
+                  <td colSpan={5} style={{ padding: '40px 20px', textAlign: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Search size={22} />
+                      </div>
+                      <div style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                        {isId ? 'Tidak ada anggota yang cocok dengan filter' : 'No team members match your filter'}
+                      </div>
+                      <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', maxWidth: 360 }}>
+                        {isId ? 'Coba ubah kata kunci pencarian atau reset filter peran pengguna.' : 'Try adjusting your search query or reset the role filter.'}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                filteredMembers.map((m) => (
+                  <tr key={m.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                   {/* Member Name */}
                   <td style={{ padding: '14px 18px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -1277,7 +1277,7 @@ function TeamRbacMembersPreview({ isDarkProp }: { isDarkProp?: boolean }) {
                     )}
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>
@@ -1845,7 +1845,7 @@ function SecurityAuditSessionsPreview({ isDarkProp }: { isDarkProp?: boolean }) 
 
   const [enforce2FA, setEnforce2FA] = useState(true);
   const [sessionTimeout, setSessionTimeout] = useState('8h');
-  const [logs, setLogs] = useState<AuditLog[]>(MOCK_AUDIT_LOGS);
+  const [logs] = useState<AuditLog[]>(MOCK_AUDIT_LOGS);
   const [logFilter, setLogFilter] = useState<'ALL' | 'SUCCESS' | 'WARNING'>('ALL');
   const [selectedLogJson, setSelectedLogJson] = useState<AuditLog | null>(null);
 
@@ -2121,10 +2121,9 @@ function SecurityAuditSessionsPreview({ isDarkProp }: { isDarkProp?: boolean }) 
 // Interactive Variant 5: Workspace Transfer & Critical Danger Zone
 // ─────────────────────────────────────────────────────────────────────────────
 
-function DangerZoneTransferPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function DangerZoneTransferPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [selectedRecipient, setSelectedRecipient] = useState('rian.p@acme.com');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
@@ -2318,7 +2317,7 @@ function DangerZoneTransferPreview({ isDarkProp }: { isDarkProp?: boolean }) {
 export function renderLiveSettingsPreview(
   variantId: SettingsVariantId,
   isDark: boolean,
-  setActiveTab?: (tabId: string) => void
+  _setActiveTab?: (tabId: string) => void
 ) {
   switch (variantId) {
     case 'general-workspace':
@@ -2467,9 +2466,10 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
     setIsModalOpen(true);
   };
 
-  const handleOpenNewTab = (vId: SettingsVariantId) => {
-    window.location.hash = `#preview-settings-${vId}`;
-    setActiveTab(`preview-settings-${vId}`);
+  const handleOpenNewTab = (vId: SettingsVariantId, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const url = `${window.location.origin}${window.location.pathname}#preview-settings-${vId}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyTSX = () => {
@@ -2832,6 +2832,9 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2842,15 +2845,20 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2859,15 +2867,20 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2880,14 +2893,17 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
                   onClick={() => handleOpenNewTab(selectedVariant)}
                   title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                   style={{
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     gap: 6,
                     background: 'var(--color-primary)',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: 8,
-                    padding: '6px 12px',
+                    padding: '0 14px',
                     fontSize: 12,
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -2905,12 +2921,15 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
                   onClick={() => setIsModalOpen(false)}
                   title={isId ? 'Tutup (Esc)' : 'Close (Esc)'}
                   style={{
+                    height: 36,
+                    width: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     border: '1px solid var(--color-border)',
                     borderRadius: 8,
-                    padding: 6,
+                    padding: 0,
                     cursor: 'pointer',
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'var(--color-text-primary)',

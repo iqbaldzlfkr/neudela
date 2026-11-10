@@ -16,6 +16,8 @@ export type NeuronBadgeVariant =
   | 'info'
   | 'default' // alias for gray
   | 'neutral' // alias for gray
+  | 'secondary' // alias for gray
+  | 'outline' // alias for gray
   | 'primary' // alias for brand
   | 'danger'; // alias for error
 
@@ -67,7 +69,7 @@ export default function NeuronBadge({
 }: NeuronBadgeProps) {
   // Normalize alias variants
   const normalizedVariant = 
-    variant === 'default' || (variant as string) === 'neutral' ? 'gray' :
+    variant === 'default' || (variant as string) === 'neutral' || (variant as string) === 'secondary' || (variant as string) === 'outline' ? 'gray' :
     variant === 'primary' ? 'brand' :
     variant === 'danger' ? 'error' :
     variant === 'info' ? 'info' : variant;

@@ -4,9 +4,6 @@ import NextPrevious from '../../components/NextPrevious';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
-import NeuronRadio from '../../components/NeuronRadio';
-import NeuronCheckbox from '../../components/NeuronCheckbox';
-import NeuronCard from '../../components/NeuronCard';
 import NeuronProgress from '../../components/NeuronProgress';
 import NeuronDivider from '../../components/NeuronDivider';
 import NeuronAlert from '../../components/NeuronAlert';
@@ -26,37 +23,23 @@ import {
   Check,
   ExternalLink,
   FileText,
-  ChevronRight,
   ArrowRight,
   ArrowLeft,
   Clock,
-  AlertCircle,
   Tag,
   Download,
   Printer,
   RefreshCw,
   Plus,
-  Trash2,
-  HelpCircle,
   Lock,
-  Sun,
-  Moon,
-  Monitor,
-  Tablet,
-  Smartphone,
-  Sparkles,
   RotateCcw,
-  FileCheck,
   X,
-  FileCode,
-  Layers,
   ChevronDown,
   ChevronUp,
   PackageCheck,
   Navigation,
   Wallet,
   Landmark,
-  BadgePercent,
   CheckCircle,
   Eye,
 } from 'lucide-react';
@@ -475,10 +458,9 @@ const SHIPPING_OPTIONS: ShippingOption[] = [
   },
 ];
 
-function MultiStepCheckoutPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function MultiStepCheckoutPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [activeStep, setActiveStep] = useState(0);
   const [cart, setCart] = useState<CartItem[]>(INITIAL_CART);
@@ -1094,10 +1076,9 @@ function MultiStepCheckoutPreview({ isDarkProp }: { isDarkProp?: boolean }) {
 // Interactive Variant 2: Express Single-Page Accordion Checkout Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function OnePageAccordionCheckoutPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function OnePageAccordionCheckoutPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [expandedSection, setExpandedSection] = useState<'address' | 'shipping' | 'payment'>('shipping');
   const [selectedCourier, setSelectedCourier] = useState('sicepat');
@@ -1290,10 +1271,9 @@ function OnePageAccordionCheckoutPreview({ isDarkProp }: { isDarkProp?: boolean 
 // Interactive Variant 3: Omnichannel Payment Gateway & Live QRIS / VA Hub
 // ─────────────────────────────────────────────────────────────────────────────
 
-function PaymentGatewayHubPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function PaymentGatewayHubPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [activeTab, setActiveTab] = useState<'qris' | 'va' | 'card' | 'ewallet'>('qris');
   const [selectedBank, setSelectedBank] = useState('bca');
@@ -1618,10 +1598,9 @@ function PaymentGatewayHubPreview({ isDarkProp }: { isDarkProp?: boolean }) {
 // Interactive Variant 4: B2B Procurement & Purchase Order (PO) Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function B2BProcurementPreview({ isDarkProp }: { isDarkProp?: boolean }) {
+function B2BProcurementPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: boolean }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const [poNumber, setPoNumber] = useState('PO/2026/NEU-OCT/8821');
   const [requireTaxInvoice, setRequireTaxInvoice] = useState(true);
@@ -1764,10 +1743,9 @@ function B2BProcurementPreview({ isDarkProp }: { isDarkProp?: boolean }) {
 // Interactive Variant 5: Post-Purchase Confirmation & Digital Receipt Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-function OrderSuccessReceiptPreview({ isDarkProp, setActiveTab }: { isDarkProp?: boolean; setActiveTab?: (tabId: string) => void }) {
+function OrderSuccessReceiptPreview({ setActiveTab }: { isDarkProp?: boolean; setActiveTab?: (tabId: string) => void }) {
   const { language } = useLanguage();
   const isId = language === 'id';
-  const isDarkMode = useIsDarkMode(isDarkProp);
 
   const fulfillmentSteps: StepperStep[] = [
     { id: 0, label: isId ? 'Pesanan Dibuat' : 'Order Placed', status: 'completed' },
@@ -2394,6 +2372,9 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2404,15 +2385,20 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2421,15 +2407,20 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2443,14 +2434,17 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
                     onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                     style={{
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      height: 36,
+                      boxSizing: 'border-box',
                       gap: 6,
                       background: 'var(--color-primary)',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 8,
-                      padding: '6px 12px',
+                      padding: '0 14px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -2466,13 +2460,16 @@ export default function CheckoutPatternView({ setActiveTab, isDarkMode: isDarkPa
                     type="button"
                     onClick={() => setIsModalOpen(false)}
                     style={{
+                      height: 36,
+                      width: 36,
+                      boxSizing: 'border-box',
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
                       borderRadius: 8,
-                      padding: 6,
+                      padding: 0,
                       cursor: 'pointer',
                       color: 'var(--color-text-primary)',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}

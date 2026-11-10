@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronSelect from '../../components/NeuronSelect';
 import type { FormVariantId } from './FormPatternView';

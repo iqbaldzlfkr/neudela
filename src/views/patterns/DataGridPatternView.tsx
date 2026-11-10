@@ -4,12 +4,10 @@ import NextPrevious from '../../components/NextPrevious';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronButton from '../../components/NeuronButton';
-import NeuronTooltip from '../../components/NeuronTooltip';
 import NeuronProgress from '../../components/NeuronProgress';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronSelect from '../../components/NeuronSelect';
 import NeuronCheckbox from '../../components/NeuronCheckbox';
-import NeuronToggle from '../../components/NeuronToggle';
 import {
   Check,
   Copy,
@@ -17,15 +15,11 @@ import {
   X,
   Search,
   Filter,
-  ArrowUpDown,
-  ChevronDown,
   ChevronRight,
   Download,
   Plus,
   Trash2,
-  Edit3,
   RefreshCw,
-  SlidersHorizontal,
   Table,
   LayoutGrid,
   Columns,
@@ -33,26 +27,16 @@ import {
   Sparkles,
   Cpu,
   Server,
-  HardDrive,
   Activity,
-  Clock,
   ExternalLink,
   Save,
   Undo2,
   AlertCircle,
   CheckCircle2,
-  DollarSign,
   TrendingUp,
-  BarChart2,
-  Users,
-  Shield,
   Layers,
   FileSpreadsheet,
   CheckSquare,
-  Square,
-  ArrowRight,
-  MoreVertical,
-  HelpCircle,
 } from 'lucide-react';
 
 interface DataGridPatternViewProps {
@@ -185,7 +169,7 @@ const INITIAL_PODS: PodService[] = [
 ];
 
 function MasterDetailDataGrid() {
-  const [pods, setPods] = useState<PodService[]>(INITIAL_PODS);
+  const [pods] = useState<PodService[]>(INITIAL_PODS);
   const [selectedPodId, setSelectedPodId] = useState<string | null>('pod-1');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -260,6 +244,7 @@ function MasterDetailDataGrid() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 260 }}>
           <div style={{ position: 'relative', width: 280 }}>
             <NeuronInput
+              size="sm"
               placeholder="Search service or namespace..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -277,7 +262,7 @@ function MasterDetailDataGrid() {
                 { value: 'restarting', label: 'Restarting' },
               ]}
               value={statusFilter}
-              onChange={(val) => setStatusFilter(val)}
+              onChange={(val) => setStatusFilter(val as string)}
             />
           </div>
         </div>
@@ -1173,6 +1158,7 @@ function FacetedFilterDataGrid() {
         {/* Filter Inputs Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
           <NeuronInput
+            size="sm"
             placeholder="Search account, industry, owner..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -1189,7 +1175,7 @@ function FacetedFilterDataGrid() {
               { value: 'Closed Won', label: 'Closed Won' },
             ]}
             value={selectedStage}
-            onChange={(val) => { setSelectedStage(val); setActiveView('custom'); }}
+            onChange={(val) => { setSelectedStage(val as string); setActiveView('custom'); }}
           />
 
           <NeuronSelect
@@ -1201,7 +1187,7 @@ function FacetedFilterDataGrid() {
               { value: 'NA', label: 'NA (North America)' },
             ]}
             value={selectedRegion}
-            onChange={(val) => { setSelectedRegion(val); setActiveView('custom'); }}
+            onChange={(val) => { setSelectedRegion(val as string); setActiveView('custom'); }}
           />
 
           <NeuronSelect
@@ -1451,6 +1437,7 @@ function MultiViewDataGrid() {
       }}>
         <div style={{ position: 'relative', width: 280 }}>
           <NeuronInput
+            size="sm"
             placeholder="Search digital assets..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -1918,6 +1905,7 @@ function InlineEditableDataGrid() {
                     </td>
                     <td className="neuron-table__td" style={{ padding: '6px 10px' }}>
                       <NeuronInput
+                        size="sm"
                         value={row.name}
                         onChange={(e) => updateRow(row.id, 'name', e.target.value)}
                         placeholder="Line item name"
@@ -1933,6 +1921,7 @@ function InlineEditableDataGrid() {
                     </td>
                     <td className="neuron-table__td" style={{ padding: '6px 10px' }}>
                       <NeuronInput
+                        size="sm"
                         type="text"
                         value={row.q1Allocated.toLocaleString('en-US')}
                         onChange={(e) => {
@@ -1944,6 +1933,7 @@ function InlineEditableDataGrid() {
                     </td>
                     <td className="neuron-table__td" style={{ padding: '6px 10px' }}>
                       <NeuronInput
+                        size="sm"
                         type="text"
                         value={row.q2Projected.toLocaleString('en-US')}
                         onChange={(e) => {
@@ -2644,6 +2634,9 @@ export default function DataGridPatternView({ setActiveTab }: DataGridPatternVie
                 <div
                   style={{
                     display: 'flex',
+                    alignItems: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
@@ -2654,15 +2647,20 @@ export default function DataGridPatternView({ setActiveTab }: DataGridPatternVie
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -2671,15 +2669,20 @@ export default function DataGridPatternView({ setActiveTab }: DataGridPatternVie
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
                       color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
@@ -2693,14 +2696,17 @@ export default function DataGridPatternView({ setActiveTab }: DataGridPatternVie
                     onClick={(e) => handleOpenRealAppNewTab(selectedVariant, e)}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                     style={{
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      height: 36,
+                      boxSizing: 'border-box',
                       gap: 6,
                       background: 'var(--color-primary)',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 8,
-                      padding: '6px 12px',
+                      padding: '0 14px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -2716,13 +2722,16 @@ export default function DataGridPatternView({ setActiveTab }: DataGridPatternVie
                     type="button"
                     onClick={() => setIsModalOpen(false)}
                     style={{
+                      height: 36,
+                      width: 36,
+                      boxSizing: 'border-box',
                       background: 'var(--color-bg-surface)',
                       border: '1px solid var(--color-border)',
                       borderRadius: 8,
-                      padding: 6,
+                      padding: 0,
                       cursor: 'pointer',
                       color: 'var(--color-text-primary)',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}

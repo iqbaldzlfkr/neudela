@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NeuronCard from '../../../components/NeuronCard';
 import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
@@ -10,11 +10,8 @@ import {
   Activity,
   ArrowUpRight,
   ArrowDownRight,
-  CheckCircle2,
   Building2,
-  Users,
   Award,
-  Sparkles,
 } from 'lucide-react';
 
 interface ExecutiveSaasDashboardProps {
@@ -25,11 +22,8 @@ interface ExecutiveSaasDashboardProps {
 
 export default function ExecutiveSaasDashboard({
   isId,
-  previewTheme,
   onTriggerModal,
 }: ExecutiveSaasDashboardProps) {
-  const [hoveredMonth, setHoveredMonth] = useState<string | null>(null);
-
   const monthsData = [
     { month: 'Jan', actual: 280, target: 250 },
     { month: 'Feb', actual: 310, target: 275 },

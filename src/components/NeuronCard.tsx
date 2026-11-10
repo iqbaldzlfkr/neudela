@@ -15,12 +15,14 @@ export type NeuronCardPadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 export type NeuronCardRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 export type NeuronCardHoverEffect = 'auto' | 'none' | 'lift' | 'glow' | 'border' | 'tint' | 'scale';
 
-export interface NeuronCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface NeuronCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   variant?: NeuronCardVariant;
   hoverable?: boolean;
   hoverEffect?: NeuronCardHoverEffect;
   padding?: NeuronCardPadding;
   radius?: NeuronCardRadius;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
   header?: React.ReactNode;
   media?: React.ReactNode;
   mediaPosition?: 'top' | 'bottom';
@@ -37,6 +39,8 @@ export const NeuronCard: React.FC<NeuronCardProps> = ({
   hoverEffect,
   padding = 'md',
   radius = 'lg',
+  title,
+  subtitle,
   header,
   media,
   mediaPosition = 'top',
@@ -74,8 +78,17 @@ export const NeuronCard: React.FC<NeuronCardProps> = ({
         <div className="neuron-card-media">{media}</div>
       )}
       
-      {header && (
-        <div className="neuron-card-header">{header}</div>
+      {(header || title || subtitle) && (
+        <div className="neuron-card-header">
+          {header ? (
+            header
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginBottom: 'var(--space-3)' }}>
+              {title && <h4 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{title}</h4>}
+              {subtitle && <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>{subtitle}</p>}
+            </div>
+          )}
+        </div>
       )}
 
       {children && (

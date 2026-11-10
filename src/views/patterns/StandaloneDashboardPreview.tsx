@@ -11,7 +11,6 @@ import {
   Monitor,
   Tablet,
   Smartphone,
-  ChevronDown,
   LayoutDashboard,
 } from 'lucide-react';
 

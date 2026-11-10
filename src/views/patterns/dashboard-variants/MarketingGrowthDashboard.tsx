@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
 import NeuronCard from '../../../components/NeuronCard';
-import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
 import NeuronProgress from '../../../components/NeuronProgress';
 import {
   TrendingUp,
   Target,
-  Users,
   MousePointerClick,
-  Sparkles,
-  BarChart3,
-  Layers,
-  ArrowUpRight,
-  ArrowDownRight,
-  Filter,
-  CheckCircle2,
   DollarSign,
-  PieChart,
-  Globe,
-  Sliders,
   Play,
   Pause,
 } from 'lucide-react';

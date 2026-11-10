@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronSelect from '../../components/NeuronSelect';
 import type { SettingsVariantId } from './SettingsPatternView';
@@ -10,7 +10,6 @@ import {
   Monitor,
   Tablet,
   Smartphone,
-  Settings,
 } from 'lucide-react';
 
 interface StandaloneSettingsPreviewProps {
@@ -124,7 +123,7 @@ export default function StandaloneSettingsPreview({
               value={activeVariant}
               onChange={(newVal) => {
                 setActiveVariant(newVal as SettingsVariantId);
-                window.location.hash = `#standalone-settings-${newVal}`;
+                window.location.hash = `#preview-settings-${newVal}`;
               }}
               options={SETTINGS_VARIANTS.map((v) => ({
                 value: v.id,

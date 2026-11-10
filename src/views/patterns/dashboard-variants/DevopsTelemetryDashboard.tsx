@@ -2,20 +2,12 @@ import React, { useState } from 'react';
 import NeuronCard from '../../../components/NeuronCard';
 import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
-import NeuronProgress from '../../../components/NeuronProgress';
 import {
   Server,
-  Activity,
   Cpu,
-  HardDrive,
   Terminal,
-  ShieldCheck,
   AlertCircle,
   Zap,
-  RefreshCw,
-  Sliders,
-  SlidersHorizontal,
-  ExternalLink,
 } from 'lucide-react';
 
 interface DevopsTelemetryDashboardProps {
@@ -31,7 +23,7 @@ export default function DevopsTelemetryDashboard({
 }: DevopsTelemetryDashboardProps) {
   const isDark = previewTheme === 'dark';
   const [selectedNode, setSelectedNode] = useState<number>(5);
-  const [replicaCount, setReplicaCount] = useState<number>(48);
+  const [replicaCount] = useState<number>(48);
 
   // 24 Kubernetes Cluster Blade Nodes
   const clusterNodes = Array.from({ length: 24 }, (_, i) => {

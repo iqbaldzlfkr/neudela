@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import NextPrevious from '../../components/NextPrevious';
 import NeuronBadge from '../../components/NeuronBadge';
@@ -6,8 +6,6 @@ import NeuronAvatar from '../../components/NeuronAvatar';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronInput from '../../components/NeuronInput';
 import NeuronProgress from '../../components/NeuronProgress';
-import NeuronTooltip from '../../components/NeuronTooltip';
-import NeuronDivider from '../../components/NeuronDivider';
 import NeuronModal from '../../components/NeuronModal';
 import { NeuronCard } from '../../components/NeuronCard';
 import {
@@ -23,30 +21,16 @@ import {
 import {
   LayoutDashboard,
   TrendingUp,
-  TrendingDown,
-  DollarSign,
   Users,
   Activity,
   Server,
   Truck,
-  Package,
-  Calendar,
-  Filter,
-  Download,
   Search,
-  CheckCircle2,
-  AlertTriangle,
   Clock,
-  ArrowUpRight,
-  ArrowDownRight,
-  Sparkles,
-  RefreshCw,
   ShieldCheck,
   Eye,
   ExternalLink,
-  Layers,
   Settings,
-  Maximize2,
   Sun,
   Moon,
   Monitor,
@@ -54,21 +38,12 @@ import {
   Smartphone,
   Check,
   Copy,
-  Plus,
-  ArrowRight,
-  Building2,
   CreditCard,
-  Cpu,
-  HelpCircle,
-  FileText,
   Sliders,
   X,
-  Play,
-  RotateCcw,
   Zap,
   PanelLeftClose,
   PanelLeftOpen,
-  ChevronDown,
   Bell,
 } from 'lucide-react';
 

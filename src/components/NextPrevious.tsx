@@ -3,19 +3,22 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface TabItem {
-  id: string;
+  id?: string;
   label: string;
+  onClick?: () => void;
 }
 
 interface NextPreviousProps {
   prev?: TabItem;
+  previous?: TabItem;
   next?: TabItem;
-  setActiveTab: (tabId: string) => void;
+  setActiveTab?: (tabId: string) => void;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default function NextPrevious({ prev, next, setActiveTab, className, style }: NextPreviousProps) {
+export default function NextPrevious({ prev, previous, next, setActiveTab, className, style }: NextPreviousProps) {
+  const effectivePrev = prev || previous;
   const [hoveredPrev, setHoveredPrev] = useState(false);
   const [hoveredNext, setHoveredNext] = useState(false);
   const { t } = useLanguage();
@@ -36,9 +39,12 @@ export default function NextPrevious({ prev, next, setActiveTab, className, styl
       }}
     >
       {/* Previous Link */}
-      {prev ? (
+      {effectivePrev ? (
         <div
-          onClick={() => setActiveTab(prev.id)}
+          onClick={() => {
+            if (effectivePrev.onClick) effectivePrev.onClick();
+            else if (effectivePrev.id && setActiveTab) setActiveTab(effectivePrev.id);
+          }}
           onMouseEnter={() => setHoveredPrev(true)}
           onMouseLeave={() => setHoveredPrev(false)}
           style={{
@@ -75,7 +81,7 @@ export default function NextPrevious({ prev, next, setActiveTab, className, styl
               marginTop: '2px',
               transition: 'color 0.2s ease',
             }}>
-              {prev.label}
+              {effectivePrev.label}
             </span>
           </div>
         </div>
@@ -86,7 +92,10 @@ export default function NextPrevious({ prev, next, setActiveTab, className, styl
       {/* Next Link */}
       {next ? (
         <div
-          onClick={() => setActiveTab(next.id)}
+          onClick={() => {
+            if (next.onClick) next.onClick();
+            else if (next.id && setActiveTab) setActiveTab(next.id);
+          }}
           onMouseEnter={() => setHoveredNext(true)}
           onMouseLeave={() => setHoveredNext(false)}
           style={{

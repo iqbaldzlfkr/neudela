@@ -8,19 +8,11 @@ import {
   MapPin,
   Clock,
   AlertTriangle,
-  CheckCircle2,
-  Navigation,
   BatteryCharging,
   Fuel,
-  RefreshCw,
   SlidersHorizontal,
-  ChevronRight,
   PackageCheck,
-  Radio,
-  Share2,
-  ShieldAlert,
   ArrowUpRight,
-  Box,
 } from 'lucide-react';
 
 interface OperationsFleetDashboardProps {

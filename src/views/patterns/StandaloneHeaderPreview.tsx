@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronAvatar from '../../components/NeuronAvatar';
@@ -21,11 +21,9 @@ import {
   BarChart3,
   Users,
   Settings,
-  Sparkles,
   Zap,
   Globe,
   ShoppingCart,
-  HelpCircle,
   LogOut,
   User,
   CreditCard,
@@ -38,18 +36,9 @@ import {
   Check,
   X,
   Plus,
-  Filter,
   ArrowRight,
   TrendingUp,
   Clock,
-  ShieldCheck,
-  FileText,
-  Copy,
-  ExternalLink,
-  Sliders,
-  DollarSign,
-  Heart,
-  Tag,
   Menu,
 } from 'lucide-react';
 
@@ -81,16 +70,6 @@ export default function StandaloneHeaderPreview({
   }, [variantId]);
 
   // Variant metadata
-  const variantTitles: Record<HeaderVariantId, string> = {
-    'classic-saas': 'Classic SaaS Topbar',
-    'minimal-centered': 'Minimal Centered Header',
-    'dashboard-topbar': 'Dashboard Topbar with Workspace',
-    'mega-menu': 'Enterprise Mega Menu Header',
-    'command-bar': 'Command Bar Header (⌘K Hub)',
-    'marketing-nav': 'Marketing Nav with Announcement',
-    'ecommerce-header': 'E-Commerce Storefront Header',
-    'docs-navbar': 'Developer Documentation Navbar',
-  };
 
   // ── Variant 1: Classic SaaS state
   const [saasActiveNav, setSaasActiveNav] = useState('dashboard');
@@ -111,7 +90,6 @@ export default function StandaloneHeaderPreview({
   // ── Variant 5: Command Bar state
   const [cmdQuery, setCmdQuery] = useState('');
   const [cmdFocused, setCmdFocused] = useState(false);
-  const [cmdFilter, setCmdFilter] = useState('all');
 
   // ── Variant 6: Marketing Nav state
   const [showAnnouncement, setShowAnnouncement] = useState(true);
@@ -123,7 +101,7 @@ export default function StandaloneHeaderPreview({
   const [ecomSearchFocused, setEcomSearchFocused] = useState(false);
 
   // ── Variant 8: Docs Navbar state
-  const [docsVersion, setDocsVersion] = useState('v0.2.1');
+  const [docsVersion] = useState('v0.2.1');
   const [docsActiveSection, setDocsActiveSection] = useState('guide');
   const [docsSidebarItem, setDocsSidebarItem] = useState('overview');
   const [docsSearch, setDocsSearch] = useState('');

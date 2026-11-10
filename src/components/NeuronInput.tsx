@@ -1,12 +1,14 @@
 import React from 'react';
 
 export type InputState = 'default' | 'success' | 'error';
+export type NeuronInputSize = 'xs' | 'sm' | 'md' | 'lg';
 
-export interface NeuronInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface NeuronInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
   state?: InputState;
+  size?: NeuronInputSize;
   helperText?: string;
   hintText?: string;
   value?: string;
@@ -36,6 +38,7 @@ export default function NeuronInput({
   placeholder = '',
   disabled = false,
   state = 'default',
+  size = 'md',
   helperText = '',
   hintText,
   value,
@@ -50,6 +53,8 @@ export default function NeuronInput({
   destructive = false,
   required = false,
   readOnly,
+  className = '',
+  style,
   ...props
 }: NeuronInputProps) {
   // Destructive overrides state to error
@@ -58,20 +63,24 @@ export default function NeuronInput({
 
   const inputClass = [
     'neuron-input',
+    `neuron-input--${size}`,
     effectiveState === 'success' && 'neuron-input--success',
     effectiveState === 'error' && 'neuron-input--error',
     leadingIcon && 'neuron-input--has-leading',
     trailingIcon && 'neuron-input--has-trailing',
+    className,
   ].filter(Boolean).join(' ');
 
   const groupClass = [
     'neuron-form-group',
+    `neuron-form-group--${size}`,
     effectiveState === 'success' && 'neuron-form-group--success',
     effectiveState === 'error' && 'neuron-form-group--error',
   ].filter(Boolean).join(' ');
 
   const wrapperClass = [
     'neuron-input-wrapper',
+    `neuron-input-wrapper--${size}`,
     hasAddon && 'neuron-input-wrapper--has-addon',
     disabled && 'neuron-input-wrapper--disabled',
     readOnly && 'neuron-input-wrapper--readonly',
@@ -82,7 +91,7 @@ export default function NeuronInput({
   const displayHelper = hintText || helperText;
 
   return (
-    <div className={groupClass}>
+    <div className={groupClass} style={style}>
       {label && (
         <label className="neuron-label">
           {label}
@@ -96,11 +105,11 @@ export default function NeuronInput({
       )}
       <div className={wrapperClass}>
         {leadingText && (
-          <span className="neuron-input-addon neuron-input-addon--leading">{leadingText}</span>
+          <span className={`neuron-input-addon neuron-input-addon--leading neuron-input-addon--${size}`}>{leadingText}</span>
         )}
         <div className="neuron-input-inner">
           {leadingIcon && (
-            <span className="neuron-input-icon neuron-input-icon--leading">{leadingIcon}</span>
+            <span className={`neuron-input-icon neuron-input-icon--leading neuron-input-icon--${size}`}>{leadingIcon}</span>
           )}
           <input
             type={type}
@@ -113,11 +122,11 @@ export default function NeuronInput({
             {...props}
           />
           {trailingIcon && (
-            <span className="neuron-input-icon neuron-input-icon--trailing">{trailingIcon}</span>
+            <span className={`neuron-input-icon neuron-input-icon--trailing neuron-input-icon--${size}`}>{trailingIcon}</span>
           )}
         </div>
         {trailingText && (
-          <span className="neuron-input-addon neuron-input-addon--trailing">{trailingText}</span>
+          <span className={`neuron-input-addon neuron-input-addon--trailing neuron-input-addon--${size}`}>{trailingText}</span>
         )}
       </div>
       {displayHelper && <span className="neuron-helper-text">{displayHelper}</span>}

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import NeuronCard from '../../../components/NeuronCard';
 import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
 import NeuronInput from '../../../components/NeuronInput';
-import NeuronDivider from '../../../components/NeuronDivider';
 import {
   Settings,
   ShieldCheck,
@@ -19,7 +18,6 @@ import {
   RefreshCw,
   Save,
   Check,
-  Terminal,
   Activity,
   Zap,
 } from 'lucide-react';
@@ -39,7 +37,6 @@ export default function SystemSettingsDashboard({
   const [mtlsEnabled, setMtlsEnabled] = useState(true);
   const [autoScalingEnabled, setAutoScalingEnabled] = useState(true);
   const [auditLoggingEnabled, setAuditLoggingEnabled] = useState(true);
-  const [traceSamplingRate, setTraceSamplingRate] = useState('15%');
   const [rateLimit, setRateLimit] = useState('15,000 req/min');
   const [webhookUrl, setWebhookUrl] = useState('https://events.pagerduty.com/v2/enqueue');
   const [ipAllowlist, setIpAllowlist] = useState('10.240.0.0/16, 172.16.0.0/12');

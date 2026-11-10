@@ -17,7 +17,7 @@ export interface AlertAction {
 
 export interface NeuronAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Semantic severity variant */
-  variant?: AlertVariant;
+  variant?: AlertVariant | 'error';
   /** Size scale */
   size?: AlertSize;
   /** Visual fill treatment */
@@ -106,9 +106,11 @@ export default function NeuronAlert({
 
   if (dismissed) return null;
 
+  const effectiveVariant = variant === 'error' ? 'danger' : variant;
+
   const classes = [
     'neuron-alert',
-    `neuron-alert--${variant}`,
+    `neuron-alert--${effectiveVariant}`,
     `neuron-alert--${size}`,
     `neuron-alert--${fill}`,
     animating ? 'neuron-alert--dismissing' : '',
@@ -116,7 +118,7 @@ export default function NeuronAlert({
   ].filter(Boolean).join(' ');
 
   // icon === null → hide; icon === undefined → use default; icon = ReactNode → custom
-  const resolvedIcon = icon === null ? null : icon !== undefined ? icon : <DefaultIcon variant={variant} />;
+  const resolvedIcon = icon === null ? null : icon !== undefined ? icon : <DefaultIcon variant={effectiveVariant} />;
 
   const showClose = dismissible || !!onClose;
 

@@ -94,7 +94,7 @@ export type {
 
 // ── Inputs & Form Controls ──
 export { default as NeuronInput } from './components/NeuronInput';
-export type { NeuronInputProps, InputState } from './components/NeuronInput';
+export type { NeuronInputProps, InputState, NeuronInputSize } from './components/NeuronInput';
 
 export { default as NeuronTextArea, NeuronTextarea } from './components/NeuronTextArea';
 export type { 

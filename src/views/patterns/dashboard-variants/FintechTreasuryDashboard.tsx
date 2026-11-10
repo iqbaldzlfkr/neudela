@@ -2,22 +2,8 @@ import React, { useState } from 'react';
 import NeuronCard from '../../../components/NeuronCard';
 import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
-import NeuronProgress from '../../../components/NeuronProgress';
 import {
-  ArrowUpRight,
-  ArrowDownRight,
-  DollarSign,
-  ShieldCheck,
-  RefreshCw,
-  Sliders,
-  Wallet,
-  CheckCircle2,
-  AlertCircle,
-  FileText,
-  Lock,
   Key,
-  Globe,
-  TrendingUp,
 } from 'lucide-react';
 
 interface FintechTreasuryDashboardProps {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NeuronCard from '../../../components/NeuronCard';
 import NeuronBadge from '../../../components/NeuronBadge';
 import NeuronButton from '../../../components/NeuronButton';
@@ -8,15 +8,7 @@ import {
   Clock,
   AlertTriangle,
   Smile,
-  ShieldCheck,
   Building2,
-  Users,
-  CheckCircle2,
-  MessageSquare,
-  Sparkles,
-  ArrowUpRight,
-  TrendingUp,
-  ThumbsUp,
 } from 'lucide-react';
 
 interface CustomerSuccessDashboardProps {
