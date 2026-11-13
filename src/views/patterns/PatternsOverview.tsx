@@ -698,6 +698,216 @@ export default function PatternsOverview({ setActiveTab }: PatternsOverviewProps
         </div>
       ),
     },
+    {
+      id: 'pat-notifications',
+      title: isId ? 'Pusat Notifikasi & Aliran Aktivitas' : 'Notification & Activity Center',
+      desc: isId
+        ? 'Arsitektur notifikasi enterprise lengkap: Bell popover melayang & drawer samping, inbox master-detail pesan sistem, toast stack global dengan auto-dismiss, audit trail SOC2 dengan inspeksi JSON, banner pengumuman pemeliharaan, dan matriks preferensi kanal komunikasi.'
+        : 'Enterprise notification and alerting architectures: Floating navbar bell popover & slide-out drawer, split-pane system inbox, stacked global toasts with undo, SOC2 security audit feed with JSON payload inspector, system maintenance countdown banners, and granular channel routing preferences.',
+      badge: 'Alerts & Activity',
+      renderPreview: () => (
+        <div
+          style={{
+            width: '90%',
+            maxWidth: 220,
+            height: 80,
+            borderRadius: 6,
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Mini Header with Bell & Unread Badge */}
+          <div
+            style={{
+              height: 18,
+              backgroundColor: 'var(--color-bg-canvas)',
+              borderBottom: '1px solid var(--color-border)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0 8px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#df7e30' }} />
+              <div style={{ width: 36, height: 4, borderRadius: 2, backgroundColor: 'var(--color-text-secondary)' }} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <div style={{ width: 14, height: 8, borderRadius: 4, backgroundColor: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 6, height: 2, borderRadius: 1, backgroundColor: '#fff' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Mini Notification Rows */}
+          <div style={{ flex: 1, padding: '4px 6px', display: 'flex', flexDirection: 'column', gap: 3, backgroundColor: 'var(--color-bg-surface)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 4px', borderRadius: 3, backgroundColor: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+              <div style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: '#ef4444', flexShrink: 0 }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1.5, flex: 1 }}>
+                <div style={{ width: '70%', height: 3, borderRadius: 1.5, backgroundColor: '#ef4444' }} />
+                <div style={{ width: '45%', height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-secondary)', opacity: 0.6 }} />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 4px', borderRadius: 3, backgroundColor: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)' }}>
+              <div style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: '#10b981', flexShrink: 0 }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1.5, flex: 1 }}>
+                <div style={{ width: '60%', height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-primary)' }} />
+                <div style={{ width: '35%', height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-secondary)', opacity: 0.6 }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'pat-ai-copilot',
+      title: isId ? 'AI Copilot & Ruang Kerja Percakapan' : 'AI Copilot & Conversational Workspace',
+      desc: isId
+        ? 'Arsitektur antarmuka AI asisten terpadu: Asisten kontekstual slide-out sidecar, kanvas percakapan multiturn dengan artefak kode sandbox runnable, penelaahan usulan AI dengan visual diff, studio parameter model playground, dan pencarian semantik RAG berlandaskan sitasi terverifikasi.'
+        : 'Enterprise conversational AI architectures: Contextual slide-out assistant sidecars, multi-turn chat canvases with runnable code artifacts, human-in-the-loop visual diff proposal reviews, LLM prompt engineering playgrounds, and hallucination-free grounded RAG vector search.',
+      badge: 'Agentic AI & Chat',
+      renderPreview: () => (
+        <div
+          style={{
+            width: '90%',
+            maxWidth: 220,
+            height: 80,
+            borderRadius: 6,
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Mini Header with Sparkle Icon */}
+          <div
+            style={{
+              height: 16,
+              backgroundColor: 'var(--color-bg-canvas)',
+              borderBottom: '1px solid var(--color-border)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0 6px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+              <div style={{ width: 6, height: 6, borderRadius: 2, backgroundColor: '#df7e30' }} />
+              <div style={{ width: 30, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-primary)' }} />
+            </div>
+            <div style={{ width: 14, height: 5, borderRadius: 3, backgroundColor: 'rgba(59, 130, 246, 0.2)' }} />
+          </div>
+
+          {/* Mini Chat Message Stream */}
+          <div style={{ flex: 1, padding: '4px 6px', display: 'flex', flexDirection: 'column', gap: 3, backgroundColor: 'var(--color-bg-surface)' }}>
+            {/* User message on right */}
+            <div style={{ alignSelf: 'flex-end', width: '55%', height: 6, borderRadius: 3, backgroundColor: '#df7e30', opacity: 0.9 }} />
+
+            {/* Assistant message on left with mini code artifact */}
+            <div style={{ alignSelf: 'flex-start', width: '75%', borderRadius: 3, backgroundColor: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)', padding: '2px 4px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div style={{ width: '80%', height: 3, borderRadius: 1, backgroundColor: 'var(--color-text-secondary)' }} />
+              <div style={{ width: '100%', height: 8, borderRadius: 2, backgroundColor: '#0f172a', display: 'flex', alignItems: 'center', padding: '0 3px' }}>
+                <div style={{ width: '60%', height: 2, borderRadius: 1, backgroundColor: '#38bdf8' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Mini Bottom Prompt Input */}
+          <div style={{ height: 14, padding: '0 4px', backgroundColor: 'var(--color-bg-canvas)', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 3 }}>
+            <div style={{ flex: 1, height: 8, borderRadius: 2, backgroundColor: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />
+            <div style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: '#df7e30' }} />
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'pat-file-manager',
+      title: isId ? 'Manajemen Berkas & Aset' : 'File & Asset Manager',
+      desc: isId
+        ? 'Sistem manajemen berkas & aset digital enterprise: Cloud Drive hierarkis dengan kuota penyimpanan real-time, Digital Asset Management (DAM) dengan inspektor visual & ekstraksi palet warna, pengunggah berkas batch resumable dengan pemantauan bandwidth, brankas dokumen rahasia terenkripsi bersertifikasi audit, dan portal pembagian berkas aman dengan tautan berbatas waktu dan kontrol RBAC.'
+        : 'Enterprise file and digital asset management systems: Hierarchical cloud drive with real-time storage quota gauges, Digital Asset Management (DAM) with visual inspector & color palette extraction, resumable batch uploader with transfer speed analytics, audit-grade confidential document vault, and zero-trust expiring share portals.',
+      badge: 'Cloud Drive & DAM',
+      renderPreview: () => (
+        <div
+          style={{
+            width: '90%',
+            maxWidth: 220,
+            height: 80,
+            borderRadius: 6,
+            backgroundColor: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Mini Header: Breadcrumb & Actions */}
+          <div
+            style={{
+              height: 16,
+              backgroundColor: 'var(--color-bg-canvas)',
+              borderBottom: '1px solid var(--color-border)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0 6px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+              <div style={{ width: 6, height: 5, borderRadius: 1.5, backgroundColor: '#df7e30' }} />
+              <div style={{ width: 14, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-text-primary)' }} />
+              <div style={{ width: 2, height: 4, backgroundColor: 'var(--color-text-secondary)', opacity: 0.5 }} />
+              <div style={{ width: 20, height: 3, borderRadius: 1.5, backgroundColor: '#df7e30' }} />
+            </div>
+            <div style={{ display: 'flex', gap: 2 }}>
+              <div style={{ width: 5, height: 5, borderRadius: 1, backgroundColor: 'var(--color-text-secondary)', opacity: 0.4 }} />
+              <div style={{ width: 5, height: 5, borderRadius: 1, backgroundColor: '#df7e30' }} />
+            </div>
+          </div>
+
+          {/* Mini File Grid */}
+          <div style={{ flex: 1, padding: '4px 6px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, backgroundColor: 'var(--color-bg-surface)', alignItems: 'center' }}>
+            {/* Folder 1 */}
+            <div style={{ borderRadius: 3, backgroundColor: 'rgba(223, 126, 48, 0.1)', border: '1px solid rgba(223, 126, 48, 0.25)', height: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+              <div style={{ width: 12, height: 8, borderRadius: 1.5, backgroundColor: '#df7e30' }} />
+              <div style={{ width: 14, height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-primary)' }} />
+            </div>
+            {/* Folder 2 */}
+            <div style={{ borderRadius: 3, backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.25)', height: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+              <div style={{ width: 12, height: 8, borderRadius: 1.5, backgroundColor: '#3b82f6' }} />
+              <div style={{ width: 14, height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-primary)' }} />
+            </div>
+            {/* Media Asset 1 */}
+            <div style={{ borderRadius: 3, backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.25)', height: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+              <div style={{ width: 12, height: 8, borderRadius: 1.5, backgroundColor: '#10b981' }} />
+              <div style={{ width: 14, height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-primary)' }} />
+            </div>
+            {/* Document Vault 1 */}
+            <div style={{ borderRadius: 3, backgroundColor: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.25)', height: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+              <div style={{ width: 12, height: 8, borderRadius: 1.5, backgroundColor: '#8b5cf6' }} />
+              <div style={{ width: 14, height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-primary)' }} />
+            </div>
+          </div>
+
+          {/* Mini Storage Quota Meter */}
+          <div style={{ height: 12, padding: '0 6px', backgroundColor: 'var(--color-bg-canvas)', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <div style={{ width: 18, height: 2, borderRadius: 1, backgroundColor: 'var(--color-text-secondary)', opacity: 0.6 }} />
+            <div style={{ flex: 1, height: 3, borderRadius: 1.5, backgroundColor: 'var(--color-border)', overflow: 'hidden' }}>
+              <div style={{ width: '68%', height: '100%', backgroundColor: '#df7e30' }} />
+            </div>
+            <div style={{ width: 14, height: 2, borderRadius: 1, backgroundColor: '#df7e30' }} />
+          </div>
+        </div>
+      ),
+    },
   ];
 
   return (

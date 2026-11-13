@@ -227,7 +227,7 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
               <div style={{ height: 5, width: 20, borderRadius: 3, background: 'rgba(16,185,129,0.25)' }} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 4 }}>
-              {[0,1,2].map(i => <div key={i} style={{ height: 28, borderRadius: 4, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
+              {[0, 1, 2].map(i => <div key={i} style={{ height: 28, borderRadius: 4, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
             </div>
           </div>
         </>
@@ -237,7 +237,7 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
         <div style={{ width: '100%', height: '100%', background: `linear-gradient(135deg, ${accentColor}0a, ${accentColor}05)`, display: 'flex', flexDirection: 'column' }}>
           <div style={{ height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 8px', position: 'relative' }}>
             <div style={{ position: 'absolute', left: 8, display: 'flex', gap: 6 }}>
-              {[0,1].map(i => <div key={i} style={{ height: 4, width: 14, borderRadius: 2, background: 'var(--color-text-secondary)', opacity: 0.5 }} />)}
+              {[0, 1].map(i => <div key={i} style={{ height: 4, width: 14, borderRadius: 2, background: 'var(--color-text-secondary)', opacity: 0.5 }} />)}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <div style={{ width: 10, height: 10, borderRadius: 3, background: `linear-gradient(135deg, ${accentColor}, #4338ca)` }} />
@@ -281,7 +281,7 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
             </div>
             <div style={{ flex: 1, padding: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
-                {[0,1].map(i => <div key={i} style={{ height: 18, borderRadius: 3, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
+                {[0, 1].map(i => <div key={i} style={{ height: 18, borderRadius: 3, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
               </div>
               <div style={{ flex: 1, borderRadius: 3, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />
             </div>
@@ -295,7 +295,7 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
             <div style={{ width: 10, height: 10, borderRadius: 3, background: accentColor }} />
             <div style={{ height: 4, width: 20, borderRadius: 2, background: accentColor, opacity: 0.9 }} />
             <div style={{ display: 'flex', gap: 5, marginLeft: 6 }}>
-              {[0,1,2,3].map(i => (
+              {[0, 1, 2, 3].map(i => (
                 <div key={i} style={{ height: 4, width: i === 0 ? 18 : 14, borderRadius: 2, background: i === 0 ? `${accentColor}80` : 'var(--color-border)' }} />
               ))}
             </div>
@@ -303,7 +303,7 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
           <div style={{ flex: 1, display: 'flex', padding: 6, gap: 6 }}>
             <div style={{ width: '40%', display: 'flex', flexDirection: 'column', gap: 4 }}>
               <div style={{ height: 4, width: '60%', background: accentColor, borderRadius: 2 }} />
-              {[0,1,2].map(i => (
+              {[0, 1, 2].map(i => (
                 <div key={i} style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
                   <div style={{ width: 8, height: 8, borderRadius: 2, background: `${accentColor}30` }} />
                   <div>
@@ -333,12 +333,12 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
               <div style={{ height: 8, width: 14, borderRadius: 2, border: '1px solid var(--color-border)', fontSize: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-tertiary)' }}>⌘K</div>
             </div>
             <div style={{ display: 'flex', gap: 3 }}>
-              {[0,1,2].map(i => <div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)' }} />)}
+              {[0, 1, 2].map(i => <div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)' }} />)}
             </div>
           </div>
           <div style={{ flex: 1, padding: 6, display: 'flex', flexDirection: 'column', gap: 3 }}>
             <div style={{ height: 3, width: '25%', borderRadius: 1, background: 'var(--color-text-tertiary)', opacity: 0.5 }} />
-            {[0,1,2].map(i => (
+            {[0, 1, 2].map(i => (
               <div key={i} style={{ height: 10, borderRadius: 3, background: i === 0 ? `${accentColor}15` : 'var(--color-bg-subtle)', border: i === 0 ? `1px solid ${accentColor}30` : '1px solid var(--color-border)', display: 'flex', alignItems: 'center', padding: '0 5px', gap: 4 }}>
                 <div style={{ width: 5, height: 5, borderRadius: 1, background: i === 0 ? accentColor : 'var(--color-border)' }} />
                 <div style={{ height: 3, width: i === 0 ? '40%' : '30%', borderRadius: 1, background: i === 0 ? accentColor : 'var(--color-border)', opacity: i === 0 ? 0.7 : 0.5 }} />
@@ -360,11 +360,11 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
               <div style={{ height: 4, width: 16, borderRadius: 2, background: accentColor }} />
             </div>
             <div style={{ display: 'flex', gap: 5, marginLeft: 4 }}>
-              {[0,1,2].map(i => <div key={i} style={{ height: 3.5, width: 12, borderRadius: 2, background: 'var(--color-border)' }} />)}
+              {[0, 1, 2].map(i => <div key={i} style={{ height: 3.5, width: 12, borderRadius: 2, background: 'var(--color-border)' }} />)}
             </div>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: 3, alignItems: 'center' }}>
               <div style={{ display: 'flex', gap: 1 }}>
-                {[0,1,2,3].map(i => <div key={i} style={{ width: 4, height: 4, background: accentColor, opacity: 0.8, borderRadius: 1 }} />)}
+                {[0, 1, 2, 3].map(i => <div key={i} style={{ width: 4, height: 4, background: accentColor, opacity: 0.8, borderRadius: 1 }} />)}
               </div>
               <div style={{ height: 10, width: 22, borderRadius: 3, background: accentColor }} />
             </div>
@@ -399,10 +399,10 @@ function CardMiniSilhouette({ id, accentColor }: { id: HeaderVariantId; accentCo
             </div>
           </div>
           <div style={{ height: 16, background: 'var(--color-bg-surface)', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', padding: '0 8px', gap: 6 }}>
-            {[0,1,2,3,4].map(i => <div key={i} style={{ height: 3.5, width: i === 1 ? 18 : 14, borderRadius: 2, background: i === 1 ? `${accentColor}60` : 'var(--color-border)', borderBottom: i === 1 ? `1.5px solid ${accentColor}` : 'none' }} />)}
+            {[0, 1, 2, 3, 4].map(i => <div key={i} style={{ height: 3.5, width: i === 1 ? 18 : 14, borderRadius: 2, background: i === 1 ? `${accentColor}60` : 'var(--color-border)', borderBottom: i === 1 ? `1.5px solid ${accentColor}` : 'none' }} />)}
           </div>
           <div style={{ flex: 1, padding: 6, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 4 }}>
-            {[0,1,2,3].map(i => <div key={i} style={{ borderRadius: 3, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
+            {[0, 1, 2, 3].map(i => <div key={i} style={{ borderRadius: 3, background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }} />)}
           </div>
         </div>
       )}
@@ -1334,8 +1334,8 @@ export function DocsNavbar() {
               {isId ? 'Katalog Varian Arsitektur Header' : 'Header Architecture Catalog'}
             </h2>
             <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: '4px 0 0 0' }}>
-              {isId 
-                ? 'Pilih varian untuk melihat preview di modal pop-up atau salin implementasi kode TSX.' 
+              {isId
+                ? 'Pilih varian untuk melihat preview di modal pop-up atau salin implementasi kode TSX.'
                 : 'Select any variant to inspect in a modal pop-up, or copy the TSX code implementation.'}
             </p>
           </div>
@@ -1347,150 +1347,129 @@ export function DocsNavbar() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: 'var(--space-5)',
         }}>
-        {HEADER_VARIANTS.map(variant => {
-          return (
-            <div
-              key={variant.id}
-              onClick={() => handleOpenModal(variant.id)}
-              style={{
-                background: 'var(--color-bg-surface)',
-                border: '1px solid var(--color-border)',
-                borderRadius: '16px',
-                padding: 'var(--space-5)',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--space-3)',
-                transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-              className="header-pattern-card sidebar-pattern-card"
-            >
-              {/* Accent Top Border with Gradient */}
-              <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: '3.5px',
-                background: `linear-gradient(90deg, ${variant.accentColor} 0%, ${variant.accentColor}30 100%)`,
-              }} />
-
-              {/* Card Header & Badge */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+          {HEADER_VARIANTS.map(variant => {
+            return (
+              <div
+                key={variant.id}
+                onClick={() => handleOpenModal(variant.id)}
+                style={{
+                  background: 'var(--color-bg-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '16px',
+                  padding: 'var(--space-5)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--space-3)',
+                  transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+                className="header-pattern-card sidebar-pattern-card"
+              >
+                {/* Accent Top Border with Gradient */}
                 <div style={{
-                  width: 42, height: 42, borderRadius: 10,
-                  background: `${variant.accentColor}18`,
-                  border: `1px solid ${variant.accentColor}35`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: variant.accentColor
-                }}>
-                  {variant.id === 'classic-saas' && <LayoutDashboard size={20} />}
-                  {variant.id === 'minimal-centered' && <Sparkles size={20} />}
-                  {variant.id === 'dashboard-topbar' && <Layers size={20} />}
-                  {variant.id === 'mega-menu' && <LayoutGrid size={20} />}
-                  {variant.id === 'command-bar' && <Command size={20} />}
-                  {variant.id === 'marketing-nav' && <Star size={20} />}
-                  {variant.id === 'ecommerce-header' && <ShoppingCart size={20} />}
-                  {variant.id === 'docs-navbar' && <FileText size={20} />}
+                  position: 'absolute', top: 0, left: 0, right: 0, height: '3.5px',
+                  background: `linear-gradient(90deg, ${variant.accentColor} 0%, ${variant.accentColor}30 100%)`,
+                }} />
+
+                {/* Card Header & Badge */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 10,
+                    background: `${variant.accentColor}18`,
+                    border: `1px solid ${variant.accentColor}35`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: variant.accentColor
+                  }}>
+                    {variant.id === 'classic-saas' && <LayoutDashboard size={20} />}
+                    {variant.id === 'minimal-centered' && <Sparkles size={20} />}
+                    {variant.id === 'dashboard-topbar' && <Layers size={20} />}
+                    {variant.id === 'mega-menu' && <LayoutGrid size={20} />}
+                    {variant.id === 'command-bar' && <Command size={20} />}
+                    {variant.id === 'marketing-nav' && <Star size={20} />}
+                    {variant.id === 'ecommerce-header' && <ShoppingCart size={20} />}
+                    {variant.id === 'docs-navbar' && <FileText size={20} />}
+                  </div>
+
+                  <span style={{
+                    fontSize: '11px', fontWeight: 700, padding: '3px 8px', borderRadius: '12px',
+                    background: 'var(--color-bg-canvas)',
+                    color: variant.accentColor,
+                    border: `1px solid ${variant.accentColor}40`
+                  }}>
+                    {variant.badge}
+                  </span>
                 </div>
 
-                <span style={{
-                  fontSize: '11px', fontWeight: 700, padding: '3px 8px', borderRadius: '12px',
-                  background: 'var(--color-bg-canvas)',
-                  color: variant.accentColor,
-                  border: `1px solid ${variant.accentColor}40`
+                {/* Title & Tagline */}
+                <div>
+                  <h3 style={{
+                    fontSize: '16px', fontWeight: 700, margin: '0 0 6px 0',
+                    color: 'var(--color-text-primary)'
+                  }}>
+                    {isId ? variant.nameId : variant.nameEn}
+                  </h3>
+                  <p style={{ fontSize: '12.5px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    {isId ? variant.taglineId : variant.taglineEn}
+                  </p>
+                </div>
+
+                {/* Visual Architecture Silhouette */}
+                <div style={{ margin: '4px 0' }}>
+                  <CardMiniSilhouette id={variant.id} accentColor={variant.accentColor} />
+                </div>
+
+                {/* Feature Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                  {variant.tags.map(tag => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: '10.5px', background: 'var(--color-bg-canvas)',
+                        padding: '2px 8px', borderRadius: '6px', color: 'var(--color-text-secondary)',
+                        border: '1px solid var(--color-border)'
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Card Dual Action Buttons */}
+                <div style={{
+                  marginTop: 'auto', paddingTop: 'var(--space-3)',
+                  display: 'flex', gap: '8px', borderTop: '1px solid var(--color-border)'
                 }}>
-                  {variant.badge}
-                </span>
-              </div>
-
-              {/* Title & Tagline */}
-              <div>
-                <h3 style={{
-                  fontSize: '16px', fontWeight: 700, margin: '0 0 6px 0',
-                  color: 'var(--color-text-primary)'
-                }}>
-                  {isId ? variant.nameId : variant.nameEn}
-                </h3>
-                <p style={{ fontSize: '12.5px', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  {isId ? variant.taglineId : variant.taglineEn}
-                </p>
-              </div>
-
-              {/* Visual Architecture Silhouette */}
-              <div style={{ margin: '4px 0' }}>
-                <CardMiniSilhouette id={variant.id} accentColor={variant.accentColor} />
-              </div>
-
-              {/* Feature Tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                {variant.tags.map(tag => (
-                  <span 
-                    key={tag}
-                    style={{
-                      fontSize: '10.5px', background: 'var(--color-bg-canvas)',
-                      padding: '2px 8px', borderRadius: '6px', color: 'var(--color-text-secondary)',
-                      border: '1px solid var(--color-border)'
+                  <button
+                    type="button"
+                    className="pattern-btn-modal-preview"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenModal(variant.id);
                     }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                    <Eye size={14} />
+                    <span>{isId ? 'Preview di Modal' : 'Preview in Modal'}</span>
+                  </button>
 
-              {/* Card Dual Action Buttons */}
-              <div style={{
-                marginTop: 'auto', paddingTop: 'var(--space-3)',
-                display: 'flex', gap: '8px', borderTop: '1px solid var(--color-border)'
-              }}>
-                <button
-                  onClick={() => handleOpenModal(variant.id)}
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px',
-                    background: 'rgba(223, 126, 48, 0.1)',
-                    color: 'var(--color-primary)',
-                    border: '1px solid rgba(223, 126, 48, 0.25)',
-                    borderRadius: '8px',
-                    padding: '8px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                >
-                  <Eye size={14} />
-                  <span>{isId ? 'Preview di Modal' : 'Preview in Modal'}</span>
-                </button>
-
-                <button
-                  onClick={(e) => handleOpenRealAppNewTab(variant.id, e)}
-                  title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px',
-                    background: 'var(--color-bg-canvas)',
-                    color: 'var(--color-text-primary)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '8px',
-                    padding: '8px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                >
-                  <ExternalLink size={14} />
-                  <span>{isId ? 'Tab Baru' : 'New Tab'}</span>
-                </button>
+                  <button
+                    type="button"
+                    className="pattern-btn-new-tab"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenRealAppNewTab(variant.id, e);
+                    }}
+                    title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
+                  >
+                    <ExternalLink size={14} />
+                    <span>{isId ? 'Tab Baru' : 'New Tab'}</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
       </div>
 
@@ -1515,8 +1494,8 @@ export function DocsNavbar() {
             </h3>
           </div>
           <p style={{ fontSize: '12.5px', color: 'var(--color-text-secondary)', marginBottom: 14 }}>
-            {isId 
-              ? 'Pola header Neudela merupakan orkestrasi dari berbagai komponen atomik:' 
+            {isId
+              ? 'Pola header Neudela merupakan orkestrasi dari berbagai komponen atomik:'
               : 'The Neudela header pattern orchestrates multiple atomic building blocks:'}
           </p>
 
@@ -1601,8 +1580,8 @@ export function DocsNavbar() {
             </h3>
           </div>
           <p style={{ fontSize: '12.5px', color: 'var(--color-text-secondary)', marginBottom: 14 }}>
-            {isId 
-              ? 'Dimensi terkalibrasi berbasis kelipatan 8pt untuk kenyamanan navigasi atas:' 
+            {isId
+              ? 'Dimensi terkalibrasi berbasis kelipatan 8pt untuk kenyamanan navigasi atas:'
               : '8pt spatial baseline dimensions tuned for top navigation ergonomics:'}
           </p>
 
@@ -1672,8 +1651,8 @@ export function DocsNavbar() {
               <span>DO: {isId ? 'Berikan Feedback Visual pada Navigasi Aktif' : 'Provide Clear Active Indicators'}</span>
             </div>
             <p style={{ margin: 0, fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-              {isId 
-                ? 'Selalu sertakan indikator aktif (warna teks kontras atau garis aksen bawah) pada rute/tautan navigasi yang sedang dibuka agar pengguna segera memahami posisi halaman mereka.' 
+              {isId
+                ? 'Selalu sertakan indikator aktif (warna teks kontras atau garis aksen bawah) pada rute/tautan navigasi yang sedang dibuka agar pengguna segera memahami posisi halaman mereka.'
                 : 'Always provide clear visual cues (contrasting text or accent underline indicator) on currently active route links so users immediately orient themselves.'}
             </p>
           </div>
@@ -1687,8 +1666,8 @@ export function DocsNavbar() {
               <span>DON\'T: {isId ? 'Hindari Memasukkan Terlalu Banyak Item Menu Utama' : 'Avoid Overcrowding Main Navigation'}</span>
             </div>
             <p style={{ margin: 0, fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-              {isId 
-                ? 'Jangan menaruh lebih dari 6-7 tautan menu di header utama tanpa pengelompokan. Gunakan varian Mega Menu atau menu dropdown bertingkat jika aplikasi Anda memiliki banyak fitur.' 
+              {isId
+                ? 'Jangan menaruh lebih dari 6-7 tautan menu di header utama tanpa pengelompokan. Gunakan varian Mega Menu atau menu dropdown bertingkat jika aplikasi Anda memiliki banyak fitur.'
                 : 'Never place more than 6-7 main top navigation links without grouping. Migrate to a Mega Menu variant or categorized dropdowns if your product suite is expansive.'}
             </p>
           </div>

@@ -29,6 +29,7 @@ import NeuronDivider, {
 } from '../../components/NeuronDivider';
 import NeuronButton from '../../components/NeuronButton';
 import NeuronBadge from '../../components/NeuronBadge';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
 import NextPrevious from '../../components/NextPrevious';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -1052,11 +1053,12 @@ import { NeuronDivider } from '@neudela/vue';
                 {/* Inset Switch */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 6, borderTop: '1px solid var(--color-border)' }}>
                   <span style={{ fontSize: 12, fontWeight: 500 }}>Inset Padding</span>
-                  <input
-                    type="checkbox"
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
                     checked={pgInset}
-                    onChange={(e) => setPgInset(e.target.checked)}
-                    style={{ cursor: 'pointer' }}
+                    onChange={setPgInset}
+                    aria-label="Inset Padding"
                   />
                 </div>
 
@@ -1065,11 +1067,12 @@ import { NeuronDivider } from '@neudela/vue';
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 10, borderTop: '1px solid var(--color-border)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <span style={{ fontSize: 12, fontWeight: 600 }}>Enable Label Content</span>
-                      <input
-                        type="checkbox"
+                      <NeuronCheckbox
+                        size="sm"
+                        variant="brand"
                         checked={pgHasContent}
-                        onChange={(e) => setPgHasContent(e.target.checked)}
-                        style={{ cursor: 'pointer' }}
+                        onChange={setPgHasContent}
+                        aria-label="Enable Label Content"
                       />
                     </div>
 

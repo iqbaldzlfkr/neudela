@@ -1238,22 +1238,11 @@ export function WorkflowStepperSidebar() {
                   display: 'flex', gap: '8px', borderTop: '1px solid var(--color-border)'
                 }}>
                   <button
-                    onClick={() => handleOpenModal(variant.id)}
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      background: 'rgba(223, 126, 48, 0.1)',
-                      color: 'var(--color-primary)',
-                      border: '1px solid rgba(223, 126, 48, 0.25)',
-                      borderRadius: '8px',
-                      padding: '8px 12px',
-                      fontSize: '12.5px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease'
+                    type="button"
+                    className="pattern-btn-modal-preview"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenModal(variant.id);
                     }}
                   >
                     <Eye size={14} />
@@ -1261,23 +1250,13 @@ export function WorkflowStepperSidebar() {
                   </button>
 
                   <button
-                    onClick={(e) => handleOpenRealAppNewTab(variant.id, e)}
-                    title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      background: 'var(--color-bg-canvas)',
-                      color: 'var(--color-text-primary)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: '8px',
-                      padding: '8px 12px',
-                      fontSize: '12.5px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease'
+                    type="button"
+                    className="pattern-btn-new-tab"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenRealAppNewTab(variant.id, e);
                     }}
+                    title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
                   >
                     <ExternalLink size={14} />
                     <span>{isId ? 'Tab Baru' : 'New Tab'}</span>

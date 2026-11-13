@@ -88,6 +88,12 @@ import {
   StandaloneSettingsPreview,
   EmptyStatePatternView,
   StandaloneEmptyStatePreview,
+  NotificationPatternView,
+  StandaloneNotificationPreview,
+  AiCopilotPatternView,
+  StandaloneAiCopilotPreview,
+  FileManagerPatternView,
+  StandaloneFileManagerPreview,
 } from './views/patterns';
 
 import { ToastProvider } from './components/NeuronToast';
@@ -252,6 +258,23 @@ const STANDALONE_NON_COMP_TABS = new Set([
   'empty-states',
   'onboarding',
   'error-pages',
+  'pat-notifications',
+  'notifications',
+  'notification-center',
+  'activity-feed',
+  'notification-pattern',
+  'pat-ai-copilot',
+  'ai-copilot',
+  'copilot',
+  'ai-chat',
+  'conversational-ai',
+  'ai-workspace',
+  'pat-file-manager',
+  'file-manager',
+  'cloud-drive',
+  'dam',
+  'asset-manager',
+  'file-asset-manager',
   'content',
   'content-tone',
   'illustrations',
@@ -328,6 +351,30 @@ function getTabFromHash(hashStr: string): string | null {
   ) {
     return raw;
   }
+  if (
+    raw.startsWith('preview-notification-') ||
+    raw.startsWith('notification-live-') ||
+    raw.startsWith('standalone-notification-') ||
+    raw.startsWith('notification-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-ai-copilot-') ||
+    raw.startsWith('ai-copilot-live-') ||
+    raw.startsWith('standalone-ai-copilot-') ||
+    raw.startsWith('ai-copilot-standalone-')
+  ) {
+    return raw;
+  }
+  if (
+    raw.startsWith('preview-file-manager-') ||
+    raw.startsWith('file-manager-live-') ||
+    raw.startsWith('standalone-file-manager-') ||
+    raw.startsWith('file-manager-standalone-')
+  ) {
+    return raw;
+  }
   if (raw === 'pattern' || raw === 'patterns' || raw === 'patterns-overview' || raw === 'pat-overview') return 'pat-overview';
   if (raw === 'sidebar' || raw === 'pat-sidebar' || raw === 'sidebar-pattern') return 'pat-sidebar';
   if (raw === 'header' || raw === 'pat-header' || raw === 'header-pattern' || raw === 'header-navigation') return 'pat-header';
@@ -347,6 +394,35 @@ function getTabFromHash(hashStr: string): string | null {
     raw === 'empty-state-pattern'
   ) {
     return 'pat-empty-states';
+  }
+  if (
+    raw === 'notifications' ||
+    raw === 'pat-notifications' ||
+    raw === 'notification-center' ||
+    raw === 'activity-feed' ||
+    raw === 'notification-pattern'
+  ) {
+    return 'pat-notifications';
+  }
+  if (
+    raw === 'ai-copilot' ||
+    raw === 'pat-ai-copilot' ||
+    raw === 'copilot' ||
+    raw === 'ai-chat' ||
+    raw === 'conversational-ai' ||
+    raw === 'ai-workspace'
+  ) {
+    return 'pat-ai-copilot';
+  }
+  if (
+    raw === 'file-manager' ||
+    raw === 'pat-file-manager' ||
+    raw === 'cloud-drive' ||
+    raw === 'dam' ||
+    raw === 'asset-manager' ||
+    raw === 'file-asset-manager'
+  ) {
+    return 'pat-file-manager';
   }
   if (raw === 'rating' || raw === 'comp-rating') return 'comp-rating';
   if (raw === 'slider' || raw === 'comp-slider') return 'comp-slider';
@@ -514,6 +590,9 @@ export default function App() {
         { id: 'pat-checkout', label: (t.nav as any).patCheckout || 'Checkout & Payments' },
         { id: 'pat-settings', label: (t.nav as any).patSettings || 'Workspace Settings & RBAC' },
         { id: 'pat-empty-states', label: (t.nav as any).patEmptyState || 'Empty States & Error Pages' },
+        { id: 'pat-notifications', label: (t.nav as any).patNotifications || 'Notifications & Activity Center' },
+        { id: 'pat-ai-copilot', label: (t.nav as any).patAiCopilot || 'AI Copilot & Workspace' },
+        { id: 'pat-file-manager', label: (t.nav as any).patFileManager || 'File & Asset Manager' },
       ],
     },
     {
@@ -813,6 +892,26 @@ export default function App() {
       case 'empty-state':
       case 'empty-state-pattern':
         return <EmptyStatePatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-notifications':
+      case 'notifications':
+      case 'notification-center':
+      case 'activity-feed':
+      case 'notification-pattern':
+        return <NotificationPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-ai-copilot':
+      case 'ai-copilot':
+      case 'copilot':
+      case 'ai-chat':
+      case 'conversational-ai':
+      case 'ai-workspace':
+        return <AiCopilotPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
+      case 'pat-file-manager':
+      case 'file-manager':
+      case 'cloud-drive':
+      case 'dam':
+      case 'asset-manager':
+      case 'file-asset-manager':
+        return <FileManagerPatternView setActiveTab={setActiveTab} isDarkMode={isDarkMode} />;
       default:
         return (
           <PlaceholderView 
@@ -1024,6 +1123,72 @@ export default function App() {
           onBackToDocs={() => {
             window.location.hash = '#pat-empty-states';
             setActiveTab('pat-empty-states');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-notification-') ||
+    activeTab.startsWith('notification-live-') ||
+    activeTab.startsWith('standalone-notification-') ||
+    activeTab.startsWith('notification-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-notification-|notification-live-|standalone-notification-|notification-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneNotificationPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-notifications';
+            setActiveTab('pat-notifications');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-ai-copilot-') ||
+    activeTab.startsWith('ai-copilot-live-') ||
+    activeTab.startsWith('standalone-ai-copilot-') ||
+    activeTab.startsWith('ai-copilot-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-ai-copilot-|ai-copilot-live-|standalone-ai-copilot-|ai-copilot-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneAiCopilotPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-ai-copilot';
+            setActiveTab('pat-ai-copilot');
+          }}
+        />
+      </ToastProvider>
+    );
+  }
+
+  if (
+    activeTab.startsWith('preview-file-manager-') ||
+    activeTab.startsWith('file-manager-live-') ||
+    activeTab.startsWith('standalone-file-manager-') ||
+    activeTab.startsWith('file-manager-standalone-')
+  ) {
+    const variantId = activeTab.replace(/^(preview-file-manager-|file-manager-live-|standalone-file-manager-|file-manager-standalone-)/, '');
+    return (
+      <ToastProvider>
+        <StandaloneFileManagerPreview
+          variantId={variantId}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          onBackToDocs={() => {
+            window.location.hash = '#pat-file-manager';
+            setActiveTab('pat-file-manager');
           }}
         />
       </ToastProvider>

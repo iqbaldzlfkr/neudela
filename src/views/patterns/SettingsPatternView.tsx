@@ -7,6 +7,7 @@ import NeuronInput from '../../components/NeuronInput';
 import NeuronAlert from '../../components/NeuronAlert';
 import { NeuronToggle } from '../../components/NeuronToggle';
 import NeuronSelect from '../../components/NeuronSelect';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
 import {
   Settings,
   Building2,
@@ -2258,22 +2259,20 @@ function DangerZoneTransferPreview({ isDarkProp: _isDarkProp }: { isDarkProp?: b
 
             {/* Checkboxes */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16, padding: 12, borderRadius: 8, background: 'var(--color-bg-canvas)', border: '1px solid var(--color-border)' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: 'var(--color-text-primary)', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={confirmCheckbox1}
-                  onChange={(e) => setConfirmCheckbox1(e.target.checked)}
-                />
-                <span>{isId ? 'Saya paham bahwa semua database & cadangan akan dihapus permanen.' : 'I understand all database backups will be permanently purged.'}</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: 'var(--color-text-primary)', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={confirmCheckbox2}
-                  onChange={(e) => setConfirmCheckbox2(e.target.checked)}
-                />
-                <span>{isId ? 'Saya paham bahwa pelanggan tidak dapat lagi mengakses faktur.' : 'I understand billing portals will be immediately inaccessible.'}</span>
-              </label>
+              <NeuronCheckbox
+                size="sm"
+                variant="brand"
+                checked={confirmCheckbox1}
+                onChange={setConfirmCheckbox1}
+                label={isId ? 'Saya paham bahwa semua database & cadangan akan dihapus permanen.' : 'I understand all database backups will be permanently purged.'}
+              />
+              <NeuronCheckbox
+                size="sm"
+                variant="brand"
+                checked={confirmCheckbox2}
+                onChange={setConfirmCheckbox2}
+                label={isId ? 'Saya paham bahwa pelanggan tidak dapat lagi mengakses faktur.' : 'I understand billing portals will be immediately inaccessible.'}
+              />
             </div>
 
             <div style={{ marginBottom: 18 }}>
@@ -2658,73 +2657,26 @@ export default function SettingsPatternView({ setActiveTab, isDarkMode: isDarkPr
             >
               <button
                 type="button"
+                className="pattern-btn-modal-preview"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleOpenModal(variant.id);
                 }}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: 'rgba(223, 126, 48, 0.1)',
-                  color: 'var(--color-primary)',
-                  border: '1px solid rgba(223, 126, 48, 0.25)',
-                  padding: '9px 12px',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--color-primary)';
-                  e.currentTarget.style.color = '#fff';
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(223, 126, 48, 0.1)';
-                  e.currentTarget.style.color = 'var(--color-primary)';
-                  e.currentTarget.style.borderColor = 'rgba(223, 126, 48, 0.25)';
-                }}
               >
-                <Eye size={13} />
+                <Eye size={14} />
                 <span>{isId ? 'Preview di Modal' : 'Preview in Modal'}</span>
               </button>
 
               <button
                 type="button"
+                className="pattern-btn-new-tab"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleOpenNewTab(variant.id);
                 }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: 'var(--color-bg-canvas)',
-                  color: 'var(--color-text-secondary)',
-                  border: '1px solid var(--color-border)',
-                  padding: '9px 12px',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--color-text-primary)';
-                  e.currentTarget.style.borderColor = 'var(--color-text-secondary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--color-text-secondary)';
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                }}
-                title={isId ? 'Buka di Tab Baru (Aplikasi Mandiri)' : 'Open in New Tab (Standalone App)'}
+                title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
               >
-                <ExternalLink size={13} />
+                <ExternalLink size={14} />
                 <span>{isId ? 'Tab Baru' : 'New Tab'}</span>
               </button>
             </div>

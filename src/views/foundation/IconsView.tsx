@@ -17,6 +17,7 @@ import {
 import NextPrevious from '../../components/NextPrevious';
 import { useLanguage } from '../../context/LanguageContext';
 import NeuronButton from '../../components/NeuronButton';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
 
 function RuleCard({ type, children }: { type: 'do' | 'dont'; children: React.ReactNode }) {
   const isDo = type === 'do';
@@ -772,7 +773,13 @@ export default function IconsView({ setActiveTab }: IconsViewProps) {
                       </div>
                     </div>
                   </div>
-                  <input type="checkbox" checked={anatomyGuides.safeZone} readOnly />
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
+                    checked={anatomyGuides.safeZone}
+                    onChange={(val) => setAnatomyGuides(g => ({ ...g, safeZone: val }))}
+                    aria-label="20px Safe Zone Keyline"
+                  />
                 </div>
 
                 {/* Circle Keyline */}
@@ -789,7 +796,13 @@ export default function IconsView({ setActiveTab }: IconsViewProps) {
                       </div>
                     </div>
                   </div>
-                  <input type="checkbox" checked={anatomyGuides.circle} readOnly />
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
+                    checked={anatomyGuides.circle}
+                    onChange={(val) => setAnatomyGuides(g => ({ ...g, circle: val }))}
+                    aria-label="20px Circle Keyline"
+                  />
                 </div>
 
                 {/* Square Keyline */}
@@ -806,7 +819,13 @@ export default function IconsView({ setActiveTab }: IconsViewProps) {
                       </div>
                     </div>
                   </div>
-                  <input type="checkbox" checked={anatomyGuides.square} readOnly />
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
+                    checked={anatomyGuides.square}
+                    onChange={(val) => setAnatomyGuides(g => ({ ...g, square: val }))}
+                    aria-label="18x18px Square Keyline"
+                  />
                 </div>
 
                 {/* Diagonals */}
@@ -823,7 +842,13 @@ export default function IconsView({ setActiveTab }: IconsViewProps) {
                       </div>
                     </div>
                   </div>
-                  <input type="checkbox" checked={anatomyGuides.diagonals} readOnly />
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
+                    checked={anatomyGuides.diagonals}
+                    onChange={(val) => setAnatomyGuides(g => ({ ...g, diagonals: val }))}
+                    aria-label="45° Diagonal Lines"
+                  />
                 </div>
 
                 {/* Crosshair */}
@@ -840,7 +865,13 @@ export default function IconsView({ setActiveTab }: IconsViewProps) {
                       </div>
                     </div>
                   </div>
-                  <input type="checkbox" checked={anatomyGuides.crosshair} readOnly />
+                  <NeuronCheckbox
+                    size="sm"
+                    variant="brand"
+                    checked={anatomyGuides.crosshair}
+                    onChange={(val) => setAnatomyGuides(g => ({ ...g, crosshair: val }))}
+                    aria-label="Center Crosshair"
+                  />
                 </div>
               </div>
             </div>

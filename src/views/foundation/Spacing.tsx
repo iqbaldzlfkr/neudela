@@ -18,6 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import NeuronButton from '../../components/NeuronButton';
+import NeuronCheckbox from '../../components/NeuronCheckbox';
 import NeuronBadge from '../../components/NeuronBadge';
 import NeuronInput from '../../components/NeuronInput';
 import NextPrevious from '../../components/NextPrevious';
@@ -761,11 +762,12 @@ export default function Spacing({ setActiveTab }: SpacingProps) {
                   {isId ? 'Tampilkan Garis Ukur Spasial' : 'Visual Box Model Rulers'}
                 </span>
               </div>
-              <input
-                type="checkbox"
+              <NeuronCheckbox
+                size="sm"
+                variant="brand"
                 checked={showRulers}
-                onChange={(e) => setShowRulers(e.target.checked)}
-                style={{ cursor: 'pointer', accentColor: 'var(--color-primary)' }}
+                onChange={setShowRulers}
+                aria-label={isId ? 'Tampilkan Garis Ukur Spasial' : 'Visual Box Model Rulers'}
               />
             </div>
           </div>

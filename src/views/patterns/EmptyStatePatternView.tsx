@@ -2542,72 +2542,26 @@ export default function EmptyStatePatternView({
             >
               <button
                 type="button"
+                className="pattern-btn-modal-preview"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleOpenModal(variant.id);
                 }}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: 'rgba(223, 126, 48, 0.1)',
-                  color: 'var(--color-primary)',
-                  border: '1px solid rgba(223, 126, 48, 0.25)',
-                  padding: '9px 12px',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--color-primary)';
-                  e.currentTarget.style.color = '#fff';
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(223, 126, 48, 0.1)';
-                  e.currentTarget.style.color = 'var(--color-primary)';
-                  e.currentTarget.style.borderColor = 'rgba(223, 126, 48, 0.25)';
-                }}
               >
-                <Eye size={13} />
+                <Eye size={14} />
                 <span>{isId ? 'Preview di Modal' : 'Preview in Modal'}</span>
               </button>
 
               <button
                 type="button"
+                className="pattern-btn-new-tab"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleOpenNewTab(variant.id);
                 }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '5px',
-                  background: 'var(--color-bg-canvas)',
-                  color: 'var(--color-text-secondary)',
-                  border: '1px solid var(--color-border)',
-                  padding: '9px 12px',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-hover)';
-                  e.currentTarget.style.color = 'var(--color-text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                  e.currentTarget.style.color = 'var(--color-text-secondary)';
-                }}
+                title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
               >
-                <ExternalLink size={13} />
+                <ExternalLink size={14} />
                 <span>{isId ? 'Tab Baru' : 'New Tab'}</span>
               </button>
             </div>
@@ -2872,11 +2826,17 @@ export default function EmptyStatePatternView({
       <NextPrevious
         previous={{
           label: isId ? 'Pengaturan Ruang Kerja & Akses RBAC' : 'Workspace Settings & RBAC',
-          onClick: () => setActiveTab('pat-settings'),
+          onClick: () => {
+            window.location.hash = '#pat-settings';
+            setActiveTab('pat-settings');
+          },
         }}
         next={{
-          label: isId ? 'Kembali ke Ringkasan Pola' : 'Patterns Overview',
-          onClick: () => setActiveTab('pat-overview'),
+          label: isId ? 'Notifikasi & Pusat Aktivitas' : 'Notifications & Activity Center',
+          onClick: () => {
+            window.location.hash = '#pat-notifications';
+            setActiveTab('pat-notifications');
+          },
         }}
       />
     </div>

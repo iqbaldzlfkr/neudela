@@ -31,11 +31,6 @@ import {
   Eye,
   ExternalLink,
   Settings,
-  Sun,
-  Moon,
-  Monitor,
-  Tablet,
-  Smartphone,
   Check,
   Copy,
   CreditCard,
@@ -1383,8 +1378,6 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
   // Dedicated interactive preview modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'preview' | 'tsx'>('preview');
-  const [modalViewport, setModalViewport] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
-  const [modalTheme, setModalTheme] = useState<'light' | 'dark'>('light');
   const [copiedModalCode, setCopiedModalCode] = useState(false);
 
   const currentMeta = DASHBOARD_VARIANTS.find((v) => v.id === activeVariant) || DASHBOARD_VARIANTS[0];
@@ -1392,7 +1385,6 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
   const handleOpenModal = (variantId: DashboardVariantId) => {
     setActiveVariant(variantId);
     setModalTab('preview');
-    setModalViewport('desktop');
     setIsModalOpen(true);
   };
 
@@ -1628,25 +1620,10 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
                 >
                   <button
                     type="button"
+                    className="pattern-btn-modal-preview"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleOpenModal(variant.id);
-                    }}
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      background: 'rgba(223, 126, 48, 0.1)',
-                      color: 'var(--color-primary)',
-                      border: '1px solid rgba(223, 126, 48, 0.25)',
-                      borderRadius: '8px',
-                      padding: '8px 12px',
-                      fontSize: '12.5px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
                     }}
                   >
                     <Eye size={14} />
@@ -1655,26 +1632,12 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
 
                   <button
                     type="button"
+                    className="pattern-btn-new-tab"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleOpenStandalone(variant.id, e);
                     }}
                     title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      background: 'var(--color-bg-canvas)',
-                      color: 'var(--color-text-primary)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: '8px',
-                      padding: '8px 12px',
-                      fontSize: '12.5px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
                   >
                     <ExternalLink size={14} />
                     <span>{isId ? 'Tab Baru' : 'New Tab'}</span>
@@ -1844,31 +1807,38 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
                 </div>
               </div>
 
-              {/* Right Side: Subtabs + Controls + Actions (ALWAYS pinned in top right corner) */}
+              {/* Right Side: Subtabs + Actions (Standard Neudela Blueprint) */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0, marginLeft: 'auto' }}>
                 {/* Modal Subtabs (Preview vs TSX) */}
                 <div
                   style={{
-                    display: 'flex',
+                    display: 'inline-flex',
                     background: 'var(--color-bg-surface)',
                     padding: 3,
                     borderRadius: 8,
                     border: '1px solid var(--color-border)',
+                    height: 36,
+                    boxSizing: 'border-box',
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => setModalTab('preview')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'preview' ? 'var(--color-primary)' : 'transparent',
-                      color: modalTab === 'preview' ? '#fff' : 'var(--color-text-secondary)',
+                      color: modalTab === 'preview' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     {isId ? 'Kanvas Interaktif' : 'Interactive Canvas'}
@@ -1877,143 +1847,76 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
                     type="button"
                     onClick={() => setModalTab('tsx')}
                     style={{
+                      height: '100%',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       background: modalTab === 'tsx' ? 'var(--color-primary)' : 'transparent',
-                      color: modalTab === 'tsx' ? '#fff' : 'var(--color-text-secondary)',
+                      color: modalTab === 'tsx' ? '#ffffff' : 'var(--color-text-secondary)',
                       border: 'none',
                       borderRadius: 6,
-                      padding: '5px 12px',
+                      padding: '0 12px',
                       fontSize: 12,
                       fontWeight: 600,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
+                      boxSizing: 'border-box',
                     }}
                   >
                     React (TSX)
                   </button>
                 </div>
 
-                {/* Right Controls: Viewport, Theme, Real App New Tab & Close */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {modalTab === 'preview' && (
-                    <>
-                      {/* Viewport Width Buttons */}
-                      <div style={{ display: 'flex', background: 'var(--color-bg-surface)', borderRadius: '6px', padding: '2px', border: '1px solid var(--color-border)' }}>
-                        <button
-                          type="button"
-                          onClick={() => setModalViewport('desktop')}
-                          title="Desktop (100%)"
-                          style={{
-                            border: 'none',
-                            background: modalViewport === 'desktop' ? 'var(--color-bg-canvas)' : 'transparent',
-                            color: modalViewport === 'desktop' ? 'var(--color-primary)' : 'var(--color-text-tertiary)',
-                            padding: '4px 8px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                          }}
-                        >
-                          <Monitor size={14} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setModalViewport('tablet')}
-                          title="Tablet (768px)"
-                          style={{
-                            border: 'none',
-                            background: modalViewport === 'tablet' ? 'var(--color-bg-canvas)' : 'transparent',
-                            color: modalViewport === 'tablet' ? 'var(--color-primary)' : 'var(--color-text-tertiary)',
-                            padding: '4px 8px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                          }}
-                        >
-                          <Tablet size={14} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setModalViewport('mobile')}
-                          title="Mobile (420px)"
-                          style={{
-                            border: 'none',
-                            background: modalViewport === 'mobile' ? 'var(--color-bg-canvas)' : 'transparent',
-                            color: modalViewport === 'mobile' ? 'var(--color-primary)' : 'var(--color-text-tertiary)',
-                            padding: '4px 8px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                          }}
-                        >
-                          <Smartphone size={14} />
-                        </button>
-                      </div>
+                {/* Open New Tab: Solid Terracotta 36px */}
+                <button
+                  type="button"
+                  onClick={(e) => handleOpenStandalone(activeVariant, e)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 36,
+                    boxSizing: 'border-box',
+                    gap: 6,
+                    background: 'var(--color-primary)',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '0 14px',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(223, 126, 48, 0.3)',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <ExternalLink size={14} />
+                  <span>{isId ? 'Buka di Tab Baru (Real App)' : 'Open in New Tab (Real App)'}</span>
+                </button>
 
-                      {/* Theme Toggle */}
-                      <button
-                        type="button"
-                        onClick={() => setModalTheme(modalTheme === 'light' ? 'dark' : 'light')}
-                        style={{
-                          background: 'var(--color-bg-surface)',
-                          border: '1px solid var(--color-border)',
-                          color: 'var(--color-text-primary)',
-                          padding: '5px 10px',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          fontSize: '12px',
-                        }}
-                      >
-                        {modalTheme === 'light' ? <Moon size={13} /> : <Sun size={13} color="#f59e0b" />}
-                        <span>{modalTheme === 'light' ? 'Dark' : 'Light'}</span>
-                      </button>
-                    </>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={(e) => handleOpenStandalone(activeVariant, e)}
-                    title={isId ? 'Buka di Tab Baru sebagai aplikasi penuh' : 'Open in New Tab as a full real app'}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      background: 'var(--color-primary)',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: 8,
-                      padding: '6px 12px',
-                      fontSize: 12,
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 8px rgba(223, 126, 48, 0.3)',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    <ExternalLink size={14} />
-                    <span>{isId ? 'Tab Baru (Real App)' : 'New Tab (Real App)'}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(false)}
-                    style={{
-                      background: 'var(--color-bg-surface)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: 8,
-                      padding: 6,
-                      cursor: 'pointer',
-                      color: 'var(--color-text-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                    title="Close modal (Esc)"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
+                {/* Close Button: Bordered Surface 36x36px */}
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  title={isId ? 'Tutup (Esc)' : 'Close (Esc)'}
+                  style={{
+                    height: 36,
+                    width: 36,
+                    boxSizing: 'border-box',
+                    background: 'var(--color-bg-surface)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 8,
+                    padding: 0,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--color-text-primary)',
+                    flexShrink: 0,
+                  }}
+                >
+                  <X size={16} />
+                </button>
               </div>
             </div>
 
@@ -2021,59 +1924,55 @@ export default function DashboardPatternView({ setActiveTab }: DashboardPatternV
             <div
               style={{
                 flex: 1,
-                overflowY: modalTab === 'tsx' ? 'auto' : 'hidden',
-                background: modalTheme === 'dark' ? '#070b14' : '#f1f5f9',
-                display: 'flex',
-                justifyContent: 'center',
-                padding: modalViewport === 'desktop' ? '0' : '20px 0',
+                overflowY: 'auto',
+                background: 'var(--color-bg-canvas)',
                 minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
               {modalTab === 'preview' ? (
-                <div
-                  style={{
-                    width: modalViewport === 'desktop' ? '100%' : modalViewport === 'tablet' ? '768px' : '420px',
-                    height: '100%',
-                    transition: 'width 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                    boxShadow: modalViewport !== 'desktop' ? '0 16px 48px rgba(0,0,0,0.3)' : 'none',
-                    borderRadius: modalViewport !== 'desktop' ? '12px' : '0',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
+                <div style={{ width: '100%', height: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <DashboardShellLayout
                     variantId={activeVariant}
                     isId={isId}
-                    previewTheme={modalTheme}
-                    viewportMode={modalViewport}
+                    previewTheme="light"
+                    viewportMode="desktop"
                     onSelectVariant={(v) => setActiveVariant(v)}
                     onTriggerModal={(title, content) => setModalState({ open: true, title, content })}
                   />
                 </div>
               ) : (
-                <div style={{ width: '100%', background: '#0f172a', padding: '24px', position: 'relative', overflowX: 'auto' }}>
-                  <div style={{ position: 'absolute', top: 16, right: 16 }}>
+                <div style={{ width: '100%', background: 'var(--color-bg-canvas)', padding: '24px', position: 'relative', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>
+                      TypeScript Component Snippet ({activeVariant}.tsx)
+                    </span>
                     <NeuronButton
-                      size="xs"
-                      variant="primary"
-                      leadingIcon={copiedModalCode ? <Check size={12} /> : <Copy size={12} />}
+                      size="sm"
+                      variant="outline"
+                      leadingIcon={copiedModalCode ? <Check size={14} color="#10b981" /> : <Copy size={14} />}
                       onClick={() => {
                         navigator.clipboard.writeText(getDashboardCodeSnippet(activeVariant));
                         setCopiedModalCode(true);
                         setTimeout(() => setCopiedModalCode(false), 2000);
                       }}
                     >
-                      {copiedModalCode ? (isId ? 'Tersalin!' : 'Copied!') : (isId ? 'Salin Kode TSX' : 'Copy TSX Code')}
+                      {copiedModalCode ? (isId ? 'Tersalin!' : 'Copied!') : (isId ? 'Salin Kode' : 'Copy TSX')}
                     </NeuronButton>
                   </div>
                   <pre
                     style={{
                       margin: 0,
+                      padding: 20,
+                      borderRadius: 12,
+                      background: '#0d1117',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
                       fontSize: '12.5px',
                       lineHeight: 1.6,
-                      color: '#e2e8f0',
-                      fontFamily: "'Fira Code', 'JetBrains Mono', Consolas, monospace",
+                      color: '#e6edf3',
+                      fontFamily: "'JetBrains Mono', Menlo, Monaco, Consolas, monospace",
+                      overflowX: 'auto',
                     }}
                   >
                     <code>{getDashboardCodeSnippet(activeVariant)}</code>
